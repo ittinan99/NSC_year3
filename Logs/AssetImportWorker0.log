@@ -200,3 +200,220 @@ Received Import Request.
 Start importing Assets/Front/OPUN-REGULAR SDF.asset using Guid(d83336c7ff33ecb43bc2ba62c82ca372) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6e104a61ec5392e13b24e3a1a96248e') in 0.029185 seconds 
   Import took 0.031763 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 316.786194 seconds.
+  path: Assets/Exit_Icon.png
+  artifactKey: Guid(47817d8f4fd3a3b4287bca2fa9e7aaea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Exit_Icon.png using Guid(47817d8f4fd3a3b4287bca2fa9e7aaea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac41bf1c77740f8b6dab08eb7c93296e') in 0.040406 seconds 
+  Import took 0.043115 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000256 seconds.
+  path: Assets/THSarabun Italic SDF.asset
+  artifactKey: Guid(1290a03d42d8a7c438819427ec63aab2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun Italic SDF.asset using Guid(1290a03d42d8a7c438819427ec63aab2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b1b10d475ac99393c84816af5bff3c88') in 0.016918 seconds 
+  Import took 0.024343 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000271 seconds.
+  path: Assets/Mainmenu3.png
+  artifactKey: Guid(8d6c622ed1cc7e94a8d930eed129b45f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Mainmenu3.png using Guid(8d6c622ed1cc7e94a8d930eed129b45f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '782c04b30e072fbbf72e150fde5ae267') in 0.026613 seconds 
+  Import took 0.028688 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000205 seconds.
+  path: Assets/Option_Icon.png
+  artifactKey: Guid(9b306c059ddb8c44e9dfc48873ea641b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Option_Icon.png using Guid(9b306c059ddb8c44e9dfc48873ea641b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc23196ef0a94a5da18cc1019f61324e') in 0.011947 seconds 
+  Import took 0.014586 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000188 seconds.
+  path: Assets/Play_Icon.png
+  artifactKey: Guid(b6aa147fea748b04d838528c8cd8072c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Play_Icon.png using Guid(b6aa147fea748b04d838528c8cd8072c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '657b348f2ceae293b54eb3aea75fe239') in 0.014996 seconds 
+  Import took 0.017117 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000225 seconds.
+  path: Assets/THSarabun Bold Italic.ttf
+  artifactKey: Guid(6a8f18f6b30d2c9428e7a3a9e1423c5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun Bold Italic.ttf using Guid(6a8f18f6b30d2c9428e7a3a9e1423c5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a519b1f93cebb5b85eba555f580785da') in 0.018069 seconds 
+  Import took 0.020653 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000693 seconds.
+  path: Assets/THSarabun.ttf
+  artifactKey: Guid(566be4f76c001874e9ae3381a2fcfb34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun.ttf using Guid(566be4f76c001874e9ae3381a2fcfb34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd14877f399e53c99e2ab50c121654181') in 0.014722 seconds 
+  Import took 0.018055 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000179 seconds.
+  path: Assets/THSarabun Bold SDF.asset
+  artifactKey: Guid(cc81a4f32a3ce784eb264df2b093fedd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun Bold SDF.asset using Guid(cc81a4f32a3ce784eb264df2b093fedd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b3143aeedc19adccf390365ce705d89') in 0.028219 seconds 
+  Import took 0.030519 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000155 seconds.
+  path: Assets/THSarabun Bold Italic SDF 1.asset
+  artifactKey: Guid(60dff0de133cd8c449483b0900abe44b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun Bold Italic SDF 1.asset using Guid(60dff0de133cd8c449483b0900abe44b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c98760b0d71554d2d90bffa90c29a0b4') in 0.017858 seconds 
+  Import took 0.020106 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000174 seconds.
+  path: Assets/THSarabun Bold.ttf
+  artifactKey: Guid(24d89161689647c4d8472bb8695bb765) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun Bold.ttf using Guid(24d89161689647c4d8472bb8695bb765) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea192275a91557090dce2d25303016c1') in 0.015817 seconds 
+  Import took 0.019283 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000182 seconds.
+  path: Assets/THSarabun Bold Italic SDF.asset
+  artifactKey: Guid(fe609723d5e456347a861e8736083468) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun Bold Italic SDF.asset using Guid(fe609723d5e456347a861e8736083468) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95434b3a87ac5d53208bca110a3a3451') in 0.016303 seconds 
+  Import took 0.018541 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000163 seconds.
+  path: Assets/THSarabun Italic.ttf
+  artifactKey: Guid(a1037a6bbc3ff0c4080e52ef6a3eff3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun Italic.ttf using Guid(a1037a6bbc3ff0c4080e52ef6a3eff3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48a94519e7cec9e4d35ef865e1823708') in 0.016113 seconds 
+  Import took 0.018224 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000156 seconds.
+  path: Assets/THSarabun SDF.asset
+  artifactKey: Guid(f43f676b7d00a8749a0b61e837fb82fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/THSarabun SDF.asset using Guid(f43f676b7d00a8749a0b61e837fb82fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cabaae8c2899f5696cf2d0a809abefc8') in 0.016299 seconds 
+  Import took 0.018491 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000153 seconds.
+  path: Assets/Info_Icon.png
+  artifactKey: Guid(6ccbe0c32b2f71b439c8e65153ba43a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Info_Icon.png using Guid(6ccbe0c32b2f71b439c8e65153ba43a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2bc3d66ef9f25bc61212e6a1e73de24') in 0.009971 seconds 
+  Import took 0.012686 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 19.880021 seconds.
+  path: Assets/Front/THSarabun Bold Italic SDF 1.asset
+  artifactKey: Guid(60dff0de133cd8c449483b0900abe44b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Front/THSarabun Bold Italic SDF 1.asset using Guid(60dff0de133cd8c449483b0900abe44b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8e03264e591ede4db7d34f98d4d1550') in 0.011276 seconds 
+  Import took 0.014635 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000278 seconds.
+  path: Assets/Front/THSarabun Italic SDF.asset
+  artifactKey: Guid(1290a03d42d8a7c438819427ec63aab2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Front/THSarabun Italic SDF.asset using Guid(1290a03d42d8a7c438819427ec63aab2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c73cf1b6f5ddb42c3ef220f207304851') in 0.013579 seconds 
+  Import took 0.015961 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000226 seconds.
+  path: Assets/Front/THSarabun Bold SDF.asset
+  artifactKey: Guid(cc81a4f32a3ce784eb264df2b093fedd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Front/THSarabun Bold SDF.asset using Guid(cc81a4f32a3ce784eb264df2b093fedd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1cd7ab93130da49b82bedbf9f457dff4') in 0.023809 seconds 
+  Import took 0.025968 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000206 seconds.
+  path: Assets/Front/THSarabun Bold Italic SDF.asset
+  artifactKey: Guid(fe609723d5e456347a861e8736083468) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Front/THSarabun Bold Italic SDF.asset using Guid(fe609723d5e456347a861e8736083468) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17ef285b5d46616145fb45d23ec4eb8a') in 0.010079 seconds 
+  Import took 0.013127 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000187 seconds.
+  path: Assets/Front/THSarabun SDF.asset
+  artifactKey: Guid(f43f676b7d00a8749a0b61e837fb82fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Front/THSarabun SDF.asset using Guid(f43f676b7d00a8749a0b61e837fb82fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '168c2f4984d69b8f349feff1a53b1d54') in 0.014773 seconds 
+  Import took 0.017873 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.714196 seconds.
+  path: Assets/Sprite
+  artifactKey: Guid(a7d9e173a3c5c4941a37c287139ae17d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprite using Guid(a7d9e173a3c5c4941a37c287139ae17d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dcedb89fd10028f1d80daebce35029ff') in 0.005800 seconds 
+  Import took 0.008204 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.934878 seconds.
+  path: Assets/Sprite/ICON
+  artifactKey: Guid(083a898b2333de548ad3807cdc356179) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprite/ICON using Guid(083a898b2333de548ad3807cdc356179) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e96dd954c26cd95636a8e345b26c0da') in 0.005971 seconds 
+  Import took 0.008153 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.140146 seconds.
+  path: Assets/TextMesh Pro
+  artifactKey: Guid(f54d1bd14bd3ca042bd867b519fee8cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro using Guid(f54d1bd14bd3ca042bd867b519fee8cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16b4cbde9565bf190136f1148817e1ea') in 0.005905 seconds 
+  Import took 0.008389 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.728038 seconds.
+  path: Assets/TextMesh Pro/Fonts
+  artifactKey: Guid(6ab70aee4d56447429c680537fbf93ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Fonts using Guid(6ab70aee4d56447429c680537fbf93ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c860dfdf0522eec1202f36843e52d436') in 0.006203 seconds 
+  Import took 0.008391 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.064233 seconds.
+  path: Assets/TextMesh Pro/Fonts/LiberationSans.ttf
+  artifactKey: Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Fonts/LiberationSans.ttf using Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1545d9d30191816af9288526690ca05f') in 0.011853 seconds 
+  Import took 0.014240 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 21.461933 seconds.
+  path: Assets/AddFront
+  artifactKey: Guid(bf4dffaf82490ff4c9d36fbaaf73e28f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AddFront using Guid(bf4dffaf82490ff4c9d36fbaaf73e28f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'feefbbd00013f11650d4ab7e3865b570') in 0.006636 seconds 
+  Import took 0.008927 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1953.516344 seconds.
+  path: Assets/Prefab
+  artifactKey: Guid(77e75101a62e9364cb67b526c066ede9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab using Guid(77e75101a62e9364cb67b526c066ede9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ad07beddf0fe44dabd55af6f34fcc6e') in 0.006223 seconds 
+  Import took 0.009028 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.079439 seconds.
+  path: Assets/Script
+  artifactKey: Guid(60896a3d019a1624fb226a02ea74f6e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script using Guid(60896a3d019a1624fb226a02ea74f6e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90bf3798e8a36c85fdab193b51f18635') in 0.005830 seconds 
+  Import took 0.008395 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
