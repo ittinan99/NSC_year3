@@ -84,9 +84,9 @@
       "hash": "3e3aef6aa02c2a25359898319e5bd49d3518b57b"
     },
     "com.unity.netcode.gameobjects": {
-      "version": "file:D:/GDM352/com.unity.netcode.gameobjects-develop/com.unity.netcode.gameobjects",
+      "version": "file:com.unity.netcode.gameobjects",
       "depth": 0,
-      "source": "local",
+      "source": "embedded",
       "dependencies": {
         "com.unity.modules.ai": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
