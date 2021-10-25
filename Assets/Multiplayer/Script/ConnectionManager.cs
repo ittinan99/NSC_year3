@@ -44,7 +44,7 @@ namespace Netcode.Transports.PhotonRealtime
         Vector3 GetRandomSpawn()
         {
             float x = UnityEngine.Random.Range(-10f, 10f);
-            float y = 2f;
+            float y = 4f;
             float z = UnityEngine.Random.Range(-10f, 10f);
             return new Vector3(x, y, z);
         }

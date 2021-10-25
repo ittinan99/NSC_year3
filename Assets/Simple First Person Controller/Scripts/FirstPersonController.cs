@@ -53,22 +53,11 @@ namespace Unity.Netcode
         {
             if (IsLocalPlayer)
             {
-                LookServerRpc();
-                MoveServerRpc();
+                Look();
+                Move();
             }
         }
-        [ServerRpc]
-        void LookServerRpc()
-        {
-            LookClientRpc();
-        }
-        [ServerRpc]
-        void MoveServerRpc()
-        {
-            MoveClientRpc();
-        }
-        [ClientRpc]
-        void LookClientRpc()
+        void Look()
         {
             //get the mouse inpuit axis values
             float xInput = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -82,8 +71,7 @@ namespace Unity.Netcode
             Quaternion rot = Quaternion.Euler(pitch, 0, 0);
             cameraTransform.localRotation = rot;
         }
-        [ClientRpc]
-        void MoveClientRpc()
+        void Move()
         {
             //update speed based onn the input
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -91,18 +79,18 @@ namespace Unity.Netcode
             //transofrm it based off the player transform and scale it by movement speed
             Vector3 move = transform.TransformVector(input) * movementSpeed;
             //is it on the ground
-            if (cc.isGrounded)
-            {
-                yVelocity = -gravity * Time.deltaTime;
-                //check for jump here
-                if (Input.GetButtonDown("Jump"))
-                {
-                    yVelocity = jumpSpeed;
-                }
-            }
-            //now add the gravity to the yvelocity
-            yVelocity -= gravity * Time.deltaTime;
-            move.y = yVelocity;
+            //if (cc.isGrounded)
+            //{
+            //    yVelocity = -gravity * Time.deltaTime;
+            //    //check for jump here
+            //    if (Input.GetButtonDown("Jump"))
+            //    {
+            //        yVelocity = jumpSpeed;
+            //    }
+            //}
+            ////now add the gravity to the yvelocity
+            //yVelocity -= gravity * Time.deltaTime;
+            //move.y = yVelocity;
             //and finally move
             cc.Move(move * Time.deltaTime);
         }
