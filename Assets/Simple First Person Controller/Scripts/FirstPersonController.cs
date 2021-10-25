@@ -53,11 +53,20 @@ namespace Unity.Netcode
         {
             if (IsLocalPlayer)
             {
-                Look();
-                Move();
-            }
+                LookServerRpc();
+                MoveServerRpc();
         }
-
+        [ServerRpc]
+        void LookServerRpc()
+        {
+            Look();
+        }
+        [ServerRpc]
+        void MoveServerRpc()
+        {
+            Move();
+        }
+        [ClientRpc]
         void Look()
         {
             //get the mouse inpuit axis values
@@ -72,7 +81,7 @@ namespace Unity.Netcode
             Quaternion rot = Quaternion.Euler(pitch, 0, 0);
             cameraTransform.localRotation = rot;
         }
-
+        [ClientRpc]
         void Move()
         {
             //update speed based onn the input
