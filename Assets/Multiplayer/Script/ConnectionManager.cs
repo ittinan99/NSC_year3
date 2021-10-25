@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Networking;
+using Unity.Netcode;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
-namespace Unity.Netcode.Transports.UNET
+namespace Netcode.Transports.PhotonRealtime
 {
     public class ConnectionManager : MonoBehaviour
     {
         [SerializeField] GameObject ConnectionButtonPanel;
-        public string ipAddress = "127.0.0.1";
-        UNetTransport transport;
+        public string roomName = "Test";
+        public string nickName = "TestName";
+        PhotonRealtimeTransport transport;
         public Camera lobbyCamera;
         // Happen on server
         public void Host()
@@ -29,8 +33,9 @@ namespace Unity.Netcode.Transports.UNET
         }
         public void Join()
         {
-            transport = NetworkManager.Singleton.GetComponent<UNetTransport>();
-            transport.ConnectAddress = ipAddress;
+            transport = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
+            transport.RoomName = roomName;
+            transport.NickName = nickName;
             ConnectionButtonPanel.SetActive(false);
             lobbyCamera.gameObject.SetActive(false);
             NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("Password1234");
@@ -43,9 +48,9 @@ namespace Unity.Netcode.Transports.UNET
             float z = UnityEngine.Random.Range(-10f, 10f);
             return new Vector3(x, y, z);
         }
-        public void IPAddressChanged(string newAddress)
+        public void RoomNameChanged(string newRoomName)
         {
-            this.ipAddress = newAddress;
+            this.roomName = newRoomName;
         }
     }
 }
