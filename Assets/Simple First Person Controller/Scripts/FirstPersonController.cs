@@ -55,19 +55,20 @@ namespace Unity.Netcode
             {
                 LookServerRpc();
                 MoveServerRpc();
+            }
         }
         [ServerRpc]
         void LookServerRpc()
         {
-            Look();
+            LookClientRpc();
         }
         [ServerRpc]
         void MoveServerRpc()
         {
-            Move();
+            MoveClientRpc();
         }
         [ClientRpc]
-        void Look()
+        void LookClientRpc()
         {
             //get the mouse inpuit axis values
             float xInput = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -82,7 +83,7 @@ namespace Unity.Netcode
             cameraTransform.localRotation = rot;
         }
         [ClientRpc]
-        void Move()
+        void MoveClientRpc()
         {
             //update speed based onn the input
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -105,10 +106,6 @@ namespace Unity.Netcode
             //and finally move
             cc.Move(move * Time.deltaTime);
         }
-
-
-
     }
-
 }
 
