@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConnectionButtonPanel: {fileID: 1308521316}
   roomName: Test
-  nickName: TestName
+  nickName: tew
   lobbyCamera: {fileID: 1812430999}
 --- !u!1 &597265518
 GameObject:
@@ -1378,18 +1378,20 @@ MonoBehaviour:
     - Override: 0
       Prefab: {fileID: 2699541615817244657, guid: 5d353d131e213f94fb9639806519a1fa,
         type: 3}
-      SourcePrefabToOverride: {fileID: 0}
+      SourcePrefabToOverride: {fileID: 2699541615817244657, guid: 5d353d131e213f94fb9639806519a1fa,
+        type: 3}
       SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
+      OverridingTargetPrefab: {fileID: 2699541615817244657, guid: 5d353d131e213f94fb9639806519a1fa,
+        type: 3}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
+    ConnectionApproval: 1
     ConnectionData: 
     EnableTimeResync: 0
     TimeResyncInterval: 30
     EnsureNetworkVariableLengthSafety: 0
     EnableSceneManagement: 1
-    ForceSamePrefabs: 1
+    ForceSamePrefabs: 0
     RecycleNetworkIds: 1
     NetworkIdRecycleDelay: 120
     RpcHashSize: 0

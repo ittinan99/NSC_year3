@@ -136,8 +136,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2699541614725998675}
   - component: {fileID: 2699541614725998676}
-  - component: {fileID: 4808927259282943241}
   - component: {fileID: 1639597215586018710}
+  - component: {fileID: 8680598566221131651}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,7 +204,15 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &4808927259282943241
+--- !u!81 &1639597215586018710
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699541614725998678}
+  m_Enabled: 1
+--- !u!114 &8680598566221131651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,7 +221,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2699541614725998678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: debfbca7be2863f4bbf8942a3dbb1246, type: 3}
+  m_Script: {fileID: 11500000, guid: 54c9647dc784a46bca664910f182491e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 1
@@ -228,17 +236,9 @@ MonoBehaviour:
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
-  InLocalSpace: 1
+  InLocalSpace: 0
   Interpolate: 1
   CanCommitToTransform: 0
---- !u!81 &1639597215586018710
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2699541614725998678}
-  m_Enabled: 1
 --- !u!1 &2699541615817244657
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,8 +251,8 @@ GameObject:
   - component: {fileID: 2699541615817244656}
   - component: {fileID: 5311846195588319944}
   - component: {fileID: 2699541615817244670}
-  - component: {fileID: 7855811437692678785}
   - component: {fileID: 411187454379236917}
+  - component: {fileID: 2029939445382460163}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -285,7 +285,7 @@ CharacterController:
   m_GameObject: {fileID: 2699541615817244657}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
@@ -327,33 +327,6 @@ MonoBehaviour:
   maxPitch: 85
   minPitch: -85
   mouseSensitivity: 2
---- !u!114 &7855811437692678785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2699541615817244657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: debfbca7be2863f4bbf8942a3dbb1246, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 1
-  Interpolate: 1
-  CanCommitToTransform: 0
 --- !u!114 &411187454379236917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,6 +343,33 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 1
   DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
+--- !u!114 &2029939445382460163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699541615817244657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c9647dc784a46bca664910f182491e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+  CanCommitToTransform: 0
 --- !u!1 &3136625245200168079
 GameObject:
   m_ObjectHideFlags: 0

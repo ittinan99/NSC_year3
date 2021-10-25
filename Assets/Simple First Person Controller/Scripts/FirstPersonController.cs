@@ -31,14 +31,14 @@ namespace Unity.Netcode
         public float mouseSensitivity = 2f;
 
         //the charachtercompononet for moving us
-        CharacterController cc;
+        //CharacterController cc;
 
         private void Start()
         {
             cameraTransform = GetComponentInChildren<Camera>().transform;
             if (IsLocalPlayer)
             {
-                cc = GetComponent<CharacterController>();
+                //cc = GetComponent<CharacterController>();
             }
             else
             {
@@ -59,6 +59,7 @@ namespace Unity.Netcode
         }
         void Look()
         {
+            cameraTransform = GetComponentInChildren<Camera>().transform;
             //get the mouse inpuit axis values
             float xInput = Input.GetAxis("Mouse X") * mouseSensitivity;
             float yInput = Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -71,6 +72,7 @@ namespace Unity.Netcode
             Quaternion rot = Quaternion.Euler(pitch, 0, 0);
             cameraTransform.localRotation = rot;
         }
+       
         void Move()
         {
             //update speed based onn the input
@@ -78,6 +80,7 @@ namespace Unity.Netcode
             input = Vector3.ClampMagnitude(input, 1f);
             //transofrm it based off the player transform and scale it by movement speed
             Vector3 move = transform.TransformVector(input) * movementSpeed;
+            transform.position += move;
             //is it on the ground
             //if (cc.isGrounded)
             //{
@@ -92,7 +95,7 @@ namespace Unity.Netcode
             //yVelocity -= gravity * Time.deltaTime;
             //move.y = yVelocity;
             //and finally move
-            cc.Move(move * Time.deltaTime);
+            //cc.Move(move * Time.deltaTime);
         }
     }
 }
