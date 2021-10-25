@@ -1325,7 +1325,6 @@ GameObject:
   - component: {fileID: 1737465723}
   - component: {fileID: 1737465722}
   - component: {fileID: 1737465721}
-  - component: {fileID: 1737465724}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -1345,8 +1344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c005b32a68a254cbe502a4e5cb8eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NickName: 
-  m_RoomName: 
+  m_NickName: It
+  m_RoomName: Test
   m_MaxPlayers: 16
   m_NetworkDeliveryEventCodesStartRange: 0
   m_AttachSupportLogger: 0
