@@ -70,20 +70,24 @@ public class TurnBaseSystem : NetworkBehaviour
     {
         Y_CombineStateClientRpc();
     }
-    [ServerRpc]
-    public void EndTurnServerRpc()
+    public void EndTurn()
     {
         if (IsLocalPlayer)
         {
-            EndTurnClientRpc();
+            EndTurnServerRpc();
         }
+    }
+    [ServerRpc]
+    public void EndTurnServerRpc()
+    {
+        EndTurnClientRpc();
     }
     [ClientRpc]
     public void StartStateClientRpc()
     {
         PlayerState = GameState.Start;
         isYourTurn = false;
-        EndTurnButton.onClick.AddListener(() => EndTurnServerRpc());
+        EndTurnButton.onClick.AddListener(() => EndTurn());
     }
     [ClientRpc]
     public void Y_CombineStateClientRpc()

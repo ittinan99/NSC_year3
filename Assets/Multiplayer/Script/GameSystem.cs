@@ -61,7 +61,10 @@ public class GameSystem : NetworkBehaviour
     {
         Debug.Log("GameStart");
         gamePhase = GamePhase.Start;
-        Rand_startPlayerServerRpc();
+        if (IsLocalPlayer)
+        {
+            Rand_startPlayerServerRpc();
+        }
     }
     [ServerRpc]
     public void NextPlayerTurnServerRpc()
