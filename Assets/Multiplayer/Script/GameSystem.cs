@@ -50,6 +50,10 @@ public class GameSystem : NetworkBehaviour
         StartPlayer.GetComponent<TurnBaseSystem>().isYourTurn = true;
         StartPlayer.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Y_CombineTurn;
     }
+    public void startGame()
+    {
+        StartGameServerRpc();
+    }
     [ServerRpc]
     public void StartGameServerRpc()
     {
@@ -61,10 +65,8 @@ public class GameSystem : NetworkBehaviour
     {
         Debug.Log("GameStart");
         gamePhase = GamePhase.Start;
-        if (IsLocalPlayer)
-        {
-            Rand_startPlayerServerRpc();
-        }
+        Rand_startPlayerServerRpc();
+
     }
     [ServerRpc]
     public void NextPlayerTurnServerRpc()
