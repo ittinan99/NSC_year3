@@ -32,13 +32,13 @@ public class GameSystem : NetworkBehaviour
         
     }
     // Update is called once per frame
-    [ServerRpc]
-    void Rand_startPlayerServerRpc()
-    {
-        Rand_startPlayerClientRpc();
-    }
-    [ClientRpc]
-    void Rand_startPlayerClientRpc()
+    //[ServerRpc]
+    //void Rand_startPlayerServerRpc()
+    //{
+    //    Rand_startPlayerClientRpc();
+    //}
+    //[ClientRpc]
+    void Rand_startPlayerClient()
     {
         gamePhase = GamePhase.CombineState;
         PlayerList = GameObject.FindGameObjectsWithTag("Player");
@@ -65,7 +65,8 @@ public class GameSystem : NetworkBehaviour
     {
         Debug.Log("GameStart");
         gamePhase = GamePhase.Start;
-        Rand_startPlayerServerRpc();
+
+        Rand_startPlayerClient();
 
     }
     [ServerRpc]
