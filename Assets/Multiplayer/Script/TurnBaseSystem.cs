@@ -53,11 +53,11 @@ public class TurnBaseSystem : NetworkBehaviour
         }
         if (IsLocalPlayer)
         {
-            StartBut.interactable = true;
+            StartBut.interactable = false;
         }
         else if(IsLocalPlayer&&IsOwnedByServer)
         {
-            StartBut.interactable = false;
+            StartBut.interactable = true;
         }
     }
     [ServerRpc]
