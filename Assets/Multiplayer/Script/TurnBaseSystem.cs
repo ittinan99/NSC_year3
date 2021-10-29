@@ -73,7 +73,10 @@ public class TurnBaseSystem : NetworkBehaviour
     [ServerRpc]
     public void EndTurnServerRpc()
     {
-        EndTurnClientRpc();
+        if (IsLocalPlayer)
+        {
+            EndTurnClientRpc();
+        }
     }
     [ClientRpc]
     public void StartStateClientRpc()
