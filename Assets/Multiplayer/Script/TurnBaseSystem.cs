@@ -10,27 +10,25 @@ public class TurnBaseSystem : NetworkBehaviour
     public enum GameState { Start,otherTurn,Y_CombineTurn, Y_AttackTurn,Win,Lose}
     public GameState PlayerState;
     [SerializeField]
-    private GameObject PlayerCanvas;
-    [SerializeField]
-    private Button EndTurnButton;
-
+    private GameSystem GS;
     public bool isYourTurn;
+    [SerializeField]
+    public GameObject PlayerCanvas;
+    [SerializeField]
+    public Button EndTurnButton;
+    [SerializeField]
+    private Button StartBut;
     private void Awake()
     {
+        GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
         PlayerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas");
         EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
     }
     void Start()
     {
+        StartBut.onClick.AddListener(() => GS.StartGameServerRpc());
         StartStateServerRpc();
-        if (IsLocalPlayer)
-        {
-            PlayerCanvas.SetActive(true);
-        }
-        else
-        {
-            PlayerCanvas.SetActive(false);
-        }
     }
     private void Update()
     {
@@ -41,6 +39,18 @@ public class TurnBaseSystem : NetworkBehaviour
         else
         {
             EndTurnButton.interactable = false;
+        }
+        if (IsLocalPlayer)
+        {
+            PlayerCanvas.SetActive(true);
+        }
+        if (IsOwnedByServer)
+        {
+            StartBut.interactable = true;
+        }
+        else
+        {
+            StartBut.interactable = false;
         }
     }
     [ServerRpc]

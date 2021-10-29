@@ -9,6 +9,7 @@ public class GameSystem : NetworkBehaviour
 {
     [SerializeField]
     private GameObject CurrentPlayerTurn;
+
     [SerializeField]
     private int CurrentPlayerIndex;
     [SerializeField]
@@ -16,27 +17,19 @@ public class GameSystem : NetworkBehaviour
     private enum GamePhase {Start,CombineState,AttackState,End}
     [SerializeField]
     private GamePhase gamePhase;
-    [SerializeField]
-    private Button StartBut;
+   
     private void Awake()
     {
         PlayerList = new GameObject[0];
-        StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+        
     }
     void Start()
     {
-        StartBut.onClick.AddListener(() => StartGameServerRpc());
+        
     }
     private void Update()
     {
-        if (IsOwnedByServer)
-        {
-            StartBut.interactable = true;
-        }
-        else
-        {
-            StartBut.interactable = false;
-        }
+        
     }
     // Update is called once per frame
     [ServerRpc]
@@ -57,14 +50,15 @@ public class GameSystem : NetworkBehaviour
         StartPlayer.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Y_CombineTurn;
     }
     [ServerRpc]
-    void StartGameServerRpc()
+    public void StartGameServerRpc()
     {
         StartGameClientRpc();
     }
     
     [ClientRpc]
-    void StartGameClientRpc()
+    public void StartGameClientRpc()
     {
+        Debug.Log("GameStart");
         gamePhase = GamePhase.Start;
         Rand_startPlayerServerRpc();
     }
