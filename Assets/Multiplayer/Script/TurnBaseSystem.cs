@@ -81,6 +81,7 @@ public class TurnBaseSystem : NetworkBehaviour
     public void EndTurnServerRpc()
     {
         EndTurnClientRpc();
+        GS.NextPlayerTurnServerRpc();
     }
     [ClientRpc]
     public void StartStateClientRpc()
