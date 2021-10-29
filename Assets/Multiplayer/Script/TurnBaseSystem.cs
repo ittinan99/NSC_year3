@@ -39,13 +39,13 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     private void Update()
     {
-        if (isYourTurn)
-        {
-            EndTurnButton.interactable = true;
-        }
-        else
+        if (IsLocalPlayer)
         {
             EndTurnButton.interactable = false;
+        }
+        if (IsLocalPlayer&&isYourTurn)
+        {
+            EndTurnButton.interactable = true;
         }
         if (IsLocalPlayer)
         {
