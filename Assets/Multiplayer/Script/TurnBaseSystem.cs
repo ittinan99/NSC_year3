@@ -47,7 +47,7 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             PlayerCanvas.SetActive(true);
         }
-        if (IsOwnedByServer)
+        if (IsOwnedByServer && IsLocalPlayer)
         {
             StartBut.interactable = true;
         }

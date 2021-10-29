@@ -12,8 +12,8 @@ public class GameSystem : NetworkBehaviour
 
     [SerializeField]
     private int CurrentPlayerIndex;
-    [SerializeField]
-    private GameObject[] PlayerList;
+ 
+    public GameObject[] PlayerList;
     private enum GamePhase {Start,CombineState,AttackState,End}
     [SerializeField]
     private GamePhase gamePhase;
@@ -46,6 +46,7 @@ public class GameSystem : NetworkBehaviour
         GameObject StartPlayer = PlayerList[randNum];
         CurrentPlayerTurn = StartPlayer;
         CurrentPlayerIndex = randNum;
+        Debug.Log("StartPlayer : Player " + CurrentPlayerIndex);
         StartPlayer.GetComponent<TurnBaseSystem>().isYourTurn = true;
         StartPlayer.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Y_CombineTurn;
     }
@@ -75,6 +76,7 @@ public class GameSystem : NetworkBehaviour
         {
             CurrentPlayerIndex = 0;
         }
+        Debug.Log("Turn : Player " + CurrentPlayerIndex);
         CurrentPlayerTurn = PlayerList[CurrentPlayerIndex];
         CurrentPlayerTurn.GetComponent<TurnBaseSystem>().isYourTurn = true;
         if(gamePhase == GamePhase.CombineState)
