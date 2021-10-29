@@ -55,7 +55,7 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             StartBut.interactable = false;
         }
-        else if(IsLocalPlayer&&IsOwnedByServer)
+        if(IsLocalPlayer&&IsOwnedByServer)
         {
             StartBut.interactable = true;
         }
