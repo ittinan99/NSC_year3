@@ -1976,7 +1976,6 @@ MonoBehaviour:
   CurrentPlayerIndex: 0
   PlayerList: []
   gamePhase: 0
-  StartBut: {fileID: 0}
 --- !u!4 &1501836858
 Transform:
   m_ObjectHideFlags: 0

@@ -27,10 +27,14 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     void Start()
     {
-        StartBut.onClick.AddListener(() => GS.StartGameServerRpc());
         if (IsLocalPlayer)
         {
             StartStateServerRpc();
+            if (IsOwnedByServer)
+            {
+                StartBut.onClick.AddListener(() => GS.StartGameServerRpc());
+                Debug.Log("AddStartBut");
+            }
         }
     }
     private void Update()
