@@ -28,7 +28,10 @@ public class TurnBaseSystem : NetworkBehaviour
     void Start()
     {
         StartBut.onClick.AddListener(() => GS.StartGameServerRpc());
-        StartStateServerRpc();
+        if (IsLocalPlayer)
+        {
+            StartStateServerRpc();
+        }
     }
     private void Update()
     {
