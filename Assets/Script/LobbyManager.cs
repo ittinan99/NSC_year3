@@ -17,14 +17,17 @@ public class LobbyManager : NetworkBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if (GameObject.Find("NetworkManager").GetComponent<NetworkManager>().IsServer && count == 0)
+        if (GameObject.Find("NetworkManager").GetComponent<NetworkManager>().IsHost && count == 0)
         {
-            count++;
             playercount = GameObject.FindGameObjectsWithTag("NetworkObject").Length;
-            PlayerSpawn();
-            if (Player[playercount].GetComponent<NetworkObject>().IsLocalPlayer)
+            if (IsOwner)
+            {
+                PlayerSpawnServerRpc();
+            }
+            if (Player[playercount].GetComponent<NetworkObject>().IsOwner)
             {
                 PlayerChangeNameServerRpc();
+                count++;
             }
         }
     }
@@ -41,7 +44,13 @@ public class LobbyManager : NetworkBehaviour
         name = photo.NickName;
         NameText.text = name;
     }
-    void PlayerSpawn()
+    [ServerRpc]
+    void PlayerSpawnServerRpc()
+    {
+        PlayerSpawnClientRpc();
+    }
+    [ClientRpc]
+    void PlayerSpawnClientRpc()
     {
         Player[playercount] = Instantiate(Prefab, Panel);
         Player[playercount].GetComponent<RectTransform>().sizeDelta = new Vector2(320, 600);
