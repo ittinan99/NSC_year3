@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Test
   nickName: TestName
-  sceneName: 
+  sceneName: Multiplayer
   RoomID:
   - {fileID: 1293157020}
   - {fileID: 151943602}
