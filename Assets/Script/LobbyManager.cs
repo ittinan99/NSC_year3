@@ -20,11 +20,10 @@ public class LobbyManager : NetworkBehaviour
         if (GameObject.Find("NetworkManager").GetComponent<NetworkManager>().IsHost && count == 0)
         {
             playercount = GameObject.FindGameObjectsWithTag("NetworkObject").Length;
-            if (IsOwner)
-            {
-                PlayerSpawnServerRpc();
-            }
-            if (Player[playercount].GetComponent<NetworkObject>().IsOwner)
+            GameObject.FindGameObjectsWithTag("NetworkObject")[playercount - 1].GetComponent<Transform>().SetParent(Panel);
+            GameObject.FindGameObjectsWithTag("NetworkObject")[playercount - 1].GetComponent<RectTransform>().sizeDelta = new Vector2(325, 600);
+            Player[playercount - 1] = GameObject.FindGameObjectsWithTag("NetworkObject")[playercount - 1];
+            if (Player[playercount - 1].GetComponent<NetworkObject>().IsOwner) 
             {
                 PlayerChangeNameServerRpc();
                 count++;
@@ -43,17 +42,5 @@ public class LobbyManager : NetworkBehaviour
         photo = GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>();
         name = photo.NickName;
         NameText.text = name;
-    }
-    [ServerRpc]
-    void PlayerSpawnServerRpc()
-    {
-        PlayerSpawnClientRpc();
-    }
-    [ClientRpc]
-    void PlayerSpawnClientRpc()
-    {
-        Player[playercount] = Instantiate(Prefab, Panel);
-        Player[playercount].GetComponent<RectTransform>().sizeDelta = new Vector2(320, 600);
-        Player[playercount].GetComponent<NetworkObject>().Spawn();
     }
 }
