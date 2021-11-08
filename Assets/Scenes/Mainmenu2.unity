@@ -1370,12 +1370,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: Test
   nickName: TestName
-  sceneName: Multiplayer
+  sceneName: Lobby
   RoomID:
   - {fileID: 1293157020}
   - {fileID: 151943602}
   RoomPW:
   - {fileID: 459048560}
+  - {fileID: 1155497961}
 --- !u!4 &441560020
 Transform:
   m_ObjectHideFlags: 0
@@ -5471,8 +5472,14 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1532328483}
-    PlayerPrefab: {fileID: 0}
-    NetworkPrefabs: []
+    PlayerPrefab: {fileID: 6422104830213210073, guid: 7a410ed532f052747bdd594af1540e5a,
+      type: 3}
+    NetworkPrefabs:
+    - Override: 0
+      Prefab: {fileID: 0}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
