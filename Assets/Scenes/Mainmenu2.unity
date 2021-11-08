@@ -614,7 +614,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 247847375}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 441560019}
+        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
+        m_MethodName: Join
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &247847375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5472,11 +5484,11 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1532328483}
-    PlayerPrefab: {fileID: 6422104830213210073, guid: 7a410ed532f052747bdd594af1540e5a,
-      type: 3}
+    PlayerPrefab: {fileID: 0}
     NetworkPrefabs:
     - Override: 0
-      Prefab: {fileID: 0}
+      Prefab: {fileID: 6422104830213210073, guid: 7a410ed532f052747bdd594af1540e5a,
+        type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
