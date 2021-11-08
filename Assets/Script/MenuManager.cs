@@ -37,6 +37,13 @@ public class MenuManager : MonoBehaviour
         Popup[2].SetActive(false);
         Popup[3].SetActive(true);
     }
+    public void OnClickCancel() //Join Match Button
+    {
+        Popup[0].SetActive(false);
+        Popup[1].SetActive(false);
+        Popup[2].SetActive(false);
+        Popup[3].SetActive(false);
+    }
     public void OnClickRTMM() //Return to Mainmenu Button
     {
         SceneManager.LoadScene("Mainmenu",LoadSceneMode.Single);
