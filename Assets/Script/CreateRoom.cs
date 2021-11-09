@@ -30,12 +30,9 @@ public class CreateRoom : MonoBehaviour
     public void Host()
     {
         GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().RoomName = RoomID[0].text;
-        //GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().NickName = RoomID[0].text;
         GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().NickName = nickName;
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
         NetworkManager.Singleton.StartHost();
-        GameObject.Find("PlayerInfoBase(Clone)").GetComponent<PhotonRealtimeTransport>().RoomName = RoomID[0].text;
-        GameObject.Find("PlayerInfoBase(Clone)").GetComponent<PhotonRealtimeTransport>().NickName = nickName;
         NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
     // Happen on server
@@ -52,8 +49,6 @@ public class CreateRoom : MonoBehaviour
         transport.NickName = nickName;
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(RoomPW[1].text);
         NetworkManager.Singleton.StartClient();
-        GameObject.Find("PlayerInfoBase(Clone)").GetComponent<PhotonRealtimeTransport>().RoomName = RoomID[0].text;
-        GameObject.Find("PlayerInfoBase(Clone)").GetComponent<PhotonRealtimeTransport>().NickName = nickName;
     }
     Vector3 GetRandomSpawn()
     {

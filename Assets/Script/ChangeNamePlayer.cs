@@ -23,7 +23,7 @@ public class ChangeNamePlayer : NetworkBehaviour
     [ClientRpc]
     void ChangeClientRpc()
     {
-        photo = GetComponent<PhotonRealtimeTransport>();
+        photo = GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>();
         this.gameObject.name = photo.NickName;
         Destroy(GetComponent<ChangeNamePlayer>());
     }
