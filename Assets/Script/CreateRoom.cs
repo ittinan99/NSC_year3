@@ -52,6 +52,8 @@ public class CreateRoom : MonoBehaviour
         transport.NickName = nickName;
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(RoomPW[1].text);
         NetworkManager.Singleton.StartClient();
+        GameObject.Find("PlayerInfoBase(Clone)").GetComponent<PhotonRealtimeTransport>().RoomName = RoomID[0].text;
+        GameObject.Find("PlayerInfoBase(Clone)").GetComponent<PhotonRealtimeTransport>().NickName = nickName;
     }
     Vector3 GetRandomSpawn()
     {
