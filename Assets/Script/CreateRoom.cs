@@ -18,22 +18,33 @@ public class CreateRoom : MonoBehaviour
     public TMP_Text[] RoomPW;
     PhotonRealtimeTransport transport;
     GameObject[] NetworkManagers;
+    private static Dictionary<ulong, PlayerData> ClientData;
     // Happen on server
     public void Start()
     {
         NetworkManagers = GameObject.FindGameObjectsWithTag("NetworkManager");
-        if(NetworkManagers.Length > 1)
+        if (NetworkManagers.Length > 1)
         {
             Destroy(NetworkManagers[1]);
         }
     }
     public void Host()
     {
+        
         GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().RoomName = RoomID[0].text;
         GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().NickName = nickName;
+        NetworkManager.Singleton.NetworkConfig.PlayerPrefab.name = nickName;
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
         NetworkManager.Singleton.StartHost();
         NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+    public static PlayerData? GetPlayerData(ulong ClientIds)
+    {
+        if(ClientData.TryGetValue(ClientIds,out PlayerData playerDatas))
+        {
+            return playerDatas;
+        }
+        return null;
     }
     // Happen on server
     private void ApprovalCheck(byte[] connectionData, ulong clientID, NetworkManager.ConnectionApprovedDelegate callback)
@@ -47,6 +58,7 @@ public class CreateRoom : MonoBehaviour
         transport = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
         transport.RoomName = RoomID[1].text;
         transport.NickName = nickName;
+        NetworkManager.Singleton.NetworkConfig.PlayerPrefab.name = nickName;
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(RoomPW[1].text);
         NetworkManager.Singleton.StartClient();
     }

@@ -4,33 +4,27 @@ using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 using Netcode.Transports.PhotonRealtime;
-public class LobbyManager : NetworkBehaviour 
+public class LobbyManager : NetworkBehaviour
 {
     private TMP_Text[] Text;
     private Transform Panel;
     private string Name;
     int count = 0;
-    
     private void Start()
     {
         Panel = GameObject.Find("PlayerSlotPanel").GetComponent<Transform>();
         GetComponent<Transform>().SetParent(Panel);
         GetComponent<RectTransform>().sizeDelta = new Vector2(325, 600);
-        Name = GetComponent<NetworkObject>().NetworkManager.GetComponent<PhotonRealtimeTransport>().NickName;
     }
     // Start is called before the first frame update
     void Update()
     {
-        if (IsOwner)
+        if (IsLocalPlayer)
         {
             SetParentServerRpc();
-            if (IsOwner) 
-            {
-                PlayerChangeNameServerRpc();
-                count++;
-            }
+            PlayerChangeNameServerRpc();
+            count++;
         }
-        
     }
     [ServerRpc]
     void SetParentServerRpc()
@@ -40,6 +34,7 @@ public class LobbyManager : NetworkBehaviour
     [ClientRpc]
     void SetParentClientRpc()
     {
+        Name = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>().NickName;
         GetComponent<Transform>().SetParent(Panel);
         GetComponent<RectTransform>().sizeDelta = new Vector2(325, 600);
     }
@@ -52,6 +47,5 @@ public class LobbyManager : NetworkBehaviour
     void PlayerChangeNameClientRpc()
     {
         Text = GetComponentsInChildren<TMP_Text>();
-        Text[0].text = Name;
     }
 }
