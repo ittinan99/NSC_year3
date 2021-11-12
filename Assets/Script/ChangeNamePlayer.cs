@@ -14,12 +14,19 @@ public class ChangeNamePlayer : NetworkBehaviour
         photo = GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>();
         GameObject.Find("NetworkManager").GetComponent<NetworkManager>().OnClientConnectedCallback += ChangeNamePlayer_OnClientConnectedCallback;
     }
+    private void Update()
+    {
+        if (IsLocalPlayer)
+        {
+            ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+        }
+    }
 
     private void ChangeNamePlayer_OnClientConnectedCallback(ulong obj)
     {
         if (IsLocalPlayer)
         {
-            ChangeClientRpc(new DataCollect { PlayerId = obj, PlayerName = photo.NickName });
+            ChangeServerRpc(new DataCollect { PlayerId = obj, PlayerName = photo.NickName });
         }
     }
 
