@@ -18,8 +18,9 @@ public class TurnBaseSystem : NetworkBehaviour
     public Button EndTurnButton;
     [SerializeField]
     private Button StartBut;
+    [SerializeField]
     NetworkVariable<float> currentHealth;
-    NetworkVariable<float> maxHealth;
+    public float maxHealth;
     private void Awake()
     {
         GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
@@ -29,7 +30,7 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = new NetworkVariable<float>(maxHealth);
         if (IsLocalPlayer)
         {
             StartStateServerRpc();
