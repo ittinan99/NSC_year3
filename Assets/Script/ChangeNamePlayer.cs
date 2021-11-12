@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Netcode.Transports.PhotonRealtime;
 using Unity.Netcode;
+using TMPro;
 
 public class ChangeNamePlayer : NetworkBehaviour
 {
@@ -10,21 +11,26 @@ public class ChangeNamePlayer : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        photo = GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>();
+        GameObject.Find("NetworkManager").GetComponent<NetworkManager>().OnClientConnectedCallback += ChangeNamePlayer_OnClientConnectedCallback;
+    }
+
+    private void ChangeNamePlayer_OnClientConnectedCallback(ulong obj)
+    {
         if (IsLocalPlayer)
         {
-            ChangeServerRpc();
+            ChangeClientRpc(new DataCollect { PlayerId = obj, PlayerName = photo.NickName });
         }
     }
+
     [ServerRpc]
-    void ChangeServerRpc()
+    void ChangeServerRpc(DataCollect data)
     {
-        ChangeClientRpc();
+        ChangeClientRpc(data);
     }
     [ClientRpc]
-    void ChangeClientRpc()
+    void ChangeClientRpc(DataCollect data)
     {
-        photo = GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>();
-        this.gameObject.name = photo.NickName;
-        Destroy(GetComponent<ChangeNamePlayer>());
+        GetComponentsInChildren<TMP_Text>()[0].text = data.PlayerName;
     }
-}
+} 
