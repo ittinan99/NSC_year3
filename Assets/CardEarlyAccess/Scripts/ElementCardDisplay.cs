@@ -47,7 +47,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
         }
         if(GameSystem.localTurnbased != null)
         {
-            if (Input.GetKeyUp(KeyCode.Mouse0) && E_Card.CanAttack && GameSystem.localTurnbased.PlayerState == TurnBaseSystem.GameState.Y_AttackTurn)
+            if (Input.GetKeyUp(KeyCode.Mouse0) && IsAttack && GameSystem.localTurnbased.PlayerState == TurnBaseSystem.GameState.Y_AttackTurn)
             {
                 IsAttack = false;
                 GameObject arrow = GameObject.Find("Arrow");
@@ -59,7 +59,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
             }
             if (IsAttack)
             {
-
+                cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
                 if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit,1000))
                 {
                     Debug.DrawRay(cam.ScreenPointToRay(Input.mousePosition).origin, cam.ScreenPointToRay(Input.mousePosition).direction * 5f, Color.red);
@@ -77,12 +77,12 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
+        GameSystem.CurrenTarget = CurrentTarget;
         AttackCurrentTargetClientRpc();
     }
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
     {
-        GameSystem.CurrenTarget = CurrentTarget;
         CurrentTarget.GetComponent<TurnBaseSystem>().TakeDamageServerRpc(10);
     }
     public void OnPointerEnter(PointerEventData eventData)

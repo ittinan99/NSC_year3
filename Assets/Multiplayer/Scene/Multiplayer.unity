@@ -1957,7 +1957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1353697778
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3172,9 +3172,11 @@ MonoBehaviour:
   Artwork: {fileID: 413444961493705529}
   IsCombine: 0
   IsPressed: 0
+  IsAttack: 0
   StartPos: {x: 0, y: 0}
   IsOutPutCard: 0
   CombineSlot: {fileID: 0}
+  CurrentTarget: {fileID: 0}
 --- !u!224 &413444961493705531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3609,9 +3611,11 @@ MonoBehaviour:
   Artwork: {fileID: 413444962233263656}
   IsCombine: 0
   IsPressed: 0
+  IsAttack: 0
   StartPos: {x: 0, y: 0}
   IsOutPutCard: 0
   CombineSlot: {fileID: 0}
+  CurrentTarget: {fileID: 0}
 --- !u!1 &413444962233263661
 GameObject:
   m_ObjectHideFlags: 0
@@ -3966,9 +3970,11 @@ MonoBehaviour:
   Artwork: {fileID: 413444963104757931}
   IsCombine: 0
   IsPressed: 0
+  IsAttack: 0
   StartPos: {x: 0, y: 0}
   IsOutPutCard: 0
   CombineSlot: {fileID: 0}
+  CurrentTarget: {fileID: 0}
 --- !u!224 &413444963104757929
 RectTransform:
   m_ObjectHideFlags: 0

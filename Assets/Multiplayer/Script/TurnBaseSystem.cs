@@ -9,7 +9,6 @@ public class TurnBaseSystem : NetworkBehaviour
 {
     public enum GameState { Start,otherTurn,Y_CombineTurn, Y_AttackTurn,Win,Lose}
     public GameState PlayerState;
-    public GameObject CurrentTarget;
     [SerializeField]
     private GameSystem GS;
     public bool isYourTurn;
