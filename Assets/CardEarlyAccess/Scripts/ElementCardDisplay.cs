@@ -64,6 +64,7 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
                     GameObject objectHit = hit.transform.gameObject;
                     if (objectHit.CompareTag("Player"))
                     {
+                        Debug.Log("Hit");
                         CurrentTarget = objectHit;
                     }
                 }

@@ -254,6 +254,8 @@ GameObject:
   - component: {fileID: 411187454379236917}
   - component: {fileID: 2029939445382460163}
   - component: {fileID: 1947793036245895460}
+  - component: {fileID: -6767276316154322605}
+  - component: {fileID: 7044368620874380264}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -389,6 +391,37 @@ MonoBehaviour:
   PlayerCanvas: {fileID: 0}
   EndTurnButton: {fileID: 0}
   StartBut: {fileID: 0}
+  currentHealth: 0
+  maxHealth: 100
+--- !u!65 &-6767276316154322605
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699541615817244657}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.9688687, z: 1}
+  m_Center: {x: 0, y: -0.036327958, z: 0}
+--- !u!54 &7044368620874380264
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699541615817244657}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3136625245200168079
 GameObject:
   m_ObjectHideFlags: 0
