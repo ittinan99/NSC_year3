@@ -18,8 +18,8 @@ public class TurnBaseSystem : NetworkBehaviour
     public Button EndTurnButton;
     [SerializeField]
     private Button StartBut;
-    public float currentHealth;
-    public float maxHealth;
+    NetworkVariable<float> currentHealth;
+    NetworkVariable<float> maxHealth;
     private void Awake()
     {
         GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
@@ -71,7 +71,8 @@ public class TurnBaseSystem : NetworkBehaviour
     [ClientRpc]
     public void TakeDamageClientRpc(float DamageAmount)
     {
-        currentHealth -= DamageAmount;
+        float health = float.Parse(currentHealth.ToString()) - DamageAmount;
+        currentHealth = new NetworkVariable<float>(health);
     }
     [ServerRpc]
     public void StartStateServerRpc()
