@@ -13,9 +13,9 @@ public class GameSystem : NetworkBehaviour
     public static TurnBaseSystem localTurnbased = null;
     [SerializeField]
     private int CurrentPlayerIndex;
- 
-    public GameObject[] PlayerList;
     public static GameObject CurrenTarget;
+    public GameObject[] PlayerList;
+    
     public enum GamePhase {Start,CombineState,AttackState,End}
     [SerializeField]
     public static GamePhase gamePhase;

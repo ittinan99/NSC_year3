@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 using TMPro;
 using UnityEngine.EventSystems;
-public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerDownHandler,IPointerUpHandler
+public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerDownHandler,IPointerUpHandler
 {
     public ElementCard E_Card;
 
@@ -26,7 +27,6 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
     private Camera cam;
     void Start()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         IsAttack = false;
         IsCombine = false;
         IsPressed = false;
@@ -54,12 +54,12 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
                 arrow.GetComponent<Arrow>().Hide();
                 if (CurrentTarget != null)
                 {
-                    GameSystem.CurrenTarget = CurrentTarget;
-                    CurrentTarget.GetComponent<TurnBaseSystem>().TakeDamageServerRpc(10);
+                    AttackCurrentTargetServerRpc();
                 }
             }
             if (IsAttack)
             {
+
                 if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit,1000))
                 {
                     Debug.DrawRay(cam.ScreenPointToRay(Input.mousePosition).origin, cam.ScreenPointToRay(Input.mousePosition).direction * 5f, Color.red);
@@ -73,6 +73,17 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
             }
         }
        
+    }
+    [ServerRpc]
+    public void AttackCurrentTargetServerRpc()
+    {
+        AttackCurrentTargetClientRpc();
+    }
+    [ClientRpc]
+    public void AttackCurrentTargetClientRpc()
+    {
+        GameSystem.CurrenTarget = CurrentTarget;
+        CurrentTarget.GetComponent<TurnBaseSystem>().TakeDamageServerRpc(10);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
