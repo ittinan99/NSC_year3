@@ -21,7 +21,7 @@ public class GameSystem : NetworkBehaviour
     public static GamePhase gamePhase;
     [SerializeField]
     private int EndTurnCount;
-    NetworkVariable<int> randNum;
+    NetworkVariable<int> randNum = new NetworkVariable<int>(readPerm : NetworkVariableReadPermission.Everyone);
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -45,8 +45,7 @@ public class GameSystem : NetworkBehaviour
     //[ClientRpc]
     void Rand_startPlayerClient()
     {
-        gamePhase = GamePhase.CombineState;
-        PlayerList = GameObject.FindGameObjectsWithTag("Player");
+        
         foreach(GameObject player in PlayerList)
         {
             if (player.GetComponent<NetworkObject>().IsLocalPlayer)
@@ -54,8 +53,7 @@ public class GameSystem : NetworkBehaviour
                 localTurnbased = player.GetComponent<TurnBaseSystem>();
             }
         }
- 
-        randNum.Value = Random.Range(0, PlayerList.Length - 1);
+
         GameObject StartPlayer = PlayerList[randNum.Value];
         CurrentPlayerTurn = StartPlayer;
         CurrentPlayerIndex = randNum.Value;
@@ -70,6 +68,8 @@ public class GameSystem : NetworkBehaviour
     [ServerRpc]
     public void StartGameServerRpc()
     {
+        int R = Random.Range(0, PlayerList.Length - 1);
+        randNum.Value = R;
         StartGameClientRpc();
     }
     
@@ -78,7 +78,8 @@ public class GameSystem : NetworkBehaviour
     {
         Debug.Log("GameStart");
         gamePhase = GamePhase.Start;
-
+        gamePhase = GamePhase.CombineState;
+        PlayerList = GameObject.FindGameObjectsWithTag("Player");
         Rand_startPlayerClient();
 
     }
