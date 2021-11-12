@@ -19,7 +19,7 @@ public class TurnBaseSystem : NetworkBehaviour
     [SerializeField]
     private Button StartBut;
     [SerializeField]
-    NetworkVariable<float> currentHealth;
+    NetworkVariable<float> currentHealth = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone);
     public float maxHealth;
     private void Awake()
     {

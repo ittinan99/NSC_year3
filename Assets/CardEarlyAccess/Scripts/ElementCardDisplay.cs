@@ -60,8 +60,9 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
             }
             if (IsAttack)
             {
-                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit,1000))
                 {
+                    Debug.DrawRay(cam.ScreenPointToRay(Input.mousePosition).origin, cam.ScreenPointToRay(Input.mousePosition).direction * 5f, Color.red);
                     GameObject objectHit = hit.transform.gameObject;
                     if (objectHit.CompareTag("Player"))
                     {
