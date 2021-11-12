@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CardUnityEvent : UnityEvent<ElementCard>
+public class CardUnityEvent : UnityEvent<ElementCardDisplay>
 {
 }
 public class CardEvent : MonoBehaviour
@@ -14,28 +14,36 @@ public class CardEvent : MonoBehaviour
     {
         IsEmpty = true;
     }
-    public void CardAddListener(UnityAction<ElementCard> cardEvent)
+    public void CardAddListener(UnityAction<ElementCardDisplay> cardEvent)
     {
         CUE.AddListener(cardEvent);
     }
-    private void OnTriggerStay2D(Collider2D other)
+    public void PlaceCard(ElementCardDisplay eCard)
     {
-        if (other.CompareTag("Card") && IsEmpty) 
-        {
-            Debug.Log("Place Card");
-            IsEmpty = false;
-            other.GetComponent<ElementCardDisplay>().IsCombine = true;
-            other.transform.position = this.transform.position;
-            CUE.Invoke(other.GetComponent<ElementCardDisplay>().E_Card);
-        }
+        Debug.Log("Place Card");
+        IsEmpty = false;
+        CUE.Invoke(eCard);
     }
-    private void OnTriggerExit2D(Collider2D other)
+    public void RemoveCard()
     {
-        if (other.CompareTag("Card") && !IsEmpty)
-        {
-            IsEmpty = true;
-            other.GetComponent<ElementCardDisplay>().IsCombine = false;
-            CUE.Invoke(null) ;
-        }
+        IsEmpty = true;
+        CUE.Invoke(null);
     }
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("Card") && IsEmpty) 
+    //    {
+    //        Debug.Log("Place Card");
+    //        IsEmpty = false;
+    //        CUE.Invoke(other.GetComponent<ElementCardDisplay>().E_Card);
+    //    }
+    //}
+    //private void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("Card") && !IsEmpty)
+    //    {
+    //        IsEmpty = true;
+    //        CUE.Invoke(null) ;
+    //    }
+    //}
 }

@@ -18,6 +18,8 @@ public class TurnBaseSystem : NetworkBehaviour
     public Button EndTurnButton;
     [SerializeField]
     private Button StartBut;
+    public float currentHealth;
+    public float maxHealth;
     private void Awake()
     {
         GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
@@ -27,6 +29,7 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     void Start()
     {
+        currentHealth = maxHealth;
         if (IsLocalPlayer)
         {
             StartStateServerRpc();
@@ -59,6 +62,16 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             StartBut.interactable = true;
         }
+    }
+    [ServerRpc]
+    public void TakeDamageServerRpc(float DamageAmount)
+    {
+        TakeDamageClientRpc(DamageAmount);
+    }
+    [ClientRpc]
+    public void TakeDamageClientRpc(float DamageAmount)
+    {
+        currentHealth -= DamageAmount;
     }
     [ServerRpc]
     public void StartStateServerRpc()

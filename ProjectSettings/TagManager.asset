@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerCanvas
   - Card
+  - CombineSlot
   layers:
   - Default
   - TransparentFX

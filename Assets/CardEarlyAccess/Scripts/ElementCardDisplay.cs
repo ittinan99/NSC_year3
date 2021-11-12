@@ -16,9 +16,18 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
     [SerializeField]
     private bool IsPressed;
     [SerializeField]
-    private Vector2 StartPos;
+    private bool IsAttack;
+    public Vector2 StartPos;
+    
+    public bool IsOutPutCard = false;
+    public GameObject CombineSlot;
+    public GameObject CurrentTarget;
+
+    private Camera cam;
     void Start()
     {
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        IsAttack = false;
         IsCombine = false;
         IsPressed = false;
         StartPos = this.transform.position;
@@ -31,10 +40,36 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
     private void Update()
     {
-        if (IsPressed && !IsCombine)
+        if (IsPressed )
         {
             this.transform.position = Input.mousePosition;
+ 
         }
+        if(GameSystem.localTurnbased != null)
+        {
+            if (Input.GetKeyUp(KeyCode.Mouse0) && E_Card.CanAttack && GameSystem.localTurnbased.PlayerState == TurnBaseSystem.GameState.Y_AttackTurn)
+            {
+                IsAttack = false;
+                GameObject arrow = GameObject.Find("Arrow");
+                arrow.GetComponent<Arrow>().Hide();
+                if (CurrentTarget != null)
+                {
+                    CurrentTarget.GetComponent<TurnBaseSystem>().TakeDamageServerRpc(10);
+                }
+            }
+            if (IsAttack)
+            {
+                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+                {
+                    GameObject objectHit = hit.transform.gameObject;
+                    if (objectHit.CompareTag("Player"))
+                    {
+                        CurrentTarget = objectHit;
+                    }
+                }
+            }
+        }
+       
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -44,22 +79,55 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerExit(PointerEventData eventData)
     {
         this.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            StartPos = this.transform.position;
-            IsPressed = true;
+            if (GameSystem.gamePhase == GameSystem.GamePhase.CombineState)
+            {
+                IsPressed = true;
+                if (IsCombine)
+                {
+                    if (CombineSlot != null)
+                    {
+                        CombineSlot.GetComponent<CardEvent>().IsEmpty = true;
+
+                    }
+                }
+                if (IsOutPutCard)
+                {
+                    IsOutPutCard = false;
+                    GameObject cardPanel = GameObject.Find("CardPanel");
+                    GameObject combineSystem = GameObject.Find("CombineSystem");
+                    combineSystem.GetComponent<CombineSystem>().ConfirmCombine();
+                    cardPanel.GetComponent<CardPanel>().AddCard(this);
+                }
+            }
+            else if (GameSystem.gamePhase == GameSystem.GamePhase.AttackState && E_Card.CanAttack && GameSystem.localTurnbased.PlayerState == TurnBaseSystem.GameState.Y_AttackTurn)
+            {
+                Debug.Log("Arrow");
+                GameObject arrow = GameObject.Find("Arrow");
+                arrow.GetComponent<Arrow>().Show();
+                IsAttack = true;
+                Arrow.startPoint = this.gameObject.transform.position;
+            }
+           
         }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        IsPressed = false;
         if (IsCombine)
         {
-
+            if(CombineSlot != null)
+            {
+                CombineSlot.GetComponent<CardEvent>().PlaceCard(this);
+                this.transform.position = CombineSlot.transform.position;
+            }
         }
         else
         {
@@ -67,5 +135,24 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
             IsPressed = false;
         }
         
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("CombineSlot") && other.gameObject.GetComponent
+            <CardEvent>().IsEmpty)
+        {
+            IsCombine = true;
+            CombineSlot = other.gameObject;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("CombineSlot") && other.gameObject.GetComponent
+            <CardEvent>().IsEmpty)
+        {
+            other.gameObject.GetComponent<CardEvent>().RemoveCard();
+            IsCombine = false;
+            CombineSlot = null;
+        }
     }
 }

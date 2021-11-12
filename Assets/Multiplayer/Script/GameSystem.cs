@@ -10,13 +10,16 @@ public class GameSystem : NetworkBehaviour
     [SerializeField]
     private GameObject CurrentPlayerTurn;
 
+    public static TurnBaseSystem localTurnbased = null;
     [SerializeField]
     private int CurrentPlayerIndex;
  
     public GameObject[] PlayerList;
-    private enum GamePhase {Start,CombineState,AttackState,End}
+    public enum GamePhase {Start,CombineState,AttackState,End}
     [SerializeField]
-    private GamePhase gamePhase;
+    public static GamePhase gamePhase;
+    [SerializeField]
+    private int EndTurnCount;
    
     private void Awake()
     {
@@ -25,7 +28,7 @@ public class GameSystem : NetworkBehaviour
     }
     void Start()
     {
-        
+        EndTurnCount = 0;
     }
     private void Update()
     {
@@ -42,6 +45,13 @@ public class GameSystem : NetworkBehaviour
     {
         gamePhase = GamePhase.CombineState;
         PlayerList = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject player in PlayerList)
+        {
+            if (player.GetComponent<NetworkObject>().IsLocalPlayer)
+            {
+                localTurnbased = player.GetComponent<TurnBaseSystem>();
+            }
+        }
         int randNum = Random.Range(0, PlayerList.Length - 1);
         GameObject StartPlayer = PlayerList[randNum];
         CurrentPlayerTurn = StartPlayer;
@@ -77,6 +87,17 @@ public class GameSystem : NetworkBehaviour
     [ClientRpc]
     public void NextPlayerTurnClientRpc()
     {
+        EndTurnCount++;
+        if(EndTurnCount == PlayerList.Length && gamePhase == GamePhase.CombineState)
+        {
+            gamePhase = GamePhase.AttackState;
+            Debug.Log(gamePhase);
+        }
+        else if(EndTurnCount == PlayerList.Length && gamePhase == GamePhase.AttackState)
+        {
+            gamePhase = GamePhase.CombineState;
+            Debug.Log(gamePhase);
+        }
         CurrentPlayerIndex++;
         if(CurrentPlayerIndex  > PlayerList.Length - 1)
         {
