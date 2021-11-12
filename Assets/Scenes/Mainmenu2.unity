@@ -5461,7 +5461,7 @@ MonoBehaviour:
   m_RoomName: 
   m_MaxPlayers: 16
   m_NetworkDeliveryEventCodesStartRange: 0
-  m_AttachSupportLogger: 1
+  m_AttachSupportLogger: 0
   m_BatchMode: 1
   m_SendQueueBatchSize: 4096
   m_BatchedTransportEventCode: 129

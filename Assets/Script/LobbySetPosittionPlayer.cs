@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 using Netcode.Transports.PhotonRealtime;
-public class LobbyManager : NetworkBehaviour
+public class LobbySetPosittionPlayer : NetworkBehaviour
 {
     private TMP_Text[] Text;
     private Transform Panel;
@@ -15,16 +15,23 @@ public class LobbyManager : NetworkBehaviour
         Panel = GameObject.Find("PlayerSlotPanel").GetComponent<Transform>();
         GetComponent<Transform>().SetParent(Panel);
         GetComponent<RectTransform>().sizeDelta = new Vector2(325, 600);
+        NetworkManager.Singleton.OnClientConnectedCallback += Singleton_OnClientConnectedCallback;
     }
     // Start is called before the first frame update
     void Update()
     {
+    }
+
+    private void Singleton_OnClientConnectedCallback(ulong obj)
+    {
+        Debug.Log("x");
         if (IsLocalPlayer)
         {
             SetParentServerRpc();
             count++;
         }
     }
+
     [ServerRpc]
     void SetParentServerRpc()
     {
