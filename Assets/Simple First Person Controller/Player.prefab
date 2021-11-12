@@ -392,7 +392,8 @@ MonoBehaviour:
   PlayerCanvas: {fileID: 0}
   EndTurnButton: {fileID: 0}
   StartBut: {fileID: 0}
-  currentHealth: 0
+  currentHealth:
+    m_InternalValue: 0
   maxHealth: 100
 --- !u!65 &-6767276316154322605
 BoxCollider:

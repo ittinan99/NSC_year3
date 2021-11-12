@@ -72,8 +72,7 @@ public class TurnBaseSystem : NetworkBehaviour
     [ClientRpc]
     public void TakeDamageClientRpc(float DamageAmount)
     {
-        float health = float.Parse(currentHealth.ToString()) - DamageAmount;
-        currentHealth = new NetworkVariable<float>(health);
+        GameSystem.CurrenTarget.GetComponent<TurnBaseSystem>().currentHealth.Value -= DamageAmount;
     }
     [ServerRpc]
     public void StartStateServerRpc()

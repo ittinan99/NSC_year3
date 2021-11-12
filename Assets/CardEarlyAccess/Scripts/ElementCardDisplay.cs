@@ -54,6 +54,7 @@ public class ElementCardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerE
                 arrow.GetComponent<Arrow>().Hide();
                 if (CurrentTarget != null)
                 {
+                    GameSystem.CurrenTarget = CurrentTarget;
                     CurrentTarget.GetComponent<TurnBaseSystem>().TakeDamageServerRpc(10);
                 }
             }

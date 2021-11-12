@@ -15,12 +15,13 @@ public class GameSystem : NetworkBehaviour
     private int CurrentPlayerIndex;
  
     public GameObject[] PlayerList;
+    public static GameObject CurrenTarget;
     public enum GamePhase {Start,CombineState,AttackState,End}
     [SerializeField]
     public static GamePhase gamePhase;
     [SerializeField]
     private int EndTurnCount;
-   
+    NetworkVariable<int> randNum;
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -28,6 +29,7 @@ public class GameSystem : NetworkBehaviour
     }
     void Start()
     {
+        CurrenTarget = null;
         EndTurnCount = 0;
     }
     private void Update()
@@ -52,10 +54,11 @@ public class GameSystem : NetworkBehaviour
                 localTurnbased = player.GetComponent<TurnBaseSystem>();
             }
         }
-        int randNum = Random.Range(0, PlayerList.Length - 1);
-        GameObject StartPlayer = PlayerList[randNum];
+ 
+        randNum.Value = Random.Range(0, PlayerList.Length - 1);
+        GameObject StartPlayer = PlayerList[randNum.Value];
         CurrentPlayerTurn = StartPlayer;
-        CurrentPlayerIndex = randNum;
+        CurrentPlayerIndex = randNum.Value;
         Debug.Log("StartPlayer : Player " + CurrentPlayerIndex);
         StartPlayer.GetComponent<TurnBaseSystem>().isYourTurn = true;
         StartPlayer.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Y_CombineTurn;
