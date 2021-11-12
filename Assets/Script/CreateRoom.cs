@@ -18,7 +18,6 @@ public class CreateRoom : MonoBehaviour
     public TMP_Text[] RoomPW;
     PhotonRealtimeTransport transport;
     GameObject[] NetworkManagers;
-    private static Dictionary<ulong, PlayerData> ClientData;
     // Happen on server
     public void Start()
     {
@@ -38,14 +37,7 @@ public class CreateRoom : MonoBehaviour
         NetworkManager.Singleton.StartHost();
         NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
-    public static PlayerData? GetPlayerData(ulong ClientIds)
-    {
-        if(ClientData.TryGetValue(ClientIds,out PlayerData playerDatas))
-        {
-            return playerDatas;
-        }
-        return null;
-    }
+
     // Happen on server
     private void ApprovalCheck(byte[] connectionData, ulong clientID, NetworkManager.ConnectionApprovedDelegate callback)
     {

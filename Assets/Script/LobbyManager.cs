@@ -22,7 +22,6 @@ public class LobbyManager : NetworkBehaviour
         if (IsLocalPlayer)
         {
             SetParentServerRpc();
-            PlayerChangeNameServerRpc();
             count++;
         }
     }
@@ -37,15 +36,5 @@ public class LobbyManager : NetworkBehaviour
         Name = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>().NickName;
         GetComponent<Transform>().SetParent(Panel);
         GetComponent<RectTransform>().sizeDelta = new Vector2(325, 600);
-    }
-    [ServerRpc]
-    void PlayerChangeNameServerRpc()
-    {
-        PlayerChangeNameClientRpc();
-    }
-    [ClientRpc]
-    void PlayerChangeNameClientRpc()
-    {
-        Text = GetComponentsInChildren<TMP_Text>();
     }
 }
