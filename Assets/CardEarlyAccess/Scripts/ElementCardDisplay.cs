@@ -23,9 +23,6 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     public bool IsOutPutCard = false;
     public GameObject CombineSlot;
 
-    private Camera cam;
-    private Ray CamRay;
-    private RaycastHit hit;
     void Start()
     {
         IsAttack = false;
@@ -53,58 +50,13 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 IsAttack = false;
                 GameObject arrow = GameObject.Find("Arrow");
                 arrow.GetComponent<Arrow>().Hide();
-                CamRay = cam.ScreenPointToRay(Input.mousePosition);
-                cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000))
-                {
-                    GameObject enemy = hit.transform.gameObject;
-                    if (enemy.CompareTag("Player"))
-                    {
-                        Debug.Log("Attack");
-                        AttackCurrentTargetServerRpc(0);
-                        //GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
-                        //for (int i = 0; i < GS.PlayerList.Length - 1; i++)
-                        //{
-                        //    if (GS.PlayerList[i] == enemy)
-                        //    {
-                        //        Debug.Log("Attack Fin");
-                        //        AttackCurrentTargetServerRpc(i);
-                        //    }
-                        //}
-                    }
-
-                }
-
+                GameSystem.localTurnbased.AttackCurrentTargetServerRpc();
             }
-            if (IsAttack)
-            {
-                cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit,1000))
-                {
-                    Debug.DrawRay(cam.ScreenPointToRay(Input.mousePosition).origin, cam.ScreenPointToRay(Input.mousePosition).direction * 5f, Color.red);
-                    GameObject objectHit = hit.transform.gameObject;
-                    if (objectHit.CompareTag("Player"))
-                    {
-                        Debug.Log("Hit");
-                    }
-                }
-            }
+            
         }
        
     }
-    [ServerRpc]
-    public void AttackCurrentTargetServerRpc(int i)
-    {
-        var enemy = GameSystem.PlayerList[i].GetComponent<TurnBaseSystem>();
-        enemy.TakeDamage(10);
-        AttackCurrentTargetClientRpc(i);
-    }
-    [ClientRpc]
-    public void AttackCurrentTargetClientRpc(int i)
-    {
-  
-        Debug.Log("AttackClient");
-    }
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         this.GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1);

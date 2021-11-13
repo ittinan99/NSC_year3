@@ -313,6 +313,7 @@ MonoBehaviour:
   gravity: 15
   movementSpeed: 10
   jumpSpeed: 10
+  cameraTransform: {fileID: 0}
   maxPitch: 85
   minPitch: -85
   mouseSensitivity: 2
@@ -380,6 +381,7 @@ MonoBehaviour:
   currentHealth:
     m_InternalValue: 0
   maxHealth: 100
+  FlaskBarrel: {fileID: 1600550754217249858}
 --- !u!54 &980456072299073567
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class TurnBaseSystem : NetworkBehaviour
     [SerializeField]
     NetworkVariable<float> currentHealth = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone);
     public float maxHealth;
+    public GameObject FlaskBarrel;
     private void Awake()
     {
         GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
@@ -63,6 +64,27 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             StartBut.interactable = true;
         }
+    }
+    [ServerRpc]
+    public void AttackCurrentTargetServerRpc()
+    {
+        if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 1000))
+        {
+            GameObject enemy = hit.transform.gameObject;
+            if (enemy.CompareTag("Player"))
+            {
+                enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+                Debug.Log("Attack");
+            }
+
+        }
+        AttackCurrentTargetClientRpc();
+    }
+    [ClientRpc]
+    public void AttackCurrentTargetClientRpc()
+    {
+
+        Debug.Log("AttackClient");
     }
     public void TakeDamage(float DamageAmount)
     {
