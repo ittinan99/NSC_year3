@@ -26,8 +26,6 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     private Camera cam;
     private Ray CamRay;
     private RaycastHit hit;
-    [SerializeField]
-    private TurnBaseSystem enem;
     void Start()
     {
         IsAttack = false;
@@ -66,8 +64,15 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                         {
                             if (enemy.CompareTag("Player"))
                             {
-                                enem = enemy.GetComponent<TurnBaseSystem>();
-                                AttackCurrentTargetServerRpc();
+                                GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
+                                for(int i = 0;i<GS.PlayerList.Length-1;i++)
+                                {
+                                    if(enemy == GS.PlayerList[i])
+                                    {
+                                        AttackCurrentTargetServerRpc(i);
+                                    }
+                                }
+                                
                             }
                         }
                     }
@@ -91,9 +96,10 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
        
     }
     [ServerRpc]
-    public void AttackCurrentTargetServerRpc()
+    public void AttackCurrentTargetServerRpc(int i)
     {
-        enem.TakeDamage(10);
+        GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
+        GS.PlayerList[i].GetComponent<TurnBaseSystem>().TakeDamage(10);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
