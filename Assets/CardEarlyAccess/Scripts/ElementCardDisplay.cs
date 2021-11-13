@@ -57,25 +57,21 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
                 if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000))
                 {
-                    if (hit.transform.gameObject != null)
+                    GameObject enemy = hit.transform.gameObject;
+                    if (enemy.CompareTag("Player"))
                     {
-                        GameObject enemy = hit.transform.gameObject;
-                        if (enemy != null)
+                        Debug.Log("Attack");
+                        GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
+                        for (int i = 0; i < GS.PlayerList.Length - 1; i++)
                         {
-                            if (enemy.CompareTag("Player"))
+                            if (GS.PlayerList[i] == enemy)
                             {
-                                GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
-                                for(int i = 0;i<GS.PlayerList.Length-1;i++)
-                                {
-                                    if(enemy == GS.PlayerList[i])
-                                    {
-                                        AttackCurrentTargetServerRpc(i);
-                                    }
-                                }
-                                
+                                Debug.Log("Attack Fin");
+                                AttackCurrentTargetServerRpc(i);
                             }
                         }
                     }
+
                 }
 
             }
@@ -98,13 +94,13 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     [ServerRpc]
     public void AttackCurrentTargetServerRpc(int i)
     {
-        GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
-        GS.PlayerList[i].GetComponent<TurnBaseSystem>().TakeDamage(10);
         AttackCurrentTargetClientRpc(i);
     }
     [ClientRpc]
     public void AttackCurrentTargetClientRpc(int i)
     {
+        GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
+        GS.PlayerList[i].GetComponent<TurnBaseSystem>().TakeDamage(10);
         Debug.Log("Attack");
     }
     public void OnPointerEnter(PointerEventData eventData)
