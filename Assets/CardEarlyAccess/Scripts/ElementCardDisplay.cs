@@ -25,6 +25,9 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
 
     private Camera cam;
     private Ray CamRay;
+    private RaycastHit hit;
+    [SerializeField]
+    private TurnBaseSystem enem;
     void Start()
     {
         IsAttack = false;
@@ -52,10 +55,24 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 IsAttack = false;
                 GameObject arrow = GameObject.Find("Arrow");
                 arrow.GetComponent<Arrow>().Hide();
-                cam = GameSystem.localTurnbased.gameObject.GetComponent<FirstPersonController>().cameraTransform.gameObject.GetComponent<Camera>();
                 CamRay = cam.ScreenPointToRay(Input.mousePosition);
-                AttackCurrentTargetServerRpc();
-   
+                cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000))
+                {
+                    if (hit.transform.gameObject != null)
+                    {
+                        GameObject enemy = hit.transform.gameObject;
+                        if (enemy != null)
+                        {
+                            if (enemy.CompareTag("Player"))
+                            {
+                                enem = enemy.GetComponent<TurnBaseSystem>();
+                                AttackCurrentTargetServerRpc();
+                            }
+                        }
+                    }
+                }
+
             }
             if (IsAttack)
             {
@@ -76,21 +93,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
-        if (Physics.Raycast(CamRay, out RaycastHit hit, 1000))
-        {
-            Debug.DrawRay(CamRay.origin, CamRay.direction * 5f, Color.red);
-            GameObject enemy = hit.transform.gameObject;
-            if (enemy.CompareTag("Player"))
-            {
-                enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
-            }
-        }
-        AttackCurrentTargetClientRpc();
-    }
-    [ClientRpc]
-    public void AttackCurrentTargetClientRpc()
-    {
-        Debug.Log("Attack");
+        enem.TakeDamage(10);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
