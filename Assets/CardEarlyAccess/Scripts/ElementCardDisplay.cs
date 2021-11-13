@@ -24,6 +24,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     public GameObject CombineSlot;
 
     private Camera cam;
+    private Ray CamRay;
     void Start()
     {
         IsAttack = false;
@@ -51,6 +52,8 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 IsAttack = false;
                 GameObject arrow = GameObject.Find("Arrow");
                 arrow.GetComponent<Arrow>().Hide();
+                cam = GameSystem.localTurnbased.gameObject.GetComponent<FirstPersonController>().cameraTransform.gameObject.GetComponent<Camera>();
+                CamRay = cam.ScreenPointToRay(Input.mousePosition);
                 AttackCurrentTargetServerRpc();
    
             }
@@ -73,10 +76,9 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
-        cam = GameSystem.localTurnbased.gameObject.GetComponent<FirstPersonController>().cameraTransform.gameObject.GetComponent<Camera>();
-        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000))
+        if (Physics.Raycast(CamRay, out RaycastHit hit, 1000))
         {
-            Debug.DrawRay(cam.ScreenPointToRay(Input.mousePosition).origin, cam.ScreenPointToRay(Input.mousePosition).direction * 5f, Color.red);
+            Debug.DrawRay(CamRay.origin, CamRay.direction * 5f, Color.red);
             GameObject enemy = hit.transform.gameObject;
             if (enemy.CompareTag("Player"))
             {
