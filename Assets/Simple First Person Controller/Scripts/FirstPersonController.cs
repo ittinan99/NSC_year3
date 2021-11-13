@@ -21,7 +21,7 @@ namespace Unity.Netcode
         public float jumpSpeed = 10f;
 
         //now the camera so we can move it up and down
-        Transform cameraTransform;
+        public Transform cameraTransform = null;
         float pitch = 0f;
         [Range(1f, 90f)]
         public float maxPitch = 85f;

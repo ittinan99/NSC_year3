@@ -73,7 +73,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cam = GameSystem.localTurnbased.gameObject.GetComponent<FirstPersonController>().cameraTransform.gameObject.GetComponent<Camera>();
         if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000))
         {
             Debug.DrawRay(cam.ScreenPointToRay(Input.mousePosition).origin, cam.ScreenPointToRay(Input.mousePosition).direction * 5f, Color.red);
