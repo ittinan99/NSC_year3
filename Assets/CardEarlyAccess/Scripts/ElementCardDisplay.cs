@@ -100,6 +100,12 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     {
         GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
         GS.PlayerList[i].GetComponent<TurnBaseSystem>().TakeDamage(10);
+        AttackCurrentTargetClientRpc(i);
+    }
+    [ClientRpc]
+    public void AttackCurrentTargetClientRpc(int i)
+    {
+        Debug.Log("Attack");
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

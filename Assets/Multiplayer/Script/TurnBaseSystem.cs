@@ -66,6 +66,7 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     public void TakeDamage(float DamageAmount)
     {
+        Debug.Log("TakeDamage");
         currentHealth.Value -= DamageAmount;
     }
     [ServerRpc]
