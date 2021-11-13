@@ -52,6 +52,19 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 arrow.GetComponent<Arrow>().Hide();
                 GameSystem.localTurnbased.AttackCurrentTargetServerRpc();
             }
+            if (IsAttack)
+            {
+                GameObject FB = GameSystem.localTurnbased.FlaskBarrel;
+                if (Physics.Raycast(FB.transform.position, FB.transform.forward, out RaycastHit hit, 1000))
+                {
+                    GameObject enemy = hit.transform.gameObject;
+                    if (enemy.CompareTag("Player"))
+                    {
+                        Debug.Log("Hit");
+                    }
+
+                }
+            }
             
         }
        
