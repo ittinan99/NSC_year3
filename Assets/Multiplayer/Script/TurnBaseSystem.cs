@@ -64,15 +64,9 @@ public class TurnBaseSystem : NetworkBehaviour
             StartBut.interactable = true;
         }
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void TakeDamageServerRpc(float DamageAmount)
+    public void TakeDamage(float DamageAmount)
     {
-        TakeDamageClientRpc(DamageAmount);
-    }
-    [ClientRpc]
-    public void TakeDamageClientRpc(float DamageAmount)
-    {
-        GameSystem.CurrenTarget.GetComponent<TurnBaseSystem>().currentHealth.Value -= DamageAmount;
+        currentHealth.Value -= DamageAmount;
     }
     [ServerRpc]
     public void StartStateServerRpc()

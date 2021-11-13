@@ -13,7 +13,7 @@ public class GameSystem : NetworkBehaviour
     public static TurnBaseSystem localTurnbased = null;
     [SerializeField]
     private int CurrentPlayerIndex;
-    public static GameObject CurrenTarget;
+    //public static GameObject CurrenTarget;
     public GameObject[] PlayerList;
     
     public enum GamePhase {Start,CombineState,AttackState,End}
@@ -29,7 +29,7 @@ public class GameSystem : NetworkBehaviour
     }
     void Start()
     {
-        CurrenTarget = null;
+        //CurrenTarget = null;
         EndTurnCount = 0;
     }
     private void Update()

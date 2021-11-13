@@ -22,7 +22,6 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     
     public bool IsOutPutCard = false;
     public GameObject CombineSlot;
-    public GameObject CurrentTarget;
 
     private Camera cam;
     void Start()
@@ -52,10 +51,8 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 IsAttack = false;
                 GameObject arrow = GameObject.Find("Arrow");
                 arrow.GetComponent<Arrow>().Hide();
-                if (CurrentTarget != null)
-                {
-                    AttackCurrentTargetServerRpc();
-                }
+                AttackCurrentTargetServerRpc();
+   
             }
             if (IsAttack)
             {
@@ -67,7 +64,6 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     if (objectHit.CompareTag("Player"))
                     {
                         Debug.Log("Hit");
-                        CurrentTarget = objectHit;
                     }
                 }
             }
@@ -77,13 +73,22 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
-        GameSystem.CurrenTarget = CurrentTarget;
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 1000))
+        {
+            Debug.DrawRay(cam.ScreenPointToRay(Input.mousePosition).origin, cam.ScreenPointToRay(Input.mousePosition).direction * 5f, Color.red);
+            GameObject enemy = hit.transform.gameObject;
+            if (enemy.CompareTag("Player"))
+            {
+                enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+            }
+        }
         AttackCurrentTargetClientRpc();
     }
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
     {
-        CurrentTarget.GetComponent<TurnBaseSystem>().TakeDamageServerRpc(10);
+        Debug.Log("Attack");
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
