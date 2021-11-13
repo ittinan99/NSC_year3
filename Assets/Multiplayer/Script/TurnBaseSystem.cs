@@ -68,6 +68,11 @@ public class TurnBaseSystem : NetworkBehaviour
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
+        AttackCurrentTargetClientRpc();
+    }
+    [ClientRpc]
+    public void AttackCurrentTargetClientRpc()
+    {
         if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 200))
         {
             GameObject enemy = hit.transform.gameObject;
@@ -78,12 +83,6 @@ public class TurnBaseSystem : NetworkBehaviour
             }
 
         }
-        AttackCurrentTargetClientRpc();
-    }
-    [ClientRpc]
-    public void AttackCurrentTargetClientRpc()
-    {
-
         Debug.Log("AttackClient");
     }
     public void TakeDamage(float DamageAmount)
