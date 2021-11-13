@@ -61,15 +61,16 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     if (enemy.CompareTag("Player"))
                     {
                         Debug.Log("Attack");
-                        GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
-                        for (int i = 0; i < GS.PlayerList.Length - 1; i++)
-                        {
-                            if (GS.PlayerList[i] == enemy)
-                            {
-                                Debug.Log("Attack Fin");
-                                AttackCurrentTargetServerRpc(i);
-                            }
-                        }
+                        AttackCurrentTargetServerRpc(0);
+                        //GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
+                        //for (int i = 0; i < GS.PlayerList.Length - 1; i++)
+                        //{
+                        //    if (GS.PlayerList[i] == enemy)
+                        //    {
+                        //        Debug.Log("Attack Fin");
+                        //        AttackCurrentTargetServerRpc(i);
+                        //    }
+                        //}
                     }
 
                 }
@@ -94,14 +95,15 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     [ServerRpc]
     public void AttackCurrentTargetServerRpc(int i)
     {
+        var enemy = GameSystem.PlayerList[i].GetComponent<TurnBaseSystem>();
+        enemy.TakeDamage(10);
         AttackCurrentTargetClientRpc(i);
     }
     [ClientRpc]
     public void AttackCurrentTargetClientRpc(int i)
     {
-        GameSystem GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
-        GS.PlayerList[i].GetComponent<TurnBaseSystem>().TakeDamage(10);
-        Debug.Log("Attack");
+  
+        Debug.Log("AttackClient");
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

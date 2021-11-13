@@ -14,7 +14,7 @@ public class GameSystem : NetworkBehaviour
     [SerializeField]
     private int CurrentPlayerIndex;
     //public static GameObject CurrenTarget;
-    public GameObject[] PlayerList;
+    public static GameObject[] PlayerList;
     
     public enum GamePhase {Start,CombineState,AttackState,End}
     [SerializeField]
