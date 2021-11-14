@@ -21,6 +21,7 @@ namespace Unity.Netcode
         /// </summary>
         public readonly HashSet<NetworkObject> SpawnedObjectsList = new HashSet<NetworkObject>();
 
+
         private struct TriggerData
         {
             public FastBufferReader Reader;
