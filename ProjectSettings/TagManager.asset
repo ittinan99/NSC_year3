@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - NetworkManager
-  - NetworkObject
+  - PlayerCanvas
+  - Card
+  - CombineSlot
   layers:
   - Default
   - TransparentFX
