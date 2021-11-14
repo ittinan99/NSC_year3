@@ -23,6 +23,7 @@ public class SpawnPlayer : NetworkBehaviour
             {
                 ChangeServerRpc(new DataCollect { PlayerId = x, PlayerName = photo.NickName });
             }
+            Destroy(this.gameObject);
         }
     }
     [ServerRpc]
@@ -34,6 +35,7 @@ public class SpawnPlayer : NetworkBehaviour
     void ChangeClientRpc(DataCollect data)
     {
         prefap = Instantiate(StagePrefap, GetRandomSpawn(), Quaternion.identity);
+        prefap.name = data.PlayerName;
         prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(data.PlayerId, true);
     }
     Vector3 GetRandomSpawn()
