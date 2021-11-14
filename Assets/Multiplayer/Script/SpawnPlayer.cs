@@ -11,6 +11,7 @@ public class SpawnPlayer : NetworkBehaviour
     public GameObject StagePrefap;
     DataCollect dataCollect;
     IReadOnlyList<ulong> Clientlist;
+    GameObject[] PlayerList;
 
     void Start()
     {
@@ -22,6 +23,14 @@ public class SpawnPlayer : NetworkBehaviour
             foreach (ulong x in Clientlist)
             {
                 ChangeServerRpc(new DataCollect { PlayerId = x, PlayerName = photo.NickName });
+            }
+            PlayerList = GameObject.FindGameObjectsWithTag("Player");
+            foreach(GameObject delete in PlayerList)
+            {
+                if(delete.GetComponent<NetworkObject>().IsPlayerObject == false)
+                {
+                    Destroy(delete);
+                }
             }
             Destroy(this.gameObject);
         }
