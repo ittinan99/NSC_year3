@@ -15,5 +15,4 @@ public struct DataCollect : INetworkSerializable
         serializer.SerializeValue(ref PlayerName);
         serializer.SerializeValue(ref PlayerId);
     }
-
 }

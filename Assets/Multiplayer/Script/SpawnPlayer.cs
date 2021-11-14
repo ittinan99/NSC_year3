@@ -4,14 +4,16 @@ using UnityEngine;
 using Unity.Netcode;
 using Netcode.Transports.PhotonRealtime;
 
-public class SpawnPlayer : NetworkBehaviour
+public class SpawnPlayer : NetworkBehaviour , INetworkSerializable
 {
     // Start is called before the first frame update
     private GameObject prefap;
     public GameObject StagePrefap;
-    DataCollect dataCollect;
     IReadOnlyList<ulong> Clientlist;
     GameObject[] PlayerList;
+    PhotonRealtimeTransport photo;
+    public string PlayerName;
+    public ulong PlayerId;
 
     void Start()
     {
@@ -19,33 +21,44 @@ public class SpawnPlayer : NetworkBehaviour
         if (IsOwnedByServer)
         {
             Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
-            PhotonRealtimeTransport photo = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
+            getphotonServerRpc();
             foreach (ulong x in Clientlist)
             {
-                ChangeServerRpc(new DataCollect { PlayerId = x, PlayerName = photo.NickName });
+                PlayerName = photo.NickName;
+                PlayerId = x;
+                ChangeServerRpc(PlayerId);
             }
             PlayerList = GameObject.FindGameObjectsWithTag("Player");
-            foreach(GameObject delete in PlayerList)
+            foreach (GameObject delete in PlayerList)
             {
-                if(delete.GetComponent<NetworkObject>().IsPlayerObject == false)
+                if (!delete.GetComponent<NetworkObject>().IsPlayerObject)
                 {
                     Destroy(delete);
                 }
             }
-            Destroy(this.gameObject);
         }
     }
     [ServerRpc]
-    void ChangeServerRpc(DataCollect data)
+    void getphotonServerRpc()
     {
-        ChangeClientRpc(data);
+        getphotonClientRpc();
     }
     [ClientRpc]
-    void ChangeClientRpc(DataCollect data)
+    void getphotonClientRpc()
     {
+        photo = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
+    }
+    [ServerRpc]
+    void ChangeServerRpc(ulong data)
+    {
+        //ChangeClientRpc(data);
         prefap = Instantiate(StagePrefap, GetRandomSpawn(), Quaternion.identity);
-        prefap.name = data.PlayerName;
-        prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(data.PlayerId, true);
+        prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(data, true);
+    }
+    [ClientRpc]
+    void ChangeClientRpc(ulong data)
+    {
+
     }
     Vector3 GetRandomSpawn()
     {
@@ -53,5 +66,10 @@ public class SpawnPlayer : NetworkBehaviour
         float y = 4f;
         float z = Random.Range(-10f, 10f);
         return new Vector3(x, y, z);
+    }
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref PlayerName);
+        serializer.SerializeValue(ref PlayerId);
     }
 }
