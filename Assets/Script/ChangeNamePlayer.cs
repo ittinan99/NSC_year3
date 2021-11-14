@@ -8,6 +8,7 @@ using TMPro;
 public class ChangeNamePlayer : NetworkBehaviour
 {
     PhotonRealtimeTransport photo;
+    bool connectionrun = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,15 +19,23 @@ public class ChangeNamePlayer : NetworkBehaviour
             ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
         }
     }
+    private void Update()
+    {
+        if (connectionrun)
+        {
+            ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+            connectionrun = false;
+        }
+    }
 
     private void ChangeNamePlayer_OnClientConnectedCallback(ulong obj)
     {
         if (IsLocalPlayer)
         {
             ChangeServerRpc(new DataCollect { PlayerId = obj, PlayerName = photo.NickName });
+            connectionrun = true;
         }
     }
-
     [ServerRpc]
     void ChangeServerRpc(DataCollect data)
     {

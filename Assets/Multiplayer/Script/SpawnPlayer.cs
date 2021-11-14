@@ -10,7 +10,6 @@ public class SpawnPlayer : NetworkBehaviour , INetworkSerializable
     private GameObject prefap;
     public GameObject StagePrefap;
     IReadOnlyList<ulong> Clientlist;
-    GameObject[] PlayerList;
     PhotonRealtimeTransport photo;
     public string PlayerName;
     public ulong PlayerId;
@@ -27,14 +26,6 @@ public class SpawnPlayer : NetworkBehaviour , INetworkSerializable
                 PlayerName = photo.NickName;
                 PlayerId = x;
                 ChangeServerRpc(PlayerId);
-            }
-            PlayerList = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject delete in PlayerList)
-            {
-                if (!delete.GetComponent<NetworkObject>().IsPlayerObject)
-                {
-                    Destroy(delete);
-                }
             }
         }
     }
@@ -54,11 +45,6 @@ public class SpawnPlayer : NetworkBehaviour , INetworkSerializable
         //ChangeClientRpc(data);
         prefap = Instantiate(StagePrefap, GetRandomSpawn(), Quaternion.identity);
         prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(data, true);
-    }
-    [ClientRpc]
-    void ChangeClientRpc(ulong data)
-    {
-
     }
     Vector3 GetRandomSpawn()
     {
