@@ -38,7 +38,7 @@ public class SpawnPlayer : NetworkBehaviour
     [ClientRpc]
     void CloseCameraClientRpc()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").SetActive(false);
+        GameObject.Find("MainCamera").SetActive(false);
     }
     [ServerRpc]
     void getphotonServerRpc()
