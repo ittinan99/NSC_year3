@@ -28,7 +28,13 @@ public class SpawnPlayer : NetworkBehaviour
     }
     private void Update()
     {
-        CloseCameraServerRpc();
+        if (IsOwner)
+        {
+            if (GameObject.Find("MainCamera").activeSelf == true)
+            {
+                CloseCameraServerRpc();
+            }
+        }
     }
     [ServerRpc]
     void CloseCameraServerRpc()
