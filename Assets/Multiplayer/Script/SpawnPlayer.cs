@@ -16,7 +16,6 @@ public class SpawnPlayer : NetworkBehaviour
 
     void Start()
     {
-        CloseCameraServerRpc();
         Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
         if (IsOwnedByServer)
         {
@@ -26,6 +25,10 @@ public class SpawnPlayer : NetworkBehaviour
                 ChangeServerRpc(x);
             }
         }
+    }
+    private void Update()
+    {
+        CloseCameraServerRpc();
     }
     [ServerRpc]
     void CloseCameraServerRpc()
