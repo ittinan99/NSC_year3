@@ -25,16 +25,7 @@ public class SpawnPlayer : NetworkBehaviour
                 ChangeServerRpc(x);
             }
         }
-    }
-    private void Update()
-    {
-        if (IsOwner)
-        {
-            if (GameObject.Find("MainCamera").activeSelf == true)
-            {
-                CloseCameraServerRpc();
-            }
-        }
+        CloseCameraServerRpc();
     }
     [ServerRpc]
     void CloseCameraServerRpc()
@@ -45,6 +36,7 @@ public class SpawnPlayer : NetworkBehaviour
     void CloseCameraClientRpc()
     {
         GameObject.Find("MainCamera").SetActive(false);
+        Destroy(this.gameObject);
     }
     [ServerRpc]
     void getphotonServerRpc()
