@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 
-public struct DataCollect : INetworkSerializable 
+public struct DataCollect : INetworkSerializable
 {
     public string PlayerName;
     public ulong PlayerId;
-    public DataCollect(string playerName,ulong playerId)
+    public DataCollect(string playerName, ulong playerId)
     {
         PlayerName = playerName;
         PlayerId = playerId;

@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using Netcode.Transports.PhotonRealtime;
 
-public class SpawnPlayer : NetworkBehaviour , INetworkSerializable
+public class SpawnPlayer : NetworkBehaviour
 {
     // Start is called before the first frame update
     private GameObject prefap;
@@ -16,18 +16,26 @@ public class SpawnPlayer : NetworkBehaviour , INetworkSerializable
 
     void Start()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").SetActive(false);
+        CloseCameraServerRpc();
+        Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
         if (IsOwnedByServer)
         {
-            Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
-            getphotonServerRpc();
             foreach (ulong x in Clientlist)
             {
-                PlayerName = photo.NickName;
-                PlayerId = x;
-                ChangeServerRpc(PlayerId);
+                getphotonServerRpc();
+                ChangeServerRpc(x);
             }
         }
+    }
+    [ServerRpc]
+    void CloseCameraServerRpc()
+    {
+        CloseCameraClientRpc();
+    }
+    [ClientRpc]
+    void CloseCameraClientRpc()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").SetActive(false);
     }
     [ServerRpc]
     void getphotonServerRpc()
@@ -38,13 +46,15 @@ public class SpawnPlayer : NetworkBehaviour , INetworkSerializable
     void getphotonClientRpc()
     {
         photo = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
+        PlayerId = NetworkManager.Singleton.LocalClientId;
+        PlayerName = photo.NickName;
     }
     [ServerRpc]
     void ChangeServerRpc(ulong data)
     {
-        //ChangeClientRpc(data);
         prefap = Instantiate(StagePrefap, GetRandomSpawn(), Quaternion.identity);
         prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(data, true);
+        prefap.name = PlayerName;
     }
     Vector3 GetRandomSpawn()
     {
@@ -52,10 +62,5 @@ public class SpawnPlayer : NetworkBehaviour , INetworkSerializable
         float y = 4f;
         float z = Random.Range(-10f, 10f);
         return new Vector3(x, y, z);
-    }
-    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-    {
-        serializer.SerializeValue(ref PlayerName);
-        serializer.SerializeValue(ref PlayerId);
     }
 }

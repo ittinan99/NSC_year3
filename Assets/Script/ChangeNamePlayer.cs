@@ -8,7 +8,7 @@ using TMPro;
 public class ChangeNamePlayer : NetworkBehaviour
 {
     PhotonRealtimeTransport photo;
-    bool connectionrun = false;
+    public static Dictionary<ulong, string> PlayerDataDic = new Dictionary<ulong, string>();
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +21,9 @@ public class ChangeNamePlayer : NetworkBehaviour
     }
     private void Update()
     {
-        if (connectionrun)
+        if (IsOwner)
         {
             ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
-            connectionrun = false;
         }
     }
 
@@ -33,7 +32,6 @@ public class ChangeNamePlayer : NetworkBehaviour
         if (IsLocalPlayer)
         {
             ChangeServerRpc(new DataCollect { PlayerId = obj, PlayerName = photo.NickName });
-            connectionrun = true;
         }
     }
     [ServerRpc]
