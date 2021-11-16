@@ -8,6 +8,8 @@ public class CardPanel : MonoBehaviour
     public float Gap;
     public Vector2 PlacePosMin;
     public Vector2 PlacePosMax;
+    [SerializeField]
+    private GameObject E_cardPrefab;
     private void Awake()
     {
         hCard = new List<ElementCardDisplay>(GameObject.FindObjectsOfType<ElementCardDisplay>());
