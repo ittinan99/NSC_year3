@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardPanel : MonoBehaviour
 {
     public List<ElementCardDisplay> hCard;
+    public List<ElementCard> allEcard;
     public float Gap;
     public Vector2 PlacePosMin;
     public Vector2 PlacePosMax;
@@ -16,13 +17,18 @@ public class CardPanel : MonoBehaviour
     }
     void Start()
     {
-        SetCardPos();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void StartGameCard()
+    {
+        SetCardPos();
+        SpawnCard(5);
     }
     public void SetCardPos()
     {
@@ -36,6 +42,16 @@ public class CardPanel : MonoBehaviour
             card.StartPos = card.transform.position;
             PosMin = new Vector2(PosMax.x + Gap, 0);
             PosMax = new Vector2(PosMin.x + Dis.x,1);
+        }
+    }
+    public void SpawnCard(int amount)
+    {
+        for(int i = 0; i < amount; i++)
+        {
+            int RandNum = Random.Range(0, allEcard.Count - 1);
+            var newCard = Instantiate(E_cardPrefab, this.transform);
+            newCard.GetComponent<ElementCardDisplay>().E_Card = allEcard[RandNum];
+            AddCard(newCard.GetComponent<ElementCardDisplay>());
         }
     }
     public void AddCard(ElementCardDisplay ECD)

@@ -15,6 +15,10 @@ public class TurnBaseSystem : NetworkBehaviour
     [SerializeField]
     public GameObject PlayerCanvas;
     [SerializeField]
+    public GameObject CombinePanel;
+    [SerializeField]
+    public CardPanel cardPanel;
+    [SerializeField]
     public Button EndTurnButton;
     [SerializeField]
     private Button StartBut;
@@ -24,6 +28,9 @@ public class TurnBaseSystem : NetworkBehaviour
     public GameObject FlaskBarrel;
     void Start()
     {
+        CombinePanel = GameObject.Find("CombineSystem");
+        CombinePanel.SetActive(false);
+        cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         if(IsLocalPlayer)
         {
             getcomServerRpc();
@@ -48,6 +55,14 @@ public class TurnBaseSystem : NetworkBehaviour
         if (IsLocalPlayer&&isYourTurn)
         {
             EndTurnButton.interactable = true;
+            if(PlayerState == GameState.Y_CombineTurn)
+            {
+                CombinePanel.SetActive(true);
+            }
+            else
+            {
+                CombinePanel.SetActive(false);
+            }
         }
         if (IsLocalPlayer)
         {

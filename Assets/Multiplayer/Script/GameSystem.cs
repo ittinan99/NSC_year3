@@ -59,6 +59,11 @@ public class GameSystem : NetworkBehaviour
         CurrentPlayerIndex = randNum.Value;
         Debug.Log("StartPlayer : Player " + CurrentPlayerIndex);
         StartPlayer.GetComponent<TurnBaseSystem>().isYourTurn = true;
+        CurrentPlayerTurn.GetComponent<TurnBaseSystem>().cardPanel.SpawnCard(3);
+        if(CurrentPlayerTurn.GetComponent<TurnBaseSystem>() == localTurnbased)
+        {
+            CurrentPlayerTurn.GetComponent<TurnBaseSystem>().cardPanel.SpawnCard(1);
+        }
         StartPlayer.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Y_CombineTurn;
     }
     public void startGame()
@@ -95,11 +100,13 @@ public class GameSystem : NetworkBehaviour
         if(EndTurnCount == PlayerList.Length && gamePhase == GamePhase.CombineState)
         {
             gamePhase = GamePhase.AttackState;
+            EndTurnCount = 0;
             Debug.Log(gamePhase);
         }
         else if(EndTurnCount == PlayerList.Length && gamePhase == GamePhase.AttackState)
         {
             gamePhase = GamePhase.CombineState;
+            EndTurnCount = 0;
             Debug.Log(gamePhase);
         }
         CurrentPlayerIndex++;
@@ -110,9 +117,13 @@ public class GameSystem : NetworkBehaviour
         Debug.Log("Turn : Player " + CurrentPlayerIndex);
         CurrentPlayerTurn = PlayerList[CurrentPlayerIndex];
         CurrentPlayerTurn.GetComponent<TurnBaseSystem>().isYourTurn = true;
-        if(gamePhase == GamePhase.CombineState)
+        if (gamePhase == GamePhase.CombineState)
         {
             CurrentPlayerTurn.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Y_CombineTurn;
+            if(localTurnbased == CurrentPlayerTurn.GetComponent<TurnBaseSystem>())
+            {
+                CurrentPlayerTurn.GetComponent<TurnBaseSystem>().cardPanel.SpawnCard(1);
+            }
         }
         else
         {
