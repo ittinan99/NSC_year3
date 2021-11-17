@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: 
-  nickName: yyy
+  nickName: Tew
   sceneName: Lobby
   RoomID:
   - {fileID: 1293157020}

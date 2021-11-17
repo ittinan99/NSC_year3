@@ -169,6 +169,7 @@ public class TurnBaseSystem : NetworkBehaviour
     {
         PlayerState = GameState.Start;
         isYourTurn = false;
+        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
         EndTurnButton.onClick.AddListener(() => EndTurn());
     }
     [ClientRpc]
