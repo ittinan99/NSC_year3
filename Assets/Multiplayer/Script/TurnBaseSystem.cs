@@ -32,10 +32,10 @@ public class TurnBaseSystem : NetworkBehaviour
         //{
         //    getcomServerRpc();
         //}
+        StartState();
         currentHealth = new NetworkVariable<float>(maxHealth);
         if (IsLocalPlayer)
         {
-            StartState();
             if (IsOwnedByServer)
             {
                 StartBut.onClick.AddListener(() => GS.startGame());
@@ -162,6 +162,7 @@ public class TurnBaseSystem : NetworkBehaviour
     //[ClientRpc]
     public void StartState()
     {
+        StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
         PlayerCanvas = GameObject.Find("PlayerCanvas");
         CombinePanel = GameObject.Find("CombineSystem");
         EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
