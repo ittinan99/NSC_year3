@@ -50,6 +50,26 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     private void Update()
     {
+        if (PlayerCanvas == null)
+        {
+            PlayerCanvas  = PlayerCanvas = GameObject.Find("PlayerCanvas");
+        }
+        if (CombinePanel == null)
+        {
+            CombinePanel = GameObject.Find("CombineSystem");
+        }
+        if (EndTurnButton == null)
+        {
+            EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        }
+        if (StartBut == null)
+        {
+            StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+        }
+        if(GS == null)
+        {
+            GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
+        }
         if (IsLocalPlayer)
         {
             EndTurnButton.interactable = false;
