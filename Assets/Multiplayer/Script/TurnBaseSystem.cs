@@ -29,7 +29,8 @@ public class TurnBaseSystem : NetworkBehaviour
     void Start()
     {
         PlayerCanvas = GameObject.Find("PlayerCanvas");
-       CombinePanel = GameObject.Find("CombineSystem");
+        CombinePanel = GameObject.Find("CombineSystem");
+        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
         CombinePanel.SetActive(false);
         cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         if(IsLocalPlayer)
