@@ -56,9 +56,14 @@ public class SpawnPlayer : NetworkBehaviour
     [ServerRpc]
     void ChangeServerRpc(ulong data)
     {
-        prefap = Instantiate(StagePrefap, GetRandomSpawn(), Quaternion.identity);
-        prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(data, true);
-        prefap.name = PlayerName;
+        ChangeClientRpc();
+    }
+    [ClientRpc]
+    void ChangeClientRpc()
+    {
+        photo = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
+        PlayerId = NetworkManager.Singleton.LocalClientId;
+        PlayerName = photo.NickName;
     }
     Vector3 GetRandomSpawn()
     {
