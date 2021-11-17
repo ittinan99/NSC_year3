@@ -56,6 +56,7 @@ public class TurnBaseSystem : NetworkBehaviour
         if (EndTurnButton == null)
         {
             EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+            EndTurnButton.onClick.AddListener(() => EndTurn());
         }
         if (StartBut == null)
         {
@@ -73,16 +74,16 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             EndTurnButton.interactable = false;
         }
+        if (GameSystem.gamePhase != GameSystem.GamePhase.CombineState)
+        {
+            CombinePanel.SetActive(false);
+        }
         if (IsLocalPlayer&&isYourTurn)
         {
             EndTurnButton.interactable = true;
             if(PlayerState == GameState.Y_CombineTurn)
             {
                 CombinePanel.SetActive(true);
-            }
-            else
-            {
-                CombinePanel.SetActive(false);
             }
         }
         if (IsLocalPlayer)
