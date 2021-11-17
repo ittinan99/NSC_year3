@@ -28,15 +28,10 @@ public class TurnBaseSystem : NetworkBehaviour
     public GameObject FlaskBarrel;
     void Start()
     {
-        PlayerCanvas = GameObject.Find("PlayerCanvas");
-        CombinePanel = GameObject.Find("CombineSystem");
-        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
-        CombinePanel.SetActive(false);
-        cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
-        if(IsLocalPlayer)
-        {
-            getcomServerRpc();
-        }
+        //if(IsLocalPlayer)
+        //{
+        //    getcomServerRpc();
+        //}
         currentHealth = new NetworkVariable<float>(maxHealth);
         if (IsLocalPlayer)
         {
@@ -103,19 +98,19 @@ public class TurnBaseSystem : NetworkBehaviour
             StartBut.interactable = true;
         }
     }
-    [ServerRpc]
-    public void getcomServerRpc()
-    {
-        getcomClientRpc();
-    }
-    [ClientRpc]
-    public void getcomClientRpc()
-    {
-        GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
-        PlayerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas");
-        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
-        StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
-    }
+    //[ServerRpc]
+    //public void getcomServerRpc()
+    //{
+    //    getcomClientRpc();
+    //}
+    //[ClientRpc]
+    //public void getcomClientRpc()
+    //{
+    //    GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
+    //    PlayerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas");
+    //    EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+    //    StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+    //}
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
@@ -167,6 +162,11 @@ public class TurnBaseSystem : NetworkBehaviour
     //[ClientRpc]
     public void StartState()
     {
+        PlayerCanvas = GameObject.Find("PlayerCanvas");
+        CombinePanel = GameObject.Find("CombineSystem");
+        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        CombinePanel.SetActive(false);
+        cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         PlayerState = GameState.Start;
         isYourTurn = false;
         EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
