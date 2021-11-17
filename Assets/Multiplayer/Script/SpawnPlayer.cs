@@ -13,7 +13,7 @@ public class SpawnPlayer : NetworkBehaviour
     PhotonRealtimeTransport photo;
     public string PlayerName;
     public ulong PlayerId;
-    private void Awake()
+    private void Start()
     {
         Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
         if (IsOwnedByServer)
@@ -25,10 +25,6 @@ public class SpawnPlayer : NetworkBehaviour
             }
         }
         CloseCameraServerRpc();
-    }
-    void Start()
-    {
-        
     }
     [ServerRpc]
     void CloseCameraServerRpc()
@@ -55,11 +51,6 @@ public class SpawnPlayer : NetworkBehaviour
     }
     [ServerRpc]
     void ChangeServerRpc(ulong data)
-    {
-        ChangeClientRpc();
-    }
-    [ClientRpc]
-    void ChangeClientRpc()
     {
         photo = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
         PlayerId = NetworkManager.Singleton.LocalClientId;
