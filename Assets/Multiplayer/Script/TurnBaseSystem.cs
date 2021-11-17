@@ -47,7 +47,7 @@ public class TurnBaseSystem : NetworkBehaviour
     {
         if (PlayerCanvas == null)
         {
-            PlayerCanvas  = PlayerCanvas = GameObject.Find("PlayerCanvas");
+            PlayerCanvas  = GameObject.Find("PlayerCanvas");
         }
         if (CombinePanel == null)
         {
@@ -76,7 +76,15 @@ public class TurnBaseSystem : NetworkBehaviour
         }
         if (GameSystem.gamePhase != GameSystem.GamePhase.CombineState)
         {
-            CombinePanel.SetActive(false);
+            if (CombinePanel == null)
+            {
+                CombinePanel = GameObject.Find("CombineSystem");
+                CombinePanel.SetActive(false);
+            }
+            else
+            {
+                CombinePanel.SetActive(false);
+            }
         }
         if (IsLocalPlayer&&isYourTurn)
         {
