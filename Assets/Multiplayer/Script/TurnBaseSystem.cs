@@ -40,7 +40,7 @@ public class TurnBaseSystem : NetworkBehaviour
         currentHealth = new NetworkVariable<float>(maxHealth);
         if (IsLocalPlayer)
         {
-            StartStateServerRpc();
+            StartState();
             if (IsOwnedByServer)
             {
                 StartBut.onClick.AddListener(() => GS.startGame());
@@ -141,11 +141,11 @@ public class TurnBaseSystem : NetworkBehaviour
         Debug.Log("TakeDamage");
         currentHealth.Value -= DamageAmount;
     }
-    [ServerRpc]
-    public void StartStateServerRpc()
-    {
-        StartStateClientRpc();
-    }
+    //[ServerRpc]
+    //public void StartStateServerRpc()
+    //{
+    //    StartStateClientRpc();
+    //}
     [ServerRpc]
     public void Y_CombineStateServerRpc()
     {
@@ -164,8 +164,8 @@ public class TurnBaseSystem : NetworkBehaviour
         EndTurnClientRpc();
         GS.NextPlayerTurnServerRpc();
     }
-    [ClientRpc]
-    public void StartStateClientRpc()
+    //[ClientRpc]
+    public void StartState()
     {
         PlayerState = GameState.Start;
         isYourTurn = false;
