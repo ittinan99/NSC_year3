@@ -13,8 +13,7 @@ public class SpawnPlayer : NetworkBehaviour
     PhotonRealtimeTransport photo;
     public string PlayerName;
     public ulong PlayerId;
-
-    void Start()
+    private void Awake()
     {
         Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
         if (IsOwnedByServer)
@@ -26,6 +25,10 @@ public class SpawnPlayer : NetworkBehaviour
             }
         }
         CloseCameraServerRpc();
+    }
+    void Start()
+    {
+        
     }
     [ServerRpc]
     void CloseCameraServerRpc()
