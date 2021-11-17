@@ -70,6 +70,10 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
         }
+        if (cardPanel == null)
+        {
+            cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
+        }
         if (IsLocalPlayer)
         {
             EndTurnButton.interactable = false;
