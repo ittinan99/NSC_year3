@@ -96,10 +96,12 @@ public class GameSystem : NetworkBehaviour
     [ClientRpc]
     public void NextPlayerTurnClientRpc()
     {
+        localTurnbased.CombinePanel.SetActive(false);
         EndTurnCount++;
         if(EndTurnCount == PlayerList.Length && gamePhase == GamePhase.CombineState)
         {
             gamePhase = GamePhase.AttackState;
+            localTurnbased.CombinePanel.SetActive(false);
             EndTurnCount = 0;
             Debug.Log(gamePhase);
         }
@@ -122,6 +124,7 @@ public class GameSystem : NetworkBehaviour
             CurrentPlayerTurn.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Y_CombineTurn;
             if(localTurnbased == CurrentPlayerTurn.GetComponent<TurnBaseSystem>())
             {
+                CurrentPlayerTurn.GetComponent<TurnBaseSystem>().CombinePanel.SetActive(true);
                 CurrentPlayerTurn.GetComponent<TurnBaseSystem>().cardPanel.SpawnCard(1);
             }
         }

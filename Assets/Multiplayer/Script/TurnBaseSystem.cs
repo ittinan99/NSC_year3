@@ -74,18 +74,6 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             EndTurnButton.interactable = false;
         }
-        if (GameSystem.gamePhase != GameSystem.GamePhase.CombineState)
-        {
-            if (CombinePanel == null)
-            {
-                CombinePanel = GameObject.Find("CombineSystem");
-                CombinePanel.SetActive(false);
-            }
-            else
-            {
-                CombinePanel.SetActive(false);
-            }
-        }
         if (IsLocalPlayer&&isYourTurn)
         {
             EndTurnButton.interactable = true;
