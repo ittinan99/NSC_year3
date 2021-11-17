@@ -35,7 +35,7 @@ public class SpawnPlayer : NetworkBehaviour
     [ClientRpc]
     void CloseCameraClientRpc()
     {
-        GameObject.Find("MainCamera").SetActive(false);
+        //GameObject.Find("MainCamera").SetActive(false);
         Destroy(this.gameObject);
     }
     [ServerRpc]
