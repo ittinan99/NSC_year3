@@ -13,7 +13,8 @@ public class SpawnPlayer : NetworkBehaviour
     PhotonRealtimeTransport photo;
     public string PlayerName;
     public ulong PlayerId;
-    private void Start()
+
+    void Start()
     {
         Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
         if (IsOwnedByServer)
@@ -52,9 +53,9 @@ public class SpawnPlayer : NetworkBehaviour
     [ServerRpc]
     void ChangeServerRpc(ulong data)
     {
-        photo = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
-        PlayerId = NetworkManager.Singleton.LocalClientId;
-        PlayerName = photo.NickName;
+        prefap = Instantiate(StagePrefap, GetRandomSpawn(), Quaternion.identity);
+        prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(data, true);
+        prefap.name = PlayerName;
     }
     Vector3 GetRandomSpawn()
     {
