@@ -28,7 +28,8 @@ public class TurnBaseSystem : NetworkBehaviour
     public GameObject FlaskBarrel;
     void Start()
     {
-        CombinePanel = GameObject.Find("CombineSystem");
+        PlayerCanvas = GameObject.Find("PlayerCanvas");
+       CombinePanel = GameObject.Find("CombineSystem");
         CombinePanel.SetActive(false);
         cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         if(IsLocalPlayer)
