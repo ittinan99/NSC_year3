@@ -21,7 +21,7 @@ namespace Unity.Netcode
         public float jumpSpeed = 10f;
 
         //now the camera so we can move it up and down
-        Transform cameraTransform;
+        public Transform cameraTransform = null;
         float pitch = 0f;
         [Range(1f, 90f)]
         public float maxPitch = 85f;
@@ -31,14 +31,14 @@ namespace Unity.Netcode
         public float mouseSensitivity = 2f;
 
         //the charachtercompononet for moving us
-        CharacterController cc;
+        //CharacterController cc;
 
         private void Start()
         {
             cameraTransform = GetComponentInChildren<Camera>().transform;
             if (IsLocalPlayer)
             {
-                cc = GetComponent<CharacterController>();
+                //cc = GetComponent<CharacterController>();
             }
             else
             {
@@ -57,9 +57,9 @@ namespace Unity.Netcode
                 Move();
             }
         }
-
         void Look()
         {
+            cameraTransform = GetComponentInChildren<Camera>().transform;
             //get the mouse inpuit axis values
             float xInput = Input.GetAxis("Mouse X") * mouseSensitivity;
             float yInput = Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -72,7 +72,7 @@ namespace Unity.Netcode
             Quaternion rot = Quaternion.Euler(pitch, 0, 0);
             cameraTransform.localRotation = rot;
         }
-
+       
         void Move()
         {
             //update speed based onn the input
@@ -80,26 +80,23 @@ namespace Unity.Netcode
             input = Vector3.ClampMagnitude(input, 1f);
             //transofrm it based off the player transform and scale it by movement speed
             Vector3 move = transform.TransformVector(input) * movementSpeed;
+            transform.position += move;
             //is it on the ground
-            if (cc.isGrounded)
-            {
-                yVelocity = -gravity * Time.deltaTime;
-                //check for jump here
-                if (Input.GetButtonDown("Jump"))
-                {
-                    yVelocity = jumpSpeed;
-                }
-            }
-            //now add the gravity to the yvelocity
-            yVelocity -= gravity * Time.deltaTime;
-            move.y = yVelocity;
+            //if (cc.isGrounded)
+            //{
+            //    yVelocity = -gravity * Time.deltaTime;
+            //    //check for jump here
+            //    if (Input.GetButtonDown("Jump"))
+            //    {
+            //        yVelocity = jumpSpeed;
+            //    }
+            //}
+            ////now add the gravity to the yvelocity
+            //yVelocity -= gravity * Time.deltaTime;
+            //move.y = yVelocity;
             //and finally move
-            cc.Move(move * Time.deltaTime);
+            //cc.Move(move * Time.deltaTime);
         }
-
-
-
     }
-
 }
 

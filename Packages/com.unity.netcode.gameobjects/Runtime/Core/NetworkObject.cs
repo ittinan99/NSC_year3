@@ -40,7 +40,6 @@ namespace Unity.Netcode
             GlobalObjectIdHash = XXHash.Hash32(globalObjectIdString);
         }
 #endif
-
         /// <summary>
         /// Gets the NetworkManager that owns this NetworkObject instance
         /// </summary>
@@ -60,7 +59,7 @@ namespace Unity.Netcode
         /// Gets the unique Id of this object that is synced across the network
         /// </summary>
         public ulong NetworkObjectId { get; internal set; }
-
+        
         /// <summary>
         /// Gets the ClientId of the owner of this NetworkObject
         /// </summary>
