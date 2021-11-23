@@ -22,7 +22,6 @@ public class TurnBaseSystem : NetworkBehaviour
     public Button EndTurnButton;
     [SerializeField]
     private Button StartBut;
-    [SerializeField]
     public NetworkVariable<float> currentHealth = new NetworkVariable<float>();
     public float maxHealth;
     public GameObject FlaskBarrel;
