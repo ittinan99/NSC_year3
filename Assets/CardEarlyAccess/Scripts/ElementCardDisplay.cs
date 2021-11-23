@@ -54,10 +54,9 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
             if (IsAttack)
             {
                 GameObject FB = GameSystem.localTurnbased.FlaskBarrel;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit, 10000))
+                if (Physics.Raycast(FB.transform.position,FB.transform.forward, out RaycastHit hit, 10000))
                 {
-                    Debug.DrawRay(ray.origin, ray.direction *1000, Color.red);
+                    Debug.DrawRay(FB.transform.position, FB.transform.forward * 1000, Color.red);
                     GameObject enemy = hit.transform.gameObject;
                     if (enemy.CompareTag("Player"))
                     {
