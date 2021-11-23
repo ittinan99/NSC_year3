@@ -63,6 +63,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     if (enemy.CompareTag("Player"))
                     {
                         Debug.Log("Hit");
+                        GameSystem.localTurnbased.FlaskBarrel.transform.position = hit.transform.position;
                     }
 
                 }
