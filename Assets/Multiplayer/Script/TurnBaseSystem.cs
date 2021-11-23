@@ -23,7 +23,7 @@ public class TurnBaseSystem : NetworkBehaviour
     [SerializeField]
     private Button StartBut;
     [SerializeField]
-    NetworkVariable<float> currentHealth = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone);
+    public NetworkVariable<float> currentHealth = new NetworkVariable<float>();
     public float maxHealth;
     public GameObject FlaskBarrel;
 
@@ -128,8 +128,9 @@ public class TurnBaseSystem : NetworkBehaviour
             GameObject enemy = hit.transform.gameObject;
             if (enemy.CompareTag("Player"))
             {
-                AttackCurrentTargetClientRpc();
                 enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+                Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
+                AttackCurrentTargetClientRpc();
                 cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
                 cardPanel.GetComponent<CardPanel>().SetCardPos();
                 Destroy(ATKcard.gameObject);
@@ -146,26 +147,27 @@ public class TurnBaseSystem : NetworkBehaviour
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
     {
+        Debug.Log(currentHealth.Value);
         //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 200))
-        {
-            GameObject enemy = hit.transform.gameObject;
-            if (enemy.CompareTag("Player"))
-            {
-                enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
-                cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
-                cardPanel.GetComponent<CardPanel>().SetCardPos();
-                Destroy(ATKcard.gameObject);
-                Debug.Log("Attack");
-            }
-            else
-            {
-                ATKcard = null;
-            }
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Physics.Raycast(ray, out RaycastHit hit, 200))
+        //{
+        //    GameObject enemy = hit.transform.gameObject;
+        //    if (enemy.CompareTag("Player"))
+        //    {
+        //        enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+        //        cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+        //        cardPanel.GetComponent<CardPanel>().SetCardPos();
+        //        Destroy(ATKcard.gameObject);
+        //        Debug.Log("Attack");
+        //    }
+        //    else
+        //    {
+        //        ATKcard = null;
+        //    }
 
-        }
-        Debug.Log("AttackClient");
+        //}
+        //Debug.Log("AttackClient");
     }
     public void TakeDamage(float DamageAmount)
     {
