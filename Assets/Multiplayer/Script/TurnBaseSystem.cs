@@ -22,7 +22,8 @@ public class TurnBaseSystem : NetworkBehaviour
     public Button EndTurnButton;
     [SerializeField]
     private Button StartBut;
-    public NetworkVariable<float> currentHealth = new NetworkVariable<float>();
+    NetworkVariable<float> currentHealth = new NetworkVariable<float>();
+    public float CurrentHealth;
     public float maxHealth;
     public GameObject FlaskBarrel;
 
@@ -49,6 +50,7 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     private void Update()
     {
+        CurrentHealth = currentHealth.Value;
         if (PlayerCanvas == null)
         {
             PlayerCanvas  = GameObject.Find("PlayerCanvas");
