@@ -35,6 +35,12 @@ public class CardPanel : MonoBehaviour
         Vector2 PosMin = PlacePosMin;
         Vector2 PosMax = PlacePosMax;
         Vector2 Dis = PlacePosMax - PlacePosMin;
+        for (var i = hCard.Count - 1; i > -1; i--)
+        {
+            if (hCard[i] == null)
+                hCard.RemoveAt(i);
+        }
+        hCard.RemoveAll(x => x == null);
         foreach (ElementCardDisplay card in hCard)
         {
             card.gameObject.GetComponent<RectTransform>().anchorMin = PosMin;

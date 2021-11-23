@@ -41,7 +41,6 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
         if (IsPressed )
         {
             this.transform.position = Input.mousePosition;
- 
         }
         if(GameSystem.localTurnbased != null)
         {
@@ -50,7 +49,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 IsAttack = false;
                 GameObject arrow = GameObject.Find("Arrow");
                 arrow.GetComponent<Arrow>().Hide();
-                GameSystem.localTurnbased.AttackCurrentTargetServerRpc();
+                GameSystem.localTurnbased.ATKcardFunc(this);
             }
             if (IsAttack)
             {

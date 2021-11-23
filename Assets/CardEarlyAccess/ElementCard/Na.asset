@@ -15,6 +15,6 @@ MonoBehaviour:
   element_Name: Na
   element_FName: Sodium
   CanCombine: 1
-  CanAttack: 0
+  CanAttack: 1
   ArtWork: {fileID: 0}
   description: 

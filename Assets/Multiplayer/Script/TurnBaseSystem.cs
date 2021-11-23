@@ -26,6 +26,9 @@ public class TurnBaseSystem : NetworkBehaviour
     NetworkVariable<float> currentHealth = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone);
     public float maxHealth;
     public GameObject FlaskBarrel;
+
+    [SerializeField]
+    private ElementCardDisplay ATKcard;
     void Start()
     {
         //if(IsLocalPlayer)
@@ -109,6 +112,11 @@ public class TurnBaseSystem : NetworkBehaviour
     //    EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
     //    StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
     //}
+    public void ATKcardFunc(ElementCardDisplay atkCard)
+    {
+        ATKcard = atkCard;
+        AttackCurrentTargetServerRpc();
+    }
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
@@ -125,7 +133,14 @@ public class TurnBaseSystem : NetworkBehaviour
             if (enemy.CompareTag("Player"))
             {
                 enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+                cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+                cardPanel.GetComponent<CardPanel>().SetCardPos();
+                Destroy(ATKcard.gameObject);
                 Debug.Log("Attack");
+            }
+            else
+            {
+                ATKcard = null;
             }
 
         }
@@ -162,6 +177,7 @@ public class TurnBaseSystem : NetworkBehaviour
     //[ClientRpc]
     public void StartState()
     {
+        currentHealth = new NetworkVariable<float>(maxHealth);
         StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
         PlayerCanvas = GameObject.Find("PlayerCanvas");
         CombinePanel = GameObject.Find("CombineSystem");
