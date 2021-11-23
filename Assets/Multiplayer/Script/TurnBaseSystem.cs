@@ -29,6 +29,8 @@ public class TurnBaseSystem : NetworkBehaviour
 
     [SerializeField]
     private ElementCardDisplay ATKcard;
+
+    private Ray ray;
     void Start()
     {
         //if(IsLocalPlayer)
@@ -114,13 +116,32 @@ public class TurnBaseSystem : NetworkBehaviour
     //}
     public void ATKcardFunc(ElementCardDisplay atkCard)
     {
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         ATKcard = atkCard;
         AttackCurrentTargetServerRpc();
     }
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
-        AttackCurrentTargetClientRpc();
+        if (Physics.Raycast(ray, out RaycastHit hit, 200))
+        {
+            GameObject enemy = hit.transform.gameObject;
+            if (enemy.CompareTag("Player"))
+            {
+                AttackCurrentTargetClientRpc();
+                enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+                cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+                cardPanel.GetComponent<CardPanel>().SetCardPos();
+                Destroy(ATKcard.gameObject);
+                Debug.Log("Attack");
+            }
+            else
+            {
+                ATKcard = null;
+            }
+
+        }
+        Debug.Log("AttackServer");
     }
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
