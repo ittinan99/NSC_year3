@@ -77,7 +77,8 @@ namespace Unity.Netcode
         {
             //update speed based onn the input
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            FB.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            FB.transform.position = new Vector3(MousePos.x, MousePos.y, FB.transform.position.z);
             input = Vector3.ClampMagnitude(input, 1f);
             //transofrm it based off the player transform and scale it by movement speed
             Vector3 move = transform.TransformVector(input) * movementSpeed;
