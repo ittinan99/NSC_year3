@@ -133,28 +133,42 @@ public class TurnBaseSystem : NetworkBehaviour
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
     {
-        //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
-        if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 200))
+        if (FlaskBarrel.GetComponent<FlaskEnemy>().Enemy.CompareTag("Player"))
         {
-            GameObject enemy = hit.transform.gameObject;
-            if (enemy.CompareTag("Player"))
+            GameObject enemy = FlaskBarrel.GetComponent<FlaskEnemy>().Enemy;
+            enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+            Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
+            if (IsLocalPlayer)
             {
-                enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
-                Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
-                if (IsLocalPlayer)
-                {
-                    cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
-                    cardPanel.GetComponent<CardPanel>().SetCardPos();
-                    Destroy(ATKcard.gameObject);
-                }
-                Debug.Log("Attack");
+                cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+                cardPanel.GetComponent<CardPanel>().SetCardPos();
+                Destroy(ATKcard.gameObject);
             }
-            else
-            {
-                ATKcard = null;
-            }
-
+            Debug.Log("Attack");
         }
+
+        //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
+        //if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 20))
+        //{
+        //    GameObject enemy = hit.transform.gameObject;
+        //    if (enemy.CompareTag("Player"))
+        //    {
+        //        enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+        //        Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
+        //        if (IsLocalPlayer)
+        //        {
+        //            cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+        //            cardPanel.GetComponent<CardPanel>().SetCardPos();
+        //            Destroy(ATKcard.gameObject);
+        //        }
+        //        Debug.Log("Attack");
+        //    }
+        //    else
+        //    {
+        //        ATKcard = null;
+        //    }
+
+        //}
         Debug.Log(currentHealth.Value);
     }
     public void TakeDamage(float DamageAmount)
