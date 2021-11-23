@@ -125,11 +125,6 @@ public class TurnBaseSystem : NetworkBehaviour
     public void AttackCurrentTargetServerRpc()
     {
         Debug.Log("AttackServer");
-        AttackCurrentTargetClientRpc();
-    }
-    [ClientRpc]
-    public void AttackCurrentTargetClientRpc()
-    {
         if (Physics.Raycast(ray, out RaycastHit hit, 200))
         {
             GameObject enemy = hit.transform.gameObject;
@@ -149,6 +144,11 @@ public class TurnBaseSystem : NetworkBehaviour
             }
 
         }
+        AttackCurrentTargetClientRpc();
+    }
+    [ClientRpc]
+    public void AttackCurrentTargetClientRpc()
+    {
         Debug.Log(currentHealth.Value);
     }
     public void TakeDamage(float DamageAmount)

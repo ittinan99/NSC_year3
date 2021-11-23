@@ -331,9 +331,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 1
-  DontDestroyWithOwner: 1
-  AutoObjectParentSync: 1
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 0
 --- !u!114 &2029939445382460163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,12 +377,14 @@ MonoBehaviour:
   GS: {fileID: 0}
   isYourTurn: 0
   PlayerCanvas: {fileID: 0}
+  CombinePanel: {fileID: 0}
+  cardPanel: {fileID: 0}
   EndTurnButton: {fileID: 0}
   StartBut: {fileID: 0}
-  currentHealth:
-    m_InternalValue: 0
+  CurrentHealth: 0
   maxHealth: 100
   FlaskBarrel: {fileID: 1600550754217249858}
+  ATKcard: {fileID: 0}
 --- !u!54 &980456072299073567
 Rigidbody:
   m_ObjectHideFlags: 0
