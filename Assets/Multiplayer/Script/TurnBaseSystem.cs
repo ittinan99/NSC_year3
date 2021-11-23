@@ -56,6 +56,7 @@ public class TurnBaseSystem : NetworkBehaviour
         if (EndTurnButton == null)
         {
             EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+            currentHealth = new NetworkVariable<float>(maxHealth);
             EndTurnButton.onClick.AddListener(() => EndTurn());
         }
         if (StartBut == null)

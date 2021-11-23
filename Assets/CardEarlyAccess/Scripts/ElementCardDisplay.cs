@@ -62,6 +62,10 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     if (enemy.CompareTag("Player"))
                     {
                         Debug.Log("Hit");
+                        Vector3 Direction = hit.point - GameSystem.localTurnbased.gameObject.transform.position;
+                        Quaternion PlayerRotation = GameSystem.localTurnbased.gameObject.transform.rotation;
+                        Quaternion rotation = Quaternion.LookRotation(Direction);
+                        GameSystem.localTurnbased.gameObject.transform.rotation = Quaternion.Lerp(PlayerRotation, rotation, 5f * Time.deltaTime);
                     }
 
                 }
