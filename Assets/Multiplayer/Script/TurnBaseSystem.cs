@@ -117,7 +117,9 @@ public class TurnBaseSystem : NetworkBehaviour
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
     {
-        if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 200))
+        //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 200))
         {
             GameObject enemy = hit.transform.gameObject;
             if (enemy.CompareTag("Player"))
