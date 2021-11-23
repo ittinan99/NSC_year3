@@ -29,7 +29,7 @@ namespace Unity.Netcode
         public float minPitch = -85f;
         [Range(0.5f, 5f)]
         public float mouseSensitivity = 2f;
-
+        public GameObject FB;
         //the charachtercompononet for moving us
         //CharacterController cc;
 
@@ -77,6 +77,7 @@ namespace Unity.Netcode
         {
             //update speed based onn the input
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            FB.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             input = Vector3.ClampMagnitude(input, 1f);
             //transofrm it based off the player transform and scale it by movement speed
             Vector3 move = transform.TransformVector(input) * movementSpeed;

@@ -134,7 +134,7 @@ public class TurnBaseSystem : NetworkBehaviour
     public void AttackCurrentTargetClientRpc()
     {
         //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
-        if (Physics.Raycast(ray, out RaycastHit hit, 200))
+        if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 200))
         {
             GameObject enemy = hit.transform.gameObject;
             if (enemy.CompareTag("Player"))

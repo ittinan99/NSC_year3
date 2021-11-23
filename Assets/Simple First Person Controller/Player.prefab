@@ -318,6 +318,7 @@ MonoBehaviour:
   maxPitch: 85
   minPitch: -85
   mouseSensitivity: 2
+  FB: {fileID: 1600550754217249858}
 --- !u!114 &411187454379236917
 MonoBehaviour:
   m_ObjectHideFlags: 0
