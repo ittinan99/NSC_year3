@@ -139,9 +139,12 @@ public class TurnBaseSystem : NetworkBehaviour
                 enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
                 Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
                 AttackCurrentTargetClientRpc();
-                cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
-                cardPanel.GetComponent<CardPanel>().SetCardPos();
-                Destroy(ATKcard.gameObject);
+                if (IsLocalPlayer)
+                {
+                    //cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+                    //cardPanel.GetComponent<CardPanel>().SetCardPos();
+                    //Destroy(ATKcard.gameObject);
+                }
                 Debug.Log("Attack");
             }
             else
