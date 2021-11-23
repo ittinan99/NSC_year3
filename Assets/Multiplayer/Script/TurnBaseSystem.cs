@@ -119,11 +119,13 @@ public class TurnBaseSystem : NetworkBehaviour
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         ATKcard = atkCard;
+
         AttackCurrentTargetServerRpc();
     }
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
+        
         Debug.Log("AttackServer");
         
         AttackCurrentTargetClientRpc();
@@ -131,19 +133,19 @@ public class TurnBaseSystem : NetworkBehaviour
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
     {
-        if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 200))
+        //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
+        if (Physics.Raycast(ray, out RaycastHit hit, 200))
         {
             GameObject enemy = hit.transform.gameObject;
             if (enemy.CompareTag("Player"))
             {
                 enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
                 Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
-                AttackCurrentTargetClientRpc();
                 if (IsLocalPlayer)
                 {
-                    //cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
-                    //cardPanel.GetComponent<CardPanel>().SetCardPos();
-                    //Destroy(ATKcard.gameObject);
+                    cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+                    cardPanel.GetComponent<CardPanel>().SetCardPos();
+                    Destroy(ATKcard.gameObject);
                 }
                 Debug.Log("Attack");
             }
