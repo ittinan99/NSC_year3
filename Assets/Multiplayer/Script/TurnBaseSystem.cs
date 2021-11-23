@@ -133,7 +133,7 @@ public class TurnBaseSystem : NetworkBehaviour
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
     {
-        if (FlaskBarrel.GetComponent<FlaskEnemy>().Enemy.CompareTag("Player"))
+        if (FlaskBarrel.GetComponent<FlaskEnemy>().Enemy != null)
         {
             GameObject enemy = FlaskBarrel.GetComponent<FlaskEnemy>().Enemy;
             enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
