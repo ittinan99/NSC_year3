@@ -124,6 +124,12 @@ public class TurnBaseSystem : NetworkBehaviour
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
+        Debug.Log("AttackServer");
+        AttackCurrentTargetClientRpc();
+    }
+    [ClientRpc]
+    public void AttackCurrentTargetClientRpc()
+    {
         if (Physics.Raycast(ray, out RaycastHit hit, 200))
         {
             GameObject enemy = hit.transform.gameObject;
@@ -143,32 +149,7 @@ public class TurnBaseSystem : NetworkBehaviour
             }
 
         }
-        Debug.Log("AttackServer");
-    }
-    [ClientRpc]
-    public void AttackCurrentTargetClientRpc()
-    {
         Debug.Log(currentHealth.Value);
-        //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //if (Physics.Raycast(ray, out RaycastHit hit, 200))
-        //{
-        //    GameObject enemy = hit.transform.gameObject;
-        //    if (enemy.CompareTag("Player"))
-        //    {
-        //        enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
-        //        cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
-        //        cardPanel.GetComponent<CardPanel>().SetCardPos();
-        //        Destroy(ATKcard.gameObject);
-        //        Debug.Log("Attack");
-        //    }
-        //    else
-        //    {
-        //        ATKcard = null;
-        //    }
-
-        //}
-        //Debug.Log("AttackClient");
     }
     public void TakeDamage(float DamageAmount)
     {
