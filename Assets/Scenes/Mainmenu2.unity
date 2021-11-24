@@ -1575,7 +1575,7 @@ MonoBehaviour:
   RoomPW:
   - {fileID: 459048560}
   - {fileID: 1155497961}
-  NickNameText: {fileID: 1274398780}
+  NicknameInput: {fileID: 1274398780}
 --- !u!4 &441560020
 Transform:
   m_ObjectHideFlags: 0
