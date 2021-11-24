@@ -12,9 +12,9 @@ internal class OutlineSelectionResponse : MonoBehaviour, ISelectionResponse
     public void OnSelect(Transform selection)
     {
         Debug.Log(selection.name);
+        var outline = selection.GetComponentInParent<Outline>();        
         if (selection.CompareTag(canAttack_Tag) || selection.CompareTag(player_Tag))
         {
-            var outline = selection.GetComponentInParent<Outline>();
             if (outline != null)
             {
                 outline.OutlineColor = HighLightOutline;

@@ -95,12 +95,34 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 if (_selection != null)
                 {
                     Debug.Log("in_selection");
-                    _selectionResponse.OnSelect(_selection);
+                    OnSelect(_selection);
                 }
             }
         }     
     }
-
+    public void OnSelect(Transform selection)
+    {
+        Debug.Log(selection.name);
+        var outline = selection.GetComponentInParent<Outline>();
+        if (selection.CompareTag("Player") || selection.CompareTag("canAttack"))
+        {
+            if (outline != null)
+            {
+                outline.OutlineWidth = 10;
+            }
+        }
+    }
+    public void OnDeselect(Transform selection)
+    {
+        if (selection.CompareTag("Player") || selection.CompareTag("canAttack"))
+        {
+            var outline = selection.GetComponentInParent<Outline>();
+            if (outline != null)
+            {
+                outline.OutlineWidth = 0;
+            }
+        }
+    }
     private static Ray CreateRay()
     {
         return Camera.main.ScreenPointToRay(Input.mousePosition);
