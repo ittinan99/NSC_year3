@@ -19,9 +19,12 @@ public class ChangePlayerObjectName : NetworkBehaviour
     }
     private void Update()
     {
-        if (IsOwner)
+        if (gameObject.name != photo.NickName)
         {
-            ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+            if (IsOwner)
+            {
+                ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+            }
         }
     }
     [ServerRpc]
