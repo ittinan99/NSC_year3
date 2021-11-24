@@ -27,6 +27,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
 
     private ISelectionResponse _selectionResponse;
 
+
     private void Awake()
     {
         _selectionResponse = GetComponent<ISelectionResponse>();
@@ -61,14 +62,14 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
             }
             if (IsAttack)
             {
-                if(_selection != null)
+                if (_selection != null)
                 {
                     _selectionResponse.OnDeselect(_selection);
                 }
 
                 #region MyRegion
                 GameObject FB = GameSystem.localTurnbased.FlaskBarrel;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = CreateRay();
                 //Physics.Raycast(FB.transform.position, FB.transform.forward
 
                 _selection = null;
@@ -92,15 +93,20 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                         GameSystem.localTurnbased.FlaskBarrel.transform.position = hit.transform.position;
                     }
 
-                } 
+                }
                 #endregion
 
                 if (_selection != null)
                 {
                     _selectionResponse.OnSelect(_selection);
                 }
-            }            
+            }
         }     
+    }
+
+    private static Ray CreateRay()
+    {
+        return Camera.main.ScreenPointToRay(Input.mousePosition);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

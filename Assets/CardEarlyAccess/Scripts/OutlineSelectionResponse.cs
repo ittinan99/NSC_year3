@@ -4,7 +4,7 @@ internal class OutlineSelectionResponse : MonoBehaviour, ISelectionResponse
 {
     [SerializeField] public Color HighLightOutline;
 
-    [SerializeField] string canAttack_Tag = "canAttack";
+    [SerializeField] string canAttack_Tag = "Player";
 
     public void OnSelect(Transform selection)
     {
