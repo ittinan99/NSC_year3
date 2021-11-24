@@ -8,7 +8,6 @@ using TMPro;
 public class ChangeNamePlayer : NetworkBehaviour
 {
     PhotonRealtimeTransport photo;
-    public static Dictionary<ulong, string> PlayerDataDic = new Dictionary<ulong, string>();
     // Start is called before the first frame update
     void Start()
     {
