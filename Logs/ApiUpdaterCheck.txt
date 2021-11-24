@@ -998,3 +998,63 @@ C# parse time         : 1083ms
 candidates check time : 105ms
 console write time    : 14ms
 
+[api-updater (non-obsolete-error-filter)] 11/24/2021 2:10:52 PM : Starting D:/Work_KMUTT/Data Stu/2020.3.19f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 452.769ms
+moved types parse time: 50ms
+candidates parse time : 1ms
+C# parse time         : 698ms
+candidates check time : 42ms
+console write time    : 14ms
+
+[api-updater (non-obsolete-error-filter)] 11/24/2021 3:11:35 PM : Starting D:/Work_KMUTT/Data Stu/2020.3.19f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 78.7884ms
+moved types parse time: 47ms
+candidates parse time : 0ms
+C# parse time         : 176ms
+candidates check time : 39ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 11/24/2021 3:40:48 PM : Starting D:/Work_KMUTT/Data Stu/2020.3.19f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 82.7796ms
+moved types parse time: 47ms
+candidates parse time : 1ms
+C# parse time         : 189ms
+candidates check time : 40ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 11/24/2021 4:10:35 PM : Starting D:/Work_KMUTT/Data Stu/2020.3.19f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 78.8172ms
+moved types parse time: 47ms
+candidates parse time : 1ms
+C# parse time         : 157ms
+candidates check time : 38ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 11/24/2021 4:20:25 PM : Starting D:/Work_KMUTT/Data Stu/2020.3.19f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 78.8134ms
+moved types parse time: 47ms
+candidates parse time : 1ms
+C# parse time         : 215ms
+candidates check time : 125ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 11/24/2021 4:20:32 PM : Starting D:/Work_KMUTT/Data Stu/2020.3.19f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 88.7608ms
+moved types parse time: 93ms
+candidates parse time : 1ms
+C# parse time         : 258ms
+candidates check time : 140ms
+console write time    : 0ms
+
