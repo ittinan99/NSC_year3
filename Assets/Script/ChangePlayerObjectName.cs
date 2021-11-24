@@ -15,18 +15,13 @@ public class ChangePlayerObjectName : NetworkBehaviour
         if (IsOwner)
         {
             ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
-            Destroy(GetComponent<ChangePlayerObjectName>());
         }
     }
     private void Update()
     {
-        if (this.gameObject.name != photo.NickName)
+        if (IsOwner)
         {
-            if (IsOwner)
-            {
-                ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
-                Destroy(GetComponent<ChangePlayerObjectName>());
-            }
+            ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
         }
     }
     [ServerRpc]
