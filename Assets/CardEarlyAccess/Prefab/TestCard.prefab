@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HighLightOutline: {r: 0.3436276, g: 0.5204255, b: 0.735849, a: 1}
   canAttack_Tag: canAttack
+  player_Tag: Player
 --- !u!1 &413444963483840906
 GameObject:
   m_ObjectHideFlags: 0

@@ -65,7 +65,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 if (_selection != null)
                 {
                     _selectionResponse.OnDeselect(_selection);
-                    //_selection = null;
+                    
                 }
 
                 #region MyRegion
@@ -82,7 +82,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     Debug.DrawRay(FB.transform.position, FB.transform.forward * 1000, Color.red);
                     GameObject enemy = hit.transform.gameObject;
 
-                    if (enemy.CompareTag("Player") || selection.CompareTag("canAttack"))
+                    if (selection.CompareTag("Player") || selection.CompareTag("canAttack"))
                     {
                         Debug.Log("Hit");
                         _selection = selection;
@@ -94,6 +94,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
 
                 if (_selection != null)
                 {
+                    Debug.Log("in_selection");
                     _selectionResponse.OnSelect(_selection);
                 }
             }

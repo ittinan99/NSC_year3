@@ -7,13 +7,15 @@ internal class OutlineSelectionResponse : MonoBehaviour, ISelectionResponse
     [SerializeField] string canAttack_Tag;
     [SerializeField] string player_Tag;
 
+
+
     public void OnSelect(Transform selection)
     {
         Debug.Log(selection.name);
-        var outline = selection.GetComponent<Outline>();
-        if (outline != null)
+        if (selection.CompareTag(canAttack_Tag) || selection.CompareTag(player_Tag))
         {
-            if (selection.CompareTag(canAttack_Tag) || selection.CompareTag(player_Tag))
+            var outline = selection.GetComponentInParent<Outline>();
+            if (outline != null)
             {
                 outline.OutlineColor = HighLightOutline;
                 outline.OutlineWidth = 10;
@@ -22,13 +24,13 @@ internal class OutlineSelectionResponse : MonoBehaviour, ISelectionResponse
     }
     public void OnDeselect(Transform selection)
     {
-        var outline = selection.GetComponent<Outline>();
-        if (outline != null)
+        if (selection.CompareTag(canAttack_Tag) || selection.CompareTag(player_Tag))
         {
-            if (selection.CompareTag(canAttack_Tag) || selection.CompareTag(player_Tag))
+            var outline = selection.GetComponentInParent<Outline>();
+            if (outline != null)
             {
                 outline.OutlineWidth = 0;
             }
-        }    
+        }
     }
 }
