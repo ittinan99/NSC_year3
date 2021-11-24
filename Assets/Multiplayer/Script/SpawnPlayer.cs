@@ -19,24 +19,12 @@ public class SpawnPlayer : NetworkBehaviour
         Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
         if (IsOwnedByServer)
         {
-            foreach (ulong x in Clientlist)
+            foreach (ulong ClientId in Clientlist)
             {
                 getphotonServerRpc();
-                ChangeServerRpc(x);
+                ChangeServerRpc(ClientId);
             }
         }
-        CloseCameraServerRpc();
-    }
-    [ServerRpc]
-    void CloseCameraServerRpc()
-    {
-        CloseCameraClientRpc();
-    }
-    [ClientRpc]
-    void CloseCameraClientRpc()
-    {
-        //GameObject.Find("MainCamera").SetActive(false);
-        Destroy(this.gameObject);
     }
     [ServerRpc]
     void getphotonServerRpc()
@@ -47,14 +35,13 @@ public class SpawnPlayer : NetworkBehaviour
     void getphotonClientRpc()
     {
         photo = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
-        PlayerId = NetworkManager.Singleton.LocalClientId;
         PlayerName = photo.NickName;
     }
     [ServerRpc]
-    void ChangeServerRpc(ulong data)
+    void ChangeServerRpc(ulong ClientId)
     {
         prefap = Instantiate(StagePrefap, GetRandomSpawn(), Quaternion.identity);
-        prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(data, true);
+        prefap.GetComponent<NetworkObject>().SpawnAsPlayerObject(ClientId, true);
         prefap.name = PlayerName;
     }
     Vector3 GetRandomSpawn()
