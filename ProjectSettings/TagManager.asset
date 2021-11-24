@@ -7,6 +7,9 @@ TagManager:
   - PlayerCanvas
   - Card
   - CombineSlot
+  - NetworkObject
+  - NetworkManager
+  - canAttack
   layers:
   - Default
   - TransparentFX

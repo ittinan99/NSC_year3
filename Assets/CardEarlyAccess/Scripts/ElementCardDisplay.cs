@@ -23,6 +23,15 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     public bool IsOutPutCard = false;
     public GameObject CombineSlot;
 
+    private Transform _selection;
+
+    private ISelectionResponse _selectionResponse;
+
+
+    private void Awake()
+    {
+        _selectionResponse = GetComponent<ISelectionResponse>();
+    }
     void Start()
     {
         IsAttack = false;
@@ -53,26 +62,49 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
             }
             if (IsAttack)
             {
+                if (_selection != null)
+                {
+                    _selectionResponse.OnDeselect(_selection);
+                    
+                }
+
+                #region MyRegion
                 GameObject FB = GameSystem.localTurnbased.FlaskBarrel;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = CreateRay();
                 //Physics.Raycast(FB.transform.position, FB.transform.forward
+
+                _selection = null;
+
                 if (Physics.Raycast(ray, out RaycastHit hit, 10000))
                 {
+                    var selection = hit.transform;
+
                     Debug.DrawRay(FB.transform.position, FB.transform.forward * 1000, Color.red);
                     GameObject enemy = hit.transform.gameObject;
-                    if (enemy.CompareTag("Player"))
+
+                    if (selection.CompareTag("Player") || selection.CompareTag("canAttack"))
                     {
-                        Debug.Log("Hit");
+                        Debug.Log(selection.transform.gameObject.name);
+                        _selection = selection;
                         GameSystem.localTurnbased.FlaskBarrel.transform.position = hit.transform.position;
                     }
 
                 }
+                #endregion
+
+                if (_selection != null)
+                {
+                    Debug.Log("in_selection");
+                    _selectionResponse.OnSelect(_selection);
+                }
             }
-            
-        }
-       
+        }     
     }
-    
+    private static Ray CreateRay()
+    {
+        return Camera.main.ScreenPointToRay(Input.mousePosition);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         this.GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1);
@@ -123,6 +155,12 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     public void OnPointerUp(PointerEventData eventData)
     {
         IsPressed = false;
+
+        if (_selection != null)
+        {
+            _selectionResponse.OnDeselect(_selection);
+        }
+
         if (IsCombine)
         {
             if(CombineSlot != null)
@@ -156,5 +194,5 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
             IsCombine = false;
             CombineSlot = null;
         }
-    }
+    }  
 }
