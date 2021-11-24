@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 446879677548176247}
   m_Layer: 0
   m_Name: FlaskBarrel
-  m_TagString: canAttack
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 6199611380834239660}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: canAttack
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 3657122766382558699}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: canAttack
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
