@@ -65,6 +65,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 if (_selection != null)
                 {
                     _selectionResponse.OnDeselect(_selection);
+                    _selection = null;
                 }
 
                 #region MyRegion
@@ -72,7 +73,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 Ray ray = CreateRay();
                 //Physics.Raycast(FB.transform.position, FB.transform.forward
 
-                _selection = null;
+                //_selection = null;
 
                 if (Physics.Raycast(ray, out RaycastHit hit, 10000))
                 {
@@ -90,6 +91,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     if (enemy.CompareTag("Player"))
                     {
                         Debug.Log("Hit");
+                        _selection = selection;
                         GameSystem.localTurnbased.FlaskBarrel.transform.position = hit.transform.position;
                     }
 
