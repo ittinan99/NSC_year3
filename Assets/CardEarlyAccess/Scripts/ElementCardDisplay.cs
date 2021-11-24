@@ -41,7 +41,6 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
         if (IsPressed )
         {
             this.transform.position = Input.mousePosition;
- 
         }
         if(GameSystem.localTurnbased != null)
         {
@@ -50,18 +49,21 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                 IsAttack = false;
                 GameObject arrow = GameObject.Find("Arrow");
                 arrow.GetComponent<Arrow>().Hide();
-                GameSystem.localTurnbased.AttackCurrentTargetServerRpc();
+                GameSystem.localTurnbased.ATKcardFunc(this);
             }
             if (IsAttack)
             {
                 GameObject FB = GameSystem.localTurnbased.FlaskBarrel;
-                if (Physics.Raycast(FB.transform.position, FB.transform.forward, out RaycastHit hit, 10000))
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                //Physics.Raycast(FB.transform.position, FB.transform.forward
+                if (Physics.Raycast(ray, out RaycastHit hit, 10000))
                 {
-                    Debug.DrawRay(FB.transform.position, FB.transform.forward *1000, Color.red);
+                    Debug.DrawRay(FB.transform.position, FB.transform.forward * 1000, Color.red);
                     GameObject enemy = hit.transform.gameObject;
                     if (enemy.CompareTag("Player"))
                     {
                         Debug.Log("Hit");
+                        GameSystem.localTurnbased.FlaskBarrel.transform.position = hit.transform.position;
                     }
 
                 }

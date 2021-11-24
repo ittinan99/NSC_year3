@@ -22,10 +22,15 @@ public class TurnBaseSystem : NetworkBehaviour
     public Button EndTurnButton;
     [SerializeField]
     private Button StartBut;
-    [SerializeField]
-    NetworkVariable<float> currentHealth = new NetworkVariable<float>(readPerm: NetworkVariableReadPermission.Everyone);
+    NetworkVariable<float> currentHealth = new NetworkVariable<float>();
+    public float CurrentHealth;
     public float maxHealth;
     public GameObject FlaskBarrel;
+
+    [SerializeField]
+    private ElementCardDisplay ATKcard;
+
+    private Ray ray;
     void Start()
     {
         //if(IsLocalPlayer)
@@ -45,6 +50,7 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     private void Update()
     {
+        CurrentHealth = currentHealth.Value;
         if (PlayerCanvas == null)
         {
             PlayerCanvas  = GameObject.Find("PlayerCanvas");
@@ -56,6 +62,7 @@ public class TurnBaseSystem : NetworkBehaviour
         if (EndTurnButton == null)
         {
             EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+            currentHealth = new NetworkVariable<float>(maxHealth);
             EndTurnButton.onClick.AddListener(() => EndTurn());
         }
         if (StartBut == null)
@@ -108,25 +115,61 @@ public class TurnBaseSystem : NetworkBehaviour
     //    EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
     //    StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
     //}
+    public void ATKcardFunc(ElementCardDisplay atkCard)
+    {
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ATKcard = atkCard;
+
+        AttackCurrentTargetServerRpc();
+    }
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
+        
+        Debug.Log("AttackServer");
+        
         AttackCurrentTargetClientRpc();
     }
     [ClientRpc]
     public void AttackCurrentTargetClientRpc()
     {
-        if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 200))
+        if (FlaskBarrel.GetComponent<FlaskEnemy>().Enemy != null)
         {
-            GameObject enemy = hit.transform.gameObject;
-            if (enemy.CompareTag("Player"))
+            GameObject enemy = FlaskBarrel.GetComponent<FlaskEnemy>().Enemy;
+            enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+            Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
+            if (IsLocalPlayer)
             {
-                enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
-                Debug.Log("Attack");
+                cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+                cardPanel.GetComponent<CardPanel>().SetCardPos();
+                Destroy(ATKcard.gameObject);
             }
-
+            Debug.Log("Attack");
         }
-        Debug.Log("AttackClient");
+
+        //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
+        //if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 20))
+        //{
+        //    GameObject enemy = hit.transform.gameObject;
+        //    if (enemy.CompareTag("Player"))
+        //    {
+        //        enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+        //        Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
+        //        if (IsLocalPlayer)
+        //        {
+        //            cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+        //            cardPanel.GetComponent<CardPanel>().SetCardPos();
+        //            Destroy(ATKcard.gameObject);
+        //        }
+        //        Debug.Log("Attack");
+        //    }
+        //    else
+        //    {
+        //        ATKcard = null;
+        //    }
+
+        //}
+        Debug.Log(currentHealth.Value);
     }
     public void TakeDamage(float DamageAmount)
     {
@@ -159,6 +202,7 @@ public class TurnBaseSystem : NetworkBehaviour
     //[ClientRpc]
     public void StartState()
     {
+        currentHealth = new NetworkVariable<float>(maxHealth);
         StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
         PlayerCanvas = GameObject.Find("PlayerCanvas");
         CombinePanel = GameObject.Find("CombineSystem");

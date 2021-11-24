@@ -15,6 +15,6 @@ MonoBehaviour:
   element_Name: Cl
   element_FName: Chlorine
   CanCombine: 1
-  CanAttack: 0
+  CanAttack: 1
   ArtWork: {fileID: 0}
   description: 
