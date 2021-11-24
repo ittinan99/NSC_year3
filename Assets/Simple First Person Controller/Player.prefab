@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4624499299261315704}
   - component: {fileID: 2054102871746027520}
   - component: {fileID: 446879677548176247}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: FlaskBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

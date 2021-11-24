@@ -15,6 +15,7 @@ public class ChangePlayerObjectName : NetworkBehaviour
         if (IsOwner)
         {
             ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+            Destroy(GetComponent<ChangePlayerObjectName>());
         }
     }
     private void Update()
@@ -24,6 +25,7 @@ public class ChangePlayerObjectName : NetworkBehaviour
             if (IsOwner)
             {
                 ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+                Destroy(GetComponent<ChangePlayerObjectName>());
             }
         }
     }
