@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 15
-  movementSpeed: 10
+  movementSpeed: 5
   jumpSpeed: 10
   cameraTransform: {fileID: 0}
   maxPitch: 85
