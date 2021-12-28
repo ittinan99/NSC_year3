@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 using Netcode.Transports.PhotonRealtime;
+using System;
+
 public class LobbySetPosittionPlayer : NetworkBehaviour
 {
     private TMP_Text[] Text;
@@ -13,11 +15,18 @@ public class LobbySetPosittionPlayer : NetworkBehaviour
     private void Start()
     {
         Panel = GameObject.Find("PlayerSlotPanel").GetComponent<Transform>();
-        Panel.GetComponent<RectTransform>().SetWidth(Panel.GetComponent<RectTransform>().GetWidth()+325);
+        Panel.GetComponent<RectTransform>().SetWidth(Panel.GetComponent<RectTransform>().GetWidth()+350);
         GetComponent<Transform>().SetParent(Panel);
         GetComponent<RectTransform>().sizeDelta = new Vector2(325, 600);
         NetworkManager.Singleton.OnClientConnectedCallback += Singleton_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnDisconnetedCallback;
     }
+
+    private void Singleton_OnDisconnetedCallback(ulong obj)
+    {
+        Panel.GetComponent<RectTransform>().SetWidth(Panel.GetComponent<RectTransform>().GetWidth() - 350);
+    }
+
     // Start is called before the first frame update
     void Update()
     {
