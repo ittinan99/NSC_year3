@@ -13,6 +13,7 @@ public class LobbySetPosittionPlayer : NetworkBehaviour
     private void Start()
     {
         Panel = GameObject.Find("PlayerSlotPanel").GetComponent<Transform>();
+        Panel.GetComponent<RectTransform>().SetWidth(Panel.GetComponent<RectTransform>().GetWidth()+325);
         GetComponent<Transform>().SetParent(Panel);
         GetComponent<RectTransform>().sizeDelta = new Vector2(325, 600);
         NetworkManager.Singleton.OnClientConnectedCallback += Singleton_OnClientConnectedCallback;
