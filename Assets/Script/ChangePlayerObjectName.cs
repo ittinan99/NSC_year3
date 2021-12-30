@@ -19,7 +19,7 @@ public class ChangePlayerObjectName : NetworkBehaviour
     }
     private void Update()
     {
-        if (this.gameObject.name != photo.NickName)
+        if (gameObject.name != photo.NickName)
         {
             if (IsOwner)
             {

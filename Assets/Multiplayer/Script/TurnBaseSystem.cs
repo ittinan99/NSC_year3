@@ -7,19 +7,16 @@ using TMPro;
 using Netcode.Transports.PhotonRealtime;
 public class TurnBaseSystem : NetworkBehaviour
 {
-    public enum GameState { Start,otherTurn,Y_CombineTurn, Y_AttackTurn,Win,Lose}
+    public enum GameState { Start,Win,Lose}
     public GameState PlayerState;
     [SerializeField]
     private GameSystem GS;
-    public bool isYourTurn;
     [SerializeField]
     public GameObject PlayerCanvas;
     [SerializeField]
     public GameObject CombinePanel;
     [SerializeField]
     public CardPanel cardPanel;
-    [SerializeField]
-    public Button EndTurnButton;
     [SerializeField]
     private Button StartBut;
     NetworkVariable<float> currentHealth = new NetworkVariable<float>();
@@ -33,6 +30,7 @@ public class TurnBaseSystem : NetworkBehaviour
     private Ray ray;
     void Start()
     {
+        Debug.Log("K");
         //if(IsLocalPlayer)
         //{
         //    getcomServerRpc();
@@ -58,12 +56,7 @@ public class TurnBaseSystem : NetworkBehaviour
         if (CombinePanel == null)
         {
             CombinePanel = GameObject.Find("CombineSystem");
-        }
-        if (EndTurnButton == null)
-        {
-            EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
             currentHealth = new NetworkVariable<float>(maxHealth);
-            EndTurnButton.onClick.AddListener(() => EndTurn());
         }
         if (StartBut == null)
         {
@@ -77,24 +70,10 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         }
-        if (IsLocalPlayer)
-        {
-            EndTurnButton.interactable = false;
-        }
-        if (IsLocalPlayer&&isYourTurn)
-        {
-            EndTurnButton.interactable = true;
-            if(PlayerState == GameState.Y_CombineTurn)
-            {
-                CombinePanel.SetActive(true);
-            }
-        }
+       
         if (IsLocalPlayer)
         {
             PlayerCanvas.SetActive(true);
-        }
-        if (IsLocalPlayer)
-        {
             StartBut.interactable = false;
         }
         if(IsLocalPlayer&&IsOwnedByServer)
@@ -146,29 +125,6 @@ public class TurnBaseSystem : NetworkBehaviour
             }
             Debug.Log("Attack");
         }
-
-        //FlaskBarrel.transform.position, FlaskBarrel.transform.forward
-        //if (Physics.Raycast(FlaskBarrel.transform.position, FlaskBarrel.transform.forward, out RaycastHit hit, 20))
-        //{
-        //    GameObject enemy = hit.transform.gameObject;
-        //    if (enemy.CompareTag("Player"))
-        //    {
-        //        enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
-        //        Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
-        //        if (IsLocalPlayer)
-        //        {
-        //            cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
-        //            cardPanel.GetComponent<CardPanel>().SetCardPos();
-        //            Destroy(ATKcard.gameObject);
-        //        }
-        //        Debug.Log("Attack");
-        //    }
-        //    else
-        //    {
-        //        ATKcard = null;
-        //    }
-
-        //}
         Debug.Log(currentHealth.Value);
     }
     public void TakeDamage(float DamageAmount)
@@ -176,29 +132,38 @@ public class TurnBaseSystem : NetworkBehaviour
         Debug.Log("TakeDamage");
         currentHealth.Value -= DamageAmount;
     }
+    public void HideShowPanel()
+    {
+        CombinePanel.SetActive(!CombinePanel.activeInHierarchy);
+        cardPanel.gameObject.SetActive(!cardPanel.gameObject.activeInHierarchy);
+    }
+    public void HideCardPanel()
+    {
+        cardPanel.gameObject.SetActive(false);
+    }
     //[ServerRpc]
     //public void StartStateServerRpc()
     //{
     //    StartStateClientRpc();
     //}
-    [ServerRpc]
-    public void Y_CombineStateServerRpc()
-    {
-        Y_CombineStateClientRpc();
-    }
-    public void EndTurn()
-    {
-        if (IsLocalPlayer)
-        {
-            EndTurnServerRpc();
-        }
-    }
-    [ServerRpc]
-    public void EndTurnServerRpc()
-    {
-        EndTurnClientRpc();
-        GS.NextPlayerTurnServerRpc();
-    }
+    //[ServerRpc]
+    //public void Y_CombineStateServerRpc()
+    //{
+    //    Y_CombineStateClientRpc();
+    //}
+    //public void EndTurn()
+    //{
+    //    if (IsLocalPlayer)
+    //    {
+    //        EndTurnServerRpc();
+    //    }
+    //}
+    //[ServerRpc]
+    //public void EndTurnServerRpc()
+    //{
+    //    EndTurnClientRpc();
+    //    GS.NextPlayerTurnServerRpc();
+    //}
     //[ClientRpc]
     public void StartState()
     {
@@ -206,24 +171,20 @@ public class TurnBaseSystem : NetworkBehaviour
         StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
         PlayerCanvas = GameObject.Find("PlayerCanvas");
         CombinePanel = GameObject.Find("CombineSystem");
-        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
         CombinePanel.SetActive(false);
         cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         PlayerState = GameState.Start;
-        isYourTurn = false;
-        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
-        EndTurnButton.onClick.AddListener(() => EndTurn());
     }
-    [ClientRpc]
-    public void Y_CombineStateClientRpc()
-    {
-        PlayerState = GameState.Y_CombineTurn;
-    }
-    [ClientRpc]
-    public void EndTurnClientRpc()
-    {
-        PlayerState = GameState.otherTurn;
-        isYourTurn = false;
-    }
+    //[ClientRpc]
+    //public void Y_CombineStateClientRpc()
+    //{
+    //    PlayerState = GameState.Y_CombineTurn;
+    //}
+    //[ClientRpc]
+    //public void EndTurnClientRpc()
+    //{
+    //    PlayerState = GameState.otherTurn;
+    //    isYourTurn = false;
+    //}
 
 }

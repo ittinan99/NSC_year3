@@ -33,12 +33,14 @@ namespace Unity.Netcode
         //the charachtercompononet for moving us
         //CharacterController cc;
 
+        Rigidbody rigidbody;
+
         private void Start()
         {
             cameraTransform = GetComponentInChildren<Camera>().transform;
             if (IsLocalPlayer)
             {
-                //cc = GetComponent<CharacterController>();
+                rigidbody = GetComponent<Rigidbody>();
             }
             else
             {
@@ -81,8 +83,12 @@ namespace Unity.Netcode
             //Physics.Raycast(FB.transform.position, FB.transform.forward
             input = Vector3.ClampMagnitude(input, 1f);
             //transofrm it based off the player transform and scale it by movement speed
-            Vector3 move = transform.TransformVector(input) * movementSpeed;
-            transform.position += move;
+            Vector3 move = input * movementSpeed;
+
+            rigidbody.transform.Translate(move * Time.deltaTime);
+
+
+            //transform.position += move;
             //is it on the ground
             //if (cc.isGrounded)
             //{
