@@ -53,7 +53,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
         }
         if(GameSystem.localTurnbased != null)
         {
-            if (Input.GetKeyUp(KeyCode.Mouse0) && IsAttack && GameSystem.localTurnbased.PlayerState == TurnBaseSystem.GameState.Y_AttackTurn)
+            if (Input.GetKeyUp(KeyCode.Mouse0) && IsAttack )
             {
                 IsAttack = false;
                 GameObject arrow = GameObject.Find("Arrow");
@@ -140,7 +140,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     cardPanel.GetComponent<CardPanel>().AddCard(this);
                 }
             }
-            else if (GameSystem.gamePhase == GameSystem.GamePhase.AttackState && E_Card.CanAttack && GameSystem.localTurnbased.PlayerState == TurnBaseSystem.GameState.Y_AttackTurn)
+            else if (GameSystem.gamePhase == GameSystem.GamePhase.AttackState && E_Card.CanAttack )
             {
                 Debug.Log("Arrow");
                 GameObject arrow = GameObject.Find("Arrow");
