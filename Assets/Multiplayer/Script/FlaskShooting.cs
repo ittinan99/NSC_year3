@@ -8,6 +8,8 @@ namespace Unity.Netcode
     {
         public TrailRenderer T_Renderer;
         public GameObject FlaskBarrel;
+        [SerializeReference]
+        private AmmoPanel AP = null;
         // Start is called before the first frame update
         void Start()
         {
@@ -17,10 +19,16 @@ namespace Unity.Netcode
         // Update is called once per frame
         void Update()
         {
-            if (IsLocalPlayer)
+            if(AP == null)
             {
-                if (Input.GetButtonDown("Fire1"))
+                AP = GameObject.FindObjectOfType<AmmoPanel>();
+            }
+            if (IsLocalPlayer && GameSystem.gamePhase == GameSystem.GamePhase.AttackState)
+            {
+                if (Input.GetButtonDown("Fire1") && AP.CurrentAmmo.AmmoAmount > 0)
                 {
+                    AP.CurrentAmmo.AmmoAmount--;
+                    AP.DisplayAmmo.SetVar();
                     ThrowServerRpc();
                 }
             }

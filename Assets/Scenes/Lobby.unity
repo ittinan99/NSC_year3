@@ -1490,7 +1490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartGameButton: {fileID: 559235603}
-  sceneName: Multiplayer
+  sceneName: NewMultiplayer
 --- !u!4 &1733767227
 Transform:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class GameSystem : NetworkBehaviour
     [SerializeField]
     public static GamePhase gamePhase;
     public PhaseTimer PT;
+    public AmmoPanel AP;
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -80,6 +81,35 @@ public class GameSystem : NetworkBehaviour
         Debug.Log("CombinePhase");
         gamePhase = GamePhase.CombineState;
         localTurnbased.HideShowPanel();
+        PT.CombineCountDownMethod();
+    }
+
+    [ServerRpc]
+    public void TaskPhaseServerRpc()
+    {
+        TaskPhaseClientRpc();
+    }
+    [ClientRpc]
+    public void TaskPhaseClientRpc()
+    {
+        Debug.Log("TaskPhase");
+        gamePhase = GamePhase.TaskState;
+        PT.TaskCountDownMethod();
+    }
+
+    [ServerRpc]
+    public void AttackPhaseServerRpc()
+    {
+        AttackPhaseClientRpc();
+    }
+    [ClientRpc]
+    public void AttackPhaseClientRpc()
+    {
+        Debug.Log("AttackPhase");
+        gamePhase = GamePhase.AttackState;
+        AP.AddAmmoCard();
+        localTurnbased.HideShowPanel();
+        PT.AttackCountDownMethod();
     }
     //[ServerRpc]
     //public void NextPlayerTurnServerRpc()

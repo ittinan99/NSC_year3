@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e645592984406d14abc6425d9becd7c5, type: 3}
-  m_Name: I
+  m_Name: Empty
   m_EditorClassIdentifier: 
-  element_Name: I
-  element_FName: Iodine
-  CanCombine: 1
-  CanAttack: 1
+  element_Name: 
+  element_FName: 
+  CanCombine: 0
+  CanAttack: 0
   ArtWork: {fileID: 0}
   description: 
   Amount: 10

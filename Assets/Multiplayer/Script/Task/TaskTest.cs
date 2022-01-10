@@ -26,6 +26,7 @@ public class TaskTest : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CP.SpawnCard(1);
+            Debug.Log("TaskComp");
         }
     }
 }

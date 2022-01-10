@@ -12,7 +12,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     public TextMeshProUGUI CardText;
     public TextMeshProUGUI F_CardText;
     public Image Artwork = null;
-
+    public float AmmoAmount;
     public bool IsCombine;
     [SerializeField]
     private bool IsPressed;
@@ -40,6 +40,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
         StartPos = this.transform.position;
         CardText.text = E_Card.element_Name;
         F_CardText.text = E_Card.element_FName;
+        AmmoAmount = E_Card.Amount;
         if(E_Card.ArtWork != null)
         {
             Artwork.sprite = E_Card.ArtWork;
@@ -51,54 +52,54 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
         {
             this.transform.position = Input.mousePosition;
         }
-        if(GameSystem.localTurnbased != null)
-        {
-            if (Input.GetKeyUp(KeyCode.Mouse0) && IsAttack )
-            {
-                IsAttack = false;
-                GameObject arrow = GameObject.Find("Arrow");
-                arrow.GetComponent<Arrow>().Hide();
-                GameSystem.localTurnbased.ATKcardFunc(this);
-            }
-            if (IsAttack)
-            {
-                if (_selection != null)
-                {
-                    _selectionResponse.OnDeselect(_selection);
+        //if(GameSystem.localTurnbased != null)
+        //{
+        //    if (Input.GetKeyUp(KeyCode.Mouse0) && IsAttack )
+        //    {
+        //        IsAttack = false;
+        //        GameObject arrow = GameObject.Find("Arrow");
+        //        arrow.GetComponent<Arrow>().Hide();
+        //        GameSystem.localTurnbased.ATKcardFunc(this);
+        //    }
+        //    if (IsAttack)
+        //    {
+        //        if (_selection != null)
+        //        {
+        //            _selectionResponse.OnDeselect(_selection);
                     
-                }
+        //        }
 
-                #region MyRegion
-                GameObject FB = GameSystem.localTurnbased.FlaskBarrel;
-                Ray ray = CreateRay();
-                //Physics.Raycast(FB.transform.position, FB.transform.forward
+        //        #region MyRegion
+        //        GameObject FB = GameSystem.localTurnbased.FlaskBarrel;
+        //        Ray ray = CreateRay();
+        //        //Physics.Raycast(FB.transform.position, FB.transform.forward
 
-                _selection = null;
+        //        _selection = null;
 
-                if (Physics.Raycast(ray, out RaycastHit hit, 10000))
-                {
-                    var selection = hit.transform;
+        //        if (Physics.Raycast(ray, out RaycastHit hit, 10000))
+        //        {
+        //            var selection = hit.transform;
 
-                    Debug.DrawRay(FB.transform.position, FB.transform.forward * 1000, Color.red);
-                    GameObject enemy = hit.transform.gameObject;
+        //            Debug.DrawRay(FB.transform.position, FB.transform.forward * 1000, Color.red);
+        //            GameObject enemy = hit.transform.gameObject;
 
-                    if (selection.CompareTag("Player") || selection.CompareTag("canAttack"))
-                    {
-                        Debug.Log(selection.transform.gameObject.name);
-                        _selection = selection;
-                        GameSystem.localTurnbased.FlaskBarrel.transform.position = hit.transform.position;
-                    }
+        //            if (selection.CompareTag("Player") || selection.CompareTag("canAttack"))
+        //            {
+        //                Debug.Log(selection.transform.gameObject.name);
+        //                _selection = selection;
+        //                GameSystem.localTurnbased.FlaskBarrel.transform.position = hit.transform.position;
+        //            }
 
-                }
-                #endregion
+        //        }
+        //        #endregion
 
-                if (_selection != null)
-                {
-                    Debug.Log("in_selection");
-                    _selectionResponse.OnSelect(_selection);
-                }
-            }
-        }     
+        //        if (_selection != null)
+        //        {
+        //            Debug.Log("in_selection");
+        //            _selectionResponse.OnSelect(_selection);
+        //        }
+        //    }
+        //}     
     }
     private static Ray CreateRay()
     {
@@ -140,14 +141,14 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     cardPanel.GetComponent<CardPanel>().AddCard(this);
                 }
             }
-            else if (GameSystem.gamePhase == GameSystem.GamePhase.AttackState && E_Card.CanAttack )
-            {
-                Debug.Log("Arrow");
-                GameObject arrow = GameObject.Find("Arrow");
-                arrow.GetComponent<Arrow>().Show();
-                IsAttack = true;
-                Arrow.startPoint = this.gameObject.transform.position;
-            }
+            //else if (GameSystem.gamePhase == GameSystem.GamePhase.AttackState && E_Card.CanAttack )
+            //{
+            //    Debug.Log("Arrow");
+            //    GameObject arrow = GameObject.Find("Arrow");
+            //    arrow.GetComponent<Arrow>().Show();
+            //    IsAttack = true;
+            //    Arrow.startPoint = this.gameObject.transform.position;
+            //}
            
         }
     }

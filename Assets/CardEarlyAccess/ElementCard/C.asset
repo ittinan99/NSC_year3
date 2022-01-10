@@ -18,3 +18,4 @@ MonoBehaviour:
   CanAttack: 1
   ArtWork: {fileID: 0}
   description: 
+  Amount: 10
