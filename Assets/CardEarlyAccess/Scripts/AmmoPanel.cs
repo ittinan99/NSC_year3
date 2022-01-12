@@ -11,6 +11,8 @@ public class AmmoPanel : MonoBehaviour
     [SerializeField]
     private int CurrentAmmoIndex;
     public AmmoCardDisplay DisplayAmmo;
+    public AmmoCardDisplay NextDisplayAmmo;
+    public AmmoCardDisplay PreDisplayAmmo;
     public ElementCard Empty;
     [SerializeField]
     private void Awake()
@@ -27,6 +29,8 @@ public class AmmoPanel : MonoBehaviour
     {
         if(GameSystem.gamePhase == GameSystem.GamePhase.AttackState)
         {
+            int NextAmmoIndex = 0;
+            int PreAmmoIndex = 0;
             if (Input.GetAxis("Mouse ScrollWheel") > 0f && AmmoCard.Count > 0) // forward
             {
                 CurrentAmmoIndex++;
@@ -34,8 +38,22 @@ public class AmmoPanel : MonoBehaviour
                 {
                     CurrentAmmoIndex = 0;
                 }
+                NextAmmoIndex = CurrentAmmoIndex + 1;
+                PreAmmoIndex = CurrentAmmoIndex - 1;
+                if(NextAmmoIndex > AmmoCard.Count - 1)
+                {
+                    NextAmmoIndex = 0;
+                }
+                if(PreAmmoIndex < 0)
+                {
+                    PreAmmoIndex = AmmoCard.Count - 1;
+                }
                 CurrentAmmo = AmmoCard[CurrentAmmoIndex];
+                NextDisplayAmmo.ECD_Card = AmmoCard[NextAmmoIndex];
+                PreDisplayAmmo.ECD_Card = AmmoCard[PreAmmoIndex];
                 DisplayAmmo.ECD_Card = AmmoCard[CurrentAmmoIndex];
+                NextDisplayAmmo.SetVar();
+                PreDisplayAmmo.SetVar();
                 DisplayAmmo.SetVar();
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f && AmmoCard.Count > 0) // backwards
@@ -45,8 +63,22 @@ public class AmmoPanel : MonoBehaviour
                 {
                     CurrentAmmoIndex = AmmoCard.Count - 1;
                 }
+                NextAmmoIndex = CurrentAmmoIndex + 1;
+                PreAmmoIndex = CurrentAmmoIndex - 1;
+                if (NextAmmoIndex > AmmoCard.Count - 1)
+                {
+                    NextAmmoIndex = 0;
+                }
+                if (PreAmmoIndex < 0)
+                {
+                    PreAmmoIndex = AmmoCard.Count - 1;
+                }
                 CurrentAmmo = AmmoCard[CurrentAmmoIndex];
                 DisplayAmmo.ECD_Card = AmmoCard[CurrentAmmoIndex];
+                NextDisplayAmmo.ECD_Card = AmmoCard[NextAmmoIndex];
+                PreDisplayAmmo.ECD_Card = AmmoCard[PreAmmoIndex];
+                NextDisplayAmmo.SetVar();
+                PreDisplayAmmo.SetVar();
                 DisplayAmmo.SetVar();
             }
         }
@@ -65,7 +97,6 @@ public class AmmoPanel : MonoBehaviour
         CurrentAmmo = AmmoCard[CurrentAmmoIndex];
         DisplayAmmo.ECD_Card = CurrentAmmo;
         DisplayAmmo.SetVar();
-       
     }
     public void SetAmmoCardValue()
     {
