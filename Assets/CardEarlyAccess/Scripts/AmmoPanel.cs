@@ -87,16 +87,20 @@ public class AmmoPanel : MonoBehaviour
     {
         CurrentAmmoIndex = 0;
         AmmoCard = new List<ElementCardDisplay>();
-        foreach(ElementCardDisplay hcard in CP.hCard)
+        if(CP.hCard.Count > 0)
         {
-            if (hcard.E_Card.CanAttack)
+            foreach (ElementCardDisplay hcard in CP.hCard)
             {
-                AmmoCard.Add(hcard);
+                if (hcard.E_Card.CanAttack)
+                {
+                    AmmoCard.Add(hcard);
+                }
             }
+            CurrentAmmo = AmmoCard[CurrentAmmoIndex];
+            DisplayAmmo.ECD_Card = CurrentAmmo;
+            DisplayAmmo.SetVar();
         }
-        CurrentAmmo = AmmoCard[CurrentAmmoIndex];
-        DisplayAmmo.ECD_Card = CurrentAmmo;
-        DisplayAmmo.SetVar();
+     
     }
     public void SetAmmoCardValue()
     {
