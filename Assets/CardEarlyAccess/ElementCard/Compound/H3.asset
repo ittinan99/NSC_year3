@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e645592984406d14abc6425d9becd7c5, type: 3}
-  m_Name: H2S
+  m_Name: H3
   m_EditorClassIdentifier: 
-  element_Name: H2S
-  element_FName: Hydrogen Sulfide
+  element_Name: H3
+  element_FName: Triatomic hydrogen
   CanCombine: 1
   CanAttack: 0
   ArtWork: {fileID: 0}
