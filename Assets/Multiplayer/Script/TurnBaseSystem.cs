@@ -28,7 +28,6 @@ public class TurnBaseSystem : NetworkBehaviour
     public float CurrentHealth;
     public float maxHealth;
 
-    public GameObject FlaskBarrel;
     public Outline playerOutline;
     public bool die = false;
     public MeshRenderer Model;
@@ -89,37 +88,37 @@ public class TurnBaseSystem : NetworkBehaviour
         }
     }
     
-    public void ATKcardFunc(ElementCardDisplay atkCard)
-    {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        ATKcard = atkCard;
+    //public void ATKcardFunc(ElementCardDisplay atkCard)
+    //{
+    //    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    ATKcard = atkCard;
 
-        AttackCurrentTargetServerRpc();
-    }
-    [ServerRpc]
-    public void AttackCurrentTargetServerRpc()
-    {
-        Debug.Log("AttackServer");
-        AttackCurrentTargetClientRpc();
-    }
-    [ClientRpc]
-    public void AttackCurrentTargetClientRpc()
-    {
-        if (FlaskBarrel.GetComponent<FlaskEnemy>().Enemy != null)
-        {
-            GameObject enemy = FlaskBarrel.GetComponent<FlaskEnemy>().Enemy;
-            enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
-            Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
-            if (IsLocalPlayer)
-            {
-                cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
-                cardPanel.GetComponent<CardPanel>().SetCardPos();
-                Destroy(ATKcard.gameObject);
-            }
-            Debug.Log("Attack");
-        }
-        Debug.Log(currentHealth.Value);
-    }
+    //    AttackCurrentTargetServerRpc();
+    //}
+    //[ServerRpc]
+    //public void AttackCurrentTargetServerRpc()
+    //{
+    //    Debug.Log("AttackServer");
+    //    AttackCurrentTargetClientRpc();
+    //}
+    //[ClientRpc]
+    //public void AttackCurrentTargetClientRpc()
+    //{
+    //    if (FlaskBarrel.GetComponent<FlaskEnemy>().Enemy != null)
+    //    {
+    //        GameObject enemy = FlaskBarrel.GetComponent<FlaskEnemy>().Enemy;
+    //        enemy.GetComponent<TurnBaseSystem>().TakeDamage(10);
+    //        Debug.Log(enemy.GetComponent<TurnBaseSystem>().currentHealth.Value);
+    //        if (IsLocalPlayer)
+    //        {
+    //            cardPanel.GetComponent<CardPanel>().hCard.Remove(ATKcard);
+    //            cardPanel.GetComponent<CardPanel>().SetCardPos();
+    //            Destroy(ATKcard.gameObject);
+    //        }
+    //        Debug.Log("Attack");
+    //    }
+    //    Debug.Log(currentHealth.Value);
+    //}
     [ServerRpc]
     public void GetScanServerRpc()
     {
