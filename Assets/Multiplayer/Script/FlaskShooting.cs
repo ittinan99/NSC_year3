@@ -31,19 +31,26 @@ namespace Unity.Netcode
                 {
                     AP.CurrentAmmo.AmmoAmount--;
                     AP.DisplayAmmo.SetVar();
-                    ThrowServerRpc();
+                    if (AP.CurrentAmmo.E_Card.Scanable)
+                    {
+                        ThrowServerRpc(1);
+                    }
+                    else
+                    {
+                        ThrowServerRpc(0);
+                    }
                 }
             }
         }
         [ServerRpc]
-        void ThrowServerRpc()
+        void ThrowServerRpc(int i)
         {
-            ThrowClientRpc();
+            ThrowClientRpc(i);
         }
         [ClientRpc]
-        void ThrowClientRpc()
+        void ThrowClientRpc(int i)
         {
-            if (AP.CurrentAmmo.E_Card.Scanable)
+            if (i==1)
             {
                 var flask = Instantiate(Scanner, FlaskBarrel.transform.position, Quaternion.identity);
                 flask.GetComponent<Rigidbody>().AddForce(transform.forward * 50, ForceMode.Impulse);
