@@ -121,19 +121,9 @@ public class TurnBaseSystem : NetworkBehaviour
     //}
     public void GetScan()
     {
-        GetScanServerRpc();
-    }
-    [ServerRpc]
-    public void GetScanServerRpc()
-    {
-        GetScanClientRpc();
-    }
-    [ClientRpc]
-    public void GetScanClientRpc()
-    {
-        if(PlayerRole == Role.Carbohydrate)
+        if (PlayerRole == Role.Carbohydrate)
         {
-            if(playerOutline != null)
+            if (playerOutline != null)
             {
                 ShowOutline(3f);
             }
