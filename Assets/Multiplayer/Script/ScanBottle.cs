@@ -15,7 +15,7 @@ public class ScanBottle : MonoBehaviour
         {
             if(other.GetComponent<TurnBaseSystem>() != null)
             {
-                other.GetComponent<TurnBaseSystem>().GetScanServerRpc();
+                other.GetComponent<TurnBaseSystem>().GetScan();
                 Destroy(this.gameObject);
             }
         }

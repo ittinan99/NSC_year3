@@ -119,6 +119,10 @@ public class TurnBaseSystem : NetworkBehaviour
     //    }
     //    Debug.Log(currentHealth.Value);
     //}
+    public void GetScan()
+    {
+        GetScanServerRpc();
+    }
     [ServerRpc]
     public void GetScanServerRpc()
     {
