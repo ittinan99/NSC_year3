@@ -47,11 +47,13 @@ namespace Unity.Netcode
             {
                 var flask = Instantiate(Scanner, FlaskBarrel.transform.position, Quaternion.identity);
                 flask.GetComponent<Rigidbody>().AddForce(transform.forward * 50, ForceMode.Impulse);
+                flask.GetComponent<ScanBottle>().Spawner = this.gameObject;
             }
             else
             {
                 var flask = Instantiate(T_Renderer, FlaskBarrel.transform.position, Quaternion.identity);
                 flask.GetComponent<Rigidbody>().AddForce(transform.forward * 50, ForceMode.Impulse);
+                flask.GetComponent<DamageBottle>().Spawner = this.gameObject;
             }
         }
     }
