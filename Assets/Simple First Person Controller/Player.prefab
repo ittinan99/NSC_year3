@@ -166,7 +166,7 @@ BoxCollider:
   m_GameObject: {fileID: 1600550754217249858}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -226,7 +226,6 @@ GameObject:
   - component: {fileID: 2699541614218734238}
   - component: {fileID: 2699541614218734235}
   - component: {fileID: 2699541614218734236}
-  - component: {fileID: 6199611380834239660}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -297,24 +296,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6199611380834239660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2699541614218734239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 0
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &2699541614725998678
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   T_Renderer: {fileID: 4203865523768801543, guid: 2e12362b3149f2a42b807813fd9e4304,
     type: 3}
+  Scanner: {fileID: 4203865523768801543, guid: 5b427a2f8b3677a4ebf34285885f1469, type: 3}
   FlaskBarrel: {fileID: 1600550754217249858}
   AP: {fileID: 0}
 --- !u!114 &2699541615817244670
@@ -581,6 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a400007f194764745bedac1d83025831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerRole: 1
   PlayerState: 0
   GS: {fileID: 0}
   PlayerCanvas: {fileID: 0}
@@ -590,6 +573,9 @@ MonoBehaviour:
   CurrentHealth: 0
   maxHealth: 100
   FlaskBarrel: {fileID: 1600550754217249858}
+  playerOutline: {fileID: 7854567168577234838}
+  die: 0
+  Model: {fileID: 2699541614218734236}
   ATKcard: {fileID: 0}
 --- !u!54 &980456072299073567
 Rigidbody:
@@ -658,7 +644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 1, g: 0, b: 0.99869967, a: 1}
   outlineWidth: 0
   precomputeOutline: 0
   bakeKeys: []
@@ -674,7 +660,6 @@ GameObject:
   - component: {fileID: 6080732055766769769}
   - component: {fileID: 8763778867933935618}
   - component: {fileID: 7324518848491606944}
-  - component: {fileID: 3657122766382558699}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -745,21 +730,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3657122766382558699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136625245200168079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 0
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []

@@ -62,6 +62,51 @@ public class PhaseTimer : MonoBehaviour
             currentTime -= Time.deltaTime;
             await Task.Yield();
         }
-        GS.AttackPhaseServerRpc();
+        int ProteinAlive = 0;
+        int CarboAlive = 0;
+        foreach(GameObject Player in GS.ProteinList)
+        {
+            if(Player.GetComponent<TurnBaseSystem>().die == false)
+            {
+                ProteinAlive++;
+            }
+        }
+        foreach (GameObject Player in GS.CarboList)
+        {
+            if (Player.GetComponent<TurnBaseSystem>().die == false)
+            {
+                CarboAlive++;
+            }
+        }
+        if(CarboAlive == 0)
+        {
+            foreach (GameObject Player in GS.CarboList)
+            {
+                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
+                Debug.Log("Carbo Lose");
+            }
+            foreach (GameObject Player in GS.ProteinList)
+            {
+                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
+                Debug.Log("Protein Win");
+            }
+        }
+        else if(ProteinAlive == 0)
+        {
+            foreach (GameObject Player in GS.ProteinList)
+            {
+                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
+                Debug.Log("Protein Lose");
+            }
+            foreach (GameObject Player in GS.CarboList)
+            {
+                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
+                Debug.Log("Carbo Win");
+            }
+        }
+        else
+        {
+            GS.TaskPhaseServerRpc();
+        }
     }
 }

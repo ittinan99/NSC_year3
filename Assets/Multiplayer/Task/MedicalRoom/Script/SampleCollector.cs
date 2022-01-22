@@ -7,10 +7,12 @@ public class SampleCollector : MonoBehaviour
 {
     public List<GameObject> Beakers;
     public List<GameObject> Samples;
+    public MedicalTask MT;
     public int j;
     void Start()
     {
         j = 0;
+
     }
 
     // Update is called once per frame
@@ -27,6 +29,33 @@ public class SampleCollector : MonoBehaviour
         samples[indexA] = samples[indexB];
         samples[indexB] = tmp;
         CheckCorrectOrder();
+    }
+    public void RandomSwap()
+    {
+        for(int i = 0; i <= 7; i++)
+        {
+            int rand = Random.Range(1, 5);
+            if(rand == 1)
+            {
+                SwapOneTwo();
+            }
+            else if (rand == 2)
+            {
+                SwapOneThree();
+            }
+            else if (rand == 3)
+            {
+                SwapTwoFour();
+            }
+            else if (rand == 4)
+            {
+                SwapThreeFive();
+            }
+            else if (rand == 5)
+            {
+                SwapFourFive();
+            }
+        }
     }
     public void SwapOneTwo()
     {
@@ -63,6 +92,7 @@ public class SampleCollector : MonoBehaviour
         if(j == 5)
         {
             Debug.Log("AllCorrect");
+            MT.CompleteTask();
         }
     }
 }

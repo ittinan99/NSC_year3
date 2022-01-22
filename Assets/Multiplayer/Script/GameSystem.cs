@@ -12,7 +12,9 @@ public class GameSystem : NetworkBehaviour
     private int CurrentPlayerIndex;
     //public static GameObject CurrenTarget;
     public GameObject[] PlayerList;
-    
+    public List<GameObject> ProteinList;
+    public List<GameObject> CarboList;
+
     public enum GamePhase {Start,TaskState,CombineState,AttackState,End}
     [SerializeField]
     public static GamePhase gamePhase;
@@ -56,7 +58,9 @@ public class GameSystem : NetworkBehaviour
     [ServerRpc]
     public void StartGameServerRpc()
     {
+        PlayerList = GameObject.FindGameObjectsWithTag("Player");
         StartGameClientRpc();
+        RandomRole();
     }
     
     [ClientRpc]
@@ -68,7 +72,45 @@ public class GameSystem : NetworkBehaviour
         PT.TaskCountDownMethod();
         PlayerList = GameObject.FindGameObjectsWithTag("Player");
         Gather_startPlayerClient();
-
+    }
+    public void RandomRole()
+    {
+        List<int> index = new List<int>();
+        int count = 0;
+        int half = PlayerList.Length / 2;
+        if (half == 0) { half = 1; }
+        while (count != half)
+        {
+            int Rand = Random.Range(0, 1);
+            if (!index.Contains(Rand))
+            {
+                index.Add(Rand);
+                count++;
+            }
+        }
+        for (int i = 0; i < index.Count; i++)
+        {
+            RandomRoleClientRpc(index[i]);
+        }
+    }
+    [ClientRpc]
+    public void RandomRoleClientRpc(int i)
+    {
+        ProteinList = new List<GameObject>();
+        CarboList = new List<GameObject>();
+        Debug.Log($"{PlayerList[i].gameObject.name} is Protein");
+        PlayerList[i].GetComponent<TurnBaseSystem>().PlayerRole = TurnBaseSystem.Role.Protein;
+        foreach (GameObject player in PlayerList)
+        {
+            if (player.GetComponent<TurnBaseSystem>().PlayerRole == TurnBaseSystem.Role.Protein)
+            {
+                ProteinList.Add(player);
+            }
+            else
+            {
+                CarboList.Add(player);
+            }
+        }
     }
     [ServerRpc]
     public void CombinePhaseServerRpc()

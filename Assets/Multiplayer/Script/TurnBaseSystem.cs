@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
+using System.Threading.Tasks;
+using System;
 using TMPro;
 using Netcode.Transports.PhotonRealtime;
 public class TurnBaseSystem : NetworkBehaviour
 {
     public enum GameState { Start,Win,Lose}
+    public enum Role { Protein,Carbohydrate }
+    public Role PlayerRole;
     public GameState PlayerState;
     [SerializeField]
     private GameSystem GS;
@@ -19,18 +23,21 @@ public class TurnBaseSystem : NetworkBehaviour
     public CardPanel cardPanel;
     [SerializeField]
     private Button StartBut;
+
     NetworkVariable<float> currentHealth = new NetworkVariable<float>();
     public float CurrentHealth;
     public float maxHealth;
-    public GameObject FlaskBarrel;
 
+    public GameObject FlaskBarrel;
+    public Outline playerOutline;
+    public bool die = false;
+    public MeshRenderer Model;
     [SerializeField]
     private ElementCardDisplay ATKcard;
 
     private Ray ray;
     void Start()
     {
-        Debug.Log("K");
         //if(IsLocalPlayer)
         //{
         //    getcomServerRpc();
@@ -81,19 +88,7 @@ public class TurnBaseSystem : NetworkBehaviour
             StartBut.interactable = true;
         }
     }
-    //[ServerRpc]
-    //public void getcomServerRpc()
-    //{
-    //    getcomClientRpc();
-    //}
-    //[ClientRpc]
-    //public void getcomClientRpc()
-    //{
-    //    GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
-    //    PlayerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas");
-    //    EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
-    //    StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
-    //}
+    
     public void ATKcardFunc(ElementCardDisplay atkCard)
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -104,9 +99,7 @@ public class TurnBaseSystem : NetworkBehaviour
     [ServerRpc]
     public void AttackCurrentTargetServerRpc()
     {
-        
         Debug.Log("AttackServer");
-        
         AttackCurrentTargetClientRpc();
     }
     [ClientRpc]
@@ -127,10 +120,56 @@ public class TurnBaseSystem : NetworkBehaviour
         }
         Debug.Log(currentHealth.Value);
     }
+    [ServerRpc]
+    public void GetScanServerRpc()
+    {
+        GetScanClientRpc();
+    }
+    [ClientRpc]
+    public void GetScanClientRpc()
+    {
+        if(PlayerRole == Role.Carbohydrate)
+        {
+            if(playerOutline != null)
+            {
+                ShowOutline(3f);
+            }
+        }
+    }
+    public async void ShowOutline(float duration)
+    {
+        var end = Time.time + duration;
+        while(Time.time < end)
+        {
+            playerOutline.OutlineWidth = 3;
+            await Task.Yield();
+        }
+        playerOutline.OutlineWidth = 0;
+    }
     public void TakeDamage(float DamageAmount)
     {
-        Debug.Log("TakeDamage");
-        currentHealth.Value -= DamageAmount;
+        if(currentHealth.Value > 0)
+        {
+            currentHealth.Value -= DamageAmount;
+            Debug.Log("TakeDamage");
+        }
+        if(currentHealth.Value <= 0)
+        {
+            currentHealth.Value = 0;
+            DeadServerRpc();
+        }
+        
+    }
+    [ServerRpc]
+    public void DeadServerRpc()
+    {
+        DeadClientRpc();
+    }
+    [ClientRpc]
+    public void DeadClientRpc()
+    {
+        die = true;
+        Model.enabled = false;
     }
     public void HideShowPanel()
     {
@@ -140,6 +179,17 @@ public class TurnBaseSystem : NetworkBehaviour
     public void HideCardPanel()
     {
         cardPanel.gameObject.SetActive(false);
+    }
+    
+    public void StartState()
+    {
+        currentHealth = new NetworkVariable<float>(maxHealth);
+        StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+        PlayerCanvas = GameObject.Find("PlayerCanvas");
+        CombinePanel = GameObject.Find("CombineSystem");
+        CombinePanel.SetActive(false);
+        cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
+        PlayerState = GameState.Start;
     }
     //[ServerRpc]
     //public void StartStateServerRpc()
@@ -165,16 +215,6 @@ public class TurnBaseSystem : NetworkBehaviour
     //    GS.NextPlayerTurnServerRpc();
     //}
     //[ClientRpc]
-    public void StartState()
-    {
-        currentHealth = new NetworkVariable<float>(maxHealth);
-        StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
-        PlayerCanvas = GameObject.Find("PlayerCanvas");
-        CombinePanel = GameObject.Find("CombineSystem");
-        CombinePanel.SetActive(false);
-        cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
-        PlayerState = GameState.Start;
-    }
     //[ClientRpc]
     //public void Y_CombineStateClientRpc()
     //{
@@ -186,5 +226,17 @@ public class TurnBaseSystem : NetworkBehaviour
     //    PlayerState = GameState.otherTurn;
     //    isYourTurn = false;
     //}
-
+    //[ServerRpc]
+    //public void getcomServerRpc()
+        //{
+        //    getcomClientRpc();
+        //}
+        //[ClientRpc]
+        //public void getcomClientRpc()
+        //{
+        //    GS = GameObject.Find("GameSystem").GetComponent<GameSystem>();
+        //    PlayerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas");
+        //    EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        //    StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+        //}    
 }
