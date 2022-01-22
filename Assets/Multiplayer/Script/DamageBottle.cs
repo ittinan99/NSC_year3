@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-public class ScanBottle : MonoBehaviour
+public class DamageBottle : MonoBehaviour
 {
     private void Start()
     {
@@ -12,9 +12,9 @@ public class ScanBottle : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if(other.GetComponent<TurnBaseSystem>() != null)
+            if (other.GetComponent<TurnBaseSystem>() != null)
             {
-                other.GetComponent<TurnBaseSystem>().GetScanServerRpc();
+                other.GetComponent<TurnBaseSystem>().TakeDamage(10);
                 Destroy(this.gameObject);
             }
         }
