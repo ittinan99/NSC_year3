@@ -15,6 +15,7 @@ public class DamageBottle : MonoBehaviour
             if (other.GetComponent<TurnBaseSystem>() != null)
             {
                 other.GetComponent<TurnBaseSystem>().TakeDamage(10);
+                Debug.Log("Hit");
                 Destroy(this.gameObject);
             }
         }
