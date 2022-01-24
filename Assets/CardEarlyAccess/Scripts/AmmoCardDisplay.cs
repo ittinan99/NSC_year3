@@ -19,10 +19,19 @@ public class AmmoCardDisplay : NetworkBehaviour
     }
     public void SetVar()
     {
-        AmmoText.text = ECD_Card.E_Card.element_Name;
-        AmmoAmount = ECD_Card.AmmoAmount;
-        AmmoSlider.maxValue = ECD_Card.E_Card.Amount;
-        AmmoSlider.value = AmmoAmount;
+        if(ECD_Card != null)
+        {
+            AmmoText.text = ECD_Card.E_Card.element_Name;
+            AmmoAmount = ECD_Card.AmmoAmount;
+            AmmoSlider.maxValue = ECD_Card.E_Card.Amount;
+            AmmoSlider.value = AmmoAmount;
+        }
+        else
+        {
+            AmmoText.text = "";
+            AmmoSlider.value = 0;
+        }
+        
     }
     public void SetAmmo()
     {

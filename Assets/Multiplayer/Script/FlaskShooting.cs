@@ -7,7 +7,9 @@ namespace Unity.Netcode
     public class FlaskShooting : NetworkBehaviour
     {
         public TrailRenderer T_Renderer;
+        public TrailRenderer Scanner;
         public GameObject FlaskBarrel;
+
         [SerializeReference]
         private AmmoPanel AP = null;
         // Start is called before the first frame update
@@ -29,20 +31,37 @@ namespace Unity.Netcode
                 {
                     AP.CurrentAmmo.AmmoAmount--;
                     AP.DisplayAmmo.SetVar();
-                    ThrowServerRpc();
+                    if (AP.CurrentAmmo.E_Card.Scanable)
+                    {
+                        ThrowServerRpc(1);
+                    }
+                    else
+                    {
+                        ThrowServerRpc(0);
+                    }
                 }
             }
         }
         [ServerRpc]
-        void ThrowServerRpc()
+        void ThrowServerRpc(int i)
         {
-            ThrowClientRpc();
+            ThrowClientRpc(i);
         }
         [ClientRpc]
-        void ThrowClientRpc()
+        void ThrowClientRpc(int i)
         {
-            var flask = Instantiate(T_Renderer, FlaskBarrel.transform.position, Quaternion.identity);
-            flask.GetComponent<Rigidbody>().AddForce(transform.forward * 50, ForceMode.Impulse);
+            if (i==1)
+            {
+                var flask = Instantiate(Scanner, FlaskBarrel.transform.position, Quaternion.identity);
+                flask.GetComponent<Rigidbody>().AddForce(transform.forward * 50, ForceMode.Impulse);
+                flask.GetComponent<ScanBottle>().Spawner = this.gameObject;
+            }
+            else
+            {
+                var flask = Instantiate(T_Renderer, FlaskBarrel.transform.position, Quaternion.identity);
+                flask.GetComponent<Rigidbody>().AddForce(transform.forward * 50, ForceMode.Impulse);
+                flask.GetComponent<DamageBottle>().Spawner = this.gameObject;
+            }
         }
     }
 }

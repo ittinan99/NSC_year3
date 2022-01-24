@@ -11,6 +11,7 @@ public class ElementCard : ScriptableObject,ICombinable,IAttackable
 
     public bool CanCombine;
     public bool CanAttack;
+    public bool Scanable;
 
     public Sprite ArtWork;
 

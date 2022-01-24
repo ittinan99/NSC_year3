@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class TaskTest : MonoBehaviour
+public class TaskTest : NetworkBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
@@ -23,7 +24,7 @@ public class TaskTest : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")&&other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             CP.SpawnCard(1);
             Debug.Log("TaskComp");

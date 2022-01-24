@@ -16,6 +16,7 @@ MonoBehaviour:
   element_FName: Iodine
   CanCombine: 1
   CanAttack: 1
+  Scanable: 1
   ArtWork: {fileID: 0}
   description: 
   Amount: 10
