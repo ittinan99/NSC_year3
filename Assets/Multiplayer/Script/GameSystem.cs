@@ -20,6 +20,7 @@ public class GameSystem : NetworkBehaviour
     public static GamePhase gamePhase;
     public PhaseTimer PT;
     public AmmoPanel AP;
+    public CardPanel CP;
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -137,6 +138,8 @@ public class GameSystem : NetworkBehaviour
         Debug.Log("TaskPhase");
         gamePhase = GamePhase.TaskState;
         PT.TaskCountDownMethod();
+        CP.CheckEmptyAmmoCard();
+        AP.AddAmmoCard();
     }
 
     [ServerRpc]

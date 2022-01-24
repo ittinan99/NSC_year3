@@ -12,6 +12,7 @@ public class PhaseTimer : MonoBehaviour
     public float AttackStartingTime;
     public TextMeshProUGUI TimerText;
     private GameSystem GS;
+    public CardPanel CP;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -62,11 +63,16 @@ public class PhaseTimer : MonoBehaviour
             currentTime -= Time.deltaTime;
             await Task.Yield();
         }
+        CheckBattleResult();
+
+    }
+    public void CheckBattleResult()
+    {
         int ProteinAlive = 0;
         int CarboAlive = 0;
-        foreach(GameObject Player in GS.ProteinList)
+        foreach (GameObject Player in GS.ProteinList)
         {
-            if(Player.GetComponent<TurnBaseSystem>().die == false)
+            if (Player.GetComponent<TurnBaseSystem>().die == false)
             {
                 ProteinAlive++;
             }
@@ -78,7 +84,7 @@ public class PhaseTimer : MonoBehaviour
                 CarboAlive++;
             }
         }
-        if(CarboAlive == 0)
+        if (CarboAlive == 0)
         {
             foreach (GameObject Player in GS.CarboList)
             {
@@ -91,7 +97,7 @@ public class PhaseTimer : MonoBehaviour
                 Debug.Log("Protein Win");
             }
         }
-        else if(ProteinAlive == 0)
+        else if (ProteinAlive == 0)
         {
             foreach (GameObject Player in GS.ProteinList)
             {
@@ -108,5 +114,6 @@ public class PhaseTimer : MonoBehaviour
         {
             GS.TaskPhaseServerRpc();
         }
+        GS.TaskPhaseServerRpc();
     }
 }

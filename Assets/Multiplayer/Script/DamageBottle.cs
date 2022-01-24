@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 public class DamageBottle : MonoBehaviour
 {
     public GameObject Spawner;
+    private bool dSpawn = true;
     private void Start()
     {
-        DeSpawn(4f);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +19,11 @@ public class DamageBottle : MonoBehaviour
                 Debug.Log("Hit");
                 Destroy(this.gameObject);
             }
+        }
+        else if(dSpawn)
+        {
+            dSpawn = false;
+            DeSpawn(2f);
         }
     }
     public async void DeSpawn(float Duration)

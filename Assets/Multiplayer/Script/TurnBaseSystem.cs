@@ -62,6 +62,7 @@ public class TurnBaseSystem : NetworkBehaviour
         if (CombinePanel == null)
         {
             CombinePanel = GameObject.Find("CombineSystem");
+            CombinePanel.SetActive(false);
             currentHealth = new NetworkVariable<float>(maxHealth);
         }
         if (StartBut == null)

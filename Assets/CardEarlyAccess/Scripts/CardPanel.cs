@@ -11,6 +11,8 @@ public class CardPanel : MonoBehaviour
     public Vector2 PlacePosMax;
     [SerializeField]
     private GameObject E_cardPrefab;
+    [SerializeField]
+    private AmmoPanel AP;
     private void Awake()
     {
         hCard = new List<ElementCardDisplay>(GameObject.FindObjectsOfType<ElementCardDisplay>());
@@ -29,6 +31,25 @@ public class CardPanel : MonoBehaviour
     {
         SetCardPos();
         SpawnCard(5);
+    }
+    public void CheckEmptyAmmoCard()
+    {
+        List<GameObject> DeleteCard = new List<GameObject>();
+        for (var i = hCard.Count - 1; i > -1; i--)
+        {
+            if (hCard[i].AmmoAmount == 0)
+            {
+                DeleteCard.Add(hCard[i].gameObject);
+                hCard.Remove(hCard[i]);
+                Debug.Log(i);
+            }
+        }
+        for (var i = DeleteCard.Count - 1; i > -1; i--)
+        {
+            Destroy(DeleteCard[i]);
+            Debug.Log(i);
+        }
+        SetCardPos();
     }
     public void SetCardPos()
     {

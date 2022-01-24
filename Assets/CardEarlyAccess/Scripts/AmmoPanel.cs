@@ -87,7 +87,7 @@ public class AmmoPanel : MonoBehaviour
     {
         CurrentAmmoIndex = 0;
         AmmoCard = new List<ElementCardDisplay>();
-        if(CP.hCard.Count > 0)
+        if (CP.hCard.Count > 0)
         {
             foreach (ElementCardDisplay hcard in CP.hCard)
             {
@@ -98,6 +98,15 @@ public class AmmoPanel : MonoBehaviour
             }
             CurrentAmmo = AmmoCard[CurrentAmmoIndex];
             DisplayAmmo.ECD_Card = CurrentAmmo;
+            DisplayAmmo.SetVar();
+        }
+        else
+        {
+            DisplayAmmo.ECD_Card=null;
+            NextDisplayAmmo.ECD_Card = null;
+            PreDisplayAmmo.ECD_Card = null;
+            NextDisplayAmmo.SetVar();
+            PreDisplayAmmo.SetVar();
             DisplayAmmo.SetVar();
         }
      
