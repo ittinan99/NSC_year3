@@ -11,4 +11,8 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Mainmenu2", LoadSceneMode.Single);
     }
+    public void OnClickEncyclopedia()
+    {
+        SceneManager.LoadScene("Encyclopedia", LoadSceneMode.Single);
+    }
 }
