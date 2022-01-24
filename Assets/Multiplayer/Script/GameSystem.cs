@@ -82,7 +82,7 @@ public class GameSystem : NetworkBehaviour
         if (half == 0) { half = 1; }
         while (count != half)
         {
-            int Rand = Random.Range(0, 1);
+            int Rand = Random.Range(0,PlayerList.Length-1);
             if (!index.Contains(Rand))
             {
                 index.Add(Rand);
