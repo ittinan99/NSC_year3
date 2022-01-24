@@ -114,6 +114,5 @@ public class PhaseTimer : MonoBehaviour
         {
             GS.TaskPhaseServerRpc();
         }
-        GS.TaskPhaseServerRpc();
     }
 }
