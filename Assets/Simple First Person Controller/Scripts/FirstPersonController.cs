@@ -35,9 +35,23 @@ namespace Unity.Netcode
 
         Rigidbody rigidbody;
 
+        Animator animator;
+        public int aimLayer;
+        public int hurtLayer;
+        bool playerAim = true;
+        private float layerWeightVelocity;
+
+        float NegaPowerVelo = Mathf.Pow(10, -6)*8;
+
         private void Start()
         {
-            cameraTransform = GetComponentInChildren<Camera>().transform;
+
+            animator = GetComponentInChildren<Animator>();
+            aimLayer = animator.GetLayerIndex("Aiming");
+            hurtLayer = animator.GetLayerIndex("hurt");
+    
+
+                cameraTransform = GetComponentInChildren<Camera>().transform;
             if (IsLocalPlayer)
             {
                 rigidbody = GetComponent<Rigidbody>();
@@ -79,13 +93,58 @@ namespace Unity.Netcode
         {
             //update speed based onn the input
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             //Physics.Raycast(FB.transform.position, FB.transform.forward
+
             input = Vector3.ClampMagnitude(input, 1f);
+
             //transofrm it based off the player transform and scale it by movement speed
+
             Vector3 move = input * movementSpeed;
 
             rigidbody.transform.Translate(move * Time.deltaTime);
+
+            //ของอิทเอง5555
+
+            if(input.x != 0 || input.z != 0)
+            //if(input.x < -NegaPowerVelo || input.x > NegaPowerVelo || input.z < -NegaPowerVelo || input.z > NegaPowerVelo)
+            {
+                animator.SetBool("walk", true);
+            }
+            else
+            {
+                animator.SetBool("walk", false);
+            }
+            if (playerAim == true)
+            {
+                float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
+                animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
+                animator.SetBool("Aim", false);
+                movementSpeed = 10.0F;
+            }
+            if (playerAim == false)
+            {
+                float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
+                animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
+                animator.SetBool("Aim", true);
+                movementSpeed = 2.0F;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                playerAim = !playerAim;
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                animator.SetTrigger("Attack");
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                animator.SetTrigger("GetDamage");
+            }
+
+
+
 
 
             //transform.position += move;
