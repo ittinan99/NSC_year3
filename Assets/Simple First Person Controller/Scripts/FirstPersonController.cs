@@ -36,12 +36,13 @@ namespace Unity.Netcode
         Rigidbody rigidbody;
 
         Animator animator;
-        public int aimLayer;
-        public int hurtLayer;
+        int aimLayer;
+        int hurtLayer;
         bool playerAim = true;
         private float layerWeightVelocity;
 
-        float NegaPowerVelo = Mathf.Pow(10, -6)*8;
+        public GameObject camZoomOut;
+        public GameObject camZoomIn;
 
         private void Start()
         {
@@ -49,9 +50,8 @@ namespace Unity.Netcode
             animator = GetComponentInChildren<Animator>();
             aimLayer = animator.GetLayerIndex("Aiming");
             hurtLayer = animator.GetLayerIndex("hurt");
-    
 
-                cameraTransform = GetComponentInChildren<Camera>().transform;
+            cameraTransform = GetComponentInChildren<Camera>().transform;
             if (IsLocalPlayer)
             {
                 rigidbody = GetComponent<Rigidbody>();
@@ -108,7 +108,6 @@ namespace Unity.Netcode
             //ของอิทเอง5555
 
             if(input.x != 0 || input.z != 0)
-            //if(input.x < -NegaPowerVelo || input.x > NegaPowerVelo || input.z < -NegaPowerVelo || input.z > NegaPowerVelo)
             {
                 animator.SetBool("walk", true);
             }
@@ -122,6 +121,9 @@ namespace Unity.Netcode
                 animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
                 animator.SetBool("Aim", false);
                 movementSpeed = 10.0F;
+
+                camZoomOut.SetActive(true);
+                camZoomIn.SetActive(false);
             }
             if (playerAim == false)
             {
@@ -129,6 +131,9 @@ namespace Unity.Netcode
                 animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
                 animator.SetBool("Aim", true);
                 movementSpeed = 2.0F;
+
+                camZoomOut.SetActive(false);
+                camZoomIn.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
