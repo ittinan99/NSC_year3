@@ -16,4 +16,10 @@ public class EncyclopediaDisplayData : MonoBehaviour
     {
         
     }
+    public void Update()
+    {
+        CardF_NameText.text = CardF_Name;
+        CardDescription.text = Description;
+        PopupSprite.sprite = Artwork;
+    }
 }
