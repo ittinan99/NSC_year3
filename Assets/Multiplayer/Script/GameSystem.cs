@@ -22,6 +22,7 @@ public class GameSystem : NetworkBehaviour
     public AmmoPanel AP;
     public CardPanel CP;
     public CardDic CD;
+    public Minimap MP;
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -49,6 +50,7 @@ public class GameSystem : NetworkBehaviour
             if (player.GetComponent<NetworkObject>().IsLocalPlayer)
             {
                 localTurnbased = player.GetComponent<TurnBaseSystem>();
+                MP.LocalPlayer = player;
                 localTurnbased.HideCardPanel();
             }
         }

@@ -27,6 +27,8 @@ public class TurnBaseSystem : NetworkBehaviour
     NetworkVariable<float> currentHealth = new NetworkVariable<float>();
     public float CurrentHealth;
     public float maxHealth;
+    [SerializeField]
+    private Slider Hpbar;
 
     public Outline playerOutline;
     public bool die = false;
@@ -41,8 +43,10 @@ public class TurnBaseSystem : NetworkBehaviour
         //{
         //    getcomServerRpc();
         //}
-        StartState();
         currentHealth = new NetworkVariable<float>(maxHealth);
+        CurrentHealth = currentHealth.Value;
+        Hpbar = GameObject.Find("HpBar").GetComponent<Slider>();
+        StartState();
         if (IsLocalPlayer)
         {
             if (IsOwnedByServer)
@@ -54,15 +58,21 @@ public class TurnBaseSystem : NetworkBehaviour
     }
     private void Update()
     {
-        CurrentHealth = currentHealth.Value;
         if (PlayerCanvas == null)
         {
             PlayerCanvas  = GameObject.Find("PlayerCanvas");
+        }
+        if(Hpbar == null)
+        {
+            Hpbar = GameObject.Find("HpBar").GetComponent<Slider>();
+            Hpbar.maxValue = maxHealth;
+            Hpbar.value = maxHealth;
         }
         if (CombinePanel == null)
         {
             CombinePanel = GameObject.Find("CombineSystem");
             currentHealth = new NetworkVariable<float>(maxHealth);
+            CurrentHealth = currentHealth.Value;
             if (IsLocalPlayer)
             {
                 CombinePanel.SetActive(false);
@@ -148,11 +158,14 @@ public class TurnBaseSystem : NetworkBehaviour
         if(currentHealth.Value > 0)
         {
             currentHealth.Value -= DamageAmount;
+            CurrentHealth = currentHealth.Value;
+            Hpbar.value = CurrentHealth;
             Debug.Log("TakeDamage");
         }
         if(currentHealth.Value <= 0)
         {
             currentHealth.Value = 0;
+            Hpbar.value = CurrentHealth;
             DeadServerRpc();
         }
         
@@ -181,6 +194,9 @@ public class TurnBaseSystem : NetworkBehaviour
     public void StartState()
     {
         currentHealth = new NetworkVariable<float>(maxHealth);
+        CurrentHealth = currentHealth.Value;
+        Hpbar.maxValue = maxHealth;
+        Hpbar.value = maxHealth;
         StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
         PlayerCanvas = GameObject.Find("PlayerCanvas");
         CombinePanel = GameObject.Find("CombineSystem");
