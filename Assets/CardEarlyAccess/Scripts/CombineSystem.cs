@@ -53,14 +53,15 @@ public class CombineSystem : MonoBehaviour
         if(C_Input1 != null && C_Input2 != null)
         {
             string Result = C_Input1.E_Card.element_Name + C_Input2.E_Card.element_Name;
-            Debug.Log("Result Card : "+Result);
+            Debug.Log("Result Card : "+Result.Trim());
             foreach (Transform child in Output.transform)
             {
                 GameObject.Destroy(child.gameObject);
             }
-            if(CombineReceipe.E_CardDic.ContainsKey(Result))
+            if (CombineReceipe.E_CardDic.ContainsKey(Result))
             {
                 outputCard = Instantiate(Cardprefab, Output.transform.position, Quaternion.identity);
+                Debug.Log(outputCard);
                 outputCard.GetComponent<ElementCardDisplay>().E_Card = CombineReceipe.E_CardDic[Result];
                 outputCard.GetComponent<ElementCardDisplay>().IsOutPutCard = true;
                 outputCard.transform.parent = Output.transform;

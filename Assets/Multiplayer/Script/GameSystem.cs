@@ -21,6 +21,7 @@ public class GameSystem : NetworkBehaviour
     public PhaseTimer PT;
     public AmmoPanel AP;
     public CardPanel CP;
+    public CardDic CD;
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -70,6 +71,7 @@ public class GameSystem : NetworkBehaviour
         Debug.Log("GameStart");
         gamePhase = GamePhase.Start;
         gamePhase = GamePhase.TaskState;
+        CD.DeserializeDictionary();
         PT.TaskCountDownMethod();
         PlayerList = GameObject.FindGameObjectsWithTag("Player");
         Gather_startPlayerClient();
