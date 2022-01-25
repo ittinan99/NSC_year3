@@ -4,12 +4,15 @@ using UnityEngine;
 using TMPro;
 using System.Threading.Tasks;
 using UnityEngine.UI;
-public class PhaseTimer : MonoBehaviour
+using Unity.Netcode;
+public class PhaseTimer : NetworkBehaviour
 {
     float currentTime = 0;
     public float TaskStartingTime;
     public float CombineStartingTime;
     public float AttackStartingTime;
+    [SerializeField]
+    private float SpeedDivide;
     public TextMeshProUGUI TimerText;
     private GameSystem GS;
     public CardPanel CP;
@@ -38,7 +41,7 @@ public class PhaseTimer : MonoBehaviour
         while(currentTime > 0)
         {
             TimerText.text = currentTime.ToString("F2");
-            currentTime -= Time.deltaTime;
+            currentTime -= NetworkManager.Singleton.ServerTime.FixedDeltaTime / SpeedDivide;
             await Task.Yield();
         }
         GS.CombinePhaseServerRpc();
@@ -49,7 +52,7 @@ public class PhaseTimer : MonoBehaviour
         while (currentTime > 0)
         {
             TimerText.text = currentTime.ToString("F2");
-            currentTime -= Time.deltaTime;
+            currentTime -= NetworkManager.Singleton.ServerTime.FixedDeltaTime / SpeedDivide;
             await Task.Yield();
         }
         GS.AttackPhaseServerRpc();
@@ -60,7 +63,7 @@ public class PhaseTimer : MonoBehaviour
         while (currentTime > 0)
         {
             TimerText.text = currentTime.ToString("F2");
-            currentTime -= Time.deltaTime;
+            currentTime -= NetworkManager.Singleton.ServerTime.FixedDeltaTime / SpeedDivide;
             await Task.Yield();
         }
         CheckBattleResult();

@@ -480,6 +480,7 @@ MonoBehaviour:
   TaskStartingTime: 10
   CombineStartingTime: 30
   AttackStartingTime: 10
+  SpeedDivide: 4.9
   TimerText: {fileID: 233981971}
   CP: {fileID: 1218037860}
 --- !u!114 &233981971
