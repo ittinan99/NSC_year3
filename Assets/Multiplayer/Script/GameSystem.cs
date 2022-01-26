@@ -23,6 +23,7 @@ public class GameSystem : NetworkBehaviour
     public CardPanel CP;
     public CardDic CD;
     public Minimap MP;
+    public TaskList TL;
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -141,6 +142,7 @@ public class GameSystem : NetworkBehaviour
     {
         Debug.Log("TaskPhase");
         gamePhase = GamePhase.TaskState;
+        TL.resetTask();
         PT.TaskCountDownMethod();
         CP.CheckEmptyAmmoCard();
         AP.AddAmmoCard();
