@@ -31,6 +31,16 @@ public class PhaseTimer : NetworkBehaviour
     {
         
     }
+    [ServerRpc]
+    public void TimeServerRpc(ServerTime data)
+    {
+        TimeClientRpc(data);
+    }
+    [ClientRpc]
+    public void TimeClientRpc(ServerTime data)
+    {
+        TimerText.text = currentTime.ToString("F2");
+    }
     public void TaskCountDownMethod()
     {
         TaskCountDown();
@@ -40,8 +50,11 @@ public class PhaseTimer : NetworkBehaviour
         currentTime = TaskStartingTime;
         while(currentTime > 0)
         {
-            TimerText.text = currentTime.ToString("F2");
-            currentTime -= NetworkManager.Singleton.ServerTime.FixedDeltaTime / SpeedDivide;
+            if (IsOwnedByServer)
+            {
+                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+            }
+            currentTime -= Time.deltaTime;
             await Task.Yield();
         }
         GS.CombinePhaseServerRpc();
@@ -51,8 +64,11 @@ public class PhaseTimer : NetworkBehaviour
         currentTime = CombineStartingTime;
         while (currentTime > 0)
         {
-            TimerText.text = currentTime.ToString("F2");
-            currentTime -= NetworkManager.Singleton.ServerTime.FixedDeltaTime / SpeedDivide;
+            if (IsOwnedByServer)
+            {
+                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+            }
+            currentTime -= Time.deltaTime;
             await Task.Yield();
         }
         GS.AttackPhaseServerRpc();
@@ -62,8 +78,11 @@ public class PhaseTimer : NetworkBehaviour
         currentTime = AttackStartingTime;
         while (currentTime > 0)
         {
-            TimerText.text = currentTime.ToString("F2");
-            currentTime -= NetworkManager.Singleton.ServerTime.FixedDeltaTime / SpeedDivide;
+            if (IsOwnedByServer)
+            {
+                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+            }
+            currentTime -= Time.deltaTime;
             await Task.Yield();
         }
         CheckBattleResult();
