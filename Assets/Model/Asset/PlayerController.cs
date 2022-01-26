@@ -5,20 +5,23 @@ using System.Collections;
 using Unity.Netcode;
 using System;
 
-public class PlayerController : NetworkBehaviour 
+public class PlayerController : NetworkBehaviour
 {
     public enum PlayerAnimeState
     {
         Idle,
         Walk,
-        ReverseWalk
+        ReverseWalk,
+        Prethrow,
+        Throw,
+        Hurt
     }
 
     [SerializeField]
     private float speed = 3.5f;
-    
+
     [SerializeField]
-    public float rotationSpeed = 1f;
+    public float rotationSpeed = 0.5f;
 
     [SerializeField]
     private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
@@ -29,17 +32,62 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private NetworkVariable<PlayerAnimeState> networkPlayerState = new NetworkVariable<PlayerAnimeState>();
 
+    [SerializeField]
+    private NetworkVariable<float> networkAimLayerWeight = new NetworkVariable<float>();
+
+    [SerializeField]
+    private NetworkVariable<float> networkHurtLayerWeight = new NetworkVariable<float>();
 
     private Vector3 oldInputPosition;
     private Vector3 oldInputRotation;
 
     Animator animator;
-    public int aimLayer;
-    public int hurtLayer;
-    bool playerAim = true;
+
+    [SerializeField]
+    private int aimLayer;
+
+    [SerializeField]
+    private int hurtLayer;
+
+    private bool playerAim = true;
+    private bool playerHurt = false;
+    private bool playerThrow = false;
+
     Rigidbody rigidbody;
 
     private float layerWeightVelocity;
+
+    private void PlayerNotAim()
+    {
+        networkAimLayerWeight.Value = animator.GetLayerWeight(aimLayer);
+        animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(networkAimLayerWeight.Value, 0f, ref layerWeightVelocity, 0.2f));
+
+        speed = 10.0F;
+    }
+    private void PlayerAim()
+    {
+        networkAimLayerWeight.Value = animator.GetLayerWeight(aimLayer);
+        animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(networkAimLayerWeight.Value, 1f, ref layerWeightVelocity, 0.2f));
+
+        speed = 2.0F;
+    }
+    private void PlayerNotHurt()
+    {
+        animator.SetBool("Hurt", false);
+    }
+    private void PlayerHurt()
+    {
+        animator.SetBool("Hurt", true);
+    }
+
+    private void PlayerNotThrow()
+    {
+        animator.SetBool("Throw", false);
+    }
+    private void PlayerThrow()
+    {
+        animator.SetBool("Throw", true);
+    }
 
     private void Start()
     {
@@ -49,20 +97,19 @@ public class PlayerController : NetworkBehaviour
         hurtLayer = animator.GetLayerIndex("hurt");
 
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (IsClient && IsOwner)
         {
             ClientInput();
         }
-
         ClientMoveAndRotate();
         ClientVisuals();
-        SomeWait();
+        
+        //SomeWait();
     }
 
-   
     private void ClientInput()
     {
         Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
@@ -78,7 +125,48 @@ public class PlayerController : NetworkBehaviour
             UpdateClientPositionAndRotateServerRpc(inputPosition, inputRotation);
         }
 
-        if(forwardInput > 0)
+        if (playerAim == true)
+        {
+            PlayerNotAim();            
+        }
+        else if (playerAim == false)
+        {
+            PlayerAim();
+        }
+
+        if (playerHurt == true)
+        {
+            PlayerNotHurt();
+        }
+        else if (playerHurt == false)
+        {
+            PlayerHurt();
+        }
+
+        if (playerThrow == true)
+        {
+            PlayerNotThrow();
+        }
+        else if(playerThrow == false)
+        {
+            PlayerThrow();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            playerAim = !playerAim;           
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            playerThrow = !playerThrow;
+            Debug.Log(playerThrow);
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            playerHurt = !playerHurt;
+            Debug.Log(playerHurt);
+        }
+        if (forwardInput > 0)
         {
             UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.Walk);
         }
@@ -86,7 +174,7 @@ public class PlayerController : NetworkBehaviour
         {
             UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.ReverseWalk);
         }
-        else
+        else if(forwardInput == 0)
         {
             UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.Idle);
         }
@@ -116,13 +204,21 @@ public class PlayerController : NetworkBehaviour
         {
             animator.SetFloat("Walk", -1);
         }
-        else
+        else if(networkPlayerState.Value == PlayerAnimeState.Idle)
         {
             animator.SetFloat("Walk", 0);
         }
+
+        if(networkPlayerState.Value == PlayerAnimeState.Hurt)
+        {
+            Debug.Log("Hurt!!");
+        }
+        if(networkPlayerState.Value == PlayerAnimeState.Throw)
+        {
+            Debug.Log("attack");
+        }
     }
     
-
     [ServerRpc]
     public void UpdateClientPositionAndRotateServerRpc(Vector3 newPosition, Vector3 newRotation)
     {
@@ -134,6 +230,18 @@ public class PlayerController : NetworkBehaviour
     public void UpdatePlayerAnimaStateServerRpc(PlayerAnimeState newState)
     {
         networkPlayerState.Value = newState;
+    }
+
+    [ServerRpc]
+    public void UpdateClientAimLayerWeightServerRpc(float newAimWeight)
+    {
+        networkAimLayerWeight.Value = newAimWeight;
+    }
+
+    [ServerRpc]
+    public void UpdateClientHurtLayerWeightServerRpc(float newHurtWeight)
+    {
+        networkHurtLayerWeight.Value = newHurtWeight;
     }
     private void SomeWait()
     {

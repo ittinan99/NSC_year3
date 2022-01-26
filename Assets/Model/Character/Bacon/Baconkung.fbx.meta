@@ -219,9 +219,107 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_GRP
+        weight: 1
+      - path: All_GRP/All_CTRL
+        weight: 1
+      - path: All_GRP/All_CTRL/Butt_GRP
+        weight: 1
+      - path: All_GRP/All_CTRL/Butt_GRP/Butt_CTRL
+        weight: 1
+      - path: Butt
+        weight: 0
+      - path: Butt/L_leg
+        weight: 0
+      - path: Butt/L_leg/L_kao
+        weight: 0
+      - path: Butt/L_leg/L_kao/L_foot
+        weight: 0
+      - path: Butt/L_leg/L_kao/L_foot/L_foot_tip
+        weight: 0
+      - path: Butt/R_leg
+        weight: 0
+      - path: Butt/R_leg/R_kao
+        weight: 0
+      - path: Butt/R_leg/R_kao/R_foot
+        weight: 0
+      - path: Butt/R_leg/R_kao/R_foot/R_foot_tip
+        weight: 0
+      - path: Butt/Spine1
+        weight: 1
+      - path: Butt/Spine1/Spine2
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder/L_lai
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder/L_lai/L_sorg
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder/L_lai/L_sorg/L_hand
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder/L_lai/L_sorg/L_hand/L_finger
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder/L_lai/L_sorg/L_hand/L_finger/L_finger_tip
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder/L_lai/L_sorg/L_hand/L_finger/L_finger_tip/L_finger_tip1
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder/L_lai/L_sorg/L_hand/L_finger_tip2
+        weight: 1
+      - path: Butt/Spine1/Spine2/L_sholder/L_lai/L_sorg/L_hand/L_finger_tip2/L_finger_tip3
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder/R_lai
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder/R_lai/R_sorg
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder/R_lai/R_sorg/R_hand
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder/R_lai/R_sorg/R_hand/R_finger
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder/R_lai/R_sorg/R_hand/R_finger/R_finger_tip
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder/R_lai/R_sorg/R_hand/R_finger/R_finger_tip/R_finger_tip1
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder/R_lai/R_sorg/R_hand/R_finger_tip2
+        weight: 1
+      - path: Butt/Spine1/Spine2/R_sholder/R_lai/R_sorg/R_hand/R_finger_tip2/R_finger_tip3
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/L_kil1
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/L_kil1/L_kil2
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/L_kil1/L_kil2/L_kil3
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/R_kil1
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/R_kil1/R_kil2
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/R_kil1/R_kil2/R_kil3
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/Spine4
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/Spine4/Spine5
+        weight: 1
+      - path: Butt/Spine1/Spine2/Spine3/Spine4/Spine5/Spine6
+        weight: 1
+      - path: group1
+        weight: 1
+      - path: group1/polySurface1
+        weight: 1
+      - path: group1/polySurface7group2
+        weight: 1
+      - path: group1/pSphere1
+        weight: 1
+      - path: group1/pSphere2
+        weight: 1
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 2725664ac424b1b45954e009b172a4ca, type: 2}
       additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
