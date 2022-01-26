@@ -2,11 +2,35 @@
 //https://docs.unity3d.com/ScriptReference/Input.GetAxis.html
 using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
+using System;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour 
+{
+    public enum PlayerAnimeState
+    {
+        Idle,
+        Walk,
+        ReverseWalk
+    }
 
-    public float speed = 10.0F;
-    public float rotationSpeed = 100.0F;
+    [SerializeField]
+    private float walkspeed = 3.5f;
+    
+    [SerializeField]
+    public float rotationSpeed = 1.5F;
+
+    [SerializeField]
+    private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
+
+    [SerializeField]
+    private NetworkVariable<Vector3> networkRotationDirection = new NetworkVariable<Vector3>();
+
+    [SerializeField]
+    private NetworkVariable<PlayerAnimeState> networkPlayerState = new NetworkVariable<PlayerAnimeState>();
+
+    private Vector3 oldInputPosition;
+    private Vector3 oldInputRotation;
 
     Animator animator;
     public int aimLayer;
@@ -25,8 +49,49 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (IsClient && IsOwner)
+        {
+            ClientInput();
+        }
 
-        float translation = Input.GetAxis("Vertical") * speed;
+        SomeWait();
+    }
+
+    
+
+    private void ClientInput()
+    {
+        Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
+
+        Vector3 direction = transform.TransformDirection(Vector3.forward);
+        float forwardInput = Input.GetAxis("Vertical");
+        Vector3 inputPosition = direction * forwardInput;
+
+        if(oldInputPosition != inputPosition || oldInputRotation != inputRotation)
+        {
+            oldInputRotation = oldInputRotation;
+            oldInputPosition = oldInputPosition;
+        }
+    }
+    private void ClientMoveAndRotate()
+    {
+
+    }
+    private void ClientVisuals()
+    {
+        
+    }
+    
+
+    [ServerRpc]
+    public void UpdateClientPositionAndRotateServerRpc(Vector3 newPosition, Vector3 newRotation)
+    {
+        networkPositionDirection.Value = newPosition;
+        networkRotationDirection.Value = newRotation;
+    }
+    private void SomeWait()
+    {
+        float translation = Input.GetAxis("Vertical") * walkspeed;
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
         translation *= Time.deltaTime;
         rotation *= Time.deltaTime;
@@ -42,19 +107,19 @@ public class PlayerController : MonoBehaviour {
         {
             animator.SetBool("walk", false);
         }
-        if(playerAim == true)
+        if (playerAim == true)
         {
             float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
             animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
             animator.SetBool("Aim", false);
-            speed = 10.0F;
+            walkspeed = 10.0F;
         }
-        if (playerAim == false )
+        if (playerAim == false)
         {
             float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
             animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
             animator.SetBool("Aim", true);
-            speed = 2.0F;
+            walkspeed = 2.0F;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -68,10 +133,5 @@ public class PlayerController : MonoBehaviour {
         {
             animator.SetTrigger("GetDamage");
         }
-    }
-    void AfterGetHurt()
-    {
-        float currentHurtLayerWeight = animator.GetLayerWeight(hurtLayer);
-        animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentHurtLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
     }
 }
