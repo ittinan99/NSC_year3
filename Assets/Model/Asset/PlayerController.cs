@@ -36,7 +36,13 @@ public class PlayerController : NetworkBehaviour
     private NetworkVariable<float> networkAimLayerWeight = new NetworkVariable<float>();
 
     [SerializeField]
-    private NetworkVariable<float> networkHurtLayerWeight = new NetworkVariable<float>();
+    private NetworkVariable<bool> networkPlayerAim = new NetworkVariable<bool>();
+
+    [SerializeField]
+    private NetworkVariable<bool> networkPlayerHurt = new NetworkVariable<bool>();
+
+    [SerializeField]
+    private NetworkVariable<bool> networkPlayerThrow = new NetworkVariable<bool>();
 
     private Vector3 oldInputPosition;
     private Vector3 oldInputRotation;
@@ -57,12 +63,17 @@ public class PlayerController : NetworkBehaviour
 
     private float layerWeightVelocity;
 
+    public GameObject camZoomOut;
+    public GameObject camZoomIn;
+
     private void PlayerNotAim()
     {
         networkAimLayerWeight.Value = animator.GetLayerWeight(aimLayer);
         animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(networkAimLayerWeight.Value, 0f, ref layerWeightVelocity, 0.2f));
 
         speed = 10.0F;
+        camZoomOut.SetActive(true);
+        camZoomIn.SetActive(false);
     }
     private void PlayerAim()
     {
@@ -70,6 +81,8 @@ public class PlayerController : NetworkBehaviour
         animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(networkAimLayerWeight.Value, 1f, ref layerWeightVelocity, 0.2f));
 
         speed = 2.0F;
+        camZoomOut.SetActive(false);
+        camZoomIn.SetActive(true);
     }
     private void PlayerNotHurt()
     {
@@ -96,6 +109,11 @@ public class PlayerController : NetworkBehaviour
         aimLayer = animator.GetLayerIndex("Aiming");
         hurtLayer = animator.GetLayerIndex("hurt");
 
+        if(IsLocalPlayer)
+        {
+            camZoomIn.SetActive(false);
+            camZoomOut.SetActive(true);
+        }
     }
 
     void Update()
@@ -106,7 +124,22 @@ public class PlayerController : NetworkBehaviour
         }
         ClientMoveAndRotate();
         ClientVisuals();
-        
+
+        if (IsLocalPlayer)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                playerAim = !playerAim;
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                playerThrow = !playerThrow;
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                playerHurt = !playerHurt;
+            }
+        }
         //SomeWait();
     }
 
@@ -123,11 +156,24 @@ public class PlayerController : NetworkBehaviour
             oldInputRotation = inputRotation;
             oldInputPosition = inputPosition;
             UpdateClientPositionAndRotateServerRpc(inputPosition, inputRotation);
+        }     
+
+        if (forwardInput > 0)
+        {
+            UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.Walk);
+        }
+        else if(forwardInput < 0)
+        {
+            UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.ReverseWalk);
+        }
+        else if(forwardInput == 0)
+        {
+            UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.Idle);
         }
 
         if (playerAim == true)
         {
-            PlayerNotAim();            
+            PlayerNotAim();
         }
         else if (playerAim == false)
         {
@@ -136,47 +182,20 @@ public class PlayerController : NetworkBehaviour
 
         if (playerHurt == true)
         {
-            PlayerNotHurt();
+            PlayerHurt();
         }
         else if (playerHurt == false)
         {
-            PlayerHurt();
+            PlayerNotHurt();
         }
 
         if (playerThrow == true)
         {
-            PlayerNotThrow();
-        }
-        else if(playerThrow == false)
-        {
             PlayerThrow();
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
+        else if (playerThrow == false)
         {
-            playerAim = !playerAim;           
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            playerThrow = !playerThrow;
-            Debug.Log(playerThrow);
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            playerHurt = !playerHurt;
-            Debug.Log(playerHurt);
-        }
-        if (forwardInput > 0)
-        {
-            UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.Walk);
-        }
-        else if(forwardInput < 0)
-        {
-            UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.ReverseWalk);
-        }
-        else if(forwardInput == 0)
-        {
-            UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.Idle);
+            PlayerNotThrow();
         }
     }
     private void ClientMoveAndRotate()
@@ -208,14 +227,9 @@ public class PlayerController : NetworkBehaviour
         {
             animator.SetFloat("Walk", 0);
         }
-
-        if(networkPlayerState.Value == PlayerAnimeState.Hurt)
+        else if(networkPlayerState.Value == PlayerAnimeState.Hurt)
         {
-            Debug.Log("Hurt!!");
-        }
-        if(networkPlayerState.Value == PlayerAnimeState.Throw)
-        {
-            Debug.Log("attack");
+            Debug.Log("yeah");
         }
     }
     
@@ -227,7 +241,7 @@ public class PlayerController : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void UpdatePlayerAnimaStateServerRpc(PlayerAnimeState newState)
+    public void UpdatePlayerAnimeStateServerRpc(PlayerAnimeState newState)
     {
         networkPlayerState.Value = newState;
     }
@@ -238,11 +252,6 @@ public class PlayerController : NetworkBehaviour
         networkAimLayerWeight.Value = newAimWeight;
     }
 
-    [ServerRpc]
-    public void UpdateClientHurtLayerWeightServerRpc(float newHurtWeight)
-    {
-        networkHurtLayerWeight.Value = newHurtWeight;
-    }
     private void SomeWait()
     {
         if (playerAim == true)

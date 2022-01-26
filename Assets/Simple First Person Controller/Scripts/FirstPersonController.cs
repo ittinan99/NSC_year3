@@ -44,6 +44,8 @@ namespace Unity.Netcode
         public GameObject camZoomOut;
         public GameObject camZoomIn;
 
+        
+
         private void Start()
         {
 
@@ -93,30 +95,46 @@ namespace Unity.Netcode
        
         void Move()
         {
-            //update speed based onn the input
+            ////update speed based onn the input
+            //Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+            ////Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            ////Physics.Raycast(FB.transform.position, FB.transform.forward
+
+            //input = Vector3.ClampMagnitude(input, 1f);
+
+            ////transofrm it based off the player transform and scale it by movement speed
+
+            //Vector3 move = input * movementSpeed;
+
+            //rigidbody.transform.Translate(move * Time.deltaTime);
+
+            //ของอิทเอง5555
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //Physics.Raycast(FB.transform.position, FB.transform.forward
-
             input = Vector3.ClampMagnitude(input, 1f);
-
-            //transofrm it based off the player transform and scale it by movement speed
-
             Vector3 move = input * movementSpeed;
 
             rigidbody.transform.Translate(move * Time.deltaTime);
 
-            //ของอิทเอง5555
+            Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
 
-            if(input.x != 0 || input.z != 0)
+            Vector3 direction = transform.TransformDirection(Vector3.forward);
+            float forwardInput = Input.GetAxis("Vertical");
+            Vector3 inputPosition = direction * forwardInput;
+   
+            if (forwardInput > 0)
             {
-                animator.SetBool("walk", true);
+                animator.SetFloat("Walk", 1);
+            }
+            else if (forwardInput < 0)
+            {
+                animator.SetFloat("Walk", -1);
             }
             else
             {
-                animator.SetBool("walk", false);
+                animator.SetFloat("Walk", 0);            
             }
+
             if (playerAim == true)
             {
                 float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
