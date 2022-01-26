@@ -15,10 +15,10 @@ public class PlayerController : NetworkBehaviour
     }
 
     [SerializeField]
-    private float walkspeed = 3.5f;
+    private float speed = 3.5f;
     
     [SerializeField]
-    public float rotationSpeed = 1.5F;
+    public float rotationSpeed = 1f;
 
     [SerializeField]
     private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
@@ -29,6 +29,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private NetworkVariable<PlayerAnimeState> networkPlayerState = new NetworkVariable<PlayerAnimeState>();
 
+
     private Vector3 oldInputPosition;
     private Vector3 oldInputRotation;
 
@@ -36,11 +37,13 @@ public class PlayerController : NetworkBehaviour
     public int aimLayer;
     public int hurtLayer;
     bool playerAim = true;
+    Rigidbody rigidbody;
 
     private float layerWeightVelocity;
 
     private void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         aimLayer = animator.GetLayerIndex("Aiming");
         hurtLayer = animator.GetLayerIndex("hurt");
@@ -54,11 +57,12 @@ public class PlayerController : NetworkBehaviour
             ClientInput();
         }
 
+        ClientMoveAndRotate();
+        ClientVisuals();
         SomeWait();
     }
 
-    
-
+   
     private void ClientInput()
     {
         Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
@@ -69,17 +73,53 @@ public class PlayerController : NetworkBehaviour
 
         if(oldInputPosition != inputPosition || oldInputRotation != inputRotation)
         {
-            oldInputRotation = oldInputRotation;
-            oldInputPosition = oldInputPosition;
+            oldInputRotation = inputRotation;
+            oldInputPosition = inputPosition;
+            UpdateClientPositionAndRotateServerRpc(inputPosition, inputRotation);
+        }
+
+        if(forwardInput > 0)
+        {
+            UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.Walk);
+        }
+        else if(forwardInput < 0)
+        {
+            UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.ReverseWalk);
+        }
+        else
+        {
+            UpdatePlayerAnimaStateServerRpc(PlayerAnimeState.Idle);
         }
     }
     private void ClientMoveAndRotate()
     {
+        if(networkPositionDirection.Value != Vector3.zero)
+        {
+            Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            input = Vector3.ClampMagnitude(input, 1f);
+            Vector3 move = input * speed;
 
+            rigidbody.transform.Translate(move * Time.deltaTime);
+        }
+        if(networkRotationDirection.Value != Vector3.zero)
+        {
+            transform.Rotate(networkRotationDirection.Value);
+        }
     }
     private void ClientVisuals()
     {
-        
+        if(networkPlayerState.Value == PlayerAnimeState.Walk)
+        {
+            animator.SetFloat("Walk", 1);
+        }
+        else if(networkPlayerState.Value == PlayerAnimeState.ReverseWalk)
+        {
+            animator.SetFloat("Walk", -1);
+        }
+        else
+        {
+            animator.SetFloat("Walk", 0);
+        }
     }
     
 
@@ -89,37 +129,27 @@ public class PlayerController : NetworkBehaviour
         networkPositionDirection.Value = newPosition;
         networkRotationDirection.Value = newRotation;
     }
+
+    [ServerRpc]
+    public void UpdatePlayerAnimaStateServerRpc(PlayerAnimeState newState)
+    {
+        networkPlayerState.Value = newState;
+    }
     private void SomeWait()
     {
-        float translation = Input.GetAxis("Vertical") * walkspeed;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-        translation *= Time.deltaTime;
-        rotation *= Time.deltaTime;
-
-        transform.Translate(0, 0, translation);
-        transform.Rotate(0, rotation, 0);
-
-        if (translation != 0 || rotation != 0)
-        {
-            animator.SetBool("walk", true);
-        }
-        else
-        {
-            animator.SetBool("walk", false);
-        }
         if (playerAim == true)
         {
             float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
             animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
             animator.SetBool("Aim", false);
-            walkspeed = 10.0F;
+            speed = 10.0F;
         }
         if (playerAim == false)
         {
             float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
             animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
             animator.SetBool("Aim", true);
-            walkspeed = 2.0F;
+            speed = 2.0F;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
