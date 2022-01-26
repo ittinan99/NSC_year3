@@ -55,6 +55,8 @@ namespace Unity.Netcode
             if (IsLocalPlayer)
             {
                 rigidbody = GetComponent<Rigidbody>();
+                camZoomIn.SetActive(false);
+                camZoomOut.SetActive(true);
             }
             else
             {
