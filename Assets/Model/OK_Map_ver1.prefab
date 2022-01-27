@@ -428,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 721015153674823313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 975933166632572102}
   - {fileID: 975933165984239580}
@@ -476,8 +476,8 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2124252, y: 0.52433634, z: 4.0168676}
   m_Center: {x: 8.593791, y: 4.2188797, z: 5.7915697}
---- !u!65 &721015153534691766
-BoxCollider:
+--- !u!64 &3625694414861958575
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -486,9 +486,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 17.155994, y: 0.696945, z: 16.071049}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9103983134350968579, guid: d5a033d1ba6132947b5afe0bb4222bae, type: 3}
 --- !u!65 &721015153534691796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3648,7 +3649,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7618279049689696887, guid: d5a033d1ba6132947b5afe0bb4222bae, type: 3}
 --- !u!65 &721015153534691704
@@ -4832,7 +4833,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1453043773871479701, guid: d5a033d1ba6132947b5afe0bb4222bae, type: 3}
 --- !u!65 &721015153534692982
@@ -5939,6 +5940,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1023ece771f8cf54ab6d2a4d3376d403, type: 2}
+    - target: {fileID: -674449036139524865, guid: d5a033d1ba6132947b5afe0bb4222bae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -652620982646648018, guid: d5a033d1ba6132947b5afe0bb4222bae,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

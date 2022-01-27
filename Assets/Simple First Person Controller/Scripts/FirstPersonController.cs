@@ -35,12 +35,30 @@ namespace Unity.Netcode
 
         Rigidbody rigidbody;
 
+        Animator animator;
+        int aimLayer;
+        int hurtLayer;
+        bool playerAim = true;
+        private float layerWeightVelocity;
+
+        public GameObject camZoomOut;
+        public GameObject camZoomIn;
+
+        
+
         private void Start()
         {
+
+            animator = GetComponentInChildren<Animator>();
+            aimLayer = animator.GetLayerIndex("Aiming");
+            hurtLayer = animator.GetLayerIndex("hurt");
+
             cameraTransform = GetComponentInChildren<Camera>().transform;
             if (IsLocalPlayer)
             {
                 rigidbody = GetComponent<Rigidbody>();
+                camZoomIn.SetActive(false);
+                camZoomOut.SetActive(true);
             }
             else
             {
@@ -77,15 +95,81 @@ namespace Unity.Netcode
        
         void Move()
         {
-            //update speed based onn the input
+            ////update speed based onn the input
+            //Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+            ////Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            ////Physics.Raycast(FB.transform.position, FB.transform.forward
+
+            //input = Vector3.ClampMagnitude(input, 1f);
+
+            ////transofrm it based off the player transform and scale it by movement speed
+
+            //Vector3 move = input * movementSpeed;
+
+            //rigidbody.transform.Translate(move * Time.deltaTime);
+
+            //ของอิทเอง5555
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //Physics.Raycast(FB.transform.position, FB.transform.forward
             input = Vector3.ClampMagnitude(input, 1f);
-            //transofrm it based off the player transform and scale it by movement speed
             Vector3 move = input * movementSpeed;
 
             rigidbody.transform.Translate(move * Time.deltaTime);
+
+            Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
+
+            Vector3 direction = transform.TransformDirection(Vector3.forward);
+            float forwardInput = Input.GetAxis("Vertical");
+            Vector3 inputPosition = direction * forwardInput;
+   
+            if (forwardInput > 0)
+            {
+                animator.SetFloat("Walk", 1);
+            }
+            else if (forwardInput < 0)
+            {
+                animator.SetFloat("Walk", -1);
+            }
+            else
+            {
+                animator.SetFloat("Walk", 0);            
+            }
+
+            if (playerAim == true)
+            {
+                float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
+                animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
+                animator.SetBool("Aim", false);
+                movementSpeed = 10.0F;
+
+                camZoomOut.SetActive(true);
+                camZoomIn.SetActive(false);
+            }
+            if (playerAim == false)
+            {
+                float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
+                animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
+                animator.SetBool("Aim", true);
+                movementSpeed = 2.0F;
+
+                camZoomOut.SetActive(false);
+                camZoomIn.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                playerAim = !playerAim;
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                animator.SetTrigger("Attack");
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                animator.SetTrigger("GetDamage");
+            }
+
+
+
 
 
             //transform.position += move;
