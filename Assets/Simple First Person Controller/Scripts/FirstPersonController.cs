@@ -9,6 +9,15 @@ namespace Unity.Netcode
         /// <summary>
         /// Move the player charactercontroller based on horizontal and vertical axis input
         /// </summary>
+        public enum PlayerAnimeState
+        {
+            Idle,
+            Walk,
+            ReverseWalk,
+            Prethrow,
+            Throw,
+            Hurt
+        }
 
         float yVelocity = 0f;
         [Range(5f, 25f)]
@@ -39,13 +48,94 @@ namespace Unity.Netcode
         int aimLayer;
         int hurtLayer;
         bool playerAim = true;
-        private float layerWeightVelocity;
+        private float layerWeightVelocity = 100;
 
         public GameObject camZoomOut;
         public GameObject camZoomIn;
 
-        
+        private Vector3 oldInputPosition;
+        private Vector3 oldInputRotation;
 
+        [SerializeField]
+        private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
+
+        [SerializeField]
+        private NetworkVariable<Vector3> networkRotationDirection = new NetworkVariable<Vector3>();
+
+        [SerializeField]
+        private NetworkVariable<PlayerAnimeState> networkPlayerState = new NetworkVariable<PlayerAnimeState>();
+
+        private void ClientInput()
+        {
+            Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
+
+            Vector3 direction = transform.TransformDirection(Vector3.forward);
+            float forwardInput = Input.GetAxis("Vertical");
+            Vector3 inputPosition = direction * forwardInput;
+
+            if (oldInputPosition != inputPosition || oldInputRotation != inputRotation)
+            {
+                oldInputRotation = inputRotation;
+                oldInputPosition = inputPosition;
+                UpdateClientPositionAndRotateServerRpc(inputPosition, inputRotation);
+            }
+
+            if (forwardInput > 0)
+            {
+                UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.Walk);
+            }
+            else if (forwardInput < 0)
+            {
+                UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.ReverseWalk);
+            }
+            else if (forwardInput == 0)
+            {
+                UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.Idle);
+            }
+        }
+        private void ClientMoveAndRotate()
+        {
+            if (networkPositionDirection.Value != Vector3.zero)
+            {
+                Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                input = Vector3.ClampMagnitude(input, 1f);
+                Vector3 move = input * movementSpeed;
+
+                rigidbody.transform.Translate(move * Time.deltaTime);
+            }
+            if (networkRotationDirection.Value != Vector3.zero)
+            {
+                transform.Rotate(networkRotationDirection.Value);
+            }
+        }
+        private void ClientVisuals()
+        {
+            if (networkPlayerState.Value == PlayerAnimeState.Walk)
+            {
+                animator.SetFloat("Walk", 1);
+            }
+            else if (networkPlayerState.Value == PlayerAnimeState.ReverseWalk)
+            {
+                animator.SetFloat("Walk", -1);
+            }
+            else if (networkPlayerState.Value == PlayerAnimeState.Idle)
+            {
+                animator.SetFloat("Walk", 0);
+            }
+        }
+
+        [ServerRpc]
+        public void UpdateClientPositionAndRotateServerRpc(Vector3 newPosition, Vector3 newRotation)
+        {
+            networkPositionDirection.Value = newPosition;
+            networkRotationDirection.Value = newRotation;
+        }
+
+        [ServerRpc]
+        public void UpdatePlayerAnimeStateServerRpc(PlayerAnimeState newState)
+        {
+            networkPlayerState.Value = newState;
+        }
         private void Start()
         {
 
@@ -75,7 +165,10 @@ namespace Unity.Netcode
             {
                 Look();
                 Move();
+                ClientInput();
+                ClientMoveAndRotate();
             }
+            ClientVisuals();
         }
         void Look()
         {
@@ -110,7 +203,8 @@ namespace Unity.Netcode
         [ClientRpc]
         public void SetWeightClientRpc(Layer data)
         {
-            animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(data.LayerWeight, data.target, ref layerWeightVelocity, 0.2f));
+            animator.SetLayerWeight(aimLayer,data.target);
+            //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(data.LayerWeight, data.target, ref layerWeightVelocity, 0.2f));
         }
         void Move()
         {
@@ -129,30 +223,30 @@ namespace Unity.Netcode
             //rigidbody.transform.Translate(move * Time.deltaTime);
 
             //ของอิทเอง5555
-            Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            input = Vector3.ClampMagnitude(input, 1f);
-            Vector3 move = input * movementSpeed;
+            //Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            //input = Vector3.ClampMagnitude(input, 1f);
+            //Vector3 move = input * movementSpeed;
 
-            rigidbody.transform.Translate(move * Time.deltaTime);
+            //rigidbody.transform.Translate(move * Time.deltaTime);
 
-            Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
+            //Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
 
-            Vector3 direction = transform.TransformDirection(Vector3.forward);
-            float forwardInput = Input.GetAxis("Vertical");
-            Vector3 inputPosition = direction * forwardInput;
+            //Vector3 direction = transform.TransformDirection(Vector3.forward);
+            //float forwardInput = Input.GetAxis("Vertical");
+            //Vector3 inputPosition = direction * forwardInput;
    
-            if (forwardInput > 0)
-            {
-                animator.SetFloat("Walk", 1);
-            }
-            else if (forwardInput < 0)
-            {
-                animator.SetFloat("Walk", -1);
-            }
-            else
-            {
-                animator.SetFloat("Walk", 0);            
-            }
+            //if (forwardInput > 0)
+            //{
+            //    animator.SetFloat("Walk", 1);
+            //}
+            //else if (forwardInput < 0)
+            //{
+            //    animator.SetFloat("Walk", -1);
+            //}
+            //else
+            //{
+            //    animator.SetFloat("Walk", 0);            
+            //}
 
             if (playerAim == true)
             {
@@ -213,5 +307,6 @@ namespace Unity.Netcode
             //cc.Move(move * Time.deltaTime);
         }
     }
+
 }
 
