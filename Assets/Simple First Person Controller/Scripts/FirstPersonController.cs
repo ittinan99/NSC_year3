@@ -60,9 +60,6 @@ namespace Unity.Netcode
         private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
 
         [SerializeField]
-        private NetworkVariable<Vector3> networkRotationDirection = new NetworkVariable<Vector3>();
-
-        [SerializeField]
         private NetworkVariable<PlayerAnimeState> networkPlayerState = new NetworkVariable<PlayerAnimeState>();
 
         private void ClientInput()
@@ -77,7 +74,7 @@ namespace Unity.Netcode
             {
                 oldInputRotation = inputRotation;
                 oldInputPosition = inputPosition;
-                UpdateClientPositionAndRotateServerRpc(inputPosition, inputRotation);
+                UpdateClientPositionAndRotateServerRpc(inputPosition);
             }
 
             if (forwardInput > 0)
@@ -103,10 +100,6 @@ namespace Unity.Netcode
 
                 rigidbody.transform.Translate(move * Time.deltaTime);
             }
-            if (networkRotationDirection.Value != Vector3.zero)
-            {
-                transform.Rotate(networkRotationDirection.Value);
-            }
         }
         private void ClientVisuals()
         {
@@ -125,10 +118,9 @@ namespace Unity.Netcode
         }
 
         [ServerRpc]
-        public void UpdateClientPositionAndRotateServerRpc(Vector3 newPosition, Vector3 newRotation)
+        public void UpdateClientPositionAndRotateServerRpc(Vector3 newPosition)
         {
             networkPositionDirection.Value = newPosition;
-            networkRotationDirection.Value = newRotation;
         }
 
         [ServerRpc]
