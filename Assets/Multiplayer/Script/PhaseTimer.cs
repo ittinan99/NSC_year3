@@ -5,9 +5,11 @@ using TMPro;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 using Unity.Netcode;
+using System;
+
 public class PhaseTimer : NetworkBehaviour
 {
-    float currentTime = 0;
+    NetworkVariable<float> currentTime = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone);
     public float TaskStartingTime;
     public float CombineStartingTime;
     public float AttackStartingTime;
@@ -23,7 +25,12 @@ public class PhaseTimer : NetworkBehaviour
     }
     void Start()
     {
-        
+        currentTime.OnValueChanged += ValueChange;
+    }
+
+    private void ValueChange(float previousValue, float newValue)
+    {
+        TimerText.text = newValue.ToString("F2");
     }
 
     // Update is called once per frame
@@ -31,58 +38,67 @@ public class PhaseTimer : NetworkBehaviour
     {
         
     }
-    [ServerRpc]
-    public void TimeServerRpc(ServerTime data)
-    {
-        TimeClientRpc(data);
-    }
-    [ClientRpc]
-    public void TimeClientRpc(ServerTime data)
-    {
-        TimerText.text = currentTime.ToString("F2");
-    }
+    //[ServerRpc]
+    //public void TimeServerRpc(ServerTime data)
+    //{
+    //    TimeClientRpc(data);
+    //}
+    //[ClientRpc]
+    //public void TimeClientRpc(ServerTime data)
+    //{
+    //    TimerText.text = currentTime.ToString("F2");
+    //}
     public void TaskCountDownMethod()
     {
         TaskCountDown();
     }
     public async void TaskCountDown()
     {
-        currentTime = TaskStartingTime;
-        while(currentTime > 0)
+        if (IsOwner)
         {
-            if (IsOwnedByServer)
+            currentTime.Value = TaskStartingTime;
+        }
+        while(currentTime.Value > 0)
+        {
+            if (IsOwner)
             {
-                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+                //TimeServerRpc(new ServerTime { Servertime = currentTime.Value.ToString("F2") });
+                currentTime.Value -= Time.deltaTime;
             }
-            currentTime -= Time.deltaTime;
             await Task.Yield();
         }
         GS.CombinePhaseServerRpc();
     }
     public async void CombineCountDownMethod()
     {
-        currentTime = CombineStartingTime;
-        while (currentTime > 0)
+        if (IsOwner)
         {
-            if (IsOwnedByServer)
+            currentTime.Value = TaskStartingTime;
+        }
+        while (currentTime.Value > 0)
+        {
+            if (IsOwner)
             {
-                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+                //TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+                currentTime.Value -= Time.deltaTime;
             }
-            currentTime -= Time.deltaTime;
             await Task.Yield();
         }
         GS.AttackPhaseServerRpc();
     }
     public async void AttackCountDownMethod()
     {
-        currentTime = AttackStartingTime;
-        while (currentTime > 0)
+        if (IsOwner)
         {
-            if (IsOwnedByServer)
+            currentTime.Value = AttackStartingTime;
+        }
+        while (currentTime.Value > 0)
+        {
+            if (IsOwner)
             {
-                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+                //TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+                currentTime.Value -= Time.deltaTime;
             }
-            currentTime -= Time.deltaTime;
             await Task.Yield();
         }
         CheckBattleResult();
