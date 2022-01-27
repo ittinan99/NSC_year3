@@ -363,7 +363,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2699541615817244657}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75773a9e7fe83d2479dea1b0917cf7c6, type: 3}
   m_Name: 
@@ -415,6 +415,7 @@ MonoBehaviour:
   StartBut: {fileID: 0}
   CurrentHealth: 0
   maxHealth: 100
+  Hpbar: {fileID: 0}
   playerOutline: {fileID: 7854567168577234838}
   die: 0
   Model: {fileID: 0}
@@ -559,7 +560,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2699541615817244657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfc6d2972d22345aba4fb5df959c1837, type: 3}
   m_Name: 
@@ -584,6 +585,11 @@ MonoBehaviour:
   hurtLayer: 0
   camZoomOut: {fileID: 5695391841594561142}
   camZoomIn: {fileID: 4703032348494848283}
+  cameraTransform: {fileID: 0}
+  maxPitch: 85
+  minPitch: -85
+  mouseSensitivity: 2
+  FB: {fileID: 0}
 --- !u!1 &4703032348494848283
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,7 +92,26 @@ namespace Unity.Netcode
             Quaternion rot = Quaternion.Euler(pitch, 0, 0);
             cameraTransform.localRotation = rot;
         }
-       
+       [ServerRpc]
+       public void SetTriggerServerRpc(string triggername)
+        {
+            SetTriggerClientRpc(triggername);
+        }
+       [ClientRpc]
+        public void SetTriggerClientRpc(string triggername)
+        {
+            animator.SetTrigger(triggername);
+        }
+        [ServerRpc]
+        public void SetWeightServerRpc(Layer data)
+        {
+            SetWeightClientRpc(data);
+        }
+        [ClientRpc]
+        public void SetWeightClientRpc(Layer data)
+        {
+            animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(data.LayerWeight, data.target, ref layerWeightVelocity, 0.2f));
+        }
         void Move()
         {
             ////update speed based onn the input
@@ -138,7 +157,8 @@ namespace Unity.Netcode
             if (playerAim == true)
             {
                 float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
-                animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
+                //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
+                SetWeightServerRpc(new Layer { LayerWeight = currentAimLayerWeight, target = 0f });
                 animator.SetBool("Aim", false);
                 movementSpeed = 10.0F;
 
@@ -148,7 +168,8 @@ namespace Unity.Netcode
             if (playerAim == false)
             {
                 float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
-                animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
+                //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
+                SetWeightServerRpc(new Layer { LayerWeight = currentAimLayerWeight, target = 1f });
                 animator.SetBool("Aim", true);
                 movementSpeed = 2.0F;
 
@@ -161,11 +182,13 @@ namespace Unity.Netcode
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                animator.SetTrigger("Attack");
+                SetTriggerServerRpc("Attack");
+                //animator.SetTrigger("Attack");
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                animator.SetTrigger("GetDamage");
+                SetTriggerServerRpc("GetDamage");
+                //animator.SetTrigger("GetDamage");
             }
 
 
