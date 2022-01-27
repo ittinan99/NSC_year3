@@ -24,7 +24,7 @@ public class TaskTest : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")&&other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        if (other.CompareTag("Player")&&other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer )
         {
             CP.SpawnCard(1);
             Debug.Log("TaskComp");

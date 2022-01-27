@@ -14,13 +14,16 @@ public class PickupTask : NetworkBehaviour
     private KeyCode PickupKey;
     [SerializeField]
     private CardPanel CP = null;
+    public bool TaskComp;
+    private TaskList TL;
     private void Awake()
     {
+        TL = GameObject.Find("TaskList").GetComponent<TaskList>();
         CP = GameObject.Find("CardPanel").GetComponent<CardPanel>();
+        TaskComp = false;
     }
     void Start()
     {
-       
     }
 
     public void spawnObjective()
@@ -51,6 +54,8 @@ public class PickupTask : NetworkBehaviour
             if(collected == CollectAmount)
             {
                 Debug.Log("Pickup Task Complete");
+                TL.PickupTaskComp();
+                TaskComp = true;
                 CP.SpawnCard(1);
             }
             Destroy(obj);
@@ -58,7 +63,7 @@ public class PickupTask : NetworkBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
+        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && !TaskComp)
         {
             Debug.Log("Enter : Pickup Task");
             spawnObjective();

@@ -4,12 +4,15 @@ using UnityEngine;
 using TMPro;
 using System.Threading.Tasks;
 using UnityEngine.UI;
-public class PhaseTimer : MonoBehaviour
+using Unity.Netcode;
+public class PhaseTimer : NetworkBehaviour
 {
     float currentTime = 0;
     public float TaskStartingTime;
     public float CombineStartingTime;
     public float AttackStartingTime;
+    [SerializeField]
+    private float SpeedDivide;
     public TextMeshProUGUI TimerText;
     private GameSystem GS;
     public CardPanel CP;
@@ -28,6 +31,16 @@ public class PhaseTimer : MonoBehaviour
     {
         
     }
+    [ServerRpc]
+    public void TimeServerRpc(ServerTime data)
+    {
+        TimeClientRpc(data);
+    }
+    [ClientRpc]
+    public void TimeClientRpc(ServerTime data)
+    {
+        TimerText.text = currentTime.ToString("F2");
+    }
     public void TaskCountDownMethod()
     {
         TaskCountDown();
@@ -37,7 +50,10 @@ public class PhaseTimer : MonoBehaviour
         currentTime = TaskStartingTime;
         while(currentTime > 0)
         {
-            TimerText.text = currentTime.ToString("F2");
+            if (IsOwnedByServer)
+            {
+                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+            }
             currentTime -= Time.deltaTime;
             await Task.Yield();
         }
@@ -48,7 +64,10 @@ public class PhaseTimer : MonoBehaviour
         currentTime = CombineStartingTime;
         while (currentTime > 0)
         {
-            TimerText.text = currentTime.ToString("F2");
+            if (IsOwnedByServer)
+            {
+                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+            }
             currentTime -= Time.deltaTime;
             await Task.Yield();
         }
@@ -59,7 +78,10 @@ public class PhaseTimer : MonoBehaviour
         currentTime = AttackStartingTime;
         while (currentTime > 0)
         {
-            TimerText.text = currentTime.ToString("F2");
+            if (IsOwnedByServer)
+            {
+                TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
+            }
             currentTime -= Time.deltaTime;
             await Task.Yield();
         }
@@ -84,35 +106,36 @@ public class PhaseTimer : MonoBehaviour
                 CarboAlive++;
             }
         }
-        if (CarboAlive == 0)
-        {
-            foreach (GameObject Player in GS.CarboList)
-            {
-                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
-                Debug.Log("Carbo Lose");
-            }
-            foreach (GameObject Player in GS.ProteinList)
-            {
-                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
-                Debug.Log("Protein Win");
-            }
-        }
-        else if (ProteinAlive == 0)
-        {
-            foreach (GameObject Player in GS.ProteinList)
-            {
-                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
-                Debug.Log("Protein Lose");
-            }
-            foreach (GameObject Player in GS.CarboList)
-            {
-                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
-                Debug.Log("Carbo Win");
-            }
-        }
-        else
-        {
-            GS.TaskPhaseServerRpc();
-        }
+        GS.TaskPhaseServerRpc();
+        //if (CarboAlive == 0)
+        //{
+        //    foreach (GameObject Player in GS.CarboList)
+        //    {
+        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
+        //        Debug.Log("Carbo Lose");
+        //    }
+        //    foreach (GameObject Player in GS.ProteinList)
+        //    {
+        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
+        //        Debug.Log("Protein Win");
+        //    }
+        //}
+        //else if (ProteinAlive == 0)
+        //{
+        //    foreach (GameObject Player in GS.ProteinList)
+        //    {
+        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
+        //        Debug.Log("Protein Lose");
+        //    }
+        //    foreach (GameObject Player in GS.CarboList)
+        //    {
+        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
+        //        Debug.Log("Carbo Win");
+        //    }
+        //}
+        //else
+        //{
+        //    GS.TaskPhaseServerRpc();
+        //}
     }
 }

@@ -22,6 +22,8 @@ public class GameSystem : NetworkBehaviour
     public AmmoPanel AP;
     public CardPanel CP;
     public CardDic CD;
+    public Minimap MP;
+    public TaskList TL;
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -49,6 +51,7 @@ public class GameSystem : NetworkBehaviour
             if (player.GetComponent<NetworkObject>().IsLocalPlayer)
             {
                 localTurnbased = player.GetComponent<TurnBaseSystem>();
+                MP.LocalPlayer = player;
                 localTurnbased.HideCardPanel();
             }
         }
@@ -139,6 +142,7 @@ public class GameSystem : NetworkBehaviour
     {
         Debug.Log("TaskPhase");
         gamePhase = GamePhase.TaskState;
+        TL.resetTask();
         PT.TaskCountDownMethod();
         CP.CheckEmptyAmmoCard();
         AP.AddAmmoCard();

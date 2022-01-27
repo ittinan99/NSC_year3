@@ -10,8 +10,11 @@ public class ElectricTask : MonoBehaviour
     public ElectricWire currentEW;
     public ElectricWire[] allEW;
     public GameObject Task;
+    public bool TaskComp;
+    private TaskList TL;
     private void Awake()
     {
+        TL = GameObject.Find("TaskList").GetComponent<TaskList>();
         CP = GameObject.Find("CardPanel").GetComponent<CardPanel>();
     }
     void Start()
@@ -27,7 +30,7 @@ public class ElectricTask : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player")  && Input.GetKeyDown(KeyCode.E))
+        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player")  && Input.GetKeyDown(KeyCode.E) && !TaskComp)
         {
             Debug.Log("Enter : Electric Task");
             SpawnElectricTask();
@@ -51,7 +54,9 @@ public class ElectricTask : MonoBehaviour
         if(i == allEW.Length)
         {
             Debug.Log("Task Completed");
+            TaskComp = true;
             CP.SpawnCard(1);
+            TL.WireTaskComp();
             Task.SetActive(false);
         }
         else

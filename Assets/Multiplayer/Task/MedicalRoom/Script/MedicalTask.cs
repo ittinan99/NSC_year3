@@ -8,8 +8,11 @@ public class MedicalTask : MonoBehaviour
     private CardPanel CP = null;
     public GameObject Task;
     public SampleCollector SC;
+    public bool TaskComp;
+    private TaskList TL;
     private void Awake()
     {
+        TL = GameObject.Find("TaskList").GetComponent<TaskList>();
         CP = GameObject.Find("CardPanel").GetComponent<CardPanel>();
     }
     void Start()
@@ -24,7 +27,7 @@ public class MedicalTask : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
+        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && !TaskComp)
         {
             Debug.Log("Enter : Medical Task");
             SpawnMedicalTask();
@@ -40,6 +43,8 @@ public class MedicalTask : MonoBehaviour
     {
         Debug.Log("Task Completed");
         CP.SpawnCard(1);
+        TaskComp = true;
+        TL.MedicalTaskComp();
         Task.SetActive(false);
     }
 }
