@@ -2589,10 +2589,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Grenade Task : 0/1'
+  m_text: "\u0E40\u0E01\u0E47\u0E1A\u0E23\u0E30\u0E40\u0E1A\u0E34\u0E14 : 0/1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c6c251f722b7c7441ba7334ab7a54003, type: 2}
+  m_sharedMaterial: {fileID: 2439626570110852133, guid: c6c251f722b7c7441ba7334ab7a54003,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2616,13 +2617,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -3711,10 +3712,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Electric Wire Fix : 0/3'
+  m_text: "\u0E0B\u0E48\u0E2D\u0E21\u0E2A\u0E32\u0E22\u0E44\u0E1F : 0/3"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8abf6fa99de9e4b43a720800ed869eb3, type: 2}
+  m_sharedMaterial: {fileID: 4291543766085020041, guid: 8abf6fa99de9e4b43a720800ed869eb3,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3738,13 +3740,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -5088,10 +5090,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Medical Task : 0/1'
+  m_text: "\u0E08\u0E31\u0E14\u0E40\u0E23\u0E35\u0E22\u0E07\u0E22\u0E32 : 0/1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1a3d18093d62df84594225ca3001ffaa, type: 2}
+  m_sharedMaterial: {fileID: -6552556486324704257, guid: 1a3d18093d62df84594225ca3001ffaa,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5115,13 +5118,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -5585,8 +5588,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e7746236b7858354e982269f07505781, type: 2}
   - {fileID: 11400000, guid: d3bc2c42da24d7341b8fdddf5961641f, type: 2}
   - {fileID: 11400000, guid: d3bc2c42da24d7341b8fdddf5961641f, type: 2}
-  - {fileID: 11400000, guid: 1b9accf3b60600346a0c69510f9bd4aa, type: 2}
-  - {fileID: 11400000, guid: 1b9accf3b60600346a0c69510f9bd4aa, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   modifyValues: 0
 --- !u!1 &2119883986
 GameObject:
