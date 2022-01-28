@@ -2617,10 +2617,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27
+  m_fontSize: 34.05
   m_fontSizeBase: 27
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -3740,10 +3740,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27
+  m_fontSize: 32.3
   m_fontSizeBase: 27
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -5118,10 +5118,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27
+  m_fontSize: 34.15
   m_fontSizeBase: 27
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -5527,69 +5527,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dictionaryData: {fileID: 11400000, guid: 44d667dda0cea8e48bad75c3a548e65a, type: 2}
   keys:
-  - H2
+  - CH3
+  - H3C
+  - CH3OH
+  - OHCH3
+  - CO
+  - OC
+  - CO2
+  - O2C
   - HH
+  - H2O
+  - OH2
+  - H2S
+  - SH2
+  - HH2
+  - H2H
   - HCl
   - ClH
   - HI
   - IH
-  - I2
-  - NH
-  - NH3
-  - H3N
-  - HS2
-  - S2H
-  - OH
-  - HO
-  - O2
-  - CH3
-  - H3C
-  - CH4
-  - H4C
+  - II
   - NaCl
   - ClNa
-  - HOH
-  - OHH
   - NaOH
   - OHNa
-  - CO2
-  - O2C
-  - CH3OH
-  - OHCH3
-  - H2SO2
-  - O2H2S
+  - NH3
+  - H3N
+  - OO
+  - OH
+  - HO
   values:
+  - {fileID: 11400000, guid: 83f67ea7ff95d0541a98dda92cdabf28, type: 2}
+  - {fileID: 11400000, guid: 83f67ea7ff95d0541a98dda92cdabf28, type: 2}
+  - {fileID: 11400000, guid: d3bc2c42da24d7341b8fdddf5961641f, type: 2}
+  - {fileID: 11400000, guid: d3bc2c42da24d7341b8fdddf5961641f, type: 2}
+  - {fileID: 11400000, guid: 4c12c3464d2001b48a406f16d924e5af, type: 2}
+  - {fileID: 11400000, guid: 4c12c3464d2001b48a406f16d924e5af, type: 2}
+  - {fileID: 11400000, guid: e7746236b7858354e982269f07505781, type: 2}
+  - {fileID: 11400000, guid: e7746236b7858354e982269f07505781, type: 2}
   - {fileID: 11400000, guid: 8d6264b0fba8f704cb6d521dde6a64a0, type: 2}
+  - {fileID: 11400000, guid: 1b24fefe5f4b73e4db65cb0ea305320a, type: 2}
+  - {fileID: 11400000, guid: 1b24fefe5f4b73e4db65cb0ea305320a, type: 2}
+  - {fileID: 11400000, guid: 77ee9d5e54a36fc4f9a3afad3806c3cc, type: 2}
+  - {fileID: 11400000, guid: 77ee9d5e54a36fc4f9a3afad3806c3cc, type: 2}
   - {fileID: 11400000, guid: 1de91d9d538fe7c40b121c35b9c5afe5, type: 2}
-  - {fileID: 11400000, guid: 28f2e45ad0bec484ba82e5a7325dfc12, type: 2}
+  - {fileID: 11400000, guid: 1de91d9d538fe7c40b121c35b9c5afe5, type: 2}
   - {fileID: 11400000, guid: 389986a77f7f4e5428ad80aca1b875eb, type: 2}
   - {fileID: 11400000, guid: 389986a77f7f4e5428ad80aca1b875eb, type: 2}
   - {fileID: 11400000, guid: 240063a7aa547144c8093ece1b740584, type: 2}
   - {fileID: 11400000, guid: 240063a7aa547144c8093ece1b740584, type: 2}
   - {fileID: 11400000, guid: 28f2e45ad0bec484ba82e5a7325dfc12, type: 2}
+  - {fileID: 11400000, guid: 09fd63ed2af082f48a355053bd39e565, type: 2}
+  - {fileID: 11400000, guid: 09fd63ed2af082f48a355053bd39e565, type: 2}
+  - {fileID: 11400000, guid: f34cd9bd8f68a3f4c90a324e4b4902d1, type: 2}
+  - {fileID: 11400000, guid: f34cd9bd8f68a3f4c90a324e4b4902d1, type: 2}
   - {fileID: 11400000, guid: a2a5c1220a2e3c24ca36431650b50c0d, type: 2}
   - {fileID: 11400000, guid: a2a5c1220a2e3c24ca36431650b50c0d, type: 2}
-  - {fileID: 11400000, guid: 77ee9d5e54a36fc4f9a3afad3806c3cc, type: 2}
-  - {fileID: 11400000, guid: 77ee9d5e54a36fc4f9a3afad3806c3cc, type: 2}
-  - {fileID: 11400000, guid: 49aee0778ea730b469a89f1046df155b, type: 2}
-  - {fileID: 11400000, guid: 49aee0778ea730b469a89f1046df155b, type: 2}
   - {fileID: 11400000, guid: 28e37365762c3c444b2abf350bf3bc8f, type: 2}
-  - {fileID: 11400000, guid: 83f67ea7ff95d0541a98dda92cdabf28, type: 2}
-  - {fileID: 11400000, guid: 83f67ea7ff95d0541a98dda92cdabf28, type: 2}
-  - {fileID: 11400000, guid: 618c6c2ee58aa6f44b4d411d4e3a2504, type: 2}
-  - {fileID: 11400000, guid: 618c6c2ee58aa6f44b4d411d4e3a2504, type: 2}
-  - {fileID: 11400000, guid: 09fd63ed2af082f48a355053bd39e565, type: 2}
-  - {fileID: 11400000, guid: 09fd63ed2af082f48a355053bd39e565, type: 2}
-  - {fileID: 11400000, guid: 1b24fefe5f4b73e4db65cb0ea305320a, type: 2}
-  - {fileID: 11400000, guid: 1b24fefe5f4b73e4db65cb0ea305320a, type: 2}
-  - {fileID: 11400000, guid: f34cd9bd8f68a3f4c90a324e4b4902d1, type: 2}
-  - {fileID: 11400000, guid: f34cd9bd8f68a3f4c90a324e4b4902d1, type: 2}
-  - {fileID: 11400000, guid: e7746236b7858354e982269f07505781, type: 2}
-  - {fileID: 11400000, guid: e7746236b7858354e982269f07505781, type: 2}
-  - {fileID: 11400000, guid: d3bc2c42da24d7341b8fdddf5961641f, type: 2}
-  - {fileID: 11400000, guid: d3bc2c42da24d7341b8fdddf5961641f, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 49aee0778ea730b469a89f1046df155b, type: 2}
+  - {fileID: 11400000, guid: 49aee0778ea730b469a89f1046df155b, type: 2}
   modifyValues: 0
 --- !u!1 &2119883986
 GameObject:
