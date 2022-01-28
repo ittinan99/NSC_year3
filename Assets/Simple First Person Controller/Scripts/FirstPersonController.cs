@@ -47,7 +47,7 @@ namespace Unity.Netcode
         Animator animator;
         int aimLayer;
         int hurtLayer;
-        bool playerAim = true;
+        bool playerAim = false;
         private float layerWeightVelocity = 100;
 
         public GameObject camZoomOut;
@@ -240,31 +240,34 @@ namespace Unity.Netcode
             //    animator.SetFloat("Walk", 0);            
             //}
 
-            if (playerAim == true)
-            {
-                float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
-                //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
-                SetWeightServerRpc(new Layer { LayerWeight = currentAimLayerWeight, target = 0f });
-                animator.SetBool("Aim", false);
-                movementSpeed = 10.0F;
-
-                camZoomOut.SetActive(true);
-                camZoomIn.SetActive(false);
-            }
-            if (playerAim == false)
-            {
-                float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
-                //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
-                SetWeightServerRpc(new Layer { LayerWeight = currentAimLayerWeight, target = 1f });
-                animator.SetBool("Aim", true);
-                movementSpeed = 2.0F;
-
-                camZoomOut.SetActive(false);
-                camZoomIn.SetActive(true);
-            }
             if (Input.GetKeyDown(KeyCode.E))
             {
                 playerAim = !playerAim;
+                if (playerAim == false)
+                {
+                    float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
+                    //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 0f, ref layerWeightVelocity, 0.2f));
+                    SetWeightServerRpc(new Layer { LayerWeight = currentAimLayerWeight, target = 0f });
+                    animator.SetBool("Aim", false);
+                    movementSpeed = 10.0F;
+
+                    camZoomOut.SetActive(true);
+                    camZoomIn.SetActive(false);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (playerAim == true)
+                {
+                    float currentAimLayerWeight = animator.GetLayerWeight(aimLayer);
+                    //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
+                    SetWeightServerRpc(new Layer { LayerWeight = currentAimLayerWeight, target = 1f });
+                    animator.SetBool("Aim", true);
+                    movementSpeed = 2.0F;
+
+                    camZoomOut.SetActive(false);
+                    camZoomIn.SetActive(true);
+                }
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
