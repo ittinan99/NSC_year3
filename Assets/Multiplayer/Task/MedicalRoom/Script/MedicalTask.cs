@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class MedicalTask : MonoBehaviour
+public class MedicalTask : NetworkBehaviour
 {
     [SerializeField]
     private CardPanel CP = null;
@@ -27,7 +28,8 @@ public class MedicalTask : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && !TaskComp)
+        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && !TaskComp
+            && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             Debug.Log("Enter : Medical Task");
             SpawnMedicalTask();

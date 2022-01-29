@@ -10,6 +10,7 @@ TagManager:
   - NetworkObject
   - NetworkManager
   - canAttack
+  - TaskCanvas
   layers:
   - Default
   - TransparentFX

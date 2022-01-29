@@ -144,6 +144,10 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
                     cardPanel.GetComponent<CardPanel>().AddCard(this);
                 }
             }
+            else if(GameSystem.gamePhase == GameSystem.GamePhase.TaskState)
+            {
+                IsPressed = true;
+            }
             //else if (GameSystem.gamePhase == GameSystem.GamePhase.AttackState && E_Card.CanAttack )
             //{
             //    Debug.Log("Arrow");

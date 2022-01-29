@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.UI;
+using TMPro;
 
 public class PickupTask : NetworkBehaviour
 {
@@ -15,6 +17,11 @@ public class PickupTask : NetworkBehaviour
     [SerializeField]
     private CardPanel CP = null;
     public bool TaskComp;
+
+    public GameObject Task;
+    public TextMeshProUGUI Pickupwhat;
+    public string PickupText;
+
     private TaskList TL;
     private void Awake()
     {
@@ -24,16 +31,21 @@ public class PickupTask : NetworkBehaviour
     }
     void Start()
     {
+        Task.SetActive(false);
     }
 
     public void spawnObjective()
     {
+        Task.SetActive(true);
         AllObj = new List<PickupEvent>();
         spawnPos = new List<Transform>();
         collected = 0;
         foreach (Transform child in transform)
         {
-            spawnPos.Add(child);
+            if(child.tag != "TaskCanvas")
+            {
+                spawnPos.Add(child);
+            }
         }
         for (int i = 0; i <= spawnPos.Count - 1; i++)
         {
@@ -41,6 +53,7 @@ public class PickupTask : NetworkBehaviour
             Obj.GetComponent<PickupEvent>().onTriggerStay.AddListener(PlayerPickup);
             AllObj.Add(Obj.GetComponent<PickupEvent>());
         }
+        Pickupwhat.text = $"{PickupText} : {collected}/{CollectAmount} ";
     }
     void Update()
     {
@@ -63,19 +76,22 @@ public class PickupTask : NetworkBehaviour
         if (col.gameObject.tag == "Player" && Input.GetKeyDown(PickupKey))
         {
             collected++;
-            if(collected == CollectAmount)
+            Pickupwhat.text = $"{PickupText} : {collected}/{CollectAmount} ";
+            if (collected == CollectAmount)
             {
                 Debug.Log("Pickup Task Complete");
                 TL.PickupTaskComp();
                 TaskComp = true;
                 CP.SpawnCard(1);
+                Task.SetActive(false);
             }
             Destroy(obj);
         }
     }
     private void OnTriggerStay(Collider other)
     {
-        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && !TaskComp)
+        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && !TaskComp
+            && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             Debug.Log("Enter : Pickup Task");
             spawnObjective();

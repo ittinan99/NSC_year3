@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ElectricTask : MonoBehaviour
+using Unity.Netcode;
+public class ElectricTask : NetworkBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
@@ -30,7 +30,8 @@ public class ElectricTask : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player")  && Input.GetKeyDown(KeyCode.E) && !TaskComp)
+        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player")  && Input.GetKeyDown(KeyCode.E) && !TaskComp
+            && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             Debug.Log("Enter : Electric Task");
             SpawnElectricTask();
