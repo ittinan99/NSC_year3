@@ -4,11 +4,23 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
+    public TMP_Text Name;
+    public GameObject EnterNameUI;
+    public void ExitEnterName()
+    {
+        EnterNameUI.SetActive(false);
+    }
     public void OnClickStartGame()
     {
+        EnterNameUI.SetActive(true);
+    }
+    public void OnClickEnter()
+    {
+        PlayerPrefs.SetString("PName", Name.text);
         SceneManager.LoadScene("Mainmenu2", LoadSceneMode.Single);
     }
     public void OnClickEncyclopedia()

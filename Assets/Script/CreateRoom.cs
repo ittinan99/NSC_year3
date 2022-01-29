@@ -16,12 +16,12 @@ public class CreateRoom : MonoBehaviour
     public string sceneName;
     public TMP_Text[] RoomID;
     public TMP_Text[] RoomPW;
-    public TMP_Text NicknameInput;
     PhotonRealtimeTransport transport;
     GameObject[] NetworkManagers;
     // Happen on server
     public void Start()
     {
+        nickName = PlayerPrefs.GetString("PName");
         NetworkManagers = GameObject.FindGameObjectsWithTag("NetworkManager");
         if (NetworkManagers.Length > 1)
         {
@@ -32,7 +32,7 @@ public class CreateRoom : MonoBehaviour
     {
         
         GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().RoomName = RoomID[0].text;
-        GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().NickName = NicknameInput.text;
+        GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().NickName = nickName;
         NetworkManager.Singleton.NetworkConfig.PlayerPrefab.name = "PlayerInfoBase(Clone)";
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
         NetworkManager.Singleton.StartHost();
@@ -50,7 +50,7 @@ public class CreateRoom : MonoBehaviour
     {
         transport = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
         transport.RoomName = RoomID[1].text;
-        transport.NickName = NicknameInput.text;
+        transport.NickName = nickName;
         NetworkManager.Singleton.NetworkConfig.PlayerPrefab.name = "PlayerInfoBase(Clone)";
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(RoomPW[1].text);
         NetworkManager.Singleton.StartClient();
