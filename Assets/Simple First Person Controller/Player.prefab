@@ -378,6 +378,10 @@ MonoBehaviour:
   FB: {fileID: 0}
   camZoomOut: {fileID: 5695391841594561142}
   camZoomIn: {fileID: 4703032348494848283}
+  networkPositionDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkPlayerState:
+    m_InternalValue: 0
 --- !u!114 &411187454379236917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,6 +923,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2699541615817244671}
     m_Modifications:
+    - target: {fileID: 2450243116866379512, guid: 2f7656efa0abf8544a2d79c130f2a91e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7888d7c26afa82542953ab2b4802819f, type: 2}
     - target: {fileID: 2593873998170222140, guid: 2f7656efa0abf8544a2d79c130f2a91e,
         type: 3}
       propertyPath: m_Name
