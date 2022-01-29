@@ -41,13 +41,11 @@ public class CardPanel : MonoBehaviour
             {
                 DeleteCard.Add(hCard[i].gameObject);
                 hCard.Remove(hCard[i]);
-                Debug.Log(i);
             }
         }
         for (var i = DeleteCard.Count - 1; i > -1; i--)
         {
             Destroy(DeleteCard[i]);
-            Debug.Log(i);
         }
         SetCardPos();
     }
@@ -81,26 +79,47 @@ public class CardPanel : MonoBehaviour
             AddCard(newCard.GetComponent<ElementCardDisplay>());
         }
     }
-    public void AddCard(ElementCardDisplay ECD)
+    public void RemoveCard(ElementCardDisplay ECD)
     {
-        hCard.Add(ECD);
-        //hCard = new List<ElementCardDisplay>(GameObject.FindObjectsOfType<ElementCardDisplay>());
+        List<GameObject> DeleteCard = new List<GameObject>();
         for (var i = hCard.Count - 1; i > -1; i--)
         {
-            if (hCard[i] == null)
-                hCard.RemoveAt(i);
+            if (hCard[i] == ECD)
+            {
+                DeleteCard.Add(hCard[i].gameObject);
+                hCard.Remove(hCard[i]);
+                Debug.Log(i);
+            }
         }
-        hCard.RemoveAll(x => x==null);
-        ECD.gameObject.transform.parent = this.gameObject.transform;
-        Vector2 offsetmax = ECD.gameObject.GetComponent<RectTransform>().offsetMax;
-        Vector2 offsetmin = ECD.gameObject.GetComponent<RectTransform>().offsetMin;
-        ECD.gameObject.GetComponent<RectTransform>().position = Vector3.zero;
-        ECD.gameObject.GetComponent<RectTransform>().offsetMax = Vector2.zero;
-        ECD.gameObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
-
-        Debug.Log(ECD.gameObject.GetComponent<RectTransform>().position);
-  
+        for (var i = DeleteCard.Count - 1; i > -1; i--)
+        {
+            Destroy(DeleteCard[i]);
+        }
         SetCardPos();
+    }
+    public void AddCard(ElementCardDisplay ECD)
+    {   
+        if(hCard.Count < 8)
+        {
+            hCard.Add(ECD);
+            //hCard = new List<ElementCardDisplay>(GameObject.FindObjectsOfType<ElementCardDisplay>());
+            for (var i = hCard.Count - 1; i > -1; i--)
+            {
+                if (hCard[i] == null)
+                    hCard.RemoveAt(i);
+            }
+            hCard.RemoveAll(x => x == null);
+            ECD.gameObject.transform.parent = this.gameObject.transform;
+            Vector2 offsetmax = ECD.gameObject.GetComponent<RectTransform>().offsetMax;
+            Vector2 offsetmin = ECD.gameObject.GetComponent<RectTransform>().offsetMin;
+            ECD.gameObject.GetComponent<RectTransform>().position = Vector3.zero;
+            ECD.gameObject.GetComponent<RectTransform>().offsetMax = Vector2.zero;
+            ECD.gameObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
+
+            Debug.Log(ECD.gameObject.GetComponent<RectTransform>().position);
+
+            SetCardPos();
+        }
     }
     
 }
