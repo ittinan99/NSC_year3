@@ -18,6 +18,7 @@ public class TaskList : MonoBehaviour
     public string ETinfo;
     public string MTinfo;
     public string PTinfo;
+    public Minimap Mm;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,9 @@ public class TaskList : MonoBehaviour
         allET = GameObject.FindObjectsOfType<ElectricTask>();
         allMT = GameObject.FindObjectsOfType<MedicalTask>();
         allPT = GameObject.FindObjectsOfType<PickupTask>();
+        Mm = GameObject.FindObjectOfType<Minimap>();
         resetTask();
+        Mm.SpawnMiniIcon();
     }
 
     // Update is called once per frame
