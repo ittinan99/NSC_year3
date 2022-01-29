@@ -4055,6 +4055,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedicalTask
       objectReference: {fileID: 0}
+    - target: {fileID: 2792160135363720606, guid: 9a760fea395f60d49ae65a91ffc77189,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6091596806251085682, guid: 9a760fea395f60d49ae65a91ffc77189,
         type: 3}
       propertyPath: m_IsActive
