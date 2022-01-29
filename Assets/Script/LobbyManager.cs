@@ -14,4 +14,10 @@ public class LobbyManager : MonoBehaviour
     {
         NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
+    public void onclickBack()
+    {
+        NetworkManager.Singleton.DontDestroy = false;
+        Destroy(NetworkManager.Singleton.gameObject);
+        SceneManager.LoadScene("Mainmenu2");
+    }
 }
