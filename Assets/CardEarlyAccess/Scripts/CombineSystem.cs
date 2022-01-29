@@ -92,6 +92,21 @@ public class CombineSystem : MonoBehaviour
             outputCard = null;
         }
     }
+    public void ResetRemainCard()
+    {
+        if(C_Input1 != null)
+        {
+            C_Input1.ResetFromCombine();
+            C_Input1 = null;
+            Input1.GetComponent<CardEvent>().IsEmpty = true;
+        }
+        if(C_Input2 != null)
+        {
+            C_Input2.ResetFromCombine();
+            C_Input2 = null;
+            Input2.GetComponent<CardEvent>().IsEmpty = true;
+        }
+    }
     // Update is called once per frame
     void Update()
     {

@@ -46,6 +46,18 @@ public class PickupTask : NetworkBehaviour
     {
         
     }
+    public void DestroyAllSpawn()
+    {
+        AllObj.RemoveAll(x =>x==null);
+        if(AllObj.Count > 0)
+        {
+            foreach (PickupEvent obj in AllObj)
+            {
+                Destroy(obj.gameObject);
+            }
+        }
+        AllObj.Clear();
+    }
     void PlayerPickup(Collider col,GameObject obj)
     {
         if (col.gameObject.tag == "Player" && Input.GetKeyDown(PickupKey))

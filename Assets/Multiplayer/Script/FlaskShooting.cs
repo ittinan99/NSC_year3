@@ -61,6 +61,7 @@ namespace Unity.Netcode
                 var flask = Instantiate(T_Renderer, FlaskBarrel.transform.position, Quaternion.identity);
                 flask.GetComponent<Rigidbody>().AddForce(transform.forward * 50, ForceMode.Impulse);
                 flask.GetComponent<DamageBottle>().Spawner = this.gameObject;
+                flask.GetComponent<DamageBottle>().Damage = AP.CurrentAmmo.E_Card.Damage;
             }
         }
     }

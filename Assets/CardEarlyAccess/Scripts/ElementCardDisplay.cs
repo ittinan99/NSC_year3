@@ -26,7 +26,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     private Transform _selection;
 
     private ISelectionResponse _selectionResponse;
-
+    private int sIndex;
 
     private void Awake()
     {
@@ -45,6 +45,7 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
         {
             Artwork.sprite = E_Card.ArtWork;
         }
+        sIndex = this.transform.GetSiblingIndex();
     }
     private void Update()
     {
@@ -109,11 +110,13 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
     public void OnPointerEnter(PointerEventData eventData)
     {
         this.GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1);
+        this.transform.SetAsLastSibling();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         this.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+        this.transform.SetSiblingIndex(sIndex);
 
     }
 
@@ -196,4 +199,11 @@ public class ElementCardDisplay : NetworkBehaviour, IPointerEnterHandler, IPoint
             CombineSlot = null;
         }
     }  
+    public void ResetFromCombine()
+    {
+        IsCombine = false;
+        CombineSlot = null;
+        this.transform.position = StartPos;
+        IsPressed = false;
+    }
 }

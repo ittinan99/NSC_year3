@@ -128,6 +128,7 @@ public class GameSystem : NetworkBehaviour
     {
         Debug.Log("CombinePhase");
         gamePhase = GamePhase.CombineState;
+        TL.HideShowTask();
         localTurnbased.HideShowPanel();
         PT.CombineCountDownMethod();
     }

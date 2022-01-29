@@ -15,6 +15,9 @@ public class TaskList : MonoBehaviour
     public TextMeshProUGUI WireText;
     public TextMeshProUGUI MedicalText;
     public TextMeshProUGUI PickupText;
+    public string ETinfo;
+    public string MTinfo;
+    public string PTinfo;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,23 +52,38 @@ public class TaskList : MonoBehaviour
         {
             PT.TaskComp = false;
         }
-        WireText.text = $"Electric Wire Fix : 0/{allET.Length}";
-        MedicalText.text = $"Medical Task : 0/{allMT.Length}";
-        PickupText.text = $"Grenade Task : 0/{allPT.Length}";
+        WireText.text = $"{ETinfo} : 0/{allET.Length}";
+        MedicalText.text = $"{MTinfo} : 0/{allMT.Length}";
+        PickupText.text = $"{PTinfo} : 0/{allPT.Length}";
+    }
+    public void HideShowTask()
+    {
+        foreach (ElectricTask ET in allET)
+        {
+            ET.Task.SetActive(false);
+        }
+        foreach (MedicalTask MT in allMT)
+        {
+            MT.Task.SetActive(false);
+        }
+        foreach (PickupTask PT in allPT)
+        {
+            PT.DestroyAllSpawn();
+        }
     }
     public void WireTaskComp()
     {
         WireFixCount++;
-        WireText.text = $"Electric Wire Fix : {WireFixCount}/{allET.Length}";
+        WireText.text = $"{ETinfo} : {WireFixCount}/{allET.Length}";
     }
     public void MedicalTaskComp()
     {
         MedicalTaskCount++;
-        MedicalText.text = $"Medical Task : {MedicalTaskCount}/{allMT.Length}";
+        MedicalText.text = $"{MTinfo} : {MedicalTaskCount}/{allMT.Length}";
     }
     public void PickupTaskComp()
     {
         PickupCount++;
-        PickupText.text = $"Grenade Task : {PickupCount}/{allPT.Length}";
+        PickupText.text = $"{PTinfo} : {PickupCount}/{allPT.Length}";
     }
 }
