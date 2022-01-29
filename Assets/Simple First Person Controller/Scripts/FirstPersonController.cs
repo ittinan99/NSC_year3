@@ -240,7 +240,7 @@ namespace Unity.Netcode
             //    animator.SetFloat("Walk", 0);            
             //}
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 playerAim = !playerAim;
                 if (playerAim == false)
@@ -255,7 +255,7 @@ namespace Unity.Netcode
                     camZoomIn.SetActive(false);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 if (playerAim == true)
                 {

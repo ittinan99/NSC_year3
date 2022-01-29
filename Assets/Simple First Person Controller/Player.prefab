@@ -378,6 +378,10 @@ MonoBehaviour:
   FB: {fileID: 0}
   camZoomOut: {fileID: 5695391841594561142}
   camZoomIn: {fileID: 4703032348494848283}
+  networkPositionDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkPlayerState:
+    m_InternalValue: 0
 --- !u!114 &411187454379236917
 MonoBehaviour:
   m_ObjectHideFlags: 0
