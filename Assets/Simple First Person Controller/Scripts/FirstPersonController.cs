@@ -240,7 +240,7 @@ namespace Unity.Netcode
             //    animator.SetFloat("Walk", 0);            
             //}
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 playerAim = !playerAim;
                 if (playerAim == false)
@@ -255,7 +255,7 @@ namespace Unity.Netcode
                     camZoomIn.SetActive(false);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 if (playerAim == true)
                 {
@@ -263,7 +263,7 @@ namespace Unity.Netcode
                     //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(currentAimLayerWeight, 1f, ref layerWeightVelocity, 0.2f));
                     SetWeightServerRpc(new Layer { LayerWeight = currentAimLayerWeight, target = 1f });
                     animator.SetBool("Aim", true);
-                    movementSpeed = 2.0F;
+                    movementSpeed = 5.0F;
 
                     camZoomOut.SetActive(false);
                     camZoomIn.SetActive(true);
