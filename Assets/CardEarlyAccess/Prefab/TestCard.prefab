@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 413444962088438659}
   - component: {fileID: 413444962088438661}
   - component: {fileID: 413444962088438658}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: CardName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 413444962380916272}
   - component: {fileID: 413444962380916273}
   - component: {fileID: 4768155772155515416}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: TestCard
   m_TagString: Card
   m_Icon: {fileID: 0}
@@ -231,6 +231,7 @@ MonoBehaviour:
   CardText: {fileID: 413444962088438658}
   F_CardText: {fileID: 413444963483840908}
   Artwork: {fileID: 413444962380916287}
+  AmmoAmount: 0
   IsCombine: 0
   IsPressed: 0
   IsAttack: 0
@@ -310,7 +311,7 @@ GameObject:
   - component: {fileID: 413444963483840909}
   - component: {fileID: 413444963483840911}
   - component: {fileID: 413444963483840908}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: CardFName
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,6 +15,7 @@ public class ElementCard : ScriptableObject,ICombinable,IAttackable
 
     public Sprite ArtWork;
 
+    public float Damage;
     public string description;
     public float Amount;
     public void Attack()

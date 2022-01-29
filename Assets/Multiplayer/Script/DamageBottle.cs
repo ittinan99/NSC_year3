@@ -6,6 +6,7 @@ public class DamageBottle : MonoBehaviour
 {
     public GameObject Spawner;
     private bool dSpawn = true;
+    public float Damage;
     private void Start()
     {
     }
@@ -15,7 +16,7 @@ public class DamageBottle : MonoBehaviour
         {
             if (other.GetComponent<TurnBaseSystem>() != null)
             {
-                other.GetComponent<TurnBaseSystem>().TakeDamage(10);
+                other.GetComponent<TurnBaseSystem>().TakeDamage(Damage);
                 Debug.Log("Hit");
                 Destroy(this.gameObject);
             }

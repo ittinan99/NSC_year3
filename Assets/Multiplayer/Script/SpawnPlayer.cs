@@ -13,7 +13,7 @@ public class SpawnPlayer : NetworkBehaviour
     PhotonRealtimeTransport photo;
     public string PlayerName;
     public ulong PlayerId;
-
+    public Transform[] SpawnPoints;
     void Start()
     {
         Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
@@ -46,9 +46,8 @@ public class SpawnPlayer : NetworkBehaviour
     }
     Vector3 GetRandomSpawn()
     {
-        float x = Random.Range(-10f, 10f);
-        float y = 4f;
-        float z = Random.Range(-10f, 10f);
-        return new Vector3(x, y, z);
+        int Rand = Random.Range(0, SpawnPoints.Length-1);
+        Vector3 RandPos = SpawnPoints[Rand].position;
+        return RandPos;
     }
 }
