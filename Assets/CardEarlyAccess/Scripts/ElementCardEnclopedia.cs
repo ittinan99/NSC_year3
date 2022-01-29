@@ -9,8 +9,6 @@ public class ElementCardEnclopedia : NetworkBehaviour, IPointerEnterHandler, IPo
 {
     public ElementCard E_Card;
 
-    public TextMeshProUGUI CardText;
-    public TextMeshProUGUI F_CardText;
     public Image Artwork = null;
     public float AmmoAmount;
     public bool IsCombine;
@@ -38,8 +36,6 @@ public class ElementCardEnclopedia : NetworkBehaviour, IPointerEnterHandler, IPo
         IsCombine = false;
         IsPressed = false;
         StartPos = this.transform.position;
-        CardText.text = E_Card.element_Name;
-        F_CardText.text = E_Card.element_FName;
         AmmoAmount = E_Card.Amount;
         if(E_Card.ArtWork != null)
         {
