@@ -19,7 +19,6 @@ public class ElectricTask : NetworkBehaviour
     }
     void Start()
     {
-        allEW = GameObject.FindObjectsOfType<ElectricWire>();
         Task.SetActive(false);
     }
 

@@ -112,8 +112,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CP: {fileID: 0}
   currentEW: {fileID: 0}
-  allEW: []
-  Task: {fileID: 0}
+  allEW:
+  - {fileID: 4539693629489303215}
+  - {fileID: 4539693630424796558}
+  - {fileID: 4539693630077547979}
+  - {fileID: 4539693628487389672}
+  Task: {fileID: 5201083986823005445}
+  TaskComp: 0
 --- !u!54 &1357395517620362908
 Rigidbody:
   m_ObjectHideFlags: 0

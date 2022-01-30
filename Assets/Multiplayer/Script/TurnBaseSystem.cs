@@ -159,14 +159,20 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             currentHealth.Value -= DamageAmount;
             CurrentHealth = currentHealth.Value;
-            Hpbar.value = CurrentHealth;
+            if (IsLocalPlayer)
+            {
+                Hpbar.value = CurrentHealth;
+            }
             Debug.Log("TakeDamage");
         }
         if(currentHealth.Value <= 0)
         {
             currentHealth.Value = 0;
-            Hpbar.value = CurrentHealth;
-            DeadServerRpc();
+            if (IsLocalPlayer)
+            {
+                Hpbar.value = CurrentHealth;
+                DeadServerRpc();
+            }
         }
         
     }
