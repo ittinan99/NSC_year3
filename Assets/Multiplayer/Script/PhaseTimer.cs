@@ -22,6 +22,12 @@ public class PhaseTimer : NetworkBehaviour
     public GameObject ClockHand;
     public Image ClockAreaRemain;
     public Slider ClockSlider;
+
+    public AudioClip TaskPhaseMusic;
+    public AudioClip CombPhaseMusic;
+    public AudioClip ATKPhaseMusic;
+    [SerializeField]
+    private AudioSource audioS;
     float Angle = 0;
     // Start is called before the first frame update
     private void Awake()
@@ -64,6 +70,8 @@ public class PhaseTimer : NetworkBehaviour
     }
     public async void TaskCountDown()
     {
+        audioS.clip = TaskPhaseMusic;
+        audioS.Play();
         if (IsOwner)
         {
             currentTime.Value = TaskStartingTime;
@@ -81,10 +89,13 @@ public class PhaseTimer : NetworkBehaviour
             ClockHandRotate(TaskStartingTime);
             await Task.Yield();
         }
+        audioS.Stop();
         GS.CombinePhaseServerRpc();
     }
     public async void CombineCountDownMethod()
     {
+        audioS.clip = CombPhaseMusic;
+        audioS.Play();
         if (IsOwner)
         {
             currentTime.Value = CombineStartingTime;
@@ -102,10 +113,13 @@ public class PhaseTimer : NetworkBehaviour
             ClockHandRotate(CombineStartingTime);
             await Task.Yield();
         }
+        audioS.Stop();
         GS.AttackPhaseServerRpc();
     }
     public async void AttackCountDownMethod()
     {
+        audioS.clip = ATKPhaseMusic;
+        audioS.Play();
         if (IsOwner)
         {
             currentTime.Value = AttackStartingTime;
@@ -123,6 +137,7 @@ public class PhaseTimer : NetworkBehaviour
             ClockHandRotate(AttackStartingTime);
             await Task.Yield();
         }
+        audioS.Stop();
         CheckBattleResult();
 
     }
