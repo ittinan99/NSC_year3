@@ -32,7 +32,7 @@ public class BinTask : NetworkBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        if (other.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             Debug.Log("Left : Bin");
             Task.SetActive(false);

@@ -24,7 +24,7 @@ public class TurnBaseSystem : NetworkBehaviour
     [SerializeField]
     private Button StartBut;
 
-    NetworkVariable<float> currentHealth = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone);
+    NetworkVariable<float> currentHealth = new NetworkVariable<float>();
     public float CurrentHealth;
     public float maxHealth;
     [SerializeField]
@@ -32,7 +32,7 @@ public class TurnBaseSystem : NetworkBehaviour
 
     public Outline playerOutline;
     public bool die = false;
-    public GameObject Model;
+    public MeshRenderer Model;
     [SerializeField]
     private ElementCardDisplay ATKcard;
 
@@ -171,8 +171,8 @@ public class TurnBaseSystem : NetworkBehaviour
             if (IsLocalPlayer)
             {
                 Hpbar.value = CurrentHealth;
+                DeadServerRpc();
             }
-            DeadServerRpc();
         }
         
     }
@@ -185,7 +185,7 @@ public class TurnBaseSystem : NetworkBehaviour
     public void DeadClientRpc()
     {
         die = true;
-        Model.SetActive(false);
+        Model.enabled = false;
     }
     public void HideShowPanel()
     {

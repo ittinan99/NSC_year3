@@ -71,12 +71,15 @@ public class CardPanel : MonoBehaviour
     }
     public void SpawnCard(int amount)
     {
-        for(int i = 0; i < amount; i++)
+        if(hCard.Count < 8)
         {
-            int RandNum = Random.Range(0, allEcard.Count - 1);
-            var newCard = Instantiate(E_cardPrefab, this.transform);
-            newCard.GetComponent<ElementCardDisplay>().E_Card = allEcard[RandNum];
-            AddCard(newCard.GetComponent<ElementCardDisplay>());
+            for (int i = 0; i < amount; i++)
+            {
+                int RandNum = Random.Range(0, allEcard.Count - 1);
+                var newCard = Instantiate(E_cardPrefab, this.transform);
+                newCard.GetComponent<ElementCardDisplay>().E_Card = allEcard[RandNum];
+                AddCard(newCard.GetComponent<ElementCardDisplay>());
+            }
         }
     }
     public void RemoveCard(ElementCardDisplay ECD)
@@ -98,28 +101,25 @@ public class CardPanel : MonoBehaviour
         SetCardPos();
     }
     public void AddCard(ElementCardDisplay ECD)
-    {   
-        if(hCard.Count < 8)
+    {
+        hCard.Add(ECD);
+        //hCard = new List<ElementCardDisplay>(GameObject.FindObjectsOfType<ElementCardDisplay>());
+        for (var i = hCard.Count - 1; i > -1; i--)
         {
-            hCard.Add(ECD);
-            //hCard = new List<ElementCardDisplay>(GameObject.FindObjectsOfType<ElementCardDisplay>());
-            for (var i = hCard.Count - 1; i > -1; i--)
-            {
-                if (hCard[i] == null)
-                    hCard.RemoveAt(i);
-            }
-            hCard.RemoveAll(x => x == null);
-            ECD.gameObject.transform.parent = this.gameObject.transform;
-            Vector2 offsetmax = ECD.gameObject.GetComponent<RectTransform>().offsetMax;
-            Vector2 offsetmin = ECD.gameObject.GetComponent<RectTransform>().offsetMin;
-            ECD.gameObject.GetComponent<RectTransform>().position = Vector3.zero;
-            ECD.gameObject.GetComponent<RectTransform>().offsetMax = Vector2.zero;
-            ECD.gameObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
-
-            Debug.Log(ECD.gameObject.GetComponent<RectTransform>().position);
-
-            SetCardPos();
+            if (hCard[i] == null)
+                hCard.RemoveAt(i);
         }
+        hCard.RemoveAll(x => x == null);
+        ECD.gameObject.transform.parent = this.gameObject.transform;
+        Vector2 offsetmax = ECD.gameObject.GetComponent<RectTransform>().offsetMax;
+        Vector2 offsetmin = ECD.gameObject.GetComponent<RectTransform>().offsetMin;
+        ECD.gameObject.GetComponent<RectTransform>().position = Vector3.zero;
+        ECD.gameObject.GetComponent<RectTransform>().offsetMax = Vector2.zero;
+        ECD.gameObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
+
+        Debug.Log(ECD.gameObject.GetComponent<RectTransform>().position);
+
+        SetCardPos();
     }
     
 }

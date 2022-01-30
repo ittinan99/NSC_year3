@@ -96,7 +96,7 @@ public class AmmoPanel : MonoBehaviour
                     AmmoCard.Add(hcard);
                 }
             }
-            if (AmmoCard.Count > 0)
+            if(AmmoCard.Count > 0)
             {
                 CurrentAmmo = AmmoCard[CurrentAmmoIndex];
                 DisplayAmmo.ECD_Card = CurrentAmmo;
