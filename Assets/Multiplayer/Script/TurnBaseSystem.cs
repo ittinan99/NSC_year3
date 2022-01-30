@@ -101,7 +101,8 @@ public class TurnBaseSystem : NetworkBehaviour
             StartBut.interactable = true;
         }
     }
-    
+
+
     //public void ATKcardFunc(ElementCardDisplay atkCard)
     //{
     //    ray = Camera.main.ScreenPointToRay(Input.mousePosition);

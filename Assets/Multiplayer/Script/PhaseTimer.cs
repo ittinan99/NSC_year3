@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class PhaseTimer : NetworkBehaviour
 {
     NetworkVariable<float> currentTime = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone);
+    NetworkVariable<float> ClockValue = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone);
     public float TaskStartingTime;
     public float CombineStartingTime;
     public float AttackStartingTime;
@@ -31,13 +32,17 @@ public class PhaseTimer : NetworkBehaviour
     void Start()
     {
         currentTime.OnValueChanged += ValueChange;
+        ClockValue.OnValueChanged += clockchange;
+        currentTime.Value = 0;
     }
-
     private void ValueChange(float previousValue, float newValue)
     {
         TimerText.text = newValue.ToString("F2");
     }
-
+    private void clockchange(float previousValue, float newValue)
+    {
+        ClockSlider.value = newValue;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -75,8 +80,8 @@ public class PhaseTimer : NetworkBehaviour
             {
                 //TimeServerRpc(new ServerTime { Servertime = currentTime.Value.ToString("F2") });
                 currentTime.Value -= Time.deltaTime;
+                ClockValue.Value = currentTime.Value;
             }
-            ClockSlider.value = currentTime.Value;
             Angle = 0;
             ClockHandRotate(TaskStartingTime);
             await Task.Yield();
@@ -96,8 +101,8 @@ public class PhaseTimer : NetworkBehaviour
             {
                 //TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
                 currentTime.Value -= Time.deltaTime;
+                ClockValue.Value = currentTime.Value;
             }
-            ClockSlider.value = currentTime.Value;
             Angle = 0;
             ClockHandRotate(CombineStartingTime);
             await Task.Yield();
@@ -117,8 +122,8 @@ public class PhaseTimer : NetworkBehaviour
             {
                 //TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
                 currentTime.Value -= Time.deltaTime;
+                ClockValue.Value = currentTime.Value;
             }
-            ClockSlider.value = currentTime.Value;
             Angle = 0;
             ClockHandRotate(AttackStartingTime);
             await Task.Yield();
