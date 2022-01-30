@@ -143,6 +143,7 @@ public class PhaseTimer : NetworkBehaviour
             await Task.Yield();
         }
         audioS.Stop();
+        Cursor.visible = true;
         CheckBattleResult();
 
     }

@@ -23,8 +23,10 @@ public class PickupTask : NetworkBehaviour
     public string PickupText;
 
     private TaskList TL;
+    private Animator TaskCompImage;
     private void Awake()
     {
+        TaskCompImage = GameObject.Find("Taskcomp").GetComponent<Animator>();
         TL = GameObject.Find("TaskList").GetComponent<TaskList>();
         CP = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         TaskComp = false;
@@ -84,6 +86,7 @@ public class PickupTask : NetworkBehaviour
                 TaskComp = true;
                 CP.SpawnCard(1);
                 Task.SetActive(false);
+                TaskCompImage.SetTrigger("Comp");
             }
             Destroy(obj);
         }

@@ -143,6 +143,7 @@ public class GameSystem : NetworkBehaviour
     [ClientRpc]
     public void TaskPhaseClientRpc()
     {
+        Cursor.visible = true;
         Debug.Log("TaskPhase");
         gamePhase = GamePhase.TaskState;
         TL.resetTask();
@@ -164,6 +165,7 @@ public class GameSystem : NetworkBehaviour
         AP.AddAmmoCard();
         localTurnbased.HideShowPanel();
         PT.AttackCountDownMethod();
+        Cursor.visible = false;
     }
     //[ServerRpc]
     //public void NextPlayerTurnServerRpc()

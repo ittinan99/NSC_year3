@@ -11,8 +11,10 @@ public class MedicalTask : NetworkBehaviour
     public SampleCollector SC;
     public bool TaskComp;
     private TaskList TL;
+    private Animator TaskCompImage;
     private void Awake()
     {
+        TaskCompImage = GameObject.Find("Taskcomp").GetComponent<Animator>();
         TL = GameObject.Find("TaskList").GetComponent<TaskList>();
         CP = GameObject.Find("CardPanel").GetComponent<CardPanel>();
     }
@@ -47,6 +49,7 @@ public class MedicalTask : NetworkBehaviour
         CP.SpawnCard(1);
         TaskComp = true;
         TL.MedicalTaskComp();
+        TaskCompImage.SetTrigger("Comp");
         Task.SetActive(false);
     }
 }

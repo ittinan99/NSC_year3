@@ -12,8 +12,10 @@ public class ElectricTask : NetworkBehaviour
     public GameObject Task;
     public bool TaskComp;
     private TaskList TL;
+    private Animator TaskCompImage;
     private void Awake()
     {
+        TaskCompImage = GameObject.Find("Taskcomp").GetComponent<Animator>();
         TL = GameObject.Find("TaskList").GetComponent<TaskList>();
         CP = GameObject.Find("CardPanel").GetComponent<CardPanel>();
     }
@@ -58,6 +60,7 @@ public class ElectricTask : NetworkBehaviour
             CP.SpawnCard(1);
             TL.WireTaskComp();
             Task.SetActive(false);
+            TaskCompImage.SetTrigger("Comp");
         }
         else
         {
