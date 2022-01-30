@@ -33,22 +33,22 @@ namespace Unity.Netcode
                     AP.DisplayAmmo.SetVar();
                     if (AP.CurrentAmmo.E_Card.Scanable)
                     {
-                        ThrowServerRpc(1);
+                        ThrowServerRpc(1,0);
                     }
                     else
                     {
-                        ThrowServerRpc(0);
+                        ThrowServerRpc(0, AP.CurrentAmmo.E_Card.Damage);
                     }
                 }
             }
         }
         [ServerRpc]
-        void ThrowServerRpc(int i)
+        void ThrowServerRpc(int i,float j)
         {
-            ThrowClientRpc(i);
+            ThrowClientRpc(i,j);
         }
         [ClientRpc]
-        void ThrowClientRpc(int i)
+        void ThrowClientRpc(int i,float j)
         {
             if (i==1)
             {
@@ -61,7 +61,7 @@ namespace Unity.Netcode
                 var flask = Instantiate(T_Renderer, FlaskBarrel.transform.position, Quaternion.identity);
                 flask.GetComponent<Rigidbody>().AddForce(transform.forward * 50, ForceMode.Impulse);
                 flask.GetComponent<DamageBottle>().Spawner = this.gameObject;
-                flask.GetComponent<DamageBottle>().Damage = AP.CurrentAmmo.E_Card.Damage;
+                flask.GetComponent<DamageBottle>().Damage = j;
             }
         }
     }
