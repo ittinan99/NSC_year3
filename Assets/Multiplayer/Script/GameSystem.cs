@@ -148,8 +148,7 @@ public class GameSystem : NetworkBehaviour
     }
     private void SetRoleSprite()
     {
-        TurnBaseSystem thisPlayer = GameObject.FindObjectOfType<TurnBaseSystem>();
-        if(thisPlayer.GetComponent<TurnBaseSystem>().PlayerRole == TurnBaseSystem.Role.Protein)
+        if(localTurnbased.PlayerRole == TurnBaseSystem.Role.Protein)
         {
             CarboSprite.SetActive(false);
             proteinSprite.SetActive(true);
