@@ -26,6 +26,9 @@ public class GameSystem : NetworkBehaviour
     public TaskList TL;
 
     FirstPersonController[] _FirstPersonControllerGang;
+    public GameObject proteinSprite;
+    public GameObject CarboSprite;
+
 
     private void Awake()
     {
@@ -140,6 +143,21 @@ public class GameSystem : NetworkBehaviour
             {
                 CarboList.Add(player);
             }
+        }
+        SetRoleSprite();
+    }
+    private void SetRoleSprite()
+    {
+        TurnBaseSystem thisPlayer = GameObject.FindObjectOfType<TurnBaseSystem>();
+        if(thisPlayer.GetComponent<TurnBaseSystem>().PlayerRole == TurnBaseSystem.Role.Protein)
+        {
+            CarboSprite.SetActive(false);
+            proteinSprite.SetActive(true);
+        }
+        else
+        {
+            proteinSprite.SetActive(false);
+            CarboSprite.SetActive(true);
         }
     }
     [ServerRpc]
