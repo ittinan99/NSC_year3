@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 namespace Unity.Netcode
 {
-    [RequireComponent(typeof(CharacterController))]
     public class FirstPersonController : NetworkBehaviour
     {
         /// <summary>
@@ -39,8 +39,6 @@ namespace Unity.Netcode
         [Range(0.5f, 5f)]
         public float mouseSensitivity = 2f;
         public GameObject FB;
-        //the charachtercompononet for moving us
-        //CharacterController cc;
 
         Rigidbody rigidbody;
 
@@ -56,18 +54,29 @@ namespace Unity.Netcode
         private Vector3 oldInputPosition;
         private Vector3 oldInputRotation;
 
+        public GameObject cursorBase;
+
         [SerializeField]
         private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
 
         [SerializeField]
         private NetworkVariable<PlayerAnimeState> networkPlayerState = new NetworkVariable<PlayerAnimeState>();
 
+        private void CursorOn()
+        {
+            cursorBase.SetActive(true);
+        }
+        private void CursorOff()
+        {
+            cursorBase.SetActive(false);
+        }
         private void ClientInput()
         {
             Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
 
             Vector3 direction = transform.TransformDirection(Vector3.forward);
             float forwardInput = Input.GetAxis("Vertical");
+            float sideInput = Input.GetAxis("Horizontal");
             Vector3 inputPosition = direction * forwardInput;
 
             if (oldInputPosition != inputPosition || oldInputRotation != inputRotation)
@@ -77,30 +86,20 @@ namespace Unity.Netcode
                 UpdateClientPositionAndRotateServerRpc(inputPosition);
             }
 
-            if (forwardInput > 0)
+            if (forwardInput < 0)
+            {                
+                UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.ReverseWalk);
+            }
+            else if (forwardInput > 0 || sideInput != 0)
             {
                 UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.Walk);
-            }
-            else if (forwardInput < 0)
-            {
-                UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.ReverseWalk);
             }
             else if (forwardInput == 0)
             {
                 UpdatePlayerAnimeStateServerRpc(PlayerAnimeState.Idle);
             }
         }
-        private void ClientMoveAndRotate()
-        {
-            if (networkPositionDirection.Value != Vector3.zero)
-            {
-                Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                input = Vector3.ClampMagnitude(input, 1f);
-                Vector3 move = input * movementSpeed;
-
-                rigidbody.transform.Translate(move * Time.deltaTime);
-            }
-        }
+        
         private void ClientVisuals()
         {
             if (networkPlayerState.Value == PlayerAnimeState.Walk)
@@ -130,17 +129,18 @@ namespace Unity.Netcode
         }
         private void Start()
         {
-
             animator = GetComponentInChildren<Animator>();
             aimLayer = animator.GetLayerIndex("Aiming");
             hurtLayer = animator.GetLayerIndex("hurt");
 
             cameraTransform = GetComponentInChildren<Camera>().transform;
+            
             if (IsLocalPlayer)
             {
                 rigidbody = GetComponent<Rigidbody>();
                 camZoomIn.SetActive(false);
                 camZoomOut.SetActive(true);
+                CursorOff();
             }
             else
             {
@@ -198,48 +198,16 @@ namespace Unity.Netcode
             animator.SetLayerWeight(aimLayer,data.target);
             //animator.SetLayerWeight(aimLayer, Mathf.SmoothDamp(data.LayerWeight, data.target, ref layerWeightVelocity, 0.2f));
         }
+        private void ClientMoveAndRotate()
+        {
+            Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            input = Vector3.ClampMagnitude(input, 1f);
+            Vector3 move = input * movementSpeed;
+
+            rigidbody.transform.Translate(move * Time.deltaTime);
+        }
         void Move()
         {
-            ////update speed based onn the input
-            //Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-            ////Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            ////Physics.Raycast(FB.transform.position, FB.transform.forward
-
-            //input = Vector3.ClampMagnitude(input, 1f);
-
-            ////transofrm it based off the player transform and scale it by movement speed
-
-            //Vector3 move = input * movementSpeed;
-
-            //rigidbody.transform.Translate(move * Time.deltaTime);
-
-            //ของอิทเอง5555
-            //Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            //input = Vector3.ClampMagnitude(input, 1f);
-            //Vector3 move = input * movementSpeed;
-
-            //rigidbody.transform.Translate(move * Time.deltaTime);
-
-            //Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
-
-            //Vector3 direction = transform.TransformDirection(Vector3.forward);
-            //float forwardInput = Input.GetAxis("Vertical");
-            //Vector3 inputPosition = direction * forwardInput;
-   
-            //if (forwardInput > 0)
-            //{
-            //    animator.SetFloat("Walk", 1);
-            //}
-            //else if (forwardInput < 0)
-            //{
-            //    animator.SetFloat("Walk", -1);
-            //}
-            //else
-            //{
-            //    animator.SetFloat("Walk", 0);            
-            //}
-
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 playerAim = !playerAim;
@@ -253,6 +221,8 @@ namespace Unity.Netcode
 
                     camZoomOut.SetActive(true);
                     camZoomIn.SetActive(false);
+
+                    CursorOff();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -267,6 +237,8 @@ namespace Unity.Netcode
 
                     camZoomOut.SetActive(false);
                     camZoomIn.SetActive(true);
+
+                    CursorOn();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))

@@ -24,6 +24,9 @@ public class GameSystem : NetworkBehaviour
     public CardDic CD;
     public Minimap MP;
     public TaskList TL;
+
+    FirstPersonController[] _FirstPersonControllerGang;
+
     private void Awake()
     {
         PlayerList = new GameObject[0];
@@ -32,6 +35,9 @@ public class GameSystem : NetworkBehaviour
     void Start()
     {
         //CurrenTarget = null;
+        _FirstPersonControllerGang = GameObject.FindObjectsOfType<FirstPersonController>();
+        StartCoroutine(StopPlayer());
+        
     }
     private void Update()
     {
@@ -44,6 +50,21 @@ public class GameSystem : NetworkBehaviour
     //    Rand_startPlayerClientRpc();
     //}
     //[ClientRpc]
+    IEnumerator StopPlayer()
+    {
+        yield return new WaitForSeconds(0.1f);
+        foreach (FirstPersonController fCon in _FirstPersonControllerGang)
+        {
+            fCon.enabled = false;
+        }
+    }
+    void PlayerCanMove()
+    {
+        foreach (FirstPersonController fCon in _FirstPersonControllerGang)
+        {
+            fCon.enabled = true;
+        }
+    }
     void Gather_startPlayerClient()
     {
         foreach(GameObject player in PlayerList)
@@ -79,6 +100,7 @@ public class GameSystem : NetworkBehaviour
         CD.DeserializeDictionary();
         PT.TaskCountDownMethod();
         PlayerList = GameObject.FindGameObjectsWithTag("Player");
+        PlayerCanMove();
         Gather_startPlayerClient();
     }
     public void RandomRole()
