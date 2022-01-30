@@ -10,5 +10,6 @@ public class DestroyNetmanager : NetworkBehaviour
     void Update()
     {
         Destroy(NetworkManager.Singleton.gameObject);
+        Destroy(this.gameObject);
     }
 }
