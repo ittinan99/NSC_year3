@@ -422,7 +422,7 @@ MonoBehaviour:
   Hpbar: {fileID: 0}
   playerOutline: {fileID: 7854567168577234838}
   die: 0
-  Model: {fileID: 0}
+  Model: {fileID: 175055490903234492}
   ATKcard: {fileID: 0}
 --- !u!54 &980456072299073567
 Rigidbody:
@@ -923,15 +923,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2699541615817244671}
     m_Modifications:
+    - target: {fileID: 1711259018855107221, guid: 2f7656efa0abf8544a2d79c130f2a91e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450243116866379512, guid: 2f7656efa0abf8544a2d79c130f2a91e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2450243116866379512, guid: 2f7656efa0abf8544a2d79c130f2a91e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7888d7c26afa82542953ab2b4802819f, type: 2}
+    - target: {fileID: 2450621776882927265, guid: 2f7656efa0abf8544a2d79c130f2a91e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2593873998170222140, guid: 2f7656efa0abf8544a2d79c130f2a91e,
         type: 3}
       propertyPath: m_Name
       value: Baconkung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2593873998170222140, guid: 2f7656efa0abf8544a2d79c130f2a91e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2933138599693956230, guid: 2f7656efa0abf8544a2d79c130f2a91e,
         type: 3}
@@ -993,6 +1013,12 @@ PrefabInstance:
 --- !u!4 &659281079218507014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2933138599693956230, guid: 2f7656efa0abf8544a2d79c130f2a91e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2419179164873144704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &175055490903234492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2593873998170222140, guid: 2f7656efa0abf8544a2d79c130f2a91e,
     type: 3}
   m_PrefabInstance: {fileID: 2419179164873144704}
   m_PrefabAsset: {fileID: 0}

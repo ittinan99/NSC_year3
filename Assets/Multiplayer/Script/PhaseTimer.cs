@@ -67,18 +67,18 @@ public class PhaseTimer : NetworkBehaviour
         if (IsOwner)
         {
             currentTime.Value = TaskStartingTime;
-            ClockSlider.maxValue = TaskStartingTime;
         }
-        while(currentTime.Value > 0)
+        ClockSlider.maxValue = TaskStartingTime;
+        while (currentTime.Value > 0)
         {
             if (IsOwner)
             {
                 //TimeServerRpc(new ServerTime { Servertime = currentTime.Value.ToString("F2") });
                 currentTime.Value -= Time.deltaTime;
-                ClockSlider.value = currentTime.Value;
-                Angle = 0;
-                ClockHandRotate(TaskStartingTime);
             }
+            ClockSlider.value = currentTime.Value;
+            Angle = 0;
+            ClockHandRotate(TaskStartingTime);
             await Task.Yield();
         }
         GS.CombinePhaseServerRpc();
@@ -87,19 +87,19 @@ public class PhaseTimer : NetworkBehaviour
     {
         if (IsOwner)
         {
-            currentTime.Value = TaskStartingTime;
-            ClockSlider.maxValue = CombineStartingTime;
+            currentTime.Value = CombineStartingTime;
         }
+        ClockSlider.maxValue = CombineStartingTime;
         while (currentTime.Value > 0)
         {
             if (IsOwner)
             {
                 //TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
                 currentTime.Value -= Time.deltaTime;
-                ClockSlider.value = currentTime.Value;
-                Angle = 0;
-                ClockHandRotate(CombineStartingTime);
             }
+            ClockSlider.value = currentTime.Value;
+            Angle = 0;
+            ClockHandRotate(CombineStartingTime);
             await Task.Yield();
         }
         GS.AttackPhaseServerRpc();
@@ -109,18 +109,18 @@ public class PhaseTimer : NetworkBehaviour
         if (IsOwner)
         {
             currentTime.Value = AttackStartingTime;
-            ClockSlider.maxValue = AttackStartingTime;
         }
+        ClockSlider.maxValue = AttackStartingTime;
         while (currentTime.Value > 0)
         {
             if (IsOwner)
             {
                 //TimeServerRpc(new ServerTime { Servertime = currentTime.ToString("F2") });
                 currentTime.Value -= Time.deltaTime;
-                ClockSlider.value = currentTime.Value;
-                Angle = 0;
-                ClockHandRotate(AttackStartingTime);
             }
+            ClockSlider.value = currentTime.Value;
+            Angle = 0;
+            ClockHandRotate(AttackStartingTime);
             await Task.Yield();
         }
         CheckBattleResult();
@@ -144,48 +144,48 @@ public class PhaseTimer : NetworkBehaviour
                 CarboAlive++;
             }
         }
-        GS.TaskPhaseServerRpc();
-        //if (CarboAlive == 0)
-        //{
-        //    foreach (GameObject Player in GS.CarboList)
-        //    {
-        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
-        //        Debug.Log("Carbo Lose");
-        //    }
-        //    foreach (GameObject Player in GS.ProteinList)
-        //    {
-        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
-        //        Debug.Log("Protein Win");
-        //    }
-        //}
-        //else if (ProteinAlive == 0)
-        //{
-        //    foreach (GameObject Player in GS.ProteinList)
-        //    {
-        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
-        //        Debug.Log("Protein Lose");
-        //    }
-        //    foreach (GameObject Player in GS.CarboList)
-        //    {
-        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
-        //        Debug.Log("Carbo Win");
-        //    }
-        //}
-        //else
-        //{
-        //    GS.TaskPhaseServerRpc();
-        //}
-        //if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Lose)
-        //{
-        //    NetworkManager.Singleton.DontDestroy = false;
-        //    Destroy(NetworkManager.Singleton.gameObject);
-        //    SceneManager.LoadScene("EndLoseScene");
-        //}
-        //else if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Win)
-        //{
-        //    NetworkManager.Singleton.DontDestroy = false;
-        //    Destroy(NetworkManager.Singleton.gameObject);
-        //    SceneManager.LoadScene("EndWinScene");
-        //}
+        //GS.TaskPhaseServerRpc();
+        if (CarboAlive == 0)
+        {
+            foreach (GameObject Player in GS.CarboList)
+            {
+                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
+                Debug.Log("Carbo Lose");
+            }
+            foreach (GameObject Player in GS.ProteinList)
+            {
+                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
+                Debug.Log("Protein Win");
+            }
+        }
+        else if (ProteinAlive == 0)
+        {
+            foreach (GameObject Player in GS.ProteinList)
+            {
+                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
+                Debug.Log("Protein Lose");
+            }
+            foreach (GameObject Player in GS.CarboList)
+            {
+                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
+                Debug.Log("Carbo Win");
+            }
+        }
+        else
+        {
+            GS.TaskPhaseServerRpc();
+        }
+        if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Lose)
+        {
+            NetworkManager.Singleton.DontDestroy = false;
+            Destroy(NetworkManager.Singleton.gameObject);
+            SceneManager.LoadScene("EndLoseScene");
+        }
+        else if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Win)
+        {
+            NetworkManager.Singleton.DontDestroy = false;
+            Destroy(NetworkManager.Singleton.gameObject);
+            SceneManager.LoadScene("EndWinScene");
+        }
     }
 }

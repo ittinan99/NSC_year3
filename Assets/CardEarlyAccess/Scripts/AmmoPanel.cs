@@ -96,9 +96,21 @@ public class AmmoPanel : MonoBehaviour
                     AmmoCard.Add(hcard);
                 }
             }
-            CurrentAmmo = AmmoCard[CurrentAmmoIndex];
-            DisplayAmmo.ECD_Card = CurrentAmmo;
-            DisplayAmmo.SetVar();
+            if (AmmoCard.Count > 0)
+            {
+                CurrentAmmo = AmmoCard[CurrentAmmoIndex];
+                DisplayAmmo.ECD_Card = CurrentAmmo;
+                DisplayAmmo.SetVar();
+            }
+            else
+            {
+                DisplayAmmo.ECD_Card = null;
+                NextDisplayAmmo.ECD_Card = null;
+                PreDisplayAmmo.ECD_Card = null;
+                NextDisplayAmmo.SetVar();
+                PreDisplayAmmo.SetVar();
+                DisplayAmmo.SetVar();
+            }
         }
         else
         {
