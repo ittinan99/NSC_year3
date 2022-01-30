@@ -22,9 +22,14 @@ public class BinTask : NetworkBehaviour
         Task.SetActive(true);
         CP.gameObject.SetActive(true);
     }
+    public void DespawnBin()
+    {
+        Task.SetActive(false);
+        CP.gameObject.SetActive(false);
+    }
     private void OnTriggerStay(Collider other)
     {
-        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             Debug.Log("Enter : Bin");
             spawnBin();
@@ -32,11 +37,14 @@ public class BinTask : NetworkBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        if (GameSystem.gamePhase == GameSystem.GamePhase.TaskState && other.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             Debug.Log("Left : Bin");
+            DespawnBin();
+        }
+        else if(GameSystem.gamePhase == GameSystem.GamePhase.CombineState && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        {
             Task.SetActive(false);
-            CP.gameObject.SetActive(false);
         }
     }
 }

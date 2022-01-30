@@ -202,8 +202,15 @@ public class TurnBaseSystem : NetworkBehaviour
     public void HideShowPanel()
     {
         CombinePanel.GetComponent<CombineSystem>().ResetRemainCard();
-        cardPanel.gameObject.SetActive(!cardPanel.gameObject.activeInHierarchy);
         CombinePanel.SetActive(!CombinePanel.activeInHierarchy);
+        if(GameSystem.gamePhase == GameSystem.GamePhase.CombineState)
+        {
+            cardPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            cardPanel.gameObject.SetActive(!cardPanel.gameObject.activeInHierarchy);
+        }
     }
     public void HideCardPanel()
     {
