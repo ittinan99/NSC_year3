@@ -182,14 +182,10 @@ public class PhaseTimer : NetworkBehaviour
             {
                 if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Lose)
                 {
-                    NetworkManager.Singleton.DontDestroy = false;
-                    Destroy(NetworkManager.Singleton.gameObject);
                     SceneManager.LoadScene("EndLoseScene");
                 }
                 else if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Win)
                 {
-                    NetworkManager.Singleton.DontDestroy = false;
-                    Destroy(NetworkManager.Singleton.gameObject);
                     SceneManager.LoadScene("EndWinScene");
                 }
             }
@@ -198,14 +194,10 @@ public class PhaseTimer : NetworkBehaviour
             {
                 if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Lose)
                 {
-                    NetworkManager.Singleton.DontDestroy = false;
-                    Destroy(NetworkManager.Singleton.gameObject);
                     SceneManager.LoadScene("EndLoseScene");
                 }
                 else if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Win)
                 {
-                    NetworkManager.Singleton.DontDestroy = false;
-                    Destroy(NetworkManager.Singleton.gameObject);
                     SceneManager.LoadScene("EndWinScene");
                 }
             }
