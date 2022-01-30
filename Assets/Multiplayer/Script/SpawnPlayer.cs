@@ -14,6 +14,7 @@ public class SpawnPlayer : NetworkBehaviour
     public string PlayerName;
     public ulong PlayerId;
     public Transform[] SpawnPoints;
+    public int spawncount = 0;
     void Start()
     {
         Clientlist = NetworkManager.Singleton.ConnectedClientsIds;
@@ -23,6 +24,7 @@ public class SpawnPlayer : NetworkBehaviour
             {
                 getphotonServerRpc();
                 ChangeServerRpc(ClientId);
+                spawncount++;
             }
         }
     }

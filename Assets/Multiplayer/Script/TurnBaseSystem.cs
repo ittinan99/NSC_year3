@@ -35,8 +35,9 @@ public class TurnBaseSystem : NetworkBehaviour
     public MeshRenderer Model;
     [SerializeField]
     private ElementCardDisplay ATKcard;
-
+    public SpawnPlayer Spawnplayer;
     private Ray ray;
+    int stopget = 0;
     void Start()
     {
         //if(IsLocalPlayer)
@@ -45,6 +46,7 @@ public class TurnBaseSystem : NetworkBehaviour
         //}
         currentHealth = new NetworkVariable<float>(maxHealth);
         CurrentHealth = currentHealth.Value;
+        Spawnplayer = GameObject.Find("SpawnPlayer").GetComponent<SpawnPlayer>();
         Hpbar = GameObject.Find("HpBar").GetComponent<Slider>();
         StartState();
         if (IsLocalPlayer)
@@ -80,7 +82,11 @@ public class TurnBaseSystem : NetworkBehaviour
         }
         if (StartBut == null)
         {
-            StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+            stopget++;
+            if (stopget <= 300)
+            {
+                StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+            }
         }
         if(GS == null)
         {
@@ -90,15 +96,20 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         }
-       
         if (IsLocalPlayer)
         {
-            PlayerCanvas.SetActive(true);
-            StartBut.interactable = false;
+            if (stopget <= 300)
+            {
+                PlayerCanvas.SetActive(true);
+                StartBut.interactable = false;
+            }
         }
         if(IsLocalPlayer&&IsOwnedByServer)
         {
-            StartBut.interactable = true;
+            if (stopget <= 300)
+            {
+                StartBut.interactable = true;
+            }
         }
     }
 

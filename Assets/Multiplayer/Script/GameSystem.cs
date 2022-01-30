@@ -59,6 +59,8 @@ public class GameSystem : NetworkBehaviour
     public void startGame()
     {
         StartGameServerRpc();
+        Button StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+        Destroy(StartBut.gameObject);
     }
     [ServerRpc]
     public void StartGameServerRpc()
