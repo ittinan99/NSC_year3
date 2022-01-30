@@ -175,17 +175,40 @@ public class PhaseTimer : NetworkBehaviour
         {
             GS.TaskPhaseServerRpc();
         }
-        if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Lose)
+        StartCoroutine(WaitForHost());
+        IEnumerator WaitForHost()
         {
-            NetworkManager.Singleton.DontDestroy = false;
-            Destroy(NetworkManager.Singleton.gameObject);
-            SceneManager.LoadScene("EndLoseScene");
-        }
-        else if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Win)
-        {
-            NetworkManager.Singleton.DontDestroy = false;
-            Destroy(NetworkManager.Singleton.gameObject);
-            SceneManager.LoadScene("EndWinScene");
+            if(!IsServer)
+            {
+                if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Lose)
+                {
+                    NetworkManager.Singleton.DontDestroy = false;
+                    Destroy(NetworkManager.Singleton.gameObject);
+                    SceneManager.LoadScene("EndLoseScene");
+                }
+                else if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Win)
+                {
+                    NetworkManager.Singleton.DontDestroy = false;
+                    Destroy(NetworkManager.Singleton.gameObject);
+                    SceneManager.LoadScene("EndWinScene");
+                }
+            }
+            yield return new WaitForSeconds(1);
+            if (IsServer)
+            {
+                if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Lose)
+                {
+                    NetworkManager.Singleton.DontDestroy = false;
+                    Destroy(NetworkManager.Singleton.gameObject);
+                    SceneManager.LoadScene("EndLoseScene");
+                }
+                else if (GameSystem.localTurnbased.gameObject.GetComponent<TurnBaseSystem>().PlayerState == TurnBaseSystem.GameState.Win)
+                {
+                    NetworkManager.Singleton.DontDestroy = false;
+                    Destroy(NetworkManager.Singleton.gameObject);
+                    SceneManager.LoadScene("EndWinScene");
+                }
+            }
         }
     }
 }
