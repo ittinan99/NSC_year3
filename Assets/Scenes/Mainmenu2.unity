@@ -2940,10 +2940,11 @@ MonoBehaviour:
     - Override: 0
       Prefab: {fileID: 6422104830213210073, guid: 7a410ed532f052747bdd594af1540e5a,
         type: 3}
-      SourcePrefabToOverride: {fileID: 6422104830213210073, guid: 7a410ed532f052747bdd594af1540e5a,
+      SourcePrefabToOverride: {fileID: 6422104830213210073, guid: 28471ae8c9fe4b14db8cbdf3df118e4d,
         type: 3}
       SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
+      OverridingTargetPrefab: {fileID: 6422104830213210073, guid: 7a410ed532f052747bdd594af1540e5a,
+        type: 3}
     - Override: 0
       Prefab: {fileID: 2699541615817244657, guid: 5d353d131e213f94fb9639806519a1fa,
         type: 3}
