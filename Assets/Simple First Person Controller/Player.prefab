@@ -926,12 +926,12 @@ PrefabInstance:
     - target: {fileID: 1711259018855107221, guid: 2f7656efa0abf8544a2d79c130f2a91e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2450243116866379512, guid: 2f7656efa0abf8544a2d79c130f2a91e,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2450243116866379512, guid: 2f7656efa0abf8544a2d79c130f2a91e,
         type: 3}
