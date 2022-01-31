@@ -154,7 +154,7 @@ namespace Unity.Netcode
 
         private void Disconnect(ulong obj)
         {
-            SceneManager.LoadScene("Mainmenu");
+            SceneManager.LoadScene("Mainmenu", LoadSceneMode.Single);
         }
 
         // Update is called once per frame
