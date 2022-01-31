@@ -26,7 +26,6 @@ public class LobbySetPosittionPlayer : NetworkBehaviour
     private void Singleton_OnDisconnetedCallback(ulong obj)
     {
         Panel.GetComponent<RectTransform>().SetWidth(Panel.GetComponent<RectTransform>().GetWidth() - 325);
-        SceneManager.LoadScene("Mainmenu",LoadSceneMode.Single);
     }
 
     // Start is called before the first frame update

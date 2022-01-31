@@ -136,7 +136,6 @@ namespace Unity.Netcode
             hurtLayer = animator.GetLayerIndex("hurt");
 
             cameraTransform = GetComponentInChildren<Camera>().transform;
-            NetworkManager.Singleton.OnClientDisconnectCallback += Disconnect;
             if (IsLocalPlayer)
             {
                 rigidbody = GetComponent<Rigidbody>();
@@ -150,11 +149,6 @@ namespace Unity.Netcode
                 cameraTransform.gameObject.GetComponent<AudioListener>().enabled = false;
             }
 
-        }
-
-        private void Disconnect(ulong obj)
-        {
-            SceneManager.LoadScene("Mainmenu", LoadSceneMode.Single);
         }
 
         // Update is called once per frame
