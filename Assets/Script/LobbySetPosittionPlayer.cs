@@ -6,6 +6,7 @@ using Unity.Netcode;
 using Netcode.Transports.PhotonRealtime;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LobbySetPosittionPlayer : NetworkBehaviour
 {
@@ -25,6 +26,7 @@ public class LobbySetPosittionPlayer : NetworkBehaviour
     private void Singleton_OnDisconnetedCallback(ulong obj)
     {
         Panel.GetComponent<RectTransform>().SetWidth(Panel.GetComponent<RectTransform>().GetWidth() - 325);
+        SceneManager.LoadScene("Mainmenu");
     }
 
     // Start is called before the first frame update

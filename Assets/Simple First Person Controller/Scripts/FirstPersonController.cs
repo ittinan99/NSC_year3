@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 namespace Unity.Netcode
 {
     public class FirstPersonController : NetworkBehaviour
@@ -134,7 +136,7 @@ namespace Unity.Netcode
             hurtLayer = animator.GetLayerIndex("hurt");
 
             cameraTransform = GetComponentInChildren<Camera>().transform;
-            
+            NetworkManager.Singleton.OnClientDisconnectCallback += Disconnect;
             if (IsLocalPlayer)
             {
                 rigidbody = GetComponent<Rigidbody>();
@@ -148,6 +150,11 @@ namespace Unity.Netcode
                 cameraTransform.gameObject.GetComponent<AudioListener>().enabled = false;
             }
 
+        }
+
+        private void Disconnect(ulong obj)
+        {
+            SceneManager.LoadScene("Mainmenu");
         }
 
         // Update is called once per frame
