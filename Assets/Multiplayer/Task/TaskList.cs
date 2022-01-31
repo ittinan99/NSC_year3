@@ -40,6 +40,9 @@ public class TaskList : MonoBehaviour
     }
     public void resetTask()
     {
+        WireFixCount = 0;
+        MedicalTaskCount = 0;
+        PickupCount = 0;
         allET = GameObject.FindObjectsOfType<ElectricTask>();
         allMT = GameObject.FindObjectsOfType<MedicalTask>();
         allPT = GameObject.FindObjectsOfType<PickupTask>();

@@ -73,7 +73,8 @@ public class PickupTask : NetworkBehaviour
         }
         AllObj.Clear();
         Task.SetActive(false);
-        
+        collected = 0;
+
     }
     void PlayerPickup(Collider col,GameObject obj)
     {
