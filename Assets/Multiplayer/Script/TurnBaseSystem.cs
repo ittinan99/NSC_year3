@@ -86,6 +86,10 @@ public class TurnBaseSystem : NetworkBehaviour
             if (stopget <= 300)
             {
                 StartBut = GameObject.Find("StartGameBut").GetComponent<Button>();
+                if (!IsServer)
+                {
+                    StartBut.gameObject.SetActive(false);
+                }
             }
         }
         if(GS == null)
@@ -96,18 +100,11 @@ public class TurnBaseSystem : NetworkBehaviour
         {
             cardPanel = GameObject.Find("CardPanel").GetComponent<CardPanel>();
         }
-        if (IsLocalPlayer)
-        {
-            if (stopget <= 300)
-            {
-                PlayerCanvas.SetActive(true);
-                StartBut.interactable = false;
-            }
-        }
         if(IsLocalPlayer&&IsOwnedByServer)
         {
             if (stopget <= 300)
             {
+                PlayerCanvas.SetActive(true);
                 StartBut.interactable = true;
             }
         }

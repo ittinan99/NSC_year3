@@ -1357,8 +1357,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0E40\u0E23\u0E34\u0E48\u0E21\u0E40\u0E01\u0E21"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d83336c7ff33ecb43bc2ba62c82ca372, type: 2}
-  m_sharedMaterial: {fileID: -7520684638659502505, guid: d83336c7ff33ecb43bc2ba62c82ca372,
+  m_fontAsset: {fileID: 11400000, guid: 3a49b5ba476a508419fd0f6c2cb73a33, type: 2}
+  m_sharedMaterial: {fileID: -3487238979972885749, guid: 3a49b5ba476a508419fd0f6c2cb73a33,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.15
+  m_fontSize: 67.37
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
