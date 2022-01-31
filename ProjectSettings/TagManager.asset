@@ -11,6 +11,7 @@ TagManager:
   - NetworkManager
   - canAttack
   - TaskCanvas
+  - AudioCon
   layers:
   - Default
   - TransparentFX

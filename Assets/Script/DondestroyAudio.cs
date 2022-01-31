@@ -9,4 +9,10 @@ public class DondestroyAudio : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject.GetComponent<DondestroyAudio>());
     }
+    private void Update()
+    {
+        if(GameObject.FindGameObjectsWithTag("AudioCon").Length > 1){
+            DestroyImmediate(GameObject.FindGameObjectsWithTag("AudioCon")[1], false);
+        }
+    }
 }
