@@ -16,7 +16,7 @@ MonoBehaviour:
   element_FName: Sodium Chloride
   CanCombine: 0
   CanAttack: 1
-  Scanable: 1
+  Scanable: 0
   ArtWork: {fileID: 21300000, guid: 99ca4239566ee2345963ce4b1edd92fe, type: 3}
   Damage: -10
   description: "\u0E42\u0E0B\u0E40\u0E14\u0E35\u0E22\u0E21\u0E04\u0E25\u0E2D\u0E44\u0E23\u0E14\u0E4C
