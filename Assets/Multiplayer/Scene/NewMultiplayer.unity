@@ -4353,6 +4353,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 221c7049a8afe5746ae907965597f491, type: 2}
   - {fileID: 11400000, guid: 20382823ed849bf4580257e0fff71b77, type: 2}
   - {fileID: 11400000, guid: 3157a39bc1ee51c4fb774fbb2bac644a, type: 2}
+  - {fileID: 11400000, guid: ecc6f2ffaa8fe7142b97fe6ddd25af6c, type: 2}
+  - {fileID: 11400000, guid: ecc6f2ffaa8fe7142b97fe6ddd25af6c, type: 2}
+  - {fileID: 11400000, guid: 20382823ed849bf4580257e0fff71b77, type: 2}
+  - {fileID: 11400000, guid: d2dc291da5e982a49ad1a3f78a673cc1, type: 2}
+  - {fileID: 11400000, guid: ecc6f2ffaa8fe7142b97fe6ddd25af6c, type: 2}
   Gap: -0.05
   PlacePosMin: {x: 0, y: 0}
   PlacePosMax: {x: 0.17, y: 1}
