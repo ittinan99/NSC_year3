@@ -8545,7 +8545,7 @@ PrefabInstance:
     - target: {fileID: 4405593773236828365, guid: ef849ece26af25b49b76cbbb83cd3c47,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.72
+      value: 1.56
       objectReference: {fileID: 0}
     - target: {fileID: 4405593773236828365, guid: ef849ece26af25b49b76cbbb83cd3c47,
         type: 3}
@@ -8591,16 +8591,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'PickupTask '
-      objectReference: {fileID: 0}
-    - target: {fileID: 6072549502202561610, guid: ef849ece26af25b49b76cbbb83cd3c47,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6072549502202561611, guid: ef849ece26af25b49b76cbbb83cd3c47,
-        type: 3}
-      propertyPath: CollectAmount
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef849ece26af25b49b76cbbb83cd3c47, type: 3}

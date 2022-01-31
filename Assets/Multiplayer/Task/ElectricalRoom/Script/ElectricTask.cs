@@ -41,6 +41,10 @@ public class ElectricTask : NetworkBehaviour
     public void SpawnElectricTask()
     {
         Task.SetActive(true);
+        foreach(ElectricWire ew in allEW)
+        {
+            ew.ResetWire();
+        }
     }
     public void CorrectWireAdd()
     {
@@ -57,7 +61,7 @@ public class ElectricTask : NetworkBehaviour
         {
             Debug.Log("Task Completed");
             TaskComp = true;
-            CP.SpawnCard(1);
+            CP.SpawnCard(2);
             TL.WireTaskComp();
             Task.SetActive(false);
             TaskCompImage.SetTrigger("Comp");

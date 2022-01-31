@@ -72,6 +72,8 @@ public class PickupTask : NetworkBehaviour
             }
         }
         AllObj.Clear();
+        Task.SetActive(false);
+        
     }
     void PlayerPickup(Collider col,GameObject obj)
     {
@@ -84,7 +86,7 @@ public class PickupTask : NetworkBehaviour
                 Debug.Log("Pickup Task Complete");
                 TL.PickupTaskComp();
                 TaskComp = true;
-                CP.SpawnCard(1);
+                CP.SpawnCard(2);
                 Task.SetActive(false);
                 TaskCompImage.SetTrigger("Comp");
             }

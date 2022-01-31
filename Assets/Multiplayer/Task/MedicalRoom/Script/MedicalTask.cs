@@ -46,7 +46,7 @@ public class MedicalTask : NetworkBehaviour
     public void CompleteTask()
     {
         Debug.Log("Task Completed");
-        CP.SpawnCard(1);
+        CP.SpawnCard(2);
         TaskComp = true;
         TL.MedicalTaskComp();
         TaskCompImage.SetTrigger("Comp");

@@ -89,7 +89,7 @@ public class SampleCollector : MonoBehaviour
                 Debug.Log($"Sample {i} : Correct !!");
             }
         }
-        if(j == 5)
+        if(j == 5 && MT.TaskComp != true)
         {
             Debug.Log("AllCorrect");
             MT.CompleteTask();

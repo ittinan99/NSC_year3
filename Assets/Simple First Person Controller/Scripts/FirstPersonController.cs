@@ -145,6 +145,7 @@ namespace Unity.Netcode
             }
             else
             {
+                CursorOff();
                 cameraTransform.gameObject.GetComponent<Camera>().enabled = false;
                 cameraTransform.gameObject.GetComponent<AudioListener>().enabled = false;
             }

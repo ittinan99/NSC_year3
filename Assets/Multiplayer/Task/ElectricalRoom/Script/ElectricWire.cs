@@ -12,7 +12,6 @@ public class ElectricWire : MonoBehaviour,IPointerDownHandler,IPointerUpHandler
     public bool IsDrag;
     public GameObject WireEndName;
     public bool Correct;
-
     void Start()
     {
         IsDrag = false;
@@ -33,7 +32,14 @@ public class ElectricWire : MonoBehaviour,IPointerDownHandler,IPointerUpHandler
             StartPoint.GetComponent<RectTransform>().localScale = new Vector3(Xscale / Calibrate, 1, 1);
         }
     }
-
+    public void ResetWire()
+    {
+        IsDrag = false;
+        Correct = false;
+        StartPoint.GetComponent<RectTransform>().localPosition = Vector3.zero;
+        StartPoint.GetComponent<RectTransform>().localEulerAngles = Vector3.zero;
+        StartPoint.GetComponent<RectTransform>().localScale = Vector3.one;
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
         if (Input.GetKey(KeyCode.Mouse0) && !Correct)

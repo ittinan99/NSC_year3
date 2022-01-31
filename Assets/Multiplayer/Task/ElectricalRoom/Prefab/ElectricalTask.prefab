@@ -599,6 +599,7 @@ MonoBehaviour:
   IsDrag: 0
   WireEndName: {fileID: 4539693628918805099}
   Correct: 0
+  wireStartPos: {fileID: 4539693630520982004}
 --- !u!61 &4539693628487389674
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1266,6 +1267,7 @@ MonoBehaviour:
   IsDrag: 0
   WireEndName: {fileID: 4539693629420798262}
   Correct: 0
+  wireStartPos: {fileID: 4539693629826126788}
 --- !u!61 &4539693630077547981
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1534,6 +1536,7 @@ MonoBehaviour:
   IsDrag: 0
   WireEndName: {fileID: 4539693629957274442}
   Correct: 0
+  wireStartPos: {fileID: 4539693630556666437}
 --- !u!61 &4539693630424796560
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1750,6 +1753,7 @@ MonoBehaviour:
   IsDrag: 0
   WireEndName: {fileID: 5330075527935730736}
   Correct: 0
+  wireStartPos: {fileID: 6790204737270033856}
 --- !u!61 &4951705971811645993
 BoxCollider2D:
   m_ObjectHideFlags: 0

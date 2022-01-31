@@ -168,37 +168,37 @@ public class PhaseTimer : NetworkBehaviour
                 CarboAlive++;
             }
         }
-        //GS.TaskPhaseServerRpc();
-        if (CarboAlive == 0)
-        {
-            foreach (GameObject Player in GS.CarboList)
-            {
-                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
-                Debug.Log("Carbo Lose");
-            }
-            foreach (GameObject Player in GS.ProteinList)
-            {
-                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
-                Debug.Log("Protein Win");
-            }
-        }
-        else if (ProteinAlive == 0)
-        {
-            foreach (GameObject Player in GS.ProteinList)
-            {
-                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
-                Debug.Log("Protein Lose");
-            }
-            foreach (GameObject Player in GS.CarboList)
-            {
-                Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
-                Debug.Log("Carbo Win");
-            }
-        }
-        else
-        {
-            GS.TaskPhaseServerRpc();
-        }
+        GS.TaskPhaseServerRpc();
+        //if (CarboAlive == 0)
+        //{
+        //    foreach (GameObject Player in GS.CarboList)
+        //    {
+        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
+        //        Debug.Log("Carbo Lose");
+        //    }
+        //    foreach (GameObject Player in GS.ProteinList)
+        //    {
+        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
+        //        Debug.Log("Protein Win");
+        //    }
+        //}
+        //else if (ProteinAlive == 0)
+        //{
+        //    foreach (GameObject Player in GS.ProteinList)
+        //    {
+        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Lose;
+        //        Debug.Log("Protein Lose");
+        //    }
+        //    foreach (GameObject Player in GS.CarboList)
+        //    {
+        //        Player.GetComponent<TurnBaseSystem>().PlayerState = TurnBaseSystem.GameState.Win;
+        //        Debug.Log("Carbo Win");
+        //    }
+        //}
+        //else
+        //{
+        //    GS.TaskPhaseServerRpc();
+        //}
         StartCoroutine(WaitForHost());
         IEnumerator WaitForHost()
         {

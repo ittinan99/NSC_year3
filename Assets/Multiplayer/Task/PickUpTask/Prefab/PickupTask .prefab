@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465ec313fafc1ac4992316b474319c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollectAmount: 6
+  CollectAmount: 5
   ObjectivePrefab: {fileID: 1894698188829287443, guid: 731858fe789df24438888b9fabda36ed,
     type: 3}
   spawnPos: []
