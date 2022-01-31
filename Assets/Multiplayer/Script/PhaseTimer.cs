@@ -43,7 +43,7 @@ public class PhaseTimer : NetworkBehaviour
     }
     private void ValueChange(float previousValue, float newValue)
     {
-        TimerText.text = newValue.ToString("F2");
+        TimerText.text = newValue.ToString("F0");
     }
     private void clockchange(float previousValue, float newValue)
     {

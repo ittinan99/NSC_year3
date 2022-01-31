@@ -779,9 +779,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6528c6584d3e25b4caf8f7cbe88a5aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TaskStartingTime: 45
-  CombineStartingTime: 15
-  AttackStartingTime: 45
+  TaskStartingTime: 100
+  CombineStartingTime: 10
+  AttackStartingTime: 10
   SpeedDivide: 4.9
   TimerText: {fileID: 233981971}
   CP: {fileID: 1218037860}
