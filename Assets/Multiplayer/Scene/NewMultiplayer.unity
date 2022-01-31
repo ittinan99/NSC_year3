@@ -685,9 +685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6528c6584d3e25b4caf8f7cbe88a5aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TaskStartingTime: 30
-  CombineStartingTime: 30
-  AttackStartingTime: 10
+  TaskStartingTime: 45
+  CombineStartingTime: 15
+  AttackStartingTime: 45
   SpeedDivide: 4.9
   TimerText: {fileID: 233981971}
   CP: {fileID: 1218037860}
@@ -2289,7 +2289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
+  m_Color: {r: 0.97085524, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

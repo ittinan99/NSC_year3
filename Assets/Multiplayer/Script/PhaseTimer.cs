@@ -82,6 +82,7 @@ public class PhaseTimer : NetworkBehaviour
             currentTime.Value = TaskStartingTime;
         }
         ClockSlider.maxValue = TaskStartingTime;
+        ClockAreaRemain.color = Color.yellow;
         while (currentTime.Value > 0)
         {
             if (IsOwner)
@@ -106,6 +107,7 @@ public class PhaseTimer : NetworkBehaviour
             currentTime.Value = CombineStartingTime;
         }
         ClockSlider.maxValue = CombineStartingTime;
+        ClockAreaRemain.color = Color.green;
         while (currentTime.Value > 0)
         {
             if (IsOwner)
@@ -130,6 +132,7 @@ public class PhaseTimer : NetworkBehaviour
             currentTime.Value = AttackStartingTime;
         }
         ClockSlider.maxValue = AttackStartingTime;
+        ClockAreaRemain.color = Color.red;
         while (currentTime.Value > 0)
         {
             if (IsOwner)
