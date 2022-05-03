@@ -39,7 +39,7 @@ public class GameSystem : NetworkBehaviour
     {
         //CurrenTarget = null;
         _FirstPersonControllerGang = GameObject.FindObjectsOfType<FirstPersonController>();
-        StartCoroutine(StopPlayer());
+        //StartCoroutine(StopPlayer());
         
     }
     private void Update()
