@@ -25,10 +25,10 @@ public class CardCombineSystem : MonoBehaviour
     }
     public void GetInputCard1(ElementCardDisplay card_Input)
     {
-        card_Input1 = card_Input;
+        slot_Input1 = card_Input;
         if(card_Input != null)
         {
-            ClearOutputCard();
+            ClearSlot_Output();
             CheckandSpawn_OutPutCard();
         }
         else
@@ -39,10 +39,10 @@ public class CardCombineSystem : MonoBehaviour
     }
     public void GetInputCard2(ElementCardDisplay card_Input)
     {
-        card_Input2 = card_Input;
+        slot_Input2 = card_Input;
         if (card_Input != null)
         {
-            ClearOutputCard();
+            ClearSlot_Output();
             CheckandSpawn_OutPutCard();
         }
         else
@@ -54,7 +54,7 @@ public class CardCombineSystem : MonoBehaviour
     public void CheckandSpawn_OutPutCard()
     {
         if(card_Input1 == null || card_Input2 == null) { return; }
-        string Result = card_Input1.E_Card.element_Name + card_Input2.E_Card.element_Name;
+        string Result = slot_Input1.E_Card.element_Name + slot_Input2.E_Card.element_Name;
         if (CombineReceipe.E_CardDic.ContainsKey(Result))
         {
             SpawnCard_FromCardDic(Result);
@@ -87,15 +87,15 @@ public class CardCombineSystem : MonoBehaviour
     {
         if(card_Input1 != null)
         {
-            card_Input1.ResetFromCombine();
-            card_Input1 = null;
-            slot_Input1.GetComponent<CardEvent>().IsEmpty = true;
+            slot_Input1.ResetFromCombine();
+            slot_Input1 = null;
+            card_Input1.GetComponent<CardEvent>().IsEmpty = true;
         }
-        if(C_Input2 != null)
+        if(card_Input2 != null)
         {
-            card_Input2.ResetFromCombine();
-            card_Input2 = null;
-            slot_Input2.GetComponent<CardEvent>().IsEmpty = true;
+            slot_Input2.ResetFromCombine();
+            slot_Input2 = null;
+            card_Input2.GetComponent<CardEvent>().IsEmpty = true;
         }
     }
     public void ClearSlot_Output()
@@ -107,8 +107,9 @@ public class CardCombineSystem : MonoBehaviour
     }
     public void ClearSlot_Input()
     {
-        cardPanel.GetComponent<CardPanel>().hCard.Remove(card_Input1);
-        cardPanel.GetComponent<CardPanel>().hCard.Remove(card_Input2);
+        GameObject cardPanel = GameObject.Find("CardPanel");
+        cardPanel.GetComponent<CardPanel>().hCard.Remove(slot_Input1);
+        cardPanel.GetComponent<CardPanel>().hCard.Remove(slot_Input2);
         Destroy(card_Input1.gameObject);
         Destroy(card_Input2.gameObject);
         card_Input1 = null;

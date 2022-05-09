@@ -6,27 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Mainmenu.unity
+    path: Assets/Old_Project/Scenes/Mainmenu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Mainmenu2.unity
+    path: Assets/Old_Project/Scenes/Mainmenu2.unity
     guid: eaa1ee158dc163b4194c3eb0e2f85621
   - enabled: 1
-    path: Assets/Multiplayer/Scene/Multiplayer.unity
+    path: Assets/Old_Project/Multiplayer/Scene/Multiplayer.unity
     guid: c3c7607615023e342a7b3edcad948d58
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
+    path: Assets/Old_Project/Scenes/Lobby.unity
     guid: 1532c4da46af6ee43a53b082189a7ed2
   - enabled: 1
-    path: Assets/Multiplayer/Scene/NewMultiplayer.unity
+    path: Assets/Old_Project/Multiplayer/Scene/NewMultiplayer.unity
     guid: e84d5d6b7b1fef74fade2d1d86664221
   - enabled: 1
-    path: Assets/Scenes/Encyclopedia.unity
+    path: Assets/Old_Project/Scenes/Encyclopedia.unity
     guid: f9cfc6f99d53f6e468598d8c0dd34681
   - enabled: 1
-    path: Assets/Scenes/EndWinScene.unity
+    path: Assets/Old_Project/Scenes/EndWinScene.unity
     guid: 62e3534c201671c43ac6153b03234005
   - enabled: 1
-    path: Assets/Scenes/EndLoseScene.unity
+    path: Assets/Old_Project/Scenes/EndLoseScene.unity
     guid: 4d0bc05a557c8fe468002ff17f55268b
   m_configObjects: {}

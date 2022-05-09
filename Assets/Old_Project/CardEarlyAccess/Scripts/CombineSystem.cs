@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardCombineSystem : MonoBehaviour
+public class CombineSystem : MonoBehaviour
 {
     public GameObject Input1;
     public GameObject Input2;
