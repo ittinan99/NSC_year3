@@ -12,6 +12,7 @@ TagManager:
   - canAttack
   - TaskCanvas
   - AudioCon
+  - VirtualCam
   layers:
   - Default
   - TransparentFX
