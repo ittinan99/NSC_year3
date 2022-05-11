@@ -15,12 +15,7 @@ public class LobbySetPosittionPlayer : NetworkBehaviour
     int count = 0;
     private void Start()
     {
-        Panel = GameObject.Find("PlayerSlotPanel").GetComponent<Transform>();
-        Panel.GetComponent<RectTransform>().SetWidth(Panel.GetComponent<RectTransform>().GetWidth()+350);
-        GetComponent<Transform>().SetParent(Panel);
-        GetComponent<RectTransform>().sizeDelta = new Vector2(325, 500);
-        NetworkManager.Singleton.OnClientConnectedCallback += Singleton_OnClientConnectedCallback;
-        NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnDisconnetedCallback;
+        
     }
 
     private void Singleton_OnDisconnetedCallback(ulong obj)
@@ -31,6 +26,15 @@ public class LobbySetPosittionPlayer : NetworkBehaviour
     // Start is called before the first frame update
     void Update()
     {
+        if(Panel == null)
+        {
+            Panel = GameObject.Find("PlayerSlotPanel").GetComponent<Transform>();
+            Panel.GetComponent<RectTransform>().SetWidth(Panel.GetComponent<RectTransform>().GetWidth() + 350);
+            GetComponent<Transform>().SetParent(Panel);
+            GetComponent<RectTransform>().sizeDelta = new Vector2(325, 500);
+            NetworkManager.Singleton.OnClientConnectedCallback += Singleton_OnClientConnectedCallback;
+            NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnDisconnetedCallback;
+        }
     }
 
     private void Singleton_OnClientConnectedCallback(ulong obj)

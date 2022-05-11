@@ -33,7 +33,7 @@ public class PlayerController : NetworkBehaviour
     private NetworkVariable<PlayerAnimeState> networkPlayerState = new NetworkVariable<PlayerAnimeState>();
 
     [SerializeField]
-    private NetworkVariable<float> networkAimLayerWeight = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone);
+    private NetworkVariable<float> networkAimLayerWeight = new NetworkVariable<float>();
 
     [SerializeField]
     private NetworkVariable<bool> networkPlayerAim = new NetworkVariable<bool>();

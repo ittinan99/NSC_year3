@@ -10,8 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class PhaseTimer : NetworkBehaviour
 {
-    NetworkVariable<float> currentTime = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone);
-    NetworkVariable<float> ClockValue = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone);
+    NetworkVariable<float> currentTime = new NetworkVariable<float>();
+    NetworkVariable<float> ClockValue = new NetworkVariable<float>();
     public float TaskStartingTime;
     public float CombineStartingTime;
     public float AttackStartingTime;
