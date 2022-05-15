@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wind
+  m_Name: Wind 1
   m_Shader: {fileID: -6465566751694194690, guid: 401d020b81574864b9623d799ebc5e7a,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _SURFACE_TYPE_TRANSPARENT
@@ -42,10 +42,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 1
-    - _AlphaClipValue: 0.6
+    - _AlphaClipValue: 0.5
     - _Blend: 2
     - _CastShadows: 0
-    - _CellDensity: 5
+    - _CellDensity: 20
     - _Cull: 0
     - _DstBlend: 1
     - _NoiseScale: 30
@@ -60,7 +60,7 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _Color: {r: 0.14335813, g: 0.5982663, b: 0.31484184, a: 0}
-    - _WindSpeed: {r: 1, g: 0.1, b: 0, a: 0}
+    - _WindSpeed: {r: 0.5, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8526525429086437061
 MonoBehaviour:
