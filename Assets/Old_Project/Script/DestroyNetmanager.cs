@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class DestroyNetmanager : NetworkBehaviour
+public class DestroyNetmanager : MonoBehaviour
 {
 
     // Update is called once per frame
     void Update()
     {
-        Destroy(NetworkManager.Singleton.gameObject);
-        Destroy(this.gameObject);
+        GameObject[] NetworkManagers = GameObject.FindGameObjectsWithTag("NetworkManager");
+        if (NetworkManagers.Length > 1)
+        {
+            Destroy(NetworkManagers[1]);
+        }
+
     }
 }

@@ -27,19 +27,21 @@ public class PlayerRpgMovement : NetworkBehaviour
     private Transform mainCam;
     public bool canMove;
     private Rigidbody rb;
-    void Start()
-    {
-        rb = this.GetComponent<Rigidbody>();
-        mainCam = Camera.main.transform;
-        Vcam = GameObject.FindGameObjectWithTag("VirtualCam").GetComponent<CinemachineFreeLook>();
-
-        Vcam.Follow = this.gameObject.transform;
-        Vcam.LookAt = this.gameObject.transform;
-    }
     void Update()
     {
         if (IsLocalPlayer)
         {
+            if (!rb == null) return;
+            rb = this.GetComponent<Rigidbody>();
+
+            if (!mainCam == null) return;
+            mainCam = Camera.main.transform;
+            if (!Vcam == null) return;
+            Vcam = GameObject.FindGameObjectWithTag("VirtualCam").GetComponent<CinemachineFreeLook>();
+
+            Vcam.Follow = this.gameObject.transform;
+            Vcam.LookAt = this.gameObject.transform;
+
             if (!canMove) return;
             Movement();
         }
