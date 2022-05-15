@@ -12,16 +12,18 @@ TagManager:
   - canAttack
   - TaskCanvas
   - AudioCon
+  - VirtualCam
+  - Walkable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - Card
   - UIDontBlur
-  - 
+  - Player
   - 
   - 
   - 
