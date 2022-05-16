@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Chat/TestChat/TestChat.unity
+    guid: dce43e0fac65dee4ca47327d03aa16c9
+  - enabled: 1
     path: Assets/TeleportPlayer/SceneTest/TestTeleport.unity
     guid: ec6c331d0515143428586535d22339b3
   - enabled: 1
