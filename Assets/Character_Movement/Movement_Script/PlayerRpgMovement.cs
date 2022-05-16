@@ -59,19 +59,25 @@ public class PlayerRpgMovement : NetworkBehaviour
     public movementState currentMovementState;
     void Start()
     {
-        if (!IsLocalPlayer) { this.enabled = false; }
-        rb = this.GetComponent<Rigidbody>();
-        animController = this.GetComponent<MovementAnim>();
 
-        mainCam = Camera.main.transform;
-        currentMovementState = movementState.walk;
-        Vcam = GameObject.FindGameObjectWithTag("VirtualCam").GetComponent<CinemachineFreeLook>();
+        if (IsLocalPlayer) {
+            rb = this.GetComponent<Rigidbody>();
+            animController = this.GetComponent<MovementAnim>();
 
-        Vcam.Follow = this.gameObject.transform;
-        Vcam.LookAt = this.gameObject.transform;
+            mainCam = Camera.main.transform;
+            currentMovementState = movementState.idle;
+            Vcam = GameObject.FindGameObjectWithTag("VirtualCam").GetComponent<CinemachineFreeLook>();
 
-        Keyframe dodge_LastFrame = dodgeCurve[dodgeCurve.length - 1];
-        dodgeTimer = dodge_LastFrame.time;
+            Vcam.Follow = this.gameObject.transform;
+            Vcam.LookAt = this.gameObject.transform;
+
+            Keyframe dodge_LastFrame = dodgeCurve[dodgeCurve.length - 1];
+            dodgeTimer = dodge_LastFrame.time;
+        }
+        else
+        {
+            this.enabled = false;
+        }
     }
     void Update()
     {
@@ -94,15 +100,15 @@ public class PlayerRpgMovement : NetworkBehaviour
         {
             case movementState.walk:
                 walkToDirection(direction);
-                animController.AnimationState(currentMovementState.ToString());
+                animController.AnimationStateServerRpc(currentMovementState.ToString());
                 break;
             case movementState.run:
                 runToDirection(direction);
                 ReduceStaminaOnRun();
-                animController.AnimationState(currentMovementState.ToString());
+                animController.AnimationStateServerRpc(currentMovementState.ToString());
                 break;
             case movementState.idle:
-                animController.AnimationState(currentMovementState.ToString());
+                animController.AnimationStateServerRpc(currentMovementState.ToString());
                 break;
         }
     }
@@ -123,7 +129,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     }
     IEnumerator Dodge()
     {
-        animController.Dodge();
+        animController.DodgeServerRpc();
         isDodging = true;
         float timer = 0;
         reduceStaminaOnDodge(10f);

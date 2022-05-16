@@ -14,7 +14,13 @@ public class MovementAnim : NetworkBehaviour
     }
 
     // Update is called once per frame
-    public void AnimationState(string paramName)
+    [ServerRpc]
+    public void AnimationStateServerRpc(string paramName)
+    {
+        AnimationStateClientRpc(paramName);
+    }
+    [ClientRpc]
+    public void AnimationStateClientRpc(string paramName)
     {
         foreach (AnimatorControllerParameter parameter in playerAnim.parameters)
         {
@@ -22,7 +28,13 @@ public class MovementAnim : NetworkBehaviour
         }
         playerAnim.SetBool(paramName, true);
     }
-    public void Dodge()
+    [ServerRpc]
+    public void DodgeServerRpc()
+    {
+        DodgeClientRpc();
+    }
+    [ClientRpc]
+    public void DodgeClientRpc()
     {
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Dodge")) { return; }
 

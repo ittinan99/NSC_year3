@@ -118,8 +118,8 @@ GameObject:
   - component: {fileID: 7854567168577234838}
   - component: {fileID: 2148099740911995076}
   - component: {fileID: 6659234616177060868}
-  - component: {fileID: -4793682980845465701}
-  - component: {fileID: -1512057976866065089}
+  - component: {fileID: -2933680086846016256}
+  - component: {fileID: -4444742851920350646}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -317,7 +317,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-4793682980845465701
+--- !u!114 &-2933680086846016256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,7 +343,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &-1512057976866065089
+--- !u!114 &-4444742851920350646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1590,6 +1590,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1363790454535928239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740551207542142318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 1441864725}
 --- !u!114 &1601660063703652156
 MonoBehaviour:
   m_ObjectHideFlags: 0

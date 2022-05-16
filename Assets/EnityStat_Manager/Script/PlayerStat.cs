@@ -21,6 +21,9 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
     public  Coroutine staminaReduceOverTime;
     [SerializeField]
     private bool IsReduceStaminaRunning;
+
+    private bool setParam = false;
+
     public float currentHealth
     {
         get { return NetworkcurrentHealth.Value; }
@@ -31,14 +34,25 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
         get { return NetworkcurrentStamina.Value; }
         set { NetworkcurrentStamina.Value = value; }
     }
+    [ServerRpc]
+    public void currentHealthServerRpc(float value)
+    {
+        currentHealth = value;
+    }
+    [ServerRpc]
+    public void currentStaminaServerRpc(float value)
+    {
+        currentStamina = value;
+    }
     public void reduceStamina(float amount)
     {
-        currentStamina -= amount;
+        currentStaminaServerRpc(currentStamina - amount);
         if(staminaRegen != null)
         {
-            StopCoroutine(RegenStamina());
+            StopCoroutine(staminaRegen);
         }
         staminaRegen = StartCoroutine(RegenStamina());
+
         onStaminaUpDate.Invoke(currentStamina);
     }
     public void reduceStaminaAmountOverTime(float amount)
@@ -47,6 +61,12 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
         {
             staminaReduceOverTime = StartCoroutine(ReduceStaminaOverTime(amount));
         }
+        if (staminaRegen != null)
+        {
+            StopCoroutine(staminaRegen);
+            staminaRegen = null;
+        }
+
     }
     public void stopReduceStamina()
     {
@@ -56,7 +76,7 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
             IsReduceStaminaRunning = false;
             if (staminaRegen != null)
             {
-                StopCoroutine(RegenStamina());
+                StopCoroutine(staminaRegen);
             }
             staminaRegen = StartCoroutine(RegenStamina());
         }
@@ -71,10 +91,11 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
     }
     public IEnumerator RegenStamina()
     {
+        onStaminaUpDate.Invoke(currentStamina);
         yield return new WaitForSeconds(2f);
         while(currentStamina < maxStamina)
         {
-            currentStamina += maxStamina / 150;
+            currentStaminaServerRpc(currentStamina + maxStamina / 150);
             onStaminaUpDate.Invoke(currentStamina);
             yield return new WaitForSeconds(0.1f);
         }
@@ -85,7 +106,7 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
         IsReduceStaminaRunning = true;
         while (currentStamina >= 0)
         {
-            currentStamina -= (maxStamina / 100)*amount;
+            currentStaminaServerRpc(currentStamina - (maxStamina / 100)*amount);
             onStaminaUpDate.Invoke(currentStamina);
             yield return new WaitForSeconds(0.1f);
         }
@@ -98,15 +119,23 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
     }
     void Start()
     {
-        if (!IsLocalPlayer) { return; }
-        onStaminaUpDate += upDateStaminaUI;
-        onHealthUpDate += upDateHealthUI;
-        currentHealth = maxHealth;
-        currentStamina = maxStamina;
-        IsReduceStaminaRunning = false;
-        UIstat = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<UIStatControl>();
-        UIstat.SetHealthUI(currentHealth);
-        UIstat.SetStaminaUI(currentStamina);
+        if (IsLocalPlayer)
+        {
+            Debug.Log("SetParam");
+            onStaminaUpDate += upDateStaminaUI;
+            onHealthUpDate += upDateHealthUI;
+            currentHealthServerRpc(maxHealth);
+            currentStaminaServerRpc(maxStamina);
+            IsReduceStaminaRunning = false;
+            UIstat = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<UIStatControl>();
+            UIstat.SetHealthUI(maxHealth);
+            UIstat.SetStaminaUI(maxStamina);
+            setParam = true;
+        }
+    }
+    private void Update()
+    {
+       
     }
 
 }
