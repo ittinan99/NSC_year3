@@ -96,6 +96,10 @@ public class PlayerRpgMovement : NetworkBehaviour
         IsStopRunning();
         currentMovementState = CheckMovementState(direction);
         if (isDodging) { return; }
+        MoveDependOnState(direction);
+    }
+    private void MoveDependOnState(Vector3 direction)
+    {
         switch (currentMovementState)
         {
             case movementState.walk:

@@ -5,8 +5,12 @@ using Unity.Netcode;
 using UnityEngine.Animations;
 public class MovementAnim : NetworkBehaviour
 {
+
     public Animator playerAnim;
 
+    [Header("Combat Manager")]
+    [SerializeField]
+    private int combatLayerIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +28,10 @@ public class MovementAnim : NetworkBehaviour
     {
         foreach (AnimatorControllerParameter parameter in playerAnim.parameters)
         {
-            playerAnim.SetBool(parameter.name, false);
+            if(parameter.name != "isCombat")
+            {
+                playerAnim.SetBool(parameter.name, false);
+            }
         }
         playerAnim.SetBool(paramName, true);
     }
@@ -40,5 +47,29 @@ public class MovementAnim : NetworkBehaviour
 
         playerAnim.SetTrigger("roll");
     }
+    [ServerRpc]
+    public void changeCombatLayerWeightServerRpc(float weight)
+    {
+        changeCombatLayerWeightClientRpc(weight);
+    }
+    [ClientRpc]
+    public void changeCombatLayerWeightClientRpc(float weight)
+    {
+        StartCoroutine(SwitchStance(weight));
+    }
+    IEnumerator SwitchStance(float weight)
+    {
+        if(weight == 1)
+        {
+            playerAnim.SetLayerWeight(combatLayerIndex, weight);
+            playerAnim.SetBool("isCombat", !playerAnim.GetBool("isCombat"));
+        }
+        else
+        {
+            playerAnim.SetBool("isCombat", !playerAnim.GetBool("isCombat"));
+            yield return new WaitForSeconds(2.5f);
+            playerAnim.SetLayerWeight(combatLayerIndex, weight);
+        }
+    }
 
- }
+}
