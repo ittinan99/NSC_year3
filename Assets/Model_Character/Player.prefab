@@ -1721,6 +1721,19 @@ MonoBehaviour:
   WeaponHeld: {fileID: 0}
   currentWeaponInHand: {fileID: 0}
   currentWeaponInShealth: {fileID: 0}
+--- !u!114 &6984142309490798292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740551207542142318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9acd1c1fefd04474990876b64d178548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponCollector: {fileID: 6244173566562600831}
 --- !u!4 &3765498987053262870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8729457516425751849, guid: 7730dae11ab2b9f49bb5023cff07a81b,

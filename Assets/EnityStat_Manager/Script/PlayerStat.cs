@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Events;
-public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<float>
+public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 {
     public float maxHealth;
     public float maxStamina;
@@ -81,9 +81,15 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
             staminaRegen = StartCoroutine(RegenStamina());
         }
     }
-    public void takeDamage(float damageTaken)
+  
+    public override void receiveAttack(float damage)
     {
-        currentHealth -= damageTaken;
+        receiveAttackServerRpc(damage);
+    }
+    [ServerRpc]
+    public void receiveAttackServerRpc(float damage)
+    {
+        currentHealth -= damage;
     }
     private void upDateHealthUI(float currentHealth)
     {
@@ -138,4 +144,5 @@ public class PlayerStat : NetworkBehaviour,IDamagable<float>,IStaminaUsable<floa
        
     }
 
+  
 }

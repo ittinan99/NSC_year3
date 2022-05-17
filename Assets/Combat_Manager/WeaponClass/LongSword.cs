@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-public class LongSword : Weapon,IMeleeWeapon
+public class LongSword : IMeleeWeapon
 {
     [SerializeField] private float _attackSpeed;
     [SerializeField] private float _staggerDamage;
@@ -34,9 +34,18 @@ public class LongSword : Weapon,IMeleeWeapon
     {
         
     }
+  
     public override void Attack(AttackTarget target, float damage)
     {
         base.Attack(target,damage);
         Debug.Log("Attack");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<AttackTarget>() && !other.CompareTag("Player"))
+        {
+            Attack(other.GetComponent<AttackTarget>(), _weaponDamage);
+        }
     }
 }

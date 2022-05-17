@@ -10,8 +10,8 @@ public class WeaponShealthDraw : NetworkBehaviour
     [SerializeField] GameObject WeaponShealth;
     [SerializeField] GameObject WeaponHeld;
 
-    [SerializeField] GameObject currentWeaponInHand;
-    [SerializeField] GameObject currentWeaponInShealth;
+    public GameObject currentWeaponInHand;
+    public GameObject currentWeaponInShealth;
     void Start()
     {
         WeaponHeld = combatManager.heldWeapon.gameObject;

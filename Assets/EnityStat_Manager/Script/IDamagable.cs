@@ -6,7 +6,6 @@ using Unity.Netcode;
 public interface IDamagable<T>
 {
     float currentHealth { get; }
-    void takeDamage(T damageTaken);
 }
 public interface IStaminaUsable<T>
 {

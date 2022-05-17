@@ -5,9 +5,9 @@ using Unity.Netcode;
 
 public abstract class Weapon : NetworkBehaviour,WeaponData
 {
-    [SerializeField] private float _weaponDamage;
-    [SerializeField] private float _weight;
-    [SerializeField] private int _sellPrice;
+    [SerializeField] protected float _weaponDamage;
+    [SerializeField] protected float _weight;
+    [SerializeField] protected int _sellPrice;
     public float weaponDamage
     {
         get { return _weaponDamage; }
