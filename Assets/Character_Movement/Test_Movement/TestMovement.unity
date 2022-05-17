@@ -419,9 +419,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1314280566, guid: 5d353d131e213f94fb9639806519a1fa, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3035399561
+    - target: {fileID: 1030980405, guid: 5d353d131e213f94fb9639806519a1fa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2699541615817244657, guid: 5d353d131e213f94fb9639806519a1fa,
         type: 3}
@@ -3130,7 +3130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e7ac528f9a3e340ac6b20cb86e9b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomName: testroom
+  RoomName: testroom1
   NickName: testname
   HostButton: {fileID: 1366183487}
   JoinButton: {fileID: 1189318860}

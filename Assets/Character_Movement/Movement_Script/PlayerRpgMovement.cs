@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
+using UnityEngine.VFX;
 using Cinemachine;
 
 public class PlayerRpgMovement : NetworkBehaviour
@@ -52,6 +53,8 @@ public class PlayerRpgMovement : NetworkBehaviour
     private LayerMask groundLayer;
     public float distanceToGround;
 
+    public VisualEffect visualEffect;
+
     public enum movementState
     {
         idle,walk,run
@@ -86,6 +89,15 @@ public class PlayerRpgMovement : NetworkBehaviour
             floatCollider();
             if (!canMove) return;
             Movement();
+
+
+            //PleaseCleanForMe
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                visualEffect.SetFloat("DashAngle",transform.rotation.eulerAngles.y);
+                Debug.Log(visualEffect.GetFloat("DashAngle"));
+                visualEffect.Play();
+            }
         }
     }
     private void Movement()
