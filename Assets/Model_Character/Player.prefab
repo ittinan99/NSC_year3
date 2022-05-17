@@ -273,11 +273,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBattle: 1
-  heldWeapon: {fileID: 4001322922013487258, guid: a1125ee3f983216408408eb52b5601bd,
+  heldWeapon: {fileID: 8401013730907822839, guid: a1125ee3f983216408408eb52b5601bd,
     type: 3}
   currentGameState: 0
   gameStateSwitchButton: 9
   animController: {fileID: 7179339755999639836}
+  cooldownTime: 0.8
 --- !u!114 &7179339755999639836
 MonoBehaviour:
   m_ObjectHideFlags: 0

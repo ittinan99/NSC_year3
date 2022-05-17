@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4905048067712522530}
-  - component: {fileID: 4001322922013487258}
   - component: {fileID: 26401757528108816}
+  - component: {fileID: 8401013730907822839}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -34,18 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4001322922013487258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739585012280874396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 056dfb7fe23c8db469c51e7da89d311d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &26401757528108816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +50,24 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &8401013730907822839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739585012280874396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba05918c6b3cd8642a17ab0474b527a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponDamage: 10
+  _weight: 0.1
+  _sellPrice: 200
+  _attackSpeed: 2
+  _staggerDamage: 4
+  _weaponStatus: 4
 --- !u!1 &3085909588128628852
 GameObject:
   m_ObjectHideFlags: 0

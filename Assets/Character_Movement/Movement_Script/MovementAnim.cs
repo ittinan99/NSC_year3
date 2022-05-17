@@ -12,29 +12,36 @@ public class MovementAnim : NetworkBehaviour
     [SerializeField]
     private int combatLayerIndex;
     // Start is called before the first frame update
+    public float currentAnimatorStateInfoTime
+    {
+        get { return playerAnim.GetCurrentAnimatorStateInfo(1).normalizedTime; }
+    }
+    public bool currentAnimatorStateInfoIsName(string paramName)
+    {
+        return playerAnim.GetCurrentAnimatorStateInfo(1).IsName(paramName);
+    }
     void Start()
     {
 
     }
 
     // Update is called once per frame
+    #region Movement Animation
     [ServerRpc]
     public void AnimationStateServerRpc(string paramName)
     {
-        AnimationStateClientRpc(paramName);
-    }
-    [ClientRpc]
-    public void AnimationStateClientRpc(string paramName)
-    {
+        List<string> movementParams = new List<string> { "walk", "run", "idle" };
         foreach (AnimatorControllerParameter parameter in playerAnim.parameters)
         {
-            if(parameter.name != "isCombat")
+            if (movementParams.Contains(parameter.name))
             {
                 playerAnim.SetBool(parameter.name, false);
             }
         }
         playerAnim.SetBool(paramName, true);
     }
+    #endregion
+    #region Dodge Animation
     [ServerRpc]
     public void DodgeServerRpc()
     {
@@ -47,19 +54,18 @@ public class MovementAnim : NetworkBehaviour
 
         playerAnim.SetTrigger("roll");
     }
+    #endregion
+    #region LayerWeight Animation
     [ServerRpc]
     public void changeCombatLayerWeightServerRpc(float weight)
     {
-        changeCombatLayerWeightClientRpc(weight);
-    }
-    [ClientRpc]
-    public void changeCombatLayerWeightClientRpc(float weight)
-    {
         StartCoroutine(SwitchStance(weight));
     }
+    #endregion
+    #region Switch Stance
     IEnumerator SwitchStance(float weight)
     {
-        if(weight == 1)
+        if (weight == 1)
         {
             playerAnim.SetLayerWeight(combatLayerIndex, weight);
             playerAnim.SetBool("isCombat", !playerAnim.GetBool("isCombat"));
@@ -70,6 +76,21 @@ public class MovementAnim : NetworkBehaviour
             yield return new WaitForSeconds(2.5f);
             playerAnim.SetLayerWeight(combatLayerIndex, weight);
         }
+    } 
+    #endregion
+    [ServerRpc]
+    public void LongSwordSetBoolServerRpc(string paramName,bool var)
+    {
+        List<string> LongSwordParams = new List<string> { "LongSword_hit1", "LongSword_hit2" };
+        foreach (AnimatorControllerParameter parameter in playerAnim.parameters)
+        {
+            if (LongSwordParams.Contains(parameter.name))
+            {
+                playerAnim.SetBool(parameter.name, false);
+            }
+        }
+        playerAnim.SetBool(paramName, var);
     }
+    
 
 }
