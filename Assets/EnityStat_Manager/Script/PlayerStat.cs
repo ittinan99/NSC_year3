@@ -26,6 +26,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     private bool setParam = false;
 
+
     public float currentHealth
     {
         get { return NetworkcurrentHealth.Value; }
@@ -36,12 +37,12 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         get { return NetworkcurrentStamina.Value; }
         set { NetworkcurrentStamina.Value = value; }
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void currentHealthServerRpc(float value)
     {
         currentHealth = value;
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void currentStaminaServerRpc(float value)
     {
         currentStamina = value;
@@ -144,11 +145,15 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             NetworkcurrentStamina.OnValueChanged += StaminaChange;
             NetworkcurrentHealth.OnValueChanged += HealthChange;
+            UIstat.SetHealthUI(maxHealth);
+            UIstat.SetStaminaUI(maxStamina);
             GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
             UIstat.transform.SetParent(Canvas.transform);
             UIstat.tag = "OtherPlayerBar";
         }
     }
+
+
 
     private void HealthChange(float previousValue, float newValue)
     {
@@ -159,6 +164,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     {
         UIstat.UpdateStaminaUI(newValue);
     }
+
 
 
     private void Update()
