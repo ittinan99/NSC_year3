@@ -12,6 +12,13 @@ public struct DataCollect : INetworkSerializable
         PlayerName = playerName;
         PlayerId = playerId;
     }
+
+    public void SetDataCollect(string playerName, ulong playerId)
+    {
+        PlayerName = playerName;
+        PlayerId = playerId;
+    }
+
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref PlayerName);
