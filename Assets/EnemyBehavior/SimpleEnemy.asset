@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 3446262383751307176}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
 --- !u!114 &2400216912757144834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,6 +38,7 @@ MonoBehaviour:
   position: {x: -10, y: -142}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
   description: 
   drawGizmos: 0
   child: {fileID: 3446262383751307176}
@@ -58,6 +60,7 @@ MonoBehaviour:
   position: {x: -10, y: 74.33334}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
   description: 
   drawGizmos: 0
   children: []
