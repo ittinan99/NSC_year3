@@ -8,23 +8,24 @@ using TMPro;
 public class ChangePlayerObjectName : NetworkBehaviour
 {
     PhotonRealtimeTransport photo;
+    DataCollect dataCollect = new DataCollect();
+    public TMP_Text text;
     // Start is called before the first frame update
     void Start()
     {
         photo = GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>();
         if (IsOwner)
         {
-            ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+            dataCollect.SetDataCollect(photo.NickName, OwnerClientId);
+            ChangeServerRpc(dataCollect);
         }
     }
     private void Update()
     {
-        if (gameObject.name != photo.NickName)
+        if (IsOwner)
         {
-            if (IsOwner)
-            {
-                ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
-            }
+            dataCollect.SetDataCollect(photo.NickName, OwnerClientId);
+            ChangeServerRpc(dataCollect);
         }
     }
     [ServerRpc]
@@ -36,5 +37,6 @@ public class ChangePlayerObjectName : NetworkBehaviour
     void ChangeClientRpc(DataCollect data)
     {
         this.gameObject.name = data.PlayerName;
+        text.text = data.PlayerName;
     }
 }

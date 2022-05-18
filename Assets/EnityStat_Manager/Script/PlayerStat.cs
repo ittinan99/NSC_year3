@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Events;
+using System;
+
 public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 {
     public float maxHealth;
@@ -14,7 +16,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     public UnityAction<float> onHealthUpDate;
     public UnityAction<float> onStaminaUpDate;
     [SerializeField]
-    private UIStatControl UIstat;
+    public UIStatControl UIstat;
 
     public  Coroutine staminaRegen;
 
@@ -23,6 +25,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     private bool IsReduceStaminaRunning;
 
     private bool setParam = false;
+
 
     public float currentHealth
     {
@@ -34,12 +37,12 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         get { return NetworkcurrentStamina.Value; }
         set { NetworkcurrentStamina.Value = value; }
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void currentHealthServerRpc(float value)
     {
         currentHealth = value;
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void currentStaminaServerRpc(float value)
     {
         currentStamina = value;
@@ -133,15 +136,40 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             currentHealthServerRpc(maxHealth);
             currentStaminaServerRpc(maxStamina);
             IsReduceStaminaRunning = false;
-            UIstat = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<UIStatControl>();
+            //UIstat = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<UIStatControl>();
             UIstat.SetHealthUI(maxHealth);
             UIstat.SetStaminaUI(maxStamina);
             setParam = true;
         }
+        if (!IsLocalPlayer)
+        {
+            NetworkcurrentStamina.OnValueChanged += StaminaChange;
+            NetworkcurrentHealth.OnValueChanged += HealthChange;
+            UIstat.SetHealthUI(maxHealth);
+            UIstat.SetStaminaUI(maxStamina);
+            GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
+            UIstat.transform.SetParent(Canvas.transform);
+            UIstat.tag = "OtherPlayerBar";
+        }
     }
+
+
+
+    private void HealthChange(float previousValue, float newValue)
+    {
+        UIstat.UpdateHealthUI(newValue);
+    }
+
+    private void StaminaChange(float previousValue, float newValue)
+    {
+        UIstat.UpdateStaminaUI(newValue);
+    }
+
+
+
     private void Update()
     {
-       
+        
     }
 
   
