@@ -5,6 +5,7 @@ using Unity.Netcode;
 using UnityEngine.Events;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 {
@@ -152,6 +153,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
             UIstat.transform.SetParent(Canvas.transform);
             UIstat.tag = "OtherPlayerBar";
+            UIstat.gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.8f);
+            UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
         }
     }
 
@@ -179,6 +182,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
             UIstat.transform.SetParent(Canvas.transform);
             UIstat.tag = "OtherPlayerBar";
+            UIstat.gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.8f);
+            UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
         }
     }
 
