@@ -20,6 +20,10 @@ public class MovementAnim : NetworkBehaviour
     {
         return playerAnim.GetCurrentAnimatorStateInfo(1).IsName(paramName);
     }
+    public bool currentAnimatorStateBaseIsName(string paramName)
+    {
+        return playerAnim.GetCurrentAnimatorStateInfo(0).IsName(paramName);
+    }
     void Start()
     {
 
@@ -50,8 +54,6 @@ public class MovementAnim : NetworkBehaviour
     [ClientRpc]
     public void DodgeClientRpc()
     {
-        if (playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Dodge")) { return; }
-
         playerAnim.SetTrigger("roll");
     }
     #endregion
