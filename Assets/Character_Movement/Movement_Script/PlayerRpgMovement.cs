@@ -86,6 +86,14 @@ public class PlayerRpgMovement : NetworkBehaviour
             floatCollider();
             if (!canMove) return;
             Movement();
+            if(mainCam == null)
+            {
+                mainCam = Camera.main.transform;
+                Vcam = GameObject.FindGameObjectWithTag("VirtualCam").GetComponent<CinemachineFreeLook>();
+
+                Vcam.Follow = this.gameObject.transform;
+                Vcam.LookAt = this.gameObject.transform;
+            }
         }
     }
     private void Movement()

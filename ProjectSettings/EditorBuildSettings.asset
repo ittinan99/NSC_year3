@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Old_Project/Scenes/EndLoseScene.unity
     guid: 4d0bc05a557c8fe468002ff17f55268b
+  - enabled: 1
+    path: Assets/TeleportPlayer/SceneTest/TestTeleport.unity
+    guid: ec6c331d0515143428586535d22339b3
+  - enabled: 1
+    path: Assets/TeleportPlayer/SceneTest/TerrainScam.unity
+    guid: b81584dcc0718414a91eef9ad0c28baf
   m_configObjects: {}

@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Events;
 using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 {
@@ -140,6 +141,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             UIstat.SetHealthUI(maxHealth);
             UIstat.SetStaminaUI(maxStamina);
             setParam = true;
+            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
         }
         if (!IsLocalPlayer)
         {
@@ -153,7 +155,32 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         }
     }
 
-
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if (IsLocalPlayer)
+        {
+            onStaminaUpDate += upDateStaminaUI;
+            onHealthUpDate += upDateHealthUI;
+            currentHealthServerRpc(maxHealth);
+            currentStaminaServerRpc(maxStamina);
+            IsReduceStaminaRunning = false;
+            //UIstat = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<UIStatControl>();
+            UIstat.SetHealthUI(maxHealth);
+            UIstat.SetStaminaUI(maxStamina);
+            setParam = true;
+            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+        }
+        if (!IsLocalPlayer)
+        {
+            NetworkcurrentStamina.OnValueChanged += StaminaChange;
+            NetworkcurrentHealth.OnValueChanged += HealthChange;
+            UIstat.SetHealthUI(maxHealth);
+            UIstat.SetStaminaUI(maxStamina);
+            GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
+            UIstat.transform.SetParent(Canvas.transform);
+            UIstat.tag = "OtherPlayerBar";
+        }
+    }
 
     private void HealthChange(float previousValue, float newValue)
     {

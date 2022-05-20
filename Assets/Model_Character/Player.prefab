@@ -1791,9 +1791,9 @@ MonoBehaviour:
   maxHealth: 100
   maxStamina: 100
   NetworkcurrentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 100
   NetworkcurrentStamina:
-    m_InternalValue: 0
+    m_InternalValue: 100
   UIstat: {fileID: 1603580632958360843}
   IsReduceStaminaRunning: 0
 --- !u!114 &-6259460489414657412
