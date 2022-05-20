@@ -485,7 +485,7 @@
     },
     "m_PreviewData": {
         "serializedMesh": {
-            "m_SerializedMesh": "{\"mesh\":{\"instanceID\":0}}",
+            "m_SerializedMesh": "{\"mesh\":{\"fileID\":-938190605039004447,\"guid\":\"d955ea0e5f58df04595e7dd077d82ba7\",\"type\":3}}",
             "m_Guid": ""
         },
         "preventRotation": false
@@ -720,7 +720,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": -1.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": -0.8999999761581421,
