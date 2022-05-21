@@ -6,18 +6,8 @@ using UnityEngine.VFX;
 public class TestVFX : MonoBehaviour
 {
     public VisualEffect visualEffect;
-    // Start is called before the first frame update
-    void Start()
+    public void OnPlayVFX()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            visualEffect.Play();
-        }
+        visualEffect.Play();
     }
 }
