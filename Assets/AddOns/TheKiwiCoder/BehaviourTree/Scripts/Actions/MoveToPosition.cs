@@ -24,14 +24,17 @@ public class MoveToPosition : ActionNode
 
     protected override State OnUpdate() {
         if (context.agent.pathPending) {
+            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(true);
             return State.Running;
         }
 
         if (context.agent.remainingDistance < tolerance) {
+            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
             return State.Success;
         }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid) {
+            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
             return State.Failure;
         }
 

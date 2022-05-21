@@ -77,8 +77,8 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0.2867924, g: 1, b: 0.32705408, a: 0}
-    - _Color1: {r: 0, g: 0.6132076, b: 0, a: 0}
+    - _Color: {r: 0.40778404, g: 0.6320754, b: 0.08745691, a: 0}
+    - _Color1: {r: 0.023466228, g: 0.066037714, b: 0.023466228, a: 0}
     - _EmissionValue: {r: 1, g: 1, b: 1, a: 0}
     - _Speed: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _Tilling: {r: 1, g: 1, b: 0, a: 0}

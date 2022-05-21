@@ -13,6 +13,7 @@ public class EnemyAttackTarget : ActionNode
 
     protected override State OnUpdate() {
         Debug.Log("Attack");
+        context.gameObject.GetComponent<enemyAnimController>().AttackServerRpc();
         return State.Success;
     }
 }

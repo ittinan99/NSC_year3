@@ -96,11 +96,13 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [ServerRpc]
     public void receiveAttackServerRpc(float damage)
     {
+        if(currentHealth <= 0) { return; }
         currentHealth -= damage;
+        onHealthUpDate.Invoke(currentHealth);
     }
     private void upDateHealthUI(float currentHealth)
     {
-
+        UIstat.UpdateHealthUI(currentHealth);
     }
     public IEnumerator RegenStamina()
     {

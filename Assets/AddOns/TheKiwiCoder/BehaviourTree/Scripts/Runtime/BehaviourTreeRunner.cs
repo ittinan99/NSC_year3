@@ -8,7 +8,6 @@ namespace TheKiwiCoder {
 
         // The main behaviour tree asset
         public BehaviourTree tree;
-
         // Storage container object to hold game object subsystems
         [SerializeField]private Context context;
 

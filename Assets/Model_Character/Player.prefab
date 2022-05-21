@@ -6231,7 +6231,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isDodging: 0
-  dodgeForce: 250
+  dodgeForce: 300
   turnSmoothTime: 0.109
   isBattle: 0
   Vcam: {fileID: 0}

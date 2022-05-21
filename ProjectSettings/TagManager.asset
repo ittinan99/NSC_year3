@@ -16,6 +16,7 @@ TagManager:
   - Walkable
   - OtherBar
   - OtherPlayerBar
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - UIDontBlur
   - Player
   - Bone
-  - 
+  - Enemy
   - 
   - 
   - 
