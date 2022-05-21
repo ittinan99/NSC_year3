@@ -132,7 +132,7 @@ Shader "SimpleURPToonLitExample(With Outline)"
 
             // explict render state to avoid confusion
             // you can expose these render state to material inspector if needed (see URP's Lit.shader)
-            Cull Back
+            Cull Off
             ZTest LEqual
             ZWrite On
             Blend One Zero
