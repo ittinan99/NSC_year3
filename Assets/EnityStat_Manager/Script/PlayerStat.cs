@@ -20,14 +20,14 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [SerializeField]
     public UIStatControl UIstat;
 
-    public  Coroutine staminaRegen;
-
-    public  Coroutine staminaReduceOverTime;
+    private  Coroutine staminaRegen;
+    private  Coroutine staminaReduceOverTime;
     [SerializeField]
     private bool IsReduceStaminaRunning;
 
     private bool setParam = false;
-
+    [SerializeField]
+    private PlayerRpgMovement playerMovement;
 
     public float currentHealth
     {
@@ -96,7 +96,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [ServerRpc]
     public void receiveAttackServerRpc(float damage)
     {
-        if(currentHealth <= 0) { return; }
+        if(currentHealth <= 0) { playerMovement.playerDie(); return; }
         currentHealth -= damage;
         onHealthUpDate.Invoke(currentHealth);
     }
@@ -188,7 +188,11 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             //UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
         }
     }
-
+    public void respawnResetHealth()
+    {
+        UIstat.SetHealthUI(maxHealth);
+        currentHealthServerRpc(maxHealth);
+    }
     private void HealthChange(float previousValue, float newValue)
     {
         UIstat.UpdateHealthUI(newValue);

@@ -131,5 +131,14 @@ public class CombatRpgManager : NetworkBehaviour
             animController.LongSwordSetBoolServerRpc("LongSword_hit2", true);
         }
     } 
+    public void dieState()
+    {
+        changeGameState(CombatRpgManager.gameState.neutral);
+        canBattle = false;
+    }
+    public void respawnState()
+    {
+        canBattle = true;
+    }
     #endregion
 }
