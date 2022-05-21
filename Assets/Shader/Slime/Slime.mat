@@ -36,7 +36,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Main_Texture:
-        m_Texture: {fileID: 2800000, guid: fc8879429733dec468c4e8c9f9bff0bd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0e257c2f871cfc24bb51f7373950586b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SlimePattern:
+        m_Texture: {fileID: 2800000, guid: 793072cd9d03a6f49b3e7060624cf861, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,18 +58,18 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _AmbientValue: 2
-    - _Blend: 2
+    - _AmbientValue: 1
+    - _Blend: 3
     - _CastShadows: 1
     - _Cull: 2
-    - _DstBlend: 1
+    - _DstBlend: 0
     - _MetallicValue: 0.3
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scale: 1
+    - _Scale: 5
     - _SmoothnessValue: 0.3
-    - _SrcBlend: 5
+    - _SrcBlend: 2
     - _Surface: 1
     - _Thickness: 1
     - _WorkflowMode: 1
@@ -73,7 +77,9 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0, g: 0.68235296, b: 0.039215688, a: 0}
-    - _Color1: {r: 0, g: 0.14901961, b: 0.007843138, a: 0}
+    - _Color: {r: 0.2867924, g: 1, b: 0.32705408, a: 0}
+    - _Color1: {r: 0, g: 0.6132076, b: 0, a: 0}
     - _EmissionValue: {r: 1, g: 1, b: 1, a: 0}
+    - _Speed: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _Tilling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
