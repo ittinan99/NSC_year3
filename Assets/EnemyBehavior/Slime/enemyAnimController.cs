@@ -34,4 +34,20 @@ public class enemyAnimController : NetworkBehaviour
     {
         anim.SetTrigger("Attack");
     }
+    [ServerRpc]
+    public void DeadServerRpc()
+    {
+        DeadClientRpc();
+        StartCoroutine(despawn());
+    }
+    [ClientRpc]
+    public void DeadClientRpc()
+    {
+        anim.SetTrigger("isDead");
+    }
+    IEnumerator despawn()
+    {
+        yield return new WaitForSeconds(2f);
+        GetComponent<NetworkObject>().Despawn();
+    }
 }

@@ -9,7 +9,6 @@ public class EnemyCombatManager : NetworkBehaviour
     [SerializeField] enemyAnimController enemyAnim;
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -23,7 +22,6 @@ public class EnemyCombatManager : NetworkBehaviour
         if (collision.gameObject.GetComponent<AttackTarget>() && !collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<AttackTarget>().receiveAttack(damage);
-            Debug.Log("Attack Player");
         }
     }
 }

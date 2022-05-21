@@ -27,7 +27,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     [Range(0, 100f)]
     public float dodgestaminaUse;
     [SerializeField] AnimationCurve dodgeCurve;
-    [SerializeField] bool isDodging;
+    public bool isDodging;
     float dodgeTimer;
     [Range(100f, 1000f)]
     public float dodgeForce;
