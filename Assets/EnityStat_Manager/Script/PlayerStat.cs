@@ -142,7 +142,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             UIstat.SetHealthUI(maxHealth);
             UIstat.SetStaminaUI(maxStamina);
             setParam = true;
-            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+            //SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         }
         if (!IsLocalPlayer)
         {
@@ -153,12 +153,12 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
             UIstat.transform.SetParent(Canvas.transform);
             UIstat.tag = "OtherPlayerBar";
-            UIstat.gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.8f);
-            UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
+            UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+            //UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
         }
     }
 
-    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    private void SceneManager_sceneUnloaded(Scene arg0)
     {
         if (IsLocalPlayer)
         {
@@ -171,7 +171,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             UIstat.SetHealthUI(maxHealth);
             UIstat.SetStaminaUI(maxStamina);
             setParam = true;
-            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+            SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         }
         if (!IsLocalPlayer)
         {
@@ -182,8 +182,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
             UIstat.transform.SetParent(Canvas.transform);
             UIstat.tag = "OtherPlayerBar";
-            UIstat.gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.8f);
-            UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
+            UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+            //UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
         }
     }
 
