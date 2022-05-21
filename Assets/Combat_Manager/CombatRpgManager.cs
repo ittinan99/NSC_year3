@@ -13,6 +13,7 @@ public class CombatRpgManager : NetworkBehaviour
     [SerializeField]
     private MovementAnim animController;
 
+
     [Header("Melee Combo")]
     public float cooldownTime = 2f;
     private float nextFireTime = 0f;

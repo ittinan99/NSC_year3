@@ -196,7 +196,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     private void StaminaChange(float previousValue, float newValue)
     {
-        UIstat.UpdateStaminaUI(newValue);
+        upDateStaminaUI(newValue);
     }
 
 

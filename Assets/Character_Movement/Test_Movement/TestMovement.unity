@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e7ac528f9a3e340ac6b20cb86e9b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomName: testroom
+  RoomName: testroom111
   NickName: testname
   HostButton: {fileID: 1366183487}
   JoinButton: {fileID: 1189318860}
@@ -2083,7 +2083,7 @@ PrefabInstance:
     - target: {fileID: 2699541615817244671, guid: 5d353d131e213f94fb9639806519a1fa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 2699541615817244671, guid: 5d353d131e213f94fb9639806519a1fa,
         type: 3}
@@ -2134,6 +2134,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5596862643317360593, guid: 5d353d131e213f94fb9639806519a1fa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533201365279422726, guid: 5d353d131e213f94fb9639806519a1fa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533201365279422726, guid: 5d353d131e213f94fb9639806519a1fa,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533201365279422726, guid: 5d353d131e213f94fb9639806519a1fa,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533201365279422726, guid: 5d353d131e213f94fb9639806519a1fa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6659234616177060868, guid: 5d353d131e213f94fb9639806519a1fa,
         type: 3}
