@@ -75,16 +75,18 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     }
     public void stopReduceStamina()
     {
-        if (staminaReduceOverTime != null)
+        if(currentStamina >= 0)
         {
             StopCoroutine(staminaReduceOverTime);
-            IsReduceStaminaRunning = false;
-            if (staminaRegen != null)
-            {
-                StopCoroutine(staminaRegen);
-            }
-            staminaRegen = StartCoroutine(RegenStamina());
         }
+        staminaReduceOverTime = null;
+        IsReduceStaminaRunning = false;
+        if (staminaRegen != null)
+        {
+            StopCoroutine(staminaRegen);
+        }
+        staminaRegen = StartCoroutine(RegenStamina());
+        Debug.Log("Stop Run");
     }
   
     public override void receiveAttack(float damage)
@@ -121,7 +123,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             onStaminaUpDate.Invoke(currentStamina);
             yield return new WaitForSeconds(0.1f);
         }
-        staminaReduceOverTime = null;
         IsReduceStaminaRunning = false;
     }
     private void upDateStaminaUI(float currentStamina)
@@ -138,7 +139,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             currentHealthServerRpc(maxHealth);
             currentStaminaServerRpc(maxStamina);
             IsReduceStaminaRunning = false;
-            //UIstat = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<UIStatControl>();
             UIstat.SetHealthUI(maxHealth);
             UIstat.SetStaminaUI(maxStamina);
             setParam = true;

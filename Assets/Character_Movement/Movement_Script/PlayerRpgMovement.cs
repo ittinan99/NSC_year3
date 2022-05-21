@@ -126,8 +126,10 @@ public class PlayerRpgMovement : NetworkBehaviour
     }
     private movementState CheckMovementState(Vector3 direction)
     {
+        bool canDodge = !animController.currentAnimatorStateBaseIsName("Dodge");
+        Debug.Log(canDodge);
         if (direction.magnitude < 0.1f) { return movementState.idle; }
-        if (Input.GetKeyUp(KeyCode.Space)&&haveStamina(dodgestaminaUse))
+        if (Input.GetKeyUp(KeyCode.Space)&&haveStamina(dodgestaminaUse)&&canDodge)
         {
             StartCoroutine(Dodge());
         }
