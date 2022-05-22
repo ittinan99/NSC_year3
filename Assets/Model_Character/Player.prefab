@@ -3411,7 +3411,7 @@ Transform:
   - {fileID: 6508956701522314415}
   - {fileID: 6578508355236525692}
   m_Father: {fileID: 6883388617085040457}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1051456212216394483
 GameObject:
@@ -7939,14 +7939,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5152162162916672260}
-  m_LocalRotation: {x: -0.061048605, y: 0.99813485, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalRotation: {x: 0.08715578, y: 0.9961947, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 1.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6883388617085040457}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -7}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 10}
 --- !u!2083052967 &490042863259507677
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -7963,7 +7963,13 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 7
+        m_Name: MainSize
+        m_Overridden: 1
+      - m_Value: 5.5
+        m_Name: SubSize
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -8517,9 +8523,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3009637768277756642}
   - {fileID: 1429584702881945565}
   - {fileID: 7625350445862039727}
-  - {fileID: 3009637768277756642}
   m_Father: {fileID: 2699541615817244671}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8771,7 +8777,7 @@ Transform:
   - {fileID: 5151497743342703318}
   - {fileID: 4886518745844039067}
   m_Father: {fileID: 6883388617085040457}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6353621496165211739
 GameObject:
