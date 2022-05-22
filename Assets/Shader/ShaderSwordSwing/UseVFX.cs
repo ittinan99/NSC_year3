@@ -11,4 +11,16 @@ public class UseVFX : MonoBehaviour
     {
         VisualEffects[VFXNumber].Play();
     }
+
+    public void OnPlayVFXDuration(int VFXNumber)
+    {
+        StartCoroutine(Duration(VFXNumber));
+    }
+
+    IEnumerator Duration(int VFXNumber)
+    {
+        VisualEffects[VFXNumber].Play();
+        yield return new WaitForSeconds(2f);
+        VisualEffects[VFXNumber].Stop();
+    }
 }
