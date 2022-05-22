@@ -5,6 +5,7 @@ using Unity.Netcode;
 public class enemyAnimController : NetworkBehaviour
 {
     public Animator anim;
+    [SerializeField] private GameObject coin;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,9 +46,25 @@ public class enemyAnimController : NetworkBehaviour
     {
         anim.SetTrigger("isDead");
     }
+    [ServerRpc]
+    public void AlertServerRpc()
+    {
+        AlertClientRpc();
+    }
+    [ClientRpc]
+    public void AlertClientRpc()
+    {
+        anim.SetTrigger("Alert");
+    }
+    [ClientRpc]
+    public void SpawnCoinClientRpc()
+    {
+        GameObject coinSpawn = Instantiate(coin, transform.position, Quaternion.identity);
+    }
     IEnumerator despawn()
     {
         yield return new WaitForSeconds(2f);
+        SpawnCoinClientRpc();
         GetComponent<NetworkObject>().Despawn();
     }
 }

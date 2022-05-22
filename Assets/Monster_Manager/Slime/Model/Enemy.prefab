@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 3190291433520612276}
+  coin: {fileID: 387299341537616803, guid: 6a413a4ee2854274d87d948e37fb7d5f, type: 3}
 --- !u!114 &1433472642747464909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,5 +569,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7705264, y: 1.1520158, z: 1}
-  m_Center: {x: -0.017123073, y: 0.5670921, z: 0}
+  m_Size: {x: 1.8147888, y: 1.1520158, z: 1.8661599}
+  m_Center: {x: 0.0050081015, y: 0.5670921, z: 0.009573579}
