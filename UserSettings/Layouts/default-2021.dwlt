@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 771}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 29
+  controlID: 50
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 30
+  controlID: 51
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 31
+  controlID: 52
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1941,36 +1941,36 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Character_Movement/Procedural_Test/Mixamo_Animation/Battle
+    - Assets/Chat
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Character_Movement/Procedural_Test/Mixamo_Animation/Battle
+  - Assets/Chat
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\NSC_year3
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 59.80005}
-    m_SelectedIDs: c2770000
-    m_LastClickedID: 30658
-    m_ExpandedIDs: 000000008a7700008c7700008e77000090770000927700009477000096770000987700005e7c000000ca9a3b
+    scrollPos: {x: 0, y: 179.80005}
+    m_SelectedIDs: ba870000
+    m_LastClickedID: 34746
+    m_ExpandedIDs: 00000000b8870000bc870000be870000c0870000c287000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: ShaderSwordSwing
-      m_OriginalName: ShaderSwordSwing
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 31838
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_SearchString: 
@@ -1984,7 +1984,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008a7700008c7700008e7700009077000092770000947700009677000098770000
+    m_ExpandedIDs: 00000000b8870000ba870000bc870000be870000c0870000c2870000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2011,7 +2011,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2076,7 +2076,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 870.8
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -2114,23 +2114,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 1a98ffff
-      m_LastClickedID: -26598
-      m_ExpandedIDs: 7a97ffff5698ffffae98ffffb298ffffb698ffff4099ffff4499ffff4a99ffff7a99ffff8c99ffff9e9cffff9af6ffff
+      m_SelectedIDs: a0bcffff
+      m_LastClickedID: -17248
+      m_ExpandedIDs: 32c3ffffa4c6ffff1addffff28ddffff26e2ffffe8880000f08f000052910000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: SwordSwing
-        m_OriginalName: SwordSwing
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -26598
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -2174,8 +2174,8 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -100, y: -25.600006}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: -100, y: -25.600006}
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -2196,7 +2196,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 24.8}
+      snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-scene-view-toolbar
@@ -2383,7 +2383,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 0, y: 24.8}
+      snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Visual Effect
@@ -2410,9 +2410,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.9700228, y: -0.91925585, z: -0.3245316}
+    m_Target: {x: 0.38274354, y: 1.1933042, z: 0.49081618}
     speed: 2
-    m_Value: {x: -0.9700228, y: -0.91925585, z: -0.3245316}
+    m_Value: {x: 0.38274354, y: 1.1933042, z: 0.49081618}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -2459,13 +2459,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.025949432, y: -0.40307224, z: 0.011845261, w: 0.9152773}
+    m_Target: {x: 0.011980976, y: -0.056528658, z: -0.00061018026, w: -0.998896}
     speed: 2
-    m_Value: {x: 0.02730803, y: -0.4028499, z: 0.012444576, w: 0.9147739}
+    m_Value: {x: 0.011974197, y: -0.056496672, z: -0.000609835, w: -0.99833083}
   m_Size:
-    m_Target: 3.817032
+    m_Target: 3.9937425
     speed: 2
-    m_Value: 3.9968922
+    m_Value: 3.9937425
   m_Ortho:
     m_Target: 0
     speed: 2
