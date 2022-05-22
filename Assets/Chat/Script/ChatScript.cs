@@ -17,7 +17,8 @@ public class ChatScript : NetworkBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            messageText.SetMassage("PlayerName", TextInput.text);
+            string Nickname = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>().NickName;
+            messageText.SetMassage(Nickname, TextInput.text);
             SendTextServerRpc(messageText);
             scrollbar.value = 0;
             TextInput.text = "";
@@ -31,8 +32,8 @@ public class ChatScript : NetworkBehaviour
     [ClientRpc]
     public void SendTextClientRpc(MessageText messageText)
     {
-        Content.sizeDelta += new Vector2(0, 25);
-        PrefabText.text = messageText.Message;
+        Content.sizeDelta += new Vector2(0, 50);
+        PrefabText.text = messageText.PlayerName + " : " + messageText.Message;
         Instantiate(PrefabText, Content);
         
     }

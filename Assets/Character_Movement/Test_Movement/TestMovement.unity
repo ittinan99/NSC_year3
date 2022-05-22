@@ -1421,6 +1421,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1529271662}
     m_Modifications:
+    - target: {fileID: 4242948168425766508, guid: 6857f0a13ee324045b5975459db778e0,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242948168425766508, guid: 6857f0a13ee324045b5975459db778e0,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4242948168478295640, guid: 6857f0a13ee324045b5975459db778e0,
         type: 3}
       propertyPath: m_Name
@@ -1535,6 +1545,16 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2402238829
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242948168571095769, guid: 6857f0a13ee324045b5975459db778e0,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 65.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242948168571095769, guid: 6857f0a13ee324045b5975459db778e0,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4242948168691006176, guid: 6857f0a13ee324045b5975459db778e0,
         type: 3}
