@@ -6133,7 +6133,6 @@ GameObject:
   - component: {fileID: -2933680086846016256}
   - component: {fileID: -4444742851920350646}
   - component: {fileID: 3594365706212277210}
-  - component: {fileID: 9138107162828226807}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -6387,19 +6386,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerAnimator: {fileID: 3857840078389424135}
   EmoteBar: {fileID: 1641628379}
---- !u!114 &9138107162828226807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2699541615817244657}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1910292e53f47334f8e16c2169f6262b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualEffect: {fileID: 6672410558217299164}
 --- !u!1 &2809121316269445918
 GameObject:
   m_ObjectHideFlags: 0
