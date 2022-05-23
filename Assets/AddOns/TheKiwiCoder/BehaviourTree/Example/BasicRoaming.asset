@@ -47,7 +47,7 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   speed: 5
-  stoppingDistance: 0.1
+  stoppingDistance: 1
   updateRotation: 1
   acceleration: 40
   tolerance: 3
@@ -90,7 +90,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 66c3028893a0c5f4a8bfce2650417978
-  position: {x: -302.0001, y: 130.66667}
+  position: {x: -414.33337, y: 130.66666}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -170,6 +170,7 @@ MonoBehaviour:
   updateRotation: 1
   acceleration: 40
   tolerance: 1
+  DetectedRanged: 8
 --- !u!114 &-1021683054488247756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +186,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 8c31e9a7b4f82284eb93c720cc4225e2
-  position: {x: -489.31998, y: 467.71423}
+  position: {x: -489.66663, y: 468.00006}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}

@@ -28,12 +28,17 @@ public class IsTargetNearby : ActionNode
         GameObject nearestTarget = GetClosestEnemy(PlayerList, context.transform);
         if (Vector3.Distance(context.gameObject.transform.position, nearestTarget.transform.position) < DetectedRanged)
         {
-            blackboard.Target = nearestTarget;
-            Debug.Log("Enemy Spotted");
+            if(blackboard.Target != nearestTarget)
+            {
+                blackboard.Target = nearestTarget;
+                Debug.Log("Enemy Spotted");
+                context.gameObject.GetComponent<enemyAnimController>().AlertServerRpc();
+            }
             return true;
         }
         else
         {
+            blackboard.Target = null;
             return false;
         }
     }

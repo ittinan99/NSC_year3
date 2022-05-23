@@ -10,7 +10,7 @@ public class SpawnEnemy : NetworkBehaviour
     public Transform spawnPos;
     void Start()
     {
-        NetworkManager.Singleton.OnServerStarted += SpawnEnemyOnStart;
+        SpawnEnemyOnStart();
     }
     private void SpawnEnemyOnStart()
     {
