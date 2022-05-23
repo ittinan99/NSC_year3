@@ -75,7 +75,7 @@ public class MovementAnim : NetworkBehaviour
         else
         {
             playerAnim.SetBool("isCombat", !playerAnim.GetBool("isCombat"));
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(1.6f);
             playerAnim.SetLayerWeight(combatLayerIndex, weight);
         }
     } 
