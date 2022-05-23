@@ -10,14 +10,14 @@ public class TeleportParty : NetworkBehaviour
     int AmountPlayerInWarpPoint = 0;
     public Button StartButton;
     public Vector3 SpawnAt;
-    // Start is called before the first frame update
+    public string TeleportPath;
 
     // Update is called once per frame
     void Update()
     {
         if (!IsServer) return;
 
-        if(AmountPlayerInWarpPoint == NetworkManager.Singleton.ConnectedClientsIds.Count)
+        if (AmountPlayerInWarpPoint == NetworkManager.Singleton.ConnectedClientsIds.Count)
         {
             StartButton.gameObject.SetActive(true);
         }
@@ -26,7 +26,12 @@ public class TeleportParty : NetworkBehaviour
             StartButton.gameObject.SetActive(false);
         }
     }
-    public void TeleportTo(string TeleportPath)
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnnowServerRpc()
+    {
+        NetworkObject.Spawn();
+    }
+    public void TeleportTo()
     {
         OnloadSceneServerRpc(TeleportPath);
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
