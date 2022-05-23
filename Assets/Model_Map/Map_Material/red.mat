@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 22492ac767d942e479a11f143e92aad4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3785d5abd275c7147a10aa4bf8720df4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineZOffsetMaskTex:
@@ -140,7 +140,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.6792453, g: 0.32057923, b: 0.2979708, a: 1}
+    - _BaseColor: {r: 0.4056604, g: 0.36856097, b: 0.36611485, a: 1}
     - _Color: {r: 0.7075472, g: 0.22328335, b: 0.15018693, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionMapChannelMask: {r: 1, g: 1, b: 1, a: 0}
