@@ -9,6 +9,7 @@ public class TeleportParty : NetworkBehaviour
 {
     int AmountPlayerInWarpPoint = 0;
     public Button StartButton;
+    public Vector3 SpawnAt;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class TeleportParty : NetworkBehaviour
         GameObject[] Player = GameObject.FindGameObjectsWithTag("Player");
         for (int PlayerAmountCount = 0; PlayerAmountCount < Player.Length; PlayerAmountCount++)
         {
-            Player[PlayerAmountCount].transform.position = new Vector3(61.7f, 9.6f, 77.3f);
+            Player[PlayerAmountCount].transform.position = SpawnAt;
             SceneManager.MoveGameObjectToScene(Player[PlayerAmountCount], arg0);
         }
         SceneManager.SetActiveScene(arg0);
