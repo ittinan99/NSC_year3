@@ -20,13 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameScene/NewMultiplayer.unity
     guid: e84d5d6b7b1fef74fade2d1d86664221
-  - enabled: 1
+  - enabled: 0
     path: Assets/Old_Project/Scenes/Encyclopedia.unity
     guid: f9cfc6f99d53f6e468598d8c0dd34681
-  - enabled: 1
+  - enabled: 0
     path: Assets/Old_Project/Scenes/EndWinScene.unity
     guid: 62e3534c201671c43ac6153b03234005
-  - enabled: 1
+  - enabled: 0
     path: Assets/Old_Project/Scenes/EndLoseScene.unity
     guid: 4d0bc05a557c8fe468002ff17f55268b
   - enabled: 1
