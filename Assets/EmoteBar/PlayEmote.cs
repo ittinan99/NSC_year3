@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Animations;
 
 public class PlayEmote : MonoBehaviour
 {
     // Start is called before the first frame update
     public Animator PlayerAnimator;
     public GameObject EmoteBar;
-
     // Update is called once per frame
     void Update()
     {
@@ -18,9 +18,9 @@ public class PlayEmote : MonoBehaviour
         }
     }
 
-    public void Emote1()
+    public void Emote(int var)
     {
-        PlayerAnimator.Play("Dance Moves");
+        PlayerAnimator.Play($"Dance{var}");
         EmoteBar.SetActive(!EmoteBar.activeSelf);
     }
 

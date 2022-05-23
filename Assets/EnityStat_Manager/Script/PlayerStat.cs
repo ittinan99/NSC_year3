@@ -19,6 +19,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     public UnityAction<float> onStaminaUpDate;
     [SerializeField]
     public UIStatControl UIstat;
+    public GameObject Canvas;
 
     private  Coroutine staminaRegen;
     private  Coroutine staminaReduceOverTime;
@@ -163,15 +164,15 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             UIstat.SetHealthUI(maxHealth);
             UIstat.SetStaminaUI(maxStamina);
             setParam = true;
-            SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
+            //SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         }
-        if (!IsLocalPlayer)
+        if (!IsLocalPlayer && Canvas == null)
         {
             NetworkcurrentStamina.OnValueChanged += StaminaChange;
             NetworkcurrentHealth.OnValueChanged += HealthChange;
             UIstat.SetHealthUI(maxHealth);
             UIstat.SetStaminaUI(maxStamina);
-            GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
+            Canvas = GameObject.FindGameObjectWithTag("OtherBar");
             UIstat.transform.SetParent(Canvas.transform);
             UIstat.tag = "OtherPlayerBar";
             UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
@@ -209,7 +210,17 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     private void Update()
     {
-        
+        if (!IsLocalPlayer && Canvas == null)
+        {
+            NetworkcurrentStamina.OnValueChanged += StaminaChange;
+            NetworkcurrentHealth.OnValueChanged += HealthChange;
+            UIstat.SetHealthUI(maxHealth);
+            UIstat.SetStaminaUI(maxStamina);
+            Canvas = GameObject.FindGameObjectWithTag("OtherBar");
+            UIstat.transform.SetParent(Canvas.transform);
+            UIstat.tag = "OtherPlayerBar";
+            UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+        }
     }
 
   

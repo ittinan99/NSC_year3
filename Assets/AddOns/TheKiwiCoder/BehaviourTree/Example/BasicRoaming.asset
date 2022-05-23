@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: e37bfc8a2b7af334cafeb1a6108bc586
   position: {x: -92.66699, y: -162.64731}
   blackboard:
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: IsDead
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 66c3028893a0c5f4a8bfce2650417978
   position: {x: -414.33337, y: 130.66666}
   blackboard:
@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: ca00e6aa7ca72c144ae99d826e0d13e4
   position: {x: -92.66699, y: -287.31396}
   blackboard:
@@ -309,14 +309,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e8b7b3236babb5b45a8c128a30261cab
-  position: {x: -323.98666, y: 467.71423}
+  position: {x: -323.99994, y: 488.54288}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
   description: 
   drawGizmos: 1
-  min: {x: -20, y: -20}
-  max: {x: 20, y: 20}
+  min: {x: 120, y: 135}
+  max: {x: 200, y: 210}
 --- !u!114 &7306043908840946751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 72829819ffe1dff4392a2e8268e58cc5
   position: {x: -92.75291, y: -10.164678}
   blackboard:

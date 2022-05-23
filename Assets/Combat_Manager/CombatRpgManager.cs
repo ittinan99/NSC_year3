@@ -48,6 +48,7 @@ public class CombatRpgManager : NetworkBehaviour
     private void gameStateCheck()
     {
         if (!Input.GetKeyDown(gameStateSwitchButton)) { return ; }
+        if(!animController.currentAnimatorStateInfoIsName("Idle")) { return; }
         if(currentGameState == gameState.neutral)
         {
             changeGameState(gameState.combat);

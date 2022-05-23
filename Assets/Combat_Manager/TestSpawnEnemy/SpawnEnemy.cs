@@ -10,7 +10,10 @@ public class SpawnEnemy : NetworkBehaviour
     public Transform spawnPos;
     void Start()
     {
-        SpawnEnemyOnStart();
+        if (NetworkManager.Singleton.IsServer)
+        {
+            SpawnEnemyOnStart();
+        }
     }
     private void SpawnEnemyOnStart()
     {
