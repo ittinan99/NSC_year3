@@ -257,7 +257,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3594365706212277210}
+      - m_Target: {fileID: 2118151635580207256}
         m_TargetAssemblyTypeName: PlayEmote, Assembly-CSharp
         m_MethodName: Emote
         m_Mode: 3
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3594365706212277210}
+      - m_Target: {fileID: 2118151635580207256}
         m_TargetAssemblyTypeName: PlayEmote, Assembly-CSharp
         m_MethodName: Emote
         m_Mode: 3
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3594365706212277210}
+      - m_Target: {fileID: 2118151635580207256}
         m_TargetAssemblyTypeName: PlayEmote, Assembly-CSharp
         m_MethodName: Emote
         m_Mode: 3
@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3594365706212277210}
+      - m_Target: {fileID: 2118151635580207256}
         m_TargetAssemblyTypeName: PlayEmote, Assembly-CSharp
         m_MethodName: Emote
         m_Mode: 3
@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3594365706212277210}
+      - m_Target: {fileID: 2118151635580207256}
         m_TargetAssemblyTypeName: PlayEmote, Assembly-CSharp
         m_MethodName: Emote
         m_Mode: 3
@@ -1644,7 +1644,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3594365706212277210}
+      - m_Target: {fileID: 2118151635580207256}
         m_TargetAssemblyTypeName: PlayEmote, Assembly-CSharp
         m_MethodName: Emote
         m_Mode: 3
@@ -6333,7 +6333,6 @@ GameObject:
   - component: {fileID: 6659234616177060868}
   - component: {fileID: -2933680086846016256}
   - component: {fileID: -4444742851920350646}
-  - component: {fileID: 3594365706212277210}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -6378,6 +6377,7 @@ MonoBehaviour:
   NetworkcurrentStamina:
     m_InternalValue: 0
   UIstat: {fileID: 1603580632958360843}
+  Canvas: {fileID: 0}
   IsReduceStaminaRunning: 0
   playerMovement: {fileID: -6259460489414657412}
 --- !u!114 &-6259460489414657412
@@ -6547,7 +6547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1650723772
+  GlobalObjectIdHash: 951099334
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -6589,20 +6589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3594365706212277210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2699541615817244657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd09b783c38a40344bdcacc5ba54f965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerAnimator: {fileID: 3857840078389424135}
-  EmoteBar: {fileID: 1641628379}
 --- !u!1 &2809121316269445918
 GameObject:
   m_ObjectHideFlags: 0
@@ -8670,6 +8656,7 @@ GameObject:
   - component: {fileID: 7224834013110030516}
   - component: {fileID: 3379536423457765714}
   - component: {fileID: 3469906439460984993}
+  - component: {fileID: 2118151635580207256}
   m_Layer: 9
   m_Name: ArmasMale
   m_TagString: Untagged
@@ -8876,6 +8863,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VisualEffects:
   - {fileID: 490042863259507677}
+--- !u!114 &2118151635580207256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6110652242008894963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd09b783c38a40344bdcacc5ba54f965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerAnimator: {fileID: 3857840078389424135}
+  EmoteBar: {fileID: 1641628379}
 --- !u!1 &6224646481942903255
 GameObject:
   m_ObjectHideFlags: 0

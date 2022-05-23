@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Animations;
+using Unity.Netcode;
 
-public class PlayEmote : MonoBehaviour
+public class PlayEmote : NetworkBehaviour
 {
     // Start is called before the first frame update
     public Animator PlayerAnimator;
@@ -12,16 +13,24 @@ public class PlayEmote : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B))
+        if (IsLocalPlayer)
         {
-            EmoteBar.SetActive(!EmoteBar.activeSelf);
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                EmoteBar.SetActive(!EmoteBar.activeSelf);
+            }
         }
     }
 
     public void Emote(int var)
     {
         PlayerAnimator.Play($"Dance{var}");
+        EmoteServerRpc(var);
         EmoteBar.SetActive(!EmoteBar.activeSelf);
     }
-
+    [ServerRpc]
+    public void EmoteServerRpc(int var)
+    {
+        PlayerAnimator.Play($"Dance{var}");
+    }
 }
