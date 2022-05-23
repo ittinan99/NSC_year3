@@ -3255,7 +3255,7 @@ MonoBehaviour:
   PrefabTeleport: {fileID: 5549405059827840338, guid: 3bc016485485a42429f51b97a22115ef,
     type: 3}
   SpawnPrefabAt: {x: 4, y: -3.5, z: 8}
-  SpawnPlayerAt: {x: 68, y: 8, z: 77}
+  SpawnPlayerAt: {x: 68, y: 8, z: 94}
   TeleportPath: TerrainScam
 --- !u!4 &649163536
 Transform:
@@ -3265,7 +3265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649163533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.680151, y: -1.3931897, z: 18.803116}
+  m_LocalPosition: {x: 4, y: -3.5, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
