@@ -11,12 +11,10 @@ public abstract class IMeleeWeapon : Weapon
     public void showHitbox_OnAnim()
     {
         this.GetComponent<Collider>().enabled = true;
-        Debug.Log(this.GetComponent<Collider>().enabled);
     }
     public void hideHitbox_OnAnim()
     {
         this.GetComponent<Collider>().enabled = false;
-        Debug.Log(this.GetComponent<Collider>().enabled);
     }
 }
 public enum statusEffect

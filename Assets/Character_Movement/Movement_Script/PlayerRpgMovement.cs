@@ -27,7 +27,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     [Range(0, 100f)]
     public float dodgestaminaUse;
     [SerializeField] AnimationCurve dodgeCurve;
-    [SerializeField] bool isDodging;
+    public bool isDodging;
     float dodgeTimer;
     [Range(100f, 1000f)]
     public float dodgeForce;
@@ -36,6 +36,8 @@ public class PlayerRpgMovement : NetworkBehaviour
     [Range(0f, 1f)]
     public float turnSmoothTime;
     float turnSmoothVelocity;
+    [SerializeField]
+    private GameObject deadCam;
 
     [Header("Battle setting")]
     public bool isBattle;
@@ -204,5 +206,28 @@ public class PlayerRpgMovement : NetworkBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime / 0.2f);
             rb.useGravity = false;
         }
+    }
+    public void playerDie()
+    {
+        if (animController.currentAnimatorStateBaseIsName("Die")) { return; }
+        canMove = false;
+        StartCoroutine(dieThenRespawn());
+    }
+    private IEnumerator dieThenRespawn()
+    {
+        this.gameObject.GetComponent<CombatRpgManager>().dieState();
+        deadCam.SetActive(true);
+        animController.dieAnimaitonServerRpc();
+        yield return new WaitForSeconds(6f);
+        Respawn();
+    }
+    public void Respawn()
+    {
+        deadCam.SetActive(false);
+        GameObject respawnPos = GameObject.Find("RespawnPos");
+        transform.position = respawnPos.transform.position;
+        canMove = true;
+        this.gameObject.GetComponent<CombatRpgManager>().respawnState();
+        this.gameObject.GetComponent<PlayerStat>().respawnResetHealth();
     }
 }

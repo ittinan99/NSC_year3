@@ -20,14 +20,14 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [SerializeField]
     public UIStatControl UIstat;
 
-    public  Coroutine staminaRegen;
-
-    public  Coroutine staminaReduceOverTime;
+    private  Coroutine staminaRegen;
+    private  Coroutine staminaReduceOverTime;
     [SerializeField]
     private bool IsReduceStaminaRunning;
 
     private bool setParam = false;
-
+    [SerializeField]
+    private PlayerRpgMovement playerMovement;
 
     public float currentHealth
     {
@@ -91,19 +91,19 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
   
     public override void receiveAttack(float damage)
     {
-        receiveAttackServerRpc(damage);
-    }
-    [ServerRpc]
-    public void receiveAttackServerRpc(float damage)
-    {
-        if(currentHealth <= 0) { return; }
-        currentHealth -= damage;
+        if (!IsLocalPlayer) { return; }
+        if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
+        currentHealthServerRpc(currentHealth - damage);
         onHealthUpDate.Invoke(currentHealth);
+        if (currentHealth <= 0) { playerMovement.playerDie(); return; }
     }
-    private void upDateHealthUI(float currentHealth)
-    {
-        UIstat.UpdateHealthUI(currentHealth);
-    }
+    //[ServerRpc(RequireOwnership = false)]
+    //public void receiveAttackServerRpc(float damage)
+    //{
+    //    currentHealthServerRpc(currentHealth - damage);
+    //    if (currentHealth <= 0 ) { playerMovement.playerDie(); return; }
+    //    onHealthUpDate.Invoke(currentHealth);
+    //}
     public IEnumerator RegenStamina()
     {
         onStaminaUpDate.Invoke(currentStamina);
@@ -127,49 +127,39 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         }
         IsReduceStaminaRunning = false;
     }
+    private void upDateHealthUI(float currentHealth)
+    {
+        UIstat.UpdateHealthUI(currentHealth);
+    }
     private void upDateStaminaUI(float currentStamina)
     {
         UIstat.UpdateStaminaUI(currentStamina);
     }
+    public void respawnResetHealth()
+    {
+        UIstat.SetHealthUI(maxHealth);
+        currentHealthServerRpc(maxHealth);
+    }
+    private void HealthChange(float previousValue, float newValue)
+    {
+        UIstat.UpdateHealthUI(newValue);
+    }
+
+    private void StaminaChange(float previousValue, float newValue)
+    {
+        UIstat.UpdateStaminaUI(newValue);
+    }
+
     void Start()
     {
         if (IsLocalPlayer)
         {
-            Debug.Log("SetParam");
+            Debug.Log("isLocal");
             onStaminaUpDate += upDateStaminaUI;
             onHealthUpDate += upDateHealthUI;
             currentHealthServerRpc(maxHealth);
             currentStaminaServerRpc(maxStamina);
             IsReduceStaminaRunning = false;
-            UIstat.SetHealthUI(maxHealth);
-            UIstat.SetStaminaUI(maxStamina);
-            setParam = true;
-            //SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
-        }
-        if (!IsLocalPlayer)
-        {
-            NetworkcurrentStamina.OnValueChanged += StaminaChange;
-            NetworkcurrentHealth.OnValueChanged += HealthChange;
-            UIstat.SetHealthUI(maxHealth);
-            UIstat.SetStaminaUI(maxStamina);
-            GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
-            UIstat.transform.SetParent(Canvas.transform);
-            UIstat.tag = "OtherPlayerBar";
-            UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
-            //UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
-        }
-    }
-
-    private void SceneManager_sceneUnloaded(Scene arg0)
-    {
-        if (IsLocalPlayer)
-        {
-            onStaminaUpDate += upDateStaminaUI;
-            onHealthUpDate += upDateHealthUI;
-            currentHealthServerRpc(maxHealth);
-            currentStaminaServerRpc(maxStamina);
-            IsReduceStaminaRunning = false;
-            //UIstat = GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<UIStatControl>();
             UIstat.SetHealthUI(maxHealth);
             UIstat.SetStaminaUI(maxStamina);
             setParam = true;
@@ -185,20 +175,36 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             UIstat.transform.SetParent(Canvas.transform);
             UIstat.tag = "OtherPlayerBar";
             UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
-            //UIstat.gameObject.GetComponentsInChildren<Slider>()[1].gameObject.SetActive(false);
         }
     }
 
-    private void HealthChange(float previousValue, float newValue)
+    private void SceneManager_sceneUnloaded(Scene arg0)
     {
-        UIstat.UpdateHealthUI(newValue);
+        //if (IsLocalPlayer)
+        //{
+        //    onStaminaUpDate += upDateStaminaUI;
+        //    onHealthUpDate += upDateHealthUI;
+        //    currentHealthServerRpc(maxHealth);
+        //    currentStaminaServerRpc(maxStamina);
+        //    IsReduceStaminaRunning = false;
+        //    UIstat.SetHealthUI(maxHealth);
+        //    UIstat.SetStaminaUI(maxStamina);
+        //    setParam = true;
+        //    SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
+        //}
+        NetworkcurrentStamina.OnValueChanged += StaminaChange;
+        NetworkcurrentHealth.OnValueChanged += HealthChange;
+        UIstat.SetHealthUI(maxHealth);
+        UIstat.SetStaminaUI(maxStamina);
+        if (!IsLocalPlayer)
+        {
+            GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
+            UIstat.transform.SetParent(Canvas.transform);
+            UIstat.tag = "OtherPlayerBar";
+            UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+        }
     }
-
-    private void StaminaChange(float previousValue, float newValue)
-    {
-        upDateStaminaUI(newValue);
-    }
-
+   
 
 
     private void Update()

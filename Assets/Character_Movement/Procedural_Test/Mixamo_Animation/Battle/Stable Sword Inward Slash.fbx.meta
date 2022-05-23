@@ -74,8 +74,8 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5316145
-        functionName: OnPlayVFX
+      - time: 0.5186765
+        functionName: OnUseVFX
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

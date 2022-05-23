@@ -26,6 +26,7 @@ public class IsDead : ActionNode
         float currentHealth = context.gameObject.GetComponent<EnemyStat>().currentHealth;
         if(currentHealth <= 0)
         {
+            context.gameObject.GetComponent<enemyAnimController>().DeadServerRpc();
             return true;
         }
         else

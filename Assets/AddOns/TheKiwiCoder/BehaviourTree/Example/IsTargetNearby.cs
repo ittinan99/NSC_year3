@@ -19,6 +19,7 @@ public class IsTargetNearby : ActionNode
         }
         else
         {
+            context.gameObject.GetComponent<enemyAnimController>().AlertServerRpc();
             return State.Failure;
         }
     }

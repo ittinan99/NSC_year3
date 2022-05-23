@@ -93,6 +93,16 @@ public class MovementAnim : NetworkBehaviour
         }
         playerAnim.SetBool(paramName, var);
     }
-    
+    [ServerRpc]
+    public void dieAnimaitonServerRpc()
+    {
+        dieAnimaitonClientRpc();
+    }
+    [ClientRpc]
+    public void dieAnimaitonClientRpc()
+    {
+        
+        playerAnim.SetTrigger("isDead");
+    }
 
 }
