@@ -5,8 +5,18 @@ using UnityEngine;
 public class DontDestroy : MonoBehaviour
 {
     // Start is called before the first frame update
+    GameObject[] gameObjects;
+    void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     private void Update()
     {
-            DontDestroyOnLoad(this.gameObject);
+        gameObjects = GameObject.FindGameObjectsWithTag("PlayerCanvas");
+        if (gameObjects.Length > 1)
+        {
+            Destroy(gameObjects[1]);
+        }
     }
 }

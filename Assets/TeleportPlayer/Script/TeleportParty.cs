@@ -15,6 +15,8 @@ public class TeleportParty : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsServer) return;
+
         if(AmountPlayerInWarpPoint == NetworkManager.Singleton.ConnectedClientsIds.Count)
         {
             StartButton.gameObject.SetActive(true);
