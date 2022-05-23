@@ -93,7 +93,7 @@ public class CombatRpgManager : NetworkBehaviour
     }
     public void LongSword_CurrentAnimOutOfTime()
     {
-        if (animController.currentAnimatorStateInfoTime <= 0.8f) { return; }
+        if (animController.currentAnimatorStateInfoTime <= 0.9f) { return; }
         if (animController.currentAnimatorStateInfoIsName("SwordAttack1"))
         {
             animController.LongSwordSetBoolServerRpc("LongSword_hit1", false);
