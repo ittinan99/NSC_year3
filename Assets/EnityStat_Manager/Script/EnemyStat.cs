@@ -9,6 +9,7 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     [SerializeField]
     NetworkVariable<float> NetworkcurrentHealth = new NetworkVariable<float>();
     public UnityAction<float> onHealthUpDate;
+
     public float currentHealth
     {
         get { return NetworkcurrentHealth.Value; }
@@ -28,6 +29,7 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     {
         currentHealth -= damage;
     }
+
     // Start is called before the first frame update
     void Start()
     {

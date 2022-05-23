@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using Unity.Netcode;
 
 public class UseVFX : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class UseVFX : MonoBehaviour
     {
         VisualEffects[VFXNumber].Play();
     }
+
 
     public void OnPlayVFXDuration(int VFXNumber)
     {
