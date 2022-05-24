@@ -8663,6 +8663,7 @@ GameObject:
   - component: {fileID: 3379536423457765714}
   - component: {fileID: 3469906439460984993}
   - component: {fileID: 2118151635580207256}
+  - component: {fileID: 4075747745710358168}
   m_Layer: 9
   m_Name: ArmasMale
   m_TagString: Untagged
@@ -8885,6 +8886,22 @@ MonoBehaviour:
   EmoteBar: {fileID: 1641628379}
   audioClip:
   - {fileID: 8300000, guid: 2e36eaf0e3048954c8b09ad94e3103b6, type: 3}
+--- !u!114 &4075747745710358168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6110652242008894963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a90936ce3623d46bc50676dfa1d8fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerSounds:
+  - {fileID: 8300000, guid: f40d9c221447bd441a2a22b7ff696b20, type: 3}
+  - {fileID: 8300000, guid: e3360c56e6894fe4aafc261ae8cf9b76, type: 3}
+  - {fileID: 8300000, guid: 2eb1d4c1b451c5e4680b4b31fe9f3654, type: 3}
 --- !u!1 &6224646481942903255
 GameObject:
   m_ObjectHideFlags: 0
