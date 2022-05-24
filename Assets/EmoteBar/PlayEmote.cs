@@ -32,5 +32,11 @@ public class PlayEmote : NetworkBehaviour
     public void EmoteServerRpc(int var)
     {
         PlayerAnimator.Play($"Dance{var}");
+        EmoteClientRpc(var);
+    }
+    [ClientRpc]
+    public void EmoteClientRpc(int var)
+    {
+        PlayerAnimator.Play($"Dance{var}");
     }
 }
