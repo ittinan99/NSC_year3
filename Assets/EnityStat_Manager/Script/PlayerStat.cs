@@ -15,8 +15,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     NetworkVariable<float> NetworkcurrentHealth = new NetworkVariable<float>();
     [SerializeField]
     NetworkVariable<float> NetworkcurrentStamina = new NetworkVariable<float>();
-    public UnityAction<float> onHealthUpDate;
-    public UnityAction<float> onStaminaUpDate;
     [SerializeField]
     public UIStatControl UIstat;
     public GameObject Canvas;
@@ -58,8 +56,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             StopCoroutine(staminaRegen);
         }
         staminaRegen = StartCoroutine(RegenStamina());
-
-        onStaminaUpDate.Invoke(currentStamina);
     }
     public void reduceStaminaAmountOverTime(float amount)
     {
@@ -95,24 +91,14 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         if (!IsLocalPlayer) { return; }
         if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
         currentHealthServerRpc(currentHealth - damage);
-        onHealthUpDate.Invoke(currentHealth);
         if (currentHealth <= 0) { playerMovement.playerDie(); return; }
     }
-    //[ServerRpc(RequireOwnership = false)]
-    //public void receiveAttackServerRpc(float damage)
-    //{
-    //    currentHealthServerRpc(currentHealth - damage);
-    //    if (currentHealth <= 0 ) { playerMovement.playerDie(); return; }
-    //    onHealthUpDate.Invoke(currentHealth);
-    //}
     public IEnumerator RegenStamina()
     {
-        onStaminaUpDate.Invoke(currentStamina);
         yield return new WaitForSeconds(2f);
         while(currentStamina < maxStamina)
         {
             currentStaminaServerRpc(currentStamina + maxStamina / 150);
-            onStaminaUpDate.Invoke(currentStamina);
             yield return new WaitForSeconds(0.1f);
         }
         staminaRegen = null;
@@ -123,18 +109,9 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         while (currentStamina >= 0)
         {
             currentStaminaServerRpc(currentStamina - (maxStamina / 100)*amount);
-            onStaminaUpDate.Invoke(currentStamina);
             yield return new WaitForSeconds(0.1f);
         }
         IsReduceStaminaRunning = false;
-    }
-    private void upDateHealthUI(float currentHealth)
-    {
-        UIstat.UpdateHealthUI(currentHealth);
-    }
-    private void upDateStaminaUI(float currentStamina)
-    {
-        UIstat.UpdateStaminaUI(currentStamina);
     }
     public void respawnResetHealth()
     {
@@ -150,34 +127,36 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     {
         UIstat.UpdateStaminaUI(newValue);
     }
-
+    private void setupVariable()
+    {
+        currentHealthServerRpc(maxHealth);
+        currentStaminaServerRpc(maxStamina);
+        NetworkcurrentStamina.OnValueChanged += StaminaChange;
+        NetworkcurrentHealth.OnValueChanged += HealthChange;
+        UIstat.SetHealthUI(maxHealth);
+        UIstat.SetStaminaUI(maxStamina);
+    }
+    private void setupClientCanvas()
+    {
+        Canvas = GameObject.FindGameObjectWithTag("OtherBar");
+        UIstat.transform.SetParent(Canvas.transform);
+        UIstat.tag = "OtherPlayerBar";
+        UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+    }
     void Start()
     {
-        if (IsLocalPlayer)
-        {
-            Debug.Log("isLocal");
-            onStaminaUpDate += upDateStaminaUI;
-            onHealthUpDate += upDateHealthUI;
-            currentHealthServerRpc(maxHealth);
-            currentStaminaServerRpc(maxStamina);
-            IsReduceStaminaRunning = false;
-            UIstat.SetHealthUI(maxHealth);
-            UIstat.SetStaminaUI(maxStamina);
-            setParam = true;
-            //SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
-        }
+        setupVariable();
+        IsReduceStaminaRunning = false;
+        setParam = true;
         if (!IsLocalPlayer && Canvas == null)
         {
-            NetworkcurrentStamina.OnValueChanged += StaminaChange;
-            NetworkcurrentHealth.OnValueChanged += HealthChange;
-            UIstat.SetHealthUI(maxHealth);
-            UIstat.SetStaminaUI(maxStamina);
-            Canvas = GameObject.FindGameObjectWithTag("OtherBar");
-            UIstat.transform.SetParent(Canvas.transform);
-            UIstat.tag = "OtherPlayerBar";
-            UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+            setupClientCanvas();
         }
     }
+
+
+
+
 
     private void SceneManager_sceneUnloaded(Scene arg0)
     {

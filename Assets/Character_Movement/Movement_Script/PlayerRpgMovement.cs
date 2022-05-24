@@ -224,7 +224,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     public void Respawn()
     {
         deadCam.SetActive(false);
-        GameObject respawnPos = GameObject.Find("RespawnPos");
+        GameObject respawnPos = GameObject.Find("SpawnPosition");
         transform.position = respawnPos.transform.position;
         canMove = true;
         this.gameObject.GetComponent<CombatRpgManager>().respawnState();

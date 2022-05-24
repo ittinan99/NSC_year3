@@ -21,13 +21,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: rock
-  m_Shader: {fileID: 4800000, guid: 37ff43039bd8df843bdc1c5fae81114a, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ShaderKeywords: _NORMALMAP _OCCLUSIONMAP _SPECULAR_SETUP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -37,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 491aae14ee858724285dd591311f1754, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -97,12 +98,13 @@ Material:
     - _AdditionalLightIgnoreCelShade: 0.9
     - _AlphaClip: 0
     - _Blend: 0
-    - _BumpScale: 1
+    - _BlendOp: 0
+    - _BumpScale: 0.1
     - _CelShadeMidPoint: -0.15
     - _CelShadeSoftness: 0.05
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -119,7 +121,7 @@ Material:
     - _Metallic: 0
     - _OcclusionRemapEnd: 1
     - _OcclusionRemapStart: 0
-    - _OcclusionStrength: 1
+    - _OcclusionStrength: 0
     - _OutlineWidth: 4
     - _OutlineZOffset: 0
     - _OutlineZOffsetMaskRemapEnd: 1
@@ -129,7 +131,8 @@ Material:
     - _ReceiveShadowMappingAmount: 0.65
     - _ReceiveShadowMappingPosOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _SampleGI: 0
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -137,11 +140,11 @@ Material:
     - _UseAlphaClipping: 0
     - _UseEmission: 1
     - _UseOcclusion: 1
-    - _WorkflowMode: 1
+    - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-    - _Color: {r: 0.764151, g: 0.45716205, b: 0.3280082, a: 1}
+    - _BaseColor: {r: 1, g: 0.91645515, b: 0.71383643, a: 1}
+    - _Color: {r: 1, g: 0.91645515, b: 0.71383643, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionMapChannelMask: {r: 1, g: 1, b: 1, a: 0}
     - _IndirectLightMinColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
