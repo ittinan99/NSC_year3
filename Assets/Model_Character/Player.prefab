@@ -8883,6 +8883,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerAnimator: {fileID: 3857840078389424135}
   EmoteBar: {fileID: 1641628379}
+  audioClip:
+  - {fileID: 8300000, guid: 2e36eaf0e3048954c8b09ad94e3103b6, type: 3}
 --- !u!1 &6224646481942903255
 GameObject:
   m_ObjectHideFlags: 0

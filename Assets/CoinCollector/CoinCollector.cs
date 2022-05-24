@@ -28,7 +28,13 @@ public class CoinCollector : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (IsLocalPlayer && coinText == null)
+        {
+            coinText = GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>();
+            coins.OnValueChanged += CoinTextChange;
+        }
+
     }
     private void CoinTextChange(int previousValue, int newValue)
     {

@@ -10,11 +10,17 @@ public class PlayEmote : NetworkBehaviour
     // Start is called before the first frame update
     public Animator PlayerAnimator;
     public GameObject EmoteBar;
+    AudioSource audioSource;
+    public AudioClip[] audioClip;
     // Update is called once per frame
     void Update()
     {
         if (IsLocalPlayer)
         {
+            if(audioSource == null)
+            {
+                audioSource = GameObject.Find("Audio Source").GetComponent<AudioSource>();
+            }
             if (Input.GetKeyDown(KeyCode.B))
             {
                 EmoteBar.SetActive(!EmoteBar.activeSelf);
@@ -26,6 +32,8 @@ public class PlayEmote : NetworkBehaviour
     {
         PlayerAnimator.Play($"Dance{var}");
         EmoteServerRpc(var);
+        audioSource.clip = audioClip[var - 1];
+        audioSource.Play();
         EmoteBar.SetActive(!EmoteBar.activeSelf);
     }
     [ServerRpc]
