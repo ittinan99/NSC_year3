@@ -8,6 +8,7 @@ using TMPro;
 public class ChangeNamePlayer : NetworkBehaviour
 {
     PhotonRealtimeTransport photo;
+    DataCollect dataCollect = new DataCollect();
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +16,16 @@ public class ChangeNamePlayer : NetworkBehaviour
         GameObject.Find("NetworkManager").GetComponent<NetworkManager>().OnClientConnectedCallback += ChangeNamePlayer_OnClientConnectedCallback;
         if (IsLocalPlayer)
         {
-            ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+            dataCollect.SetDataCollect(photo.NickName, OwnerClientId);
+            ChangeServerRpc(dataCollect);
         }
     }
     private void Update()
     {
         if (IsOwner)
         {
-            ChangeServerRpc(new DataCollect { PlayerId = OwnerClientId, PlayerName = photo.NickName });
+            dataCollect.SetDataCollect(photo.NickName, OwnerClientId);
+            ChangeServerRpc(dataCollect);
         }
     }
 
@@ -30,7 +33,8 @@ public class ChangeNamePlayer : NetworkBehaviour
     {
         if (IsLocalPlayer)
         {
-            ChangeServerRpc(new DataCollect { PlayerId = obj, PlayerName = photo.NickName });
+            dataCollect.SetDataCollect(photo.NickName, OwnerClientId);
+            ChangeServerRpc(dataCollect);
         }
     }
     [ServerRpc]
@@ -41,6 +45,7 @@ public class ChangeNamePlayer : NetworkBehaviour
     [ClientRpc]
     void ChangeClientRpc(DataCollect data)
     {
+        gameObject.name = data.PlayerName;
         GetComponentsInChildren<TMP_Text>()[0].text = data.PlayerName;
     }
 } 
